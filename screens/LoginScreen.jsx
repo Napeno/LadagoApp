@@ -16,7 +16,7 @@ const LoginScreen = () => {
   const navigation = useNavigation();
   
   const handleHome = () =>{
-    navigation.navigate("HOME");
+    navigation.navigate("MAIN");
   }
 
   let [fontsLoaded] = useFonts({
