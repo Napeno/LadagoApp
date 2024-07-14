@@ -10,7 +10,7 @@ const App = () => {
     <NavigationContainer independent={true}>
       <Stack.Navigator initialRouteName="LOGIN">
         <Stack.Screen name="LOGIN" component={LoginScreen} />
-        <Stack.Screen name="HOME" component={Homepage} />
+        <Stack.Screen name="Home" component={Homepage} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -67,6 +67,8 @@ export default StyleSheet.create({
 
   },
 
-
+  bottomTab:{
+    alignSelf:'center'
+  },
 
 });
