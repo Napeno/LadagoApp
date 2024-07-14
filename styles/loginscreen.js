@@ -26,8 +26,8 @@ export default StyleSheet.create({
   },
 
   titleForm: {
+    fontFamily: 'Quicksand_600SemiBold',
     fontSize: 23,
-    fontWeight: '500',
     marginBottom: 26,
   },
 
@@ -41,6 +41,7 @@ export default StyleSheet.create({
   },
 
   forgetPassword:{
+    fontFamily: 'Quicksand_600SemiBold',
     fontSize: 14,
     fontWeight: "500",
     textAlign: 'right'
@@ -62,6 +63,7 @@ export default StyleSheet.create({
 
   login_btn:{
     color: 'white',
+    fontFamily: 'Quicksand_700Bold',
     fontSize: 23,
     fontWeight: '500',
   },
@@ -81,6 +83,7 @@ export default StyleSheet.create({
   register_btn:{
     color: '#365486',
     fontSize: 23,
+    fontFamily: 'Quicksand_700Bold',
     fontWeight: '500',
   },
 
