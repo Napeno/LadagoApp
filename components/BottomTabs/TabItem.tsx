@@ -49,7 +49,7 @@ const TabItem: FC<TabProps> = ({
   });
 
   const labelContainerStyle = useAnimatedStyle(() => {
-    const translateY = animatedActiveIndex.value - 1 === index ? 36 : 100;
+    const translateY = animatedActiveIndex.value - 1 === index ? 25 : 100;
     return {
       transform: [
         {translateY: withTiming(translateY)},
@@ -65,7 +65,6 @@ const TabItem: FC<TabProps> = ({
   useEffect(() => {
     animatedActiveIndex.value = activeIndex;
     iconColor.value = activeIndex === (index + 1) ? 'white' : 'rgba(128,128,128,0.8)';
-    console.log(`Index: ${index}, Active Index: ${activeIndex}, Color: ${iconColor.value}`);
   }, [activeIndex, index]);
 
   const animatedIconProps = useAnimatedProps(() => ({
@@ -82,7 +81,7 @@ const TabItem: FC<TabProps> = ({
           <AnimatedIcon
             name={icon}
             size={ICON_SIZE}
-            color={activeIndex === (index + 1) ? 'white' : 'rgba(128,128,128,0.8)'}
+            color={activeIndex === (index + 1) ? 'white' : '#484C52'}
           />
         </Pressable>
       </Animated.View>
@@ -102,7 +101,8 @@ const styles = StyleSheet.create({
     width: LABEL_WIDTH,
   },
   label: {
-    color: 'rgba(128,128,128,0.8)',
+    color: '#484C52',
     fontSize: 17,
+    fontFamily: 'Quicksand_600SemiBold'
   },
 });
