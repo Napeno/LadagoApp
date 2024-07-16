@@ -61,7 +61,6 @@ export const CustomBottomTab: FC<BottomTabBarProps> = ({
     navigation.navigate(tab);
     progress.value = withTiming(index);
   };
-  console.log("Current active index:", state.index);
   return (
     <View style={styles.tabBarContainer}>
       <Svg width={SCREEN_WIDTH} height={tHeight} style={styles.shadowMd}>
