@@ -82,7 +82,7 @@ const CategoryPopularLocationItem = ({id, title, imgUrl, address, price, stars})
                     
 
                     <Text style={styles.price}>
-                        {price}
+                        {price} /night
                     </Text>
 
                     

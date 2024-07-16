@@ -1,21 +1,20 @@
 import { View, Text, FlatList, StyleSheet, Pressable, Image } from 'react-native'
 import React from 'react'
 import {data} from '../constants/data'
-import styles from '../styles/categoryLocation'
+import styles from '../styles/favoriteList'
 import iconStar from '../constants/star_icon.png'
 import favorite from '../constants/favorite.png'
 import unfavorite from '../constants/unfavorite.png'
 
-const CategoryLocation = () => {
+const FavoriteList = () => {
   return (
     <FlatList 
-        horizontal
         contentContainerStyle={styles.flatListContainer}
-        showsHorizontalScrollIndicator={false}
+        showsVerticalScrollIndicator={false}
         data={data.dataLocation}
         // keyExtractor={item=> item}
         renderItem={({item}) => (
-            <CategoryLocationItem 
+            <FavoriteListItem 
                 id = {item.id}
                 isFavorite = {item.favorite}
                 title = {item.name}
@@ -29,7 +28,7 @@ const CategoryLocation = () => {
   )
 }
 
-const CategoryLocationItem = ({id, isFavorite, title, imgUrl, address, price, stars}) => {
+const FavoriteListItem = ({id, isFavorite, title, imgUrl, address, price, stars}) => {
 
     return (
         <View style={[styles.cardWrap]}>
@@ -37,24 +36,29 @@ const CategoryLocationItem = ({id, isFavorite, title, imgUrl, address, price, st
                 // onPress={() => handleChangeCategory(isActive? null: title)} 
                 style={[styles.cardWrap]}
             >
-
                 <Image 
                     source={{ uri: imgUrl }}
                     style={{ 
-                        width: 257, 
-                        height: 182,
+                        width: '100%', 
+                        height: 300,
                         borderTopRightRadius: 12,
                         borderTopLeftRadius: 12,
                      }}
                     resizeMode='cover'
                 />
 
+                <View style={styles.labelList}>
+                    <Text style={styles.labelText}>
+                        Most Popular
+                    </Text>
+                </View>
+
                 <View style={styles.favoriteWraper}>
                     <Image 
                         source={isFavorite ? favorite : unfavorite}
                         style={{ 
-                            width: 19, 
-                            height: 16,
+                            width: 24, 
+                            height: 20,
                             alignSelf: 'center',
                             marginVertical:'auto'
                         }}
@@ -66,7 +70,7 @@ const CategoryLocationItem = ({id, isFavorite, title, imgUrl, address, price, st
 
                      <View style={styles.textLine}>
                         <View style={styles.titleStar}>
-                            <Text style={styles.title}>
+                            <Text numberOfLines={1} style={styles.title}>
                                 {title}
                             </Text>
 
@@ -74,8 +78,8 @@ const CategoryLocationItem = ({id, isFavorite, title, imgUrl, address, price, st
                                 <Image 
                                     source={iconStar}
                                     style={{
-                                        width: 17,
-                                        height: 17,
+                                        width: 20,
+                                        height: 20,
                                         marginRight: 10,
                                     }}
                                     resizeMode='contain'
@@ -94,8 +98,9 @@ const CategoryLocationItem = ({id, isFavorite, title, imgUrl, address, price, st
 
                      </View>
                     
-
-                    
+                    <Text style={styles.date}>
+                        5 nights - 31th May - 05th July
+                    </Text>
 
                     <Text style={styles.price}>
                         {price} /night
@@ -109,4 +114,4 @@ const CategoryLocationItem = ({id, isFavorite, title, imgUrl, address, price, st
     )
 }
 
-export default CategoryLocation
+export default FavoriteList
