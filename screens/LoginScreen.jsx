@@ -1,7 +1,8 @@
+// LoginScreen.js
 import { ScrollView, View, Image, Text, TextInput, Pressable } from 'react-native';
 import { SafeAreaView } from 'react-native';
-import React from 'react';
-import {useNavigation} from '@react-navigation/native'
+import React, { useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
 import styles from '../styles/loginscreen';
 import {
   useFonts,
@@ -11,13 +12,30 @@ import {
   Quicksand_600SemiBold,
   Quicksand_700Bold,
 } from '@expo-google-fonts/quicksand';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../firebase'; // Import the initialized auth instance
 
 const LoginScreen = () => {
   const navigation = useNavigation();
-  
-  const handleHome = () =>{
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+
+  const handleHome = () => {
     navigation.navigate("MAIN");
-  }
+  };
+
+  const handleLogin = () => {
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        navigation.replace('MAIN');
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        setError(errorMessage);
+      });
+  };
 
   let [fontsLoaded] = useFonts({
     Quicksand_300Light,
@@ -30,7 +48,7 @@ const LoginScreen = () => {
   if (!fontsLoaded) {
     return null;
   }
-  
+
   return (
     <SafeAreaView style={styles.safeAreaView}>
       <ScrollView contentContainerStyle={styles.scrollView}>
@@ -44,12 +62,26 @@ const LoginScreen = () => {
             <Text style={styles.titleForm}>
               Log in to LADAGO
             </Text>
-            <TextInput style={styles.textInput} placeholder="Username" placeholderTextColor="gray" />
-            <TextInput style={styles.textInput} placeholder="Password" placeholderTextColor="gray" />
+            <TextInput
+              style={styles.textInput}
+              placeholder="Username"
+              placeholderTextColor="gray"
+              value={email}
+              onChangeText={setEmail}
+            />
+            <TextInput
+              style={styles.textInput}
+              placeholder="Password"
+              placeholderTextColor="gray"
+              secureTextEntry
+              value={password}
+              onChangeText={setPassword}
+            />
+            {error ? <Text style={styles.error}>{error}</Text> : null}
             <Text style={styles.forgetPassword}>Forget password?</Text>
           </View>
           <View style={styles.interact_btn}>
-            <Pressable style={styles.loginScreenButton} onPress={handleHome}>
+            <Pressable style={styles.loginScreenButton} onPress={handleLogin}>
               <Text style={styles.login_btn}>
                 Login
               </Text>
