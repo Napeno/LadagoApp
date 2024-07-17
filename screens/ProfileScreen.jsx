@@ -13,6 +13,7 @@ import supportIcon from '../constants/supportIcon.png'
 import suportCustomer from '../constants/customerSupportIcon.png'
 import editIcon from '../constants/editIcon.png'
 import switchIcon from '../constants/switchIcon.png'
+import {logout} from '../components/logout'
 
 import {
   useFonts,
@@ -24,7 +25,11 @@ import {
 } from '@expo-google-fonts/quicksand';
 import { Filter } from 'react-native-svg';
 
-const ProfileScreen = () => {
+const ProfileScreen = ({navigation}) => {
+
+  const handleLogout = () =>{
+    logout(navigation );
+  };
 
   let [fontsLoaded] = useFonts({
     Quicksand_300Light,
@@ -395,13 +400,18 @@ const ProfileScreen = () => {
             <View style={{ backgroundColor: '#BFBCBD', width: '100%', height: 1, marginBottom: 32}}></View>
                 
           </View>
-
-          <Text style={{ 
-            fontSize: 16,
-            fontFamily: 'Quicksand_700Bold',
-            textDecorationLine: 'underline',
-            marginBottom: 24,
-           }}>Logout</Text>
+          <Pressable
+             onPress={handleLogout}
+          >
+            <Text style={{ 
+              fontSize: 16,
+              fontFamily: 'Quicksand_700Bold',
+              textDecorationLine: 'underline',
+              marginBottom: 24,
+            }} 
+            >Logout</Text>
+          </Pressable>
+          
 
            <Pressable style={{ 
             backgroundColor: '#0F1035',
