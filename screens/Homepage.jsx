@@ -1,11 +1,12 @@
 import { ScrollView, View, Image, Text, TextInput, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from '../styles/homepage';
 import Categories from '../components/categories';
 import CategoryLocation from '../components/categoryLocation';
 import CategoryPopularLocation from '../components/caregoryPopularLocation';
 import DiscoverLocation from '../components/discoverLocation';
+import PlaceList from '../components/placeList'
 
 import {
   useFonts,
@@ -19,10 +20,6 @@ import {
 const Homepage = () => {
   const [activeCategory, setActiveCategory] = useState(null);
 
-  const handleChangeCategory = (cat) => {
-    setActiveCategory(cat);
-  }
-
   let [fontsLoaded] = useFonts({
     Quicksand_300Light,
     Quicksand_400Regular,
@@ -30,6 +27,10 @@ const Homepage = () => {
     Quicksand_600SemiBold,
     Quicksand_700Bold,
   });
+
+  const handleChangeCategory = (cat) => {
+    setActiveCategory(cat);
+  }
 
   if (!fontsLoaded) {
     return null;
@@ -107,9 +108,18 @@ const Homepage = () => {
                 See all
               </Text>
             </View>
-            <DiscoverLocation />
+            <DiscoverLocation  />
           </View>
+        <View style ={[styles.cardHoriWrap, {paddingBottom: 100}]}>
+          <Text style={{ fontFamily: 'Quicksand_600SemiBold', fontSize: 16, marginBottom:24 }}>
+                Recommend today
+          </Text>
+          <PlaceList />
         </View>
+
+        </View>
+
+
       </ScrollView>
     </SafeAreaView>
   );

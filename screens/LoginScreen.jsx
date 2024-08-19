@@ -13,7 +13,7 @@ import {
   Quicksand_700Bold,
 } from '@expo-google-fonts/quicksand';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../firebase'; // Import the initialized auth instance
+import { auth } from '../firebase';
 
 const LoginScreen = () => {
   const navigation = useNavigation();
