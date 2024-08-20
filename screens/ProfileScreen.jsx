@@ -31,6 +31,10 @@ const ProfileScreen = ({navigation}) => {
     logout(navigation );
   };
 
+  const handleCreate = () => {
+    navigation.navigate("CREATE");
+  };
+
   let [fontsLoaded] = useFonts({
     Quicksand_300Light,
     Quicksand_400Regular,
@@ -78,41 +82,44 @@ const ProfileScreen = ({navigation}) => {
           </View>
 
           <View style={{ backgroundColor: '#BFBCBD', width: '100%', height: 1, marginBottom: 32 }}></View>
+          <Pressable
+             onPress={handleCreate}
+          >
+            <View style={styles.adminWrap}>
+              <View style={styles.adminText}>
+                <Text
+                  style={{
+                    fontSize: 18,
+                    fontFamily: 'Quicksand_700Bold',
+                    marginBottom: 4
+                  }}
+                >
+                  House rental on Ladago
+                </Text>
+                <Text
+                  style={{
+                    width: 242,
+                    fontSize: 14,
+                    fontFamily: 'Quicksand_600SemiBold',
+                    color: '#736E6F',
+                  }}
+                >
+                  Setting up and starting to earn money is really simple
+                </Text>
+              </View>
 
-          <View style={styles.adminWrap}>
-            <View style={styles.adminText}>
-              <Text
+              <Image
                 style={{
-                  fontSize: 18,
-                  fontFamily: 'Quicksand_700Bold',
-                  marginBottom: 4
+                  width: 90,
+                  alignSelf: 'center',
+                  height: 90,
+                  marginEnd: 12
                 }}
-              >
-                House rental on Ladago
-              </Text>
-              <Text
-                style={{
-                  width: 242,
-                  fontSize: 14,
-                  fontFamily: 'Quicksand_600SemiBold',
-                  color: '#736E6F',
-                }}
-              >
-                Setting up and starting to earn money is really simple
-              </Text>
+                source={adminhouse}
+                resizeMode='contain'
+              />
             </View>
-
-            <Image
-              style={{
-                width: 90,
-                alignSelf: 'center',
-                height: 90,
-                marginEnd: 12
-              }}
-              source={adminhouse}
-              resizeMode='contain'
-            />
-          </View>
+          </Pressable>
 
           <View style={styles.sectionSetting}>
             <Text

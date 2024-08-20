@@ -4,7 +4,6 @@ export default StyleSheet.create({
     flatListContainer: {
         gap: 16,
         marginTop: 16,
-        paddingBottom: 100,
     },
 
     cardWrap:{
