@@ -60,9 +60,21 @@ const message = [
     },
 ]
 
+const typeRoom = [
+    { label: 'Standard Room', value: '1' },
+    { label: 'Double Room', value: '2' },
+    { label: 'Family Room', value: '3' },
+    { label: 'Studio Room', value: '4' },
+    { label: 'Sea View Room', value: '5' },
+    { label: 'Suite Room', value: '6' },
+    { label: 'Deluxe Room', value: '7' },
+    { label: 'Junior Room', value: '8' },
+];
+
 export const data = {
     categories,
     dataLocation,
-    message
+    message,
+    typeRoom
 }
 

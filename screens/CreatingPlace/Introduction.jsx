@@ -3,6 +3,7 @@ import { SafeAreaView } from 'react-native';
 import styles from '../../styles/CreatingPlace/introduction';
 import house from '../../constants/3dhouse.png'
 import close from '../../constants/close.png'
+import BottomTabCreate from '../../components/bottomTabCreate'
 import {
   useFonts,
   Quicksand_300Light,
@@ -13,7 +14,7 @@ import {
 } from '@expo-google-fonts/quicksand';
 import { Filter } from 'react-native-svg';
 
-const Introduction = () => {
+const Introduction = ({navigation}) => {
 
   let [fontsLoaded] = useFonts({
     Quicksand_300Light,
@@ -26,6 +27,9 @@ const Introduction = () => {
   if (!fontsLoaded) {
     return null;
   }
+
+  const backNav = "CREATE";
+  const nextNav = "STEPONE";
 
   return (
     <SafeAreaView style={styles.safeAreaView}>
@@ -58,26 +62,7 @@ const Introduction = () => {
             guests it can accommodate.
           </Text>
 
-          <View style={styles.bottomBar}>
-            <View style={styles.listBar}>
-              <View style={[styles.Bar, {}]}></View>
-              <View style={[styles.Bar, {}]}></View>
-              <View style={[styles.Bar, {}]}></View>
-              <View style={[styles.Bar, {}]}></View>
-              <View style={[styles.Bar, {}]}></View>
-              <View style={[styles.Bar, {}]}></View>
-            </View>
-
-            <View style={styles.navigateButtons}>
-            <Pressable style={styles.backBar}>
-                  <Text style={[styles.textNav, { color: '#365486',}]}>Back</Text>
-              </Pressable> 
-              <Pressable style={styles.nextBar}>
-                  <Text style={[styles.textNav, { color: '#FFFFFF',}]}>Next</Text>
-              </Pressable>
-              
-            </View>
-          </View>
+          <BottomTabCreate navigation={navigation} backNav={backNav} nextNav={nextNav}/>
         </View>
     </SafeAreaView>
   )

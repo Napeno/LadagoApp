@@ -19,7 +19,7 @@ import {
 
 const Homepage = () => {
   const [activeCategory, setActiveCategory] = useState(null);
-
+  console.log('Homepage rendered');
   let [fontsLoaded] = useFonts({
     Quicksand_300Light,
     Quicksand_400Regular,

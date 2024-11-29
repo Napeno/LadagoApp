@@ -1,14 +1,11 @@
 import { StyleSheet } from 'react-native';
-import { red } from 'react-native-redash';
 
 export default StyleSheet.create({
     safeAreaView: {
         backgroundColor: 'white',
         height: '100%',
       },
-      scrollView: {
-        
-      },
+
       viewContainer: {
         width: '100%',
         marginTop: 20,
@@ -20,11 +17,6 @@ export default StyleSheet.create({
         width: 28,
         height: 28,
         marginBottom:16
-      },
-
-      house: {
-        width: 380,
-        height: 380,
       },
 
       titleStep:{
@@ -39,9 +31,13 @@ export default StyleSheet.create({
         marginBottom: 18
       },
 
-      description:{
-        fontSize: 14,
-        fontFamily: 'Quicksand_400Regular',
-        lineHeight: 24
+      textInput: {
+        padding: 10,
+        width: "100%",
+        height: 48,
+        borderWidth: 1,
+        borderRadius: 5,
+        marginBottom: 16,
       },
+
 });

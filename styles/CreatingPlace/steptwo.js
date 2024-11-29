@@ -22,11 +22,6 @@ export default StyleSheet.create({
         marginBottom:16
       },
 
-      house: {
-        width: 380,
-        height: 380,
-      },
-
       titleStep:{
         fontSize: 16,
         fontFamily: 'Quicksand_500Medium',
@@ -39,9 +34,32 @@ export default StyleSheet.create({
         marginBottom: 18
       },
 
-      description:{
-        fontSize: 14,
-        fontFamily: 'Quicksand_400Regular',
-        lineHeight: 24
+      titleName:{
+        fontSize: 20,
+        fontFamily: 'Quicksand_600SemiBold',
+        marginBottom: 10,
+        color: '#365486'
       },
+
+      horiItem:{
+        flexDirection: 'row',
+        alignContent: 'center',
+        justifyContent: 'space-between'
+      },    
+
+      textItems:{
+        fontFamily: "Quicksand_600SemiBold",
+        fontSize: 20
+      },
+
+      checkedItem:{
+        padding: 25,
+        borderWidth: 1,
+        borderRadius: 8,
+        marginVertical: 10,
+        width: 180,
+        alignItems: 'center'
+      },
+
+
 });

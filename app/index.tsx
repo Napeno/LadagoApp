@@ -3,6 +3,10 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LoginScreen from '../screens/LoginScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import Introduction from '../screens/CreatingPlace/Introduction'
+import StepOneScreen from '../screens/CreatingPlace/StepOneScreen'
+import StepTwoScreen from '../screens/CreatingPlace/StepTwoScreen'
+import StepThreeScreen from '../screens/CreatingPlace/StepThreeScreen'
+import StepFourScreen from '../screens/CreatingPlace/StepFourScreen'
 import BottomTabs from '../tabs/BottomTabs';
 import { auth } from '../firebase'; // Import initialized instances
 import { onAuthStateChanged } from 'firebase/auth';
@@ -16,7 +20,8 @@ const App = () => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setUser(user);
+      // @ts-ignore
+        setUser(user);
       setLoading(false);
     });
 
@@ -29,19 +34,23 @@ const App = () => {
   }
 
   return (
-    <NavigationContainer independent={true}>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         {user ? (
           <Stack.Screen name="MAIN" component={BottomTabs} />
         ) : (
           <Stack.Screen name="LOGIN" component={LoginScreen} />
         )}
-
           <Stack.Screen name="CREATE" component={Introduction} />
           <Stack.Screen name="PROFILE" component={ProfileScreen} />
-          
+          <Stack.Screen name="STEPONE" component={StepOneScreen} />
+          <Stack.Screen name="STEPTWO" component={StepTwoScreen} />
+          <Stack.Screen name="STEPTHREE" component={StepThreeScreen} />
+          <Stack.Screen name="STEPFOUR" component={StepFourScreen} />
+
       </Stack.Navigator>
-    </NavigationContainer>
+
+
+
   );
 };
 
