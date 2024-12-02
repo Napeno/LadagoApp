@@ -5,7 +5,8 @@ import styles from '../styles/categoryLocation'
 import iconStar from '../constants/star_icon.png'
 import favorite from '../constants/favorite.png'
 import unfavorite from '../constants/unfavorite.png'
-
+import { TouchableOpacity } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
 const CategoryLocation = () => {
   return (
     <FlatList 
@@ -30,11 +31,12 @@ const CategoryLocation = () => {
 }
 
 const CategoryLocationItem = ({id, isFavorite, title, imgUrl, address, price, stars}) => {
-
+    const nav = useNavigation();
     return (
         <View style={[styles.cardWrap]}>
-            <Pressable 
-                // onPress={() => handleChangeCategory(isActive? null: title)} 
+            <TouchableOpacity 
+                //onPress={() => handleChangeCategory(isActive? null: title)} 
+                onPress={()=>{nav.navigate("ROOMDETAIL")}}
                 style={[styles.cardWrap]}
             >
 
@@ -104,7 +106,7 @@ const CategoryLocationItem = ({id, isFavorite, title, imgUrl, address, price, st
                     
 
                 </View>
-            </Pressable>   
+            </TouchableOpacity>   
         </View>
     )
 }
