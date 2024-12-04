@@ -1,7 +1,14 @@
-import { ScrollView, View, Image, Text, TextInput, Pressable } from 'react-native';
-import { SafeAreaView } from 'react-native';
-import styles from '../styles/favoritescreen';
-import FavoriteList from '../components/favoriteList';
+import {
+  ScrollView,
+  View,
+  Image,
+  Text,
+  TextInput,
+  Pressable,
+} from "react-native";
+import { SafeAreaView } from "react-native";
+import styles from "../styles/favoritescreen";
+import FavoriteList from "../components/favoriteList";
 import {
   useFonts,
   Quicksand_300Light,
@@ -9,11 +16,10 @@ import {
   Quicksand_500Medium,
   Quicksand_600SemiBold,
   Quicksand_700Bold,
-} from '@expo-google-fonts/quicksand';
-import { Filter } from 'react-native-svg';
+} from "@expo-google-fonts/quicksand";
+import { Filter } from "react-native-svg";
 
 const FavoriteScreen = () => {
-
   let [fontsLoaded] = useFonts({
     Quicksand_300Light,
     Quicksand_400Regular,
@@ -28,28 +34,22 @@ const FavoriteScreen = () => {
 
   return (
     <SafeAreaView style={styles.safeAreaView}>
-        <View style={styles.viewContainer}>
-          <Text style={styles.titleFavorite}>
-            Favorite List
-          </Text>
+      <View style={styles.viewContainer}>
+        <Text style={styles.titleFavorite}>Favorite List</Text>
 
-          <View style={styles.filterWrap}>
-            <Pressable style={styles.filterBtn}>
-              <Text style={styles.filterText}>
-                Date - Visitor
-              </Text>
-            </Pressable>
-            <Pressable style={styles.filterBtn}>
-              <Text style={styles.filterText}>
-                Share
-              </Text>
-            </Pressable>
-          </View>
-
-          <FavoriteList />
+        <View style={styles.filterWrap}>
+          <Pressable style={styles.filterBtn}>
+            <Text style={styles.filterText}>Date - Visitor</Text>
+          </Pressable>
+          <Pressable style={styles.filterBtn}>
+            <Text style={styles.filterText}>Share</Text>
+          </Pressable>
         </View>
-    </SafeAreaView>
-  )
-}
 
-export default FavoriteScreen
+        <FavoriteList />
+      </View>
+    </SafeAreaView>
+  );
+};
+
+export default FavoriteScreen;

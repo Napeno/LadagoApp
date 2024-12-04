@@ -1,7 +1,7 @@
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Homepage from './screens/Homepage';
-import LoginScreen from './screens/LoginScreen';
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import Homepage from "./screens/Homepage";
+import LoginScreen from "./screens/LoginScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -14,6 +14,6 @@ const App = () => {
       </Stack.Navigator>
     </NavigationContainer>
   );
-}
+};
 
 export default App;

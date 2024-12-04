@@ -1,4 +1,3 @@
 module.exports = {
-    assets: ['./app/assets/fonts'],
-  };
-  
+  assets: ["./app/assets/fonts"],
+};

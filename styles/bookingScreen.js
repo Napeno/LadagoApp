@@ -1,38 +1,34 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
   safeAreaView: {
-    backgroundColor: 'white',
-    height: '100%',
-
+    backgroundColor: "white",
+    height: "100%",
   },
-  scrollView: {
-  },
+  scrollView: {},
   viewContainer: {
-    width: '100%',
+    width: "100%",
     marginTop: 20,
-    height: '100%',
+    height: "100%",
     paddingHorizontal: 20,
-
   },
 
-  firstLayer:{
+  firstLayer: {
     marginBottom: 24,
     marginTop: 16,
-    flexDirection:'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  
-  tilteBooking:{
-    fontSize: 34,
-    fontFamily: 'Quicksand_700Bold'
-  },
-  
-  editBooking:{
-    fontSize: 18,
-    fontFamily: 'Quicksand_500Medium',
-    textDecorationLine: 'underline'
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
 
+  tilteBooking: {
+    fontSize: 34,
+    fontFamily: "Quicksand_700Bold",
+  },
+
+  editBooking: {
+    fontSize: 18,
+    fontFamily: "Quicksand_500Medium",
+    textDecorationLine: "underline",
+  },
 });

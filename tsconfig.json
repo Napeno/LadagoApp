@@ -3,9 +3,7 @@
   "compilerOptions": {
     "strict": true,
     "paths": {
-      "@/*": [
-        "./*"
-      ],
+      "@/*": ["./*"],
       "@firebase/auth": ["./node_modules/@firebase/auth/dist/index.rn.d.ts"]
     }
   },
@@ -13,7 +11,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".expo/types/**/*.ts",
-    "expo-env.d.ts"
-, "pages/screens/LoginScreen.jsx"  ]
+    "expo-env.d.ts",
+    "pages/screens/LoginScreen.jsx"
+  ]
 }
-

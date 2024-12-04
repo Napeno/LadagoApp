@@ -1,47 +1,43 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
   safeAreaView: {
-    backgroundColor: 'white',
-    height: '100%',
-
+    backgroundColor: "white",
+    height: "100%",
   },
-  scrollView: {
-  },
+  scrollView: {},
   viewContainer: {
-    width: '100%',
+    width: "100%",
     marginTop: 20,
-    height: '100%',
+    height: "100%",
     paddingHorizontal: 20,
-
   },
 
-  titleFavorite:{
-    marginBottom:16,
+  titleFavorite: {
+    marginBottom: 16,
     fontSize: 34,
     marginTop: 16,
-    fontFamily: 'Quicksand_700Bold'
+    fontFamily: "Quicksand_700Bold",
   },
 
-  filterWrap:{
+  filterWrap: {
     width: 200,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    marginBottom:20,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: 20,
   },
 
-  filterBtn:{
+  filterBtn: {
     backgroundColor: "white",
-    borderColor: '#B2B2B2',
+    borderColor: "#B2B2B2",
     borderWidth: 1,
     padding: 14,
     borderRadius: 24,
   },
 
-  filterText:{
-    fontFamily: 'Quicksand_500Medium',
+  filterText: {
+    fontFamily: "Quicksand_500Medium",
     fontSize: 14,
   },
-
 });
