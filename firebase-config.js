@@ -13,5 +13,5 @@ export const firebaseConfig = {
   storageBucket: "ladago-5cee2.appspot.com",
   messagingSenderId: "908525025740",
   appId: "1:908525025740:web:a63583995bdfc6d9900569",
-  measurementId: "G-81PM87TXE5"
+  measurementId: "G-81PM87TXE5",
 };
