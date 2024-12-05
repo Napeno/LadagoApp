@@ -1,32 +1,32 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
   safeAreaView: {
-    backgroundColor: 'white',
-    height: '100%',
+    backgroundColor: "white",
+    height: "100%",
   },
   scrollView: {
-    height: '100%',
+    height: "100%",
   },
   viewContainer: {
-    width: '100%',
+    width: "100%",
     marginTop: 80,
-    height: '100%',
+    height: "100%",
     paddingHorizontal: 20,
   },
   logo: {
     width: 120,
     height: 33,
-    alignSelf: 'center',
+    alignSelf: "center",
     marginBottom: 80,
   },
 
-  viewForm:{
-    marginBottom:24,
+  viewForm: {
+    marginBottom: 24,
   },
 
   titleForm: {
-    fontFamily: 'Quicksand_600SemiBold',
+    fontFamily: "Quicksand_600SemiBold",
     fontSize: 23,
     marginBottom: 26,
   },
@@ -40,79 +40,75 @@ export default StyleSheet.create({
     marginBottom: 16,
   },
 
-  forgetPassword:{
-    fontFamily: 'Quicksand_600SemiBold',
+  forgetPassword: {
+    fontFamily: "Quicksand_600SemiBold",
     fontSize: 14,
     fontWeight: "500",
-    textAlign: 'right'
+    textAlign: "right",
   },
 
-  interact_btn:{
+  interact_btn: {
     marginBottom: 72,
   },
 
-  loginScreenButton:{
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#365486',
-    width: '100%',
+  loginScreenButton: {
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#365486",
+    width: "100%",
     borderRadius: 5,
     height: 50,
-    marginBottom: 16
+    marginBottom: 16,
   },
 
-  login_btn:{
-    color: 'white',
-    fontFamily: 'Quicksand_700Bold',
+  login_btn: {
+    color: "white",
+    fontFamily: "Quicksand_700Bold",
     fontSize: 23,
-    fontWeight: '500',
+    fontWeight: "500",
   },
 
-  registerScreenButton:{
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'white',
+  registerScreenButton: {
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "white",
     borderWidth: 3,
-    borderColor: '#365486',
+    borderColor: "#365486",
     borderRadius: 5,
-    width: '100%',
+    width: "100%",
     height: 50,
-    marginBottom: 16
+    marginBottom: 16,
   },
 
-  register_btn:{
-    color: '#365486',
+  register_btn: {
+    color: "#365486",
     fontSize: 23,
-    fontFamily: 'Quicksand_700Bold',
-    fontWeight: '500',
+    fontFamily: "Quicksand_700Bold",
+    fontWeight: "500",
   },
 
-  other_login:{
-  },
+  other_login: {},
 
   icon_login: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    gap : 3,
+    justifyContent: "center",
+    alignItems: "center",
+    gap: 3,
     columnGap: 72,
-    flexDirection: 'row'
+    flexDirection: "row",
   },
 
-  icon:{
+  icon: {
     width: 52,
     height: 52,
   },
 
-  icon_apple:{
+  icon_apple: {
     width: 64,
     height: 64,
   },
 
-  icon_phone:{
+  icon_phone: {
     width: 48,
     height: 48,
   },
-
-
-
 });

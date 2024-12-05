@@ -1,58 +1,54 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
   safeAreaView: {
-    backgroundColor: 'white',
-    height: '100%',
-
+    backgroundColor: "white",
+    height: "100%",
   },
-  scrollView: {
-  },
+  scrollView: {},
   viewContainer: {
-    width: '100%',
+    width: "100%",
     marginTop: 20,
-    height: '100%',
+    height: "100%",
     paddingHorizontal: 20,
-
   },
 
-  firstLayer:{
+  firstLayer: {
     marginBottom: 24,
     marginTop: 16,
-    flexDirection:'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
 
-  findMessage:{
+  findMessage: {
     width: 30,
     height: 30,
   },
 
-  titleMessage:{
+  titleMessage: {
     fontSize: 34,
-    fontFamily: 'Quicksand_700Bold'
+    fontFamily: "Quicksand_700Bold",
   },
 
-  filterWrap:{
+  filterWrap: {
     width: 200,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    marginBottom:20,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: 20,
   },
 
-  filterBtn:{
+  filterBtn: {
     backgroundColor: "white",
-    borderColor: '#B2B2B2',
+    borderColor: "#B2B2B2",
     borderWidth: 1,
     padding: 14,
     borderRadius: 24,
   },
 
-  filterText:{
-    fontFamily: 'Quicksand_500Medium',
+  filterText: {
+    fontFamily: "Quicksand_500Medium",
     fontSize: 14,
   },
-
 });

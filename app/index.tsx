@@ -11,6 +11,7 @@ import BottomTabs from '../tabs/BottomTabs';
 import { auth } from '../firebase'; // Import initialized instances
 import { onAuthStateChanged } from 'firebase/auth';
 import { useEffect, useState } from 'react';
+import RoomDetail from '@/screens/RoomDetail';
 
 const Stack = createNativeStackNavigator();
 
@@ -36,7 +37,10 @@ const App = () => {
   return (
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         {user ? (
-          <Stack.Screen name="MAIN" component={BottomTabs} />
+          <>
+            <Stack.Screen name="MAIN" component={BottomTabs} />
+            <Stack.Screen name="ROOMDETAIL" component={RoomDetail} />
+          </>
         ) : (
           <Stack.Screen name="LOGIN" component={LoginScreen} />
         )}
