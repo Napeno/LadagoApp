@@ -15,8 +15,8 @@ export default function BottomTabs() {
         <Tab.Group screenOptions={{ headerShown: false }}>
             <Tab.Screen name="Home" component={Homepage} options={{ tabBarLabel: 'Home' }} />
             <Tab.Screen name="Favorite" component={FavoriteScreen} options={{ tabBarLabel: 'Favorite' }} />
-            {/* <Tab.Screen name="Booking" component={BookingScreen} options={{ tabBarLabel: 'Booking' }} /> */}
-            <Tab.Screen name="Booking" component={CameraScreen} options={{ tabBarLabel: 'Booking' }} />
+            <Tab.Screen name="Booking" component={BookingScreen} options={{ tabBarLabel: 'Booking' }} />
+            {/* <Tab.Screen name="Booking" component={CameraScreen} options={{ tabBarLabel: 'Booking' }} /> */}
             <Tab.Screen name="Message" component={MessageScreen} options={{ tabBarLabel: 'Message' }} />
             <Tab.Screen name="Profile" component={ProfileScreen} options={{ tabBarLabel: 'Profile' }} />
         </Tab.Group>
