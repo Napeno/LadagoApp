@@ -67,6 +67,8 @@
     "react-native-element-dropdown": "^2.12.1",
     "react-native-gesture-handler": "^2.21.0",
     "react-native-linear-gradient": "^2.8.3",
+    "react-native-maps": "1.18.0",
+    "react-native-permissions": "^5.2.1",
     "react-native-qrcode-svg": "^6.3.12",
     "react-native-randombytes": "^3.6.1",
     "react-native-reanimated": "^3.16.1",
@@ -81,7 +83,9 @@
     "react-native-webview": "^13.12.4",
     "rn-qr-generator": "^1.4.2",
     "socket.io-client": "^4.8.1",
-    "stream-browserify": "^3.0.0"
+    "stream-browserify": "^3.0.0",
+    "expo-location": "~18.0.3",
+    "expo-image-picker": "~16.0.3"
   },
   "devDependencies": {
     "@babel/core": "^7.24.8",

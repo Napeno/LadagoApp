@@ -1,6 +1,6 @@
 import { ScrollView, View, Image, Text, TextInput, Pressable, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { SafeAreaView } from 'react-native';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import styles from '../../styles/CreatingPlace/stepfour';
 import close from '../../constants/close.png'
 import BottomTabCreate from '../../components/bottomTabCreate'
@@ -26,16 +26,15 @@ const StepFourScreen = ({ navigation }) => {
     const nextNav = "STEPFIVE";
 
     const [roomTabs, setRoomTabs] = useState([{id: 0}]);
-    const handleAddRoom = () => {
-        setRoomTabs([...roomTabs, {id: roomTabs[roomTabs.length - 1].id + 1}]);
-    }
 
-    const handleDeleteRoom = (idToRemove) => {
-        setRoomTabs(roomTabs.filter(room => room.id !== idToRemove));
+    const handleAddRoom = () => {
+        setRoomTabs((prevTabs) => [...prevTabs, { id: prevTabs[prevTabs.length - 1].id + 1 }]);
     };
 
-    useEffect(() => {console.log(roomTabs)});
-    
+    const handleDeleteRoom = useCallback((idToRemove) => {
+        setRoomTabs((prevTabs) => prevTabs.filter((room) => room.id !== idToRemove));
+    }, []); 
+
 
     if (!fontsLoaded) {
         return null;
@@ -59,7 +58,11 @@ const StepFourScreen = ({ navigation }) => {
                         </Text>
                         
                         {roomTabs.map((tab) => (
-                            <RoomTabCreate key={tab.id} roomTabs={tab.id} onDeleteRoom={() => handleDeleteRoom(tab.id)} />
+                            <RoomTabCreate
+                                key={tab.id}
+                                roomTabs={tab.id}
+                                onDeleteRoom={handleDeleteRoom}
+                            />
                         ))}
                         
                         <Pressable style={styles.pressBtn}

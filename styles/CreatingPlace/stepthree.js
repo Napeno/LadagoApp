@@ -40,4 +40,9 @@ export default StyleSheet.create({
         marginBottom: 16,
       },
 
+      map: {
+        width: '100%',
+        height: '100%',
+      },
+
 });

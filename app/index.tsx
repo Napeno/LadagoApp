@@ -7,6 +7,8 @@ import StepOneScreen from '../screens/CreatingPlace/StepOneScreen'
 import StepTwoScreen from '../screens/CreatingPlace/StepTwoScreen'
 import StepThreeScreen from '../screens/CreatingPlace/StepThreeScreen'
 import StepFourScreen from '../screens/CreatingPlace/StepFourScreen'
+import StepFiveScreen from '../screens/CreatingPlace/StepFiveScreen'
+import StepSixScreen from '../screens/CreatingPlace/StepSixScreen'
 import BottomTabs from '../tabs/BottomTabs';
 import { auth } from '../firebase'; // Import initialized instances
 import { onAuthStateChanged } from 'firebase/auth';
@@ -38,7 +40,8 @@ const App = () => {
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         {user ? (
           <>
-            <Stack.Screen name="MAIN" component={BottomTabs} />
+            {/* <Stack.Screen name="MAIN" component={BottomTabs} /> */}
+          <Stack.Screen name="STEPSIX" component={StepSixScreen} />
             <Stack.Screen name="ROOMDETAIL" component={RoomDetail} />
           </>
         ) : (
@@ -50,6 +53,8 @@ const App = () => {
           <Stack.Screen name="STEPTWO" component={StepTwoScreen} />
           <Stack.Screen name="STEPTHREE" component={StepThreeScreen} />
           <Stack.Screen name="STEPFOUR" component={StepFourScreen} />
+          <Stack.Screen name="STEPFIVE" component={StepFiveScreen} />
+          {/* <Stack.Screen name="STEPFIVE" component={StepFiveScreen} /> */}
 
       </Stack.Navigator>
 

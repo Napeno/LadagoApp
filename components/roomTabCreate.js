@@ -1,7 +1,7 @@
-import { View, Text, TextInput, Pressable, StyleSheet, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { View, Text, TextInput, Pressable, StyleSheet } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
-import React, { useState, useEffect } from 'react';
-import { data } from '../constants/data'
+import React, { useState, useCallback } from 'react';
+import { data } from '../constants/data';
 
 import {
     useFonts,
@@ -12,7 +12,7 @@ import {
     Quicksand_700Bold,
 } from '@expo-google-fonts/quicksand';
 
-const RoomTabCreate = ({roomTabs, onDeleteRoom}) => {
+const RoomTabCreate = ({ roomTabs, onDeleteRoom }) => {
     let [fontsLoaded] = useFonts({
         Quicksand_300Light,
         Quicksand_400Regular,
@@ -22,45 +22,45 @@ const RoomTabCreate = ({roomTabs, onDeleteRoom}) => {
     });
 
     const [value, setValue] = useState(null);
-
     const [selectedTabs, setSelectedTabs] = useState([]);
 
-    useEffect(() => { });
+    const handleDelete = () => onDeleteRoom(roomTabs);
 
-    const handlePress = (tabIndex) => {
-        setSelectedTabs(selectedTabs.includes(tabIndex)
-            ? selectedTabs.filter(index => index !== tabIndex)
-            : [...selectedTabs, tabIndex]);
-    };
-
-    const getTabStyles = (tabIndex) => ({
-        backgroundColor: selectedTabs.includes(tabIndex) ? '#365486' : 'transparent',
-        color: selectedTabs.includes(tabIndex) ? 'white' : 'black',
-    });
+    const handlePress = useCallback(
+        (tabIndex) => {
+            setSelectedTabs((prev) =>
+                prev.includes(tabIndex)
+                    ? prev.filter((index) => index !== tabIndex)
+                    : [...prev, tabIndex]
+            );
+        },
+        [] 
+    );
+    
+    const getTabStyles = useCallback(
+        (tabIndex) => ({
+            backgroundColor: selectedTabs.includes(tabIndex) ? '#365486' : 'transparent',
+            color: selectedTabs.includes(tabIndex) ? 'white' : 'black',
+        }),
+        [selectedTabs]
+    );
 
     if (!fontsLoaded) {
-        return null;
+        return null; 
     }
-
+    
     return (
         <View style={styles.coveredRoom}>
-            <View style={{ flexDirection: 'row', alignContent: 'center', justifyContent: 'space-between' }}>
-                <Text style={styles.roomTitle}>
-                    Room {roomTabs + 1}
-                </Text>
-
-                <Pressable onPress={onDeleteRoom}>
-                    <Text style={styles.deleteBtn}>
-                        Delete
-                    </Text>
+            <View style={styles.headerRow}>
+                <Text style={styles.roomTitle}>Room {roomTabs + 1}</Text>
+                <Pressable onPress={handleDelete}>
+                    <Text>Delete</Text>
                 </Pressable>
             </View>
-            
-            <View style={{ backgroundColor: '#BFBCBD', width: '100%', height: 1, marginBottom: 15 }}></View>
-            <Text style={styles.titleName}>
-                Type of room name
-            </Text>
 
+            <View style={styles.divider}></View>
+
+            <Text style={styles.titleName}>Type of room name</Text>
             <Dropdown
                 style={styles.dropdown}
                 placeholderStyle={styles.placeholderStyle}
@@ -75,57 +75,31 @@ const RoomTabCreate = ({roomTabs, onDeleteRoom}) => {
                 placeholder="Select item"
                 searchPlaceholder="Search..."
                 value={value}
-                onChange={item => {
-                    setValue(item.value);
-                }}
+                onChange={(item) => setValue(item.value)}
             />
 
-            <Text style={styles.titleName}>
-                Room Occupacity
-            </Text>
-
+            <Text style={styles.titleName}>Room Occupacity</Text>
             <TextInput
-                style={[styles.textInput]}
+                style={styles.textInput}
                 keyboardType="numeric"
                 placeholder="0"
                 maxLength={2}
             />
 
-            <Text style={styles.titleName}>
-                Amenities
-            </Text>
-
-            <View style={styles.horiItem}>
-                {['Bath Tub', 'Cleaning Ser'].map(tab => (
-                    <Pressable
-                        key={tab}
-                        style={[styles.checkedItem, { backgroundColor: getTabStyles(tab).backgroundColor }]}
-                        onPress={() => handlePress(tab)}
-                    >
-                        <Text style={[styles.textItems, { color: getTabStyles(tab).color }]}>
-                            {tab}
-                        </Text>
-                    </Pressable>
-                ))}
-            </View>
-
-            <View style={styles.horiItem}>
-                {['Pet Allowed', 'Wifi'].map(tab => (
-                    <Pressable
-                        key={tab}
-                        style={[styles.checkedItem, { backgroundColor: getTabStyles(tab).backgroundColor }]}
-                        onPress={() => handlePress(tab)}
-                    >
-                        <Text style={[styles.textItems, { color: getTabStyles(tab).color }]}>
-                            {tab}
-                        </Text>
-                    </Pressable>
-                ))}
-            </View>
-
+            <Text style={styles.titleName}>Amenities</Text>
+            {['Bath Tub', 'Cleaning Service', 'Pet Allowed', 'Wifi'].map((tab, index) => (
+                <Pressable
+                    key={tab}
+                    style={[styles.checkedItem, { backgroundColor: getTabStyles(tab).backgroundColor }]}
+                    onPress={() => handlePress(tab)}
+                >
+                    <Text style={[styles.textItems, { color: getTabStyles(tab).color }]}>{tab}</Text>
+                </Pressable>
+            ))}
         </View>
-    )
-}
+    );
+};
+
 
 const styles = StyleSheet.create({
     textInput: {
