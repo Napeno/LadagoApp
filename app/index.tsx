@@ -8,6 +8,8 @@ import { auth } from "../firebase"; // Import initialized instances
 import { onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
 import RoomDetail from "@/screens/RoomDetail";
+import IntroductionScreen from "@/screens/RoomDetail/IntroductionScreen";
+import ReviewScreen from "@/screens/RoomDetail/ReviewScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -35,7 +37,17 @@ const App = () => {
         {user ? (
           <>
             <Stack.Screen name="MAIN" component={BottomTabs} />
-            <Stack.Screen name="ROOMDETAIL" component={RoomDetail} />
+            <Stack.Screen name="Room Detail" component={RoomDetail} />
+            <Stack.Screen
+              options={{ headerShown: true }}
+              name="INTRODUCTION"
+              component={IntroductionScreen}
+            />
+            <Stack.Screen
+              options={{ headerShown: true }}
+              name="Review"
+              component={ReviewScreen}
+            />
           </>
         ) : (
           <Stack.Screen name="LOGIN" component={LoginScreen} />
