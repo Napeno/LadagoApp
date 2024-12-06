@@ -19,8 +19,9 @@ import {
   Quicksand_700Bold,
 } from "@expo-google-fonts/quicksand";
 import { Filter } from "react-native-svg";
+import BottomTabCreate from '../../components/bottomTabCreate'
 
-const Introduction = () => {
+const Introduction = ({ navigation }) => {
   let [fontsLoaded] = useFonts({
     Quicksand_300Light,
     Quicksand_400Regular,
@@ -32,6 +33,9 @@ const Introduction = () => {
   if (!fontsLoaded) {
     return null;
   }
+
+  const backNav = "Profile";
+  const nextNav = "STEPONE";
 
   return (
     <SafeAreaView style={styles.safeAreaView}>
@@ -61,14 +65,17 @@ const Introduction = () => {
             <View style={[styles.Bar, {}]}></View>
           </View>
 
-          <View style={styles.navigateButtons}>
+          {/* <View style={styles.navigateButtons}>
             <Pressable style={styles.backBar}>
               <Text style={[styles.textNav, { color: "#365486" }]}>Back</Text>
             </Pressable>
             <Pressable style={styles.nextBar}>
               <Text style={[styles.textNav, { color: "#FFFFFF" }]}>Next</Text>
             </Pressable>
-          </View>
+          </View> */}
+
+          <BottomTabCreate navigation={navigation} backNav={backNav} nextNav={nextNav}/>
+
         </View>
       </View>
     </SafeAreaView>
