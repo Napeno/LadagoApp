@@ -97,4 +97,6 @@ export default StyleSheet.create({
     fontSize: 20,
     fontFamily: "Quicksand_600SemiBold",
   },
+
+  
 });
