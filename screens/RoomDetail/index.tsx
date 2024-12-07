@@ -43,7 +43,16 @@ const RoomDetail = () => {
         </View>
         <View style={[styles.infoContainer]}>
           <Fontisto name="star" size={20} color="#fec008" />
-          <Text style={[styles.info]}>4.8 - 6 reviewers</Text>
+          <Text style={[styles.info]}>4.8 - </Text>
+          <TouchableOpacity
+            onPress={() => {
+              nav.navigate("Review" as never);
+            }}
+          >
+            <Text style={[{ textDecorationLine: "underline" }, styles.info]}>
+              6 reviewers
+            </Text>
+          </TouchableOpacity>
         </View>
         <View style={[styles.infoContainer]}>
           <MaterialCommunityIcons
@@ -63,7 +72,12 @@ const RoomDetail = () => {
           future, we will install wind power to supply electricity to our
           area...
         </Text>
-        <TouchableOpacity style={[styles.showMoreContainer]}>
+        <TouchableOpacity
+          onPress={() => {
+            nav.navigate("INTRODUCTION" as never);
+          }}
+          style={[styles.showMoreContainer]}
+        >
           <Text style={[styles.showMore]}>Show more</Text>
           <AntDesign name="right" size={16} color="black" />
         </TouchableOpacity>
@@ -135,7 +149,7 @@ const styles = StyleSheet.create({
   },
   introductionContainer: {
     paddingHorizontal: 10,
-    gap:10
+    gap: 10,
   },
   meeTheOwnerContainer: {
     paddingHorizontal: 10,
