@@ -40,8 +40,8 @@ const App = () => {
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         {user ? (
           <>
-            <Stack.Screen name="MAIN" component={BottomTabs} />
-            {/* <Stack.Screen name="STEPTHREE" component={StepThreeScreen} /> */}
+            {/* <Stack.Screen name="MAIN" component={BottomTabs} /> */}
+            <Stack.Screen name="STEPTHREE" component={StepThreeScreen} />
           {/* <Stack.Screen name="STEPSIX" component={StepSixScreen} /> */}
             <Stack.Screen name="ROOMDETAIL" component={RoomDetail} />
           </>
@@ -52,7 +52,7 @@ const App = () => {
           <Stack.Screen name="PROFILE" component={ProfileScreen} />
           <Stack.Screen name="STEPONE" component={StepOneScreen} />
           <Stack.Screen name="STEPTWO" component={StepTwoScreen} />
-          <Stack.Screen name="STEPTHREE" component={StepThreeScreen} />
+          {/* <Stack.Screen name="STEPTHREE" component={StepThreeScreen} /> */}
           <Stack.Screen name="STEPFOUR" component={StepFourScreen} />
           <Stack.Screen name="STEPFIVE" component={StepFiveScreen} />
 
