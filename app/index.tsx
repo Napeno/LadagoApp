@@ -42,7 +42,8 @@ const App = () => {
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         {user ? (
           <>
-            <Stack.Screen name="MAIN" component={BottomTabs} />
+            {/* <Stack.Screen name="MAIN" component={BottomTabs} /> */}
+            <Stack.Screen name="STEPTHREE" component={StepThreeScreen} />
             <Stack.Screen name="Room Detail" component={RoomDetail} />
             <Stack.Screen
               options={{ headerShown: true }}

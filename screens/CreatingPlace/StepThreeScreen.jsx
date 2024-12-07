@@ -3,7 +3,7 @@ import { SafeAreaView } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import styles from '../../styles/CreatingPlace/stepthree';
 import close from '../../constants/close.png';
-import { getAutoComplete } from '../../api/goongmap';
+import { getAutoComplete, getPlaceDetail, getReverseGeoCode } from '../../api/goongmap';
 import BottomTabCreate from '../../components/bottomTabCreate';
 import { Dropdown } from 'react-native-element-dropdown';
 import {
@@ -29,6 +29,8 @@ const StepThreeScreen = ({ navigation }) => {
     const [debouncedText, setDebouncedText] = useState('');
     const [loading, setLoading] = useState(true);
     const [location, setLocation] = useState(null);
+    const [markLocaiton, setMarkLocation] = useState(null);
+    const [choosenLocation, setChoosenLocation] = useState(null);
     const [predictLocation, setPredictLocation] = useState([]);
     const [errorMsg, setErrorMsg] = useState(null);
     const [region, setRegion] = useState({
@@ -70,7 +72,6 @@ const StepThreeScreen = ({ navigation }) => {
 
     useEffect(() => {
         const handler = setTimeout(() => {
-            console.log('calledText')
             setDebouncedText(text);
         }, 1000);
 
@@ -80,7 +81,6 @@ const StepThreeScreen = ({ navigation }) => {
     }, [text]);
 
     useEffect(() => {
-        console.log('called')
         if (debouncedText && location) {
             const fetchPredictions = async () => {
                 try {
@@ -89,8 +89,9 @@ const StepThreeScreen = ({ navigation }) => {
                         location: `${location.coords.latitude},${location.coords.longitude}`,
                     };
                     const response = await getAutoComplete(queryParams);
-                    console.log(response)
+                    // console.log(response)
                     setPredictLocation(response.predictions || []);
+                    
                 } catch (error) {
                     console.error('API Error:', error);
                 }
@@ -99,6 +100,44 @@ const StepThreeScreen = ({ navigation }) => {
             fetchPredictions();
         }
     }, [debouncedText]);
+
+    const handleComboBoxChange = async (item) => {
+        try {
+            setChoosenLocation({ label: item.label, value: item.value });
+            console.log(item.value);
+            const response = await getPlaceDetail(item.value);
+            const coorLocation = response?.result?.geometry?.location; 
+            // console.log(response?.result?.geometry?.location);
+            setMarkLocation({
+                latitude: coorLocation.lat,
+                longitude: coorLocation.lng,
+                latitudeDelta: 0.01,
+                longitudeDelta: 0.01,
+            })
+        } catch (error) {
+            console.error('API Error:', error);
+        }
+    }
+
+    const handleDraggerChange = async(coordinates) =>{
+        try {
+            setMarkLocation({
+                latitude: coordinates.latitude,
+                longitude: coordinates.longitude,
+            });
+            const geoCode = `${coordinates.latitude},${coordinates.longitude}`
+            const response = await getReverseGeoCode(geoCode);
+            const geoLocation = {
+                label: response?.results[0]?.formatted_address,
+                value: response?.results[0]?.place_id
+            }
+            // console.log(response);
+            setChoosenLocation({ label: geoLocation.label, value: geoLocation.value });
+
+        } catch (error) {
+            
+        }
+    }
 
     if (!fontsLoaded || loading) {
         return <SafeAreaView style={styles.safeAreaView}><Text>Loading...</Text></SafeAreaView>;
@@ -126,23 +165,21 @@ const StepThreeScreen = ({ navigation }) => {
                     selectedTextStyle={styles.selectedTextStyle}
                     inputSearchStyle={styles.inputSearchStyle}
                     iconStyle={styles.iconStyle}
-                    data={
-                        Array.isArray(predictLocation)
-                            ? predictLocation.map(item => ({
-                                  label: item.label || item.description,
-                                  value: item.value || item.place_id,
-                              }))
-                            : []
+                    data={predictLocation.map(item => ({
+                        label: item.label || item.description,
+                        value: item.value || item.place_id,
+                    }))
                     }
                     search
                     maxHeight={300}
                     labelField="label"
                     valueField="value"
-                    placeholder="Search location"
+                    placeholder={choosenLocation?.label || 'Select location '}
                     searchPlaceholder="Search..."
-                    value={text}
+                    // value={choosenLocation?.label || text} 
+                    value={'cc'} 
                     onChangeText={(text) => setText(text)} 
-                    onChange={(item) => setText(item.label)}
+                    onChange={(item) => handleComboBoxChange(item)}
                 />
 
                 {errorMsg ? (
@@ -153,15 +190,30 @@ const StepThreeScreen = ({ navigation }) => {
                         showsScale
                         showsCompass
                         style={styles.map}
-                        region={region}
+                        region={markLocaiton? markLocaiton : region}
                     >
                         {location && (
                             <Marker coordinate={{
                                 latitude: location.coords.latitude,
                                 longitude: location.coords.longitude,
-                            }}>
+                            }}
+                            pinColor={'#69ECFF'}
+                            >
                                 <Callout>
                                     <Text>Your Location</Text>
+                                </Callout>
+                            </Marker>
+                        )}
+
+                        {markLocaiton && (
+                            <Marker coordinate={markLocaiton}
+                            draggable 
+                            onDragEnd={(e) => {
+                                handleDraggerChange(e.nativeEvent.coordinate)
+                            }}
+                            >
+                                <Callout>
+                                    <Text>{choosenLocation?.label}</Text>
                                 </Callout>
                             </Marker>
                         )}
