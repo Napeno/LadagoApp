@@ -52,7 +52,7 @@ const CategoryLocationItem = ({
       <TouchableOpacity
         //onPress={() => handleChangeCategory(isActive? null: title)}
         onPress={() => {
-          nav.navigate("ROOMDETAIL");
+          nav.navigate("Room Detail");
         }}
         style={[styles.cardWrap]}
       >
