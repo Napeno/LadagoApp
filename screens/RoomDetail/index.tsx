@@ -36,7 +36,7 @@ const RoomDetail = () => {
           <MaterialCommunityIcons
             name="map-marker-radius"
             size={20}
-            color="black"
+            color="#365486"
           />
 
           <Text style={[styles.info]}>Bao Loc, Vietnam</Text>
@@ -58,7 +58,7 @@ const RoomDetail = () => {
           <MaterialCommunityIcons
             name="map-marker-multiple"
             size={20}
-            color="black"
+            color="#365486"
           />
           <Text style={[styles.info]}>232 km</Text>
         </View>

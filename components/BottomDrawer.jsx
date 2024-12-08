@@ -1,12 +1,17 @@
-import React, { useState } from 'react';
-import { View, Text, Dimensions } from 'react-native';
-import Animated, { Easing, withTiming, useSharedValue, useAnimatedStyle } from 'react-native-reanimated';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { GestureDetector, GestureHandler } from 'react-native-gesture-handler';
-import PanGestureHandler from 'react-native-gesture-handler';
-import styles from '../styles/bottomDrawer';
+import React, { useState } from "react";
+import { View, Text, Dimensions } from "react-native";
+import Animated, {
+  Easing,
+  withTiming,
+  useSharedValue,
+  useAnimatedStyle,
+} from "react-native-reanimated";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { GestureDetector, GestureHandler } from "react-native-gesture-handler";
+import PanGestureHandler from "react-native-gesture-handler";
+import styles from "../styles/bottomDrawer";
 
-const { height } = Dimensions.get('window');
+const { height } = Dimensions.get("window");
 
 const BottomDrawer = ({ children }) => {
   const [drawerHeight, setDrawerHeight] = useState(0);
@@ -52,7 +57,9 @@ const BottomDrawer = ({ children }) => {
         <GestureDetector gestureHandler={gestureHandler}>
           <Animated.View
             style={[styles.drawer, animatedStyle]}
-            onLayout={(event) => setDrawerHeight(event.nativeEvent.layout.height)}
+            onLayout={(event) =>
+              setDrawerHeight(event.nativeEvent.layout.height)
+            }
           >
             <View style={styles.header}>
               <Text style={styles.headerText}>Swipe up to expand</Text>
