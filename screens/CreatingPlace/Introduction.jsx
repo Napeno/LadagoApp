@@ -19,7 +19,7 @@ import {
   Quicksand_700Bold,
 } from "@expo-google-fonts/quicksand";
 import { Filter } from "react-native-svg";
-import BottomTabCreate from '../../components/bottomTabCreate'
+import BottomTabCreate from "../../components/bottomTabCreate";
 
 const Introduction = ({ navigation }) => {
   let [fontsLoaded] = useFonts({
@@ -74,8 +74,11 @@ const Introduction = ({ navigation }) => {
             </Pressable>
           </View> */}
 
-          <BottomTabCreate navigation={navigation} backNav={backNav} nextNav={nextNav}/>
-
+          <BottomTabCreate
+            navigation={navigation}
+            backNav={backNav}
+            nextNav={nextNav}
+          />
         </View>
       </View>
     </SafeAreaView>

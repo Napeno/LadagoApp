@@ -1,12 +1,10 @@
 import { IonCard, IonCardContent, IonLabel } from "@ionic/react";
 
 interface DummyItemProps {
-
-  number: number,
+  number: number;
 }
 
 export const DummyItem: React.FC<DummyItemProps> = ({ number }) => {
-
   return (
     <IonCard>
       <IonCardContent>
@@ -17,4 +15,4 @@ export const DummyItem: React.FC<DummyItemProps> = ({ number }) => {
       </IonCardContent>
     </IonCard>
   );
-}
+};
