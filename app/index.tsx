@@ -18,6 +18,7 @@ import IntroductionScreen from "@/screens/RoomDetail/IntroductionScreen";
 import ReviewScreen from "@/screens/RoomDetail/ReviewScreen";
 import WriteReviewScreen from "@/screens/RoomDetail/WriteReviewScreen";
 
+
 const Stack = createNativeStackNavigator();
 
 const App = () => {
