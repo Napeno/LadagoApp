@@ -34,6 +34,10 @@ export const CustomBottomTab: FC<BottomTabBarProps> = ({
         return "home";
       case "Favorite":
         return "heart";
+      case "Calendar":
+        return "calendar";
+      case "Create":
+        return "plus-circle";
       case "Booking":
         return "briefcase";
       case "Message":

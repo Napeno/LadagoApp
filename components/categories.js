@@ -1,14 +1,13 @@
 import { View, Text, FlatList, StyleSheet, Pressable } from "react-native";
 import React from "react";
-import { data } from "../constants/data";
 
-const Categories = ({ activeCategory, handleChangeCategory }) => {
+const Categories = ({ activeCategory, handleChangeCategory, datainput }) => {
   return (
     <FlatList
       horizontal
       contentContainerStyle={styles.flatListContainer}
       showsHorizontalScrollIndicator={false}
-      data={data.categories}
+      data={datainput}
       keyExtractor={(item) => item}
       renderItem={({ item, index }) => (
         <CategoriesItem
@@ -25,11 +24,12 @@ const Categories = ({ activeCategory, handleChangeCategory }) => {
 const CategoriesItem = ({ title, index, isActive, handleChangeCategory }) => {
   let color = isActive ? "white" : "black";
   let backgroundColor = isActive ? "#365486" : "#F9F9F9";
+  let borderWidth = isActive ? 1 : 1;
   return (
     <View>
       <Pressable
         onPress={() => handleChangeCategory(isActive ? null : title)}
-        style={[styles.category, { backgroundColor }]}
+        style={[styles.category, { backgroundColor, borderWidth }]}
       >
         <Text style={[styles.title, { color }]}>{title}</Text>
       </Pressable>

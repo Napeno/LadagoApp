@@ -15,6 +15,8 @@ import StepNineScreen from '../screens/admin/CreatingPlace/StepNineScreen'
 import StepTenScreen from '../screens/admin/CreatingPlace/StepTenScreen'
 
 import BottomTabs from "../tabs/BottomTabs";
+import AdminBottomTabs from "../tabs/AdminBottomTabs";
+
 import { auth } from "../firebase"; 
 import { onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
@@ -48,6 +50,7 @@ const App = () => {
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         {user ? (
           <>
+            <Stack.Screen name="ADMIN" component={AdminBottomTabs} />
             <Stack.Screen name="MAIN" component={BottomTabs} />
             <Stack.Screen name="Room Detail" component={RoomDetail} />
             <Stack.Screen
