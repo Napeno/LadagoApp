@@ -23,6 +23,7 @@ import {
   Quicksand_600SemiBold,
   Quicksand_700Bold,
 } from "@expo-google-fonts/quicksand";
+import { data } from "@/constants/data";
 
 const Homepage = () => {
   const [activeCategory, setActiveCategory] = useState(null);
@@ -108,6 +109,7 @@ const Homepage = () => {
             <Categories
               activeCategory={activeCategory}
               handleChangeCategory={handleChangeCategory}
+              datainput={data.categories}
             />
           </View>
 
