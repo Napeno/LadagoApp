@@ -9,10 +9,10 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native";
 import React, { useState, useEffect } from "react";
-import styles from "../../styles/CreatingPlace/stepfive";
-import close from "../../constants/close.png";
-import { data } from "../../constants/data";
-import BottomTabCreate from "../../components/bottomTabCreate";
+import styles from "../../../styles/CreatingPlace/stepfive";
+import close from "../../../constants/close.png";
+import { data } from "../../../constants/data";
+import BottomTabCreate from "../../../components/bottomTabCreate";
 import {
   useFonts,
   Quicksand_300Light,

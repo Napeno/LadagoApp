@@ -7,9 +7,8 @@ import {
   Pressable,
 } from "react-native";
 import { SafeAreaView } from "react-native";
-import styles from "../styles/messagescreen";
-import searchIcon from "../constants/searchIcon.png";
-import MessageList from "../components/messageList";
+import styles from "../../styles/bookingScreen";
+import BookingList from "../../components/bookingList";
 import {
   useFonts,
   Quicksand_300Light,
@@ -20,7 +19,7 @@ import {
 } from "@expo-google-fonts/quicksand";
 import { Filter } from "react-native-svg";
 
-const MessageScreen = () => {
+const BookingScreen = () => {
   let [fontsLoaded] = useFonts({
     Quicksand_300Light,
     Quicksand_400Regular,
@@ -37,19 +36,15 @@ const MessageScreen = () => {
     <SafeAreaView style={styles.safeAreaView}>
       <View style={styles.viewContainer}>
         <View style={styles.firstLayer}>
-          <Text style={styles.titleMessage}>Message List</Text>
+          <Text style={styles.tilteBooking}>Booking List</Text>
 
-          <Image
-            style={styles.findMessage}
-            source={searchIcon}
-            resizeMode="cover"
-          />
+          <Text style={styles.editBooking}>Edit</Text>
         </View>
 
-        <MessageList />
+        <BookingList />
       </View>
     </SafeAreaView>
   );
 };
 
-export default MessageScreen;
+export default BookingScreen;

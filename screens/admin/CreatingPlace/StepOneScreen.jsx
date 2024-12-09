@@ -10,10 +10,10 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native";
 import React, { useState } from "react";
-import styles from "../../styles/CreatingPlace/stepone";
-import house from "../../constants/3dhouse.png";
-import close from "../../constants/close.png";
-import BottomTabCreate from "../../components/bottomTabCreate";
+import styles from "../../../styles/CreatingPlace/stepone";
+import house from "../../../constants/3dhouse.png";
+import close from "../../../constants/close.png";
+import BottomTabCreate from "../../../components/bottomTabCreate";
 import {
   useFonts,
   Quicksand_300Light,

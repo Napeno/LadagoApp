@@ -10,10 +10,10 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native";
 import React, { useState, useEffect, useCallback } from "react";
-import styles from "../../styles/CreatingPlace/stepfour";
-import close from "../../constants/close.png";
-import BottomTabCreate from "../../components/bottomTabCreate";
-import RoomTabCreate from "../../components/roomTabCreate";
+import styles from "../../../styles/CreatingPlace/stepfour";
+import close from "../../../constants/close.png";
+import BottomTabCreate from "../../../components/bottomTabCreate";
+import RoomTabCreate from "../../../components/roomTabCreate";
 import {
   useFonts,
   Quicksand_300Light,

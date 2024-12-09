@@ -7,8 +7,8 @@ import {
   Pressable,
 } from "react-native";
 import { SafeAreaView } from "react-native";
-import styles from "../styles/favoritescreen";
-import FavoriteList from "../components/favoriteList";
+import styles from "../../styles/favoritescreen";
+import FavoriteList from "../../components/favoriteList";
 import {
   useFonts,
   Quicksand_300Light,

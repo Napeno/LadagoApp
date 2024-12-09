@@ -9,9 +9,9 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native";
 import React, { useState, useEffect } from "react";
-import styles from "../../styles/CreatingPlace/steptwo";
-import close from "../../constants/close.png";
-import BottomTabCreate from "../../components/bottomTabCreate";
+import styles from "../../../styles/CreatingPlace/steptwo";
+import close from "../../../constants/close.png";
+import BottomTabCreate from "../../../components/bottomTabCreate";
 import {
   useFonts,
   Quicksand_300Light,

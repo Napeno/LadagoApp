@@ -7,20 +7,20 @@ import {
   Pressable,
 } from "react-native";
 import { SafeAreaView } from "react-native";
-import styles from "../styles/profilescreen";
-import avatarProfile from "../constants/avatar.png";
-import arrow from "../constants/arrow.png";
-import adminhouse from "../constants/profileImg.png";
-import user from "../constants/user.png";
-import creditCard from "../constants/creditcardIcon.png";
-import fileIcon from "../constants/fileIcon.png";
-import keyIcon from "../constants/keyIcon.png";
-import notificaitionIcon from "../constants/notificaitionIcon.png";
-import supportIcon from "../constants/supportIcon.png";
-import suportCustomer from "../constants/customerSupportIcon.png";
-import editIcon from "../constants/editIcon.png";
-import switchIcon from "../constants/switchIcon.png";
-import { logout } from "../components/logout";
+import styles from "../../styles/profilescreen";
+import avatarProfile from "../../constants/avatar.png";
+import arrow from "../../constants/arrow.png";
+import adminhouse from "../../constants/profileImg.png";
+import user from "../../constants/user.png";
+import creditCard from "../../constants/creditcardIcon.png";
+import fileIcon from "../../constants/fileIcon.png";
+import keyIcon from "../../constants/keyIcon.png";
+import notificaitionIcon from "../../constants/notificaitionIcon.png";
+import supportIcon from "../../constants/supportIcon.png";
+import suportCustomer from "../../constants/customerSupportIcon.png";
+import editIcon from "../../constants/editIcon.png";
+import switchIcon from "../../constants/switchIcon.png";
+import { logout } from "../../components/logout";
 
 import {
   useFonts,
