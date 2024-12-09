@@ -36,6 +36,7 @@ const StepSixScreen = ({ navigation }) => {
         });
 
         if (!result.canceled) {
+            console.log('result', result);
             const newImages = result.assets.map((asset) => asset.uri);
             setImages((prevImages) => [...prevImages, ...newImages]);
         }
@@ -48,7 +49,10 @@ const StepSixScreen = ({ navigation }) => {
         });
 
         if (!result.canceled) {
-            setImages((prevImages) => [...prevImages, result.uri]); // Add the taken picture to the list
+            // console.log('result', result);
+            const newImages = result.assets[0].uri;
+            // console.log('result', result.assets[0].uri);
+            setImages((prevImages) => [...prevImages, newImages]);
         }
     };
 
