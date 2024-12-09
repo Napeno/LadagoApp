@@ -1,10 +1,10 @@
 import { ScrollView, View, Image, Text, TextInput, Pressable, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { SafeAreaView } from 'react-native';
 import React, { useState, useEffect } from 'react';
-import styles from '../../styles/CreatingPlace/stepthree';
-import close from '../../constants/close.png';
-import { getAutoComplete, getPlaceDetail, getReverseGeoCode } from '../../api/goongmap';
-import BottomTabCreate from '../../components/bottomTabCreate';
+import styles from '../../../styles/CreatingPlace/stepthree';
+import close from '../../../constants/close.png';
+import { getAutoComplete, getPlaceDetail, getReverseGeoCode } from '../../../api/goongmap';
+import BottomTabCreate from '../../../components/bottomTabCreate';
 import { Dropdown } from 'react-native-element-dropdown';
 import {
     useFonts,

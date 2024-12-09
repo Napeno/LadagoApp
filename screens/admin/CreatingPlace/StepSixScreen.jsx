@@ -1,12 +1,12 @@
 import { ScrollView, View, Image, Text, Pressable, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { SafeAreaView, Alert  } from 'react-native';
 import React, { useState, useEffect } from 'react';
-import styles from '../../styles/CreatingPlace/stepsix';
-import close from '../../constants/close.png';
-import camera from '../../constants/camera.png'
-import add from '../../constants/add_round.png'
-import { data } from '../../constants/data';
-import BottomTabCreate from '../../components/bottomTabCreate'
+import styles from '../../../styles/CreatingPlace/stepsix';
+import close from '../../../constants/close.png';
+import camera from '../../../constants/camera.png'
+import add from '../../../constants/add_round.png'
+import { data } from '../../../constants/data';
+import BottomTabCreate from '../../../components/bottomTabCreate'
 import * as ImagePicker from 'expo-image-picker';
 import {
     useFonts,

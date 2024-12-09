@@ -1,12 +1,12 @@
 import { ScrollView, View, Image, Text, Pressable, TouchableWithoutFeedback, Keyboard, TouchableOpacity} from 'react-native';
 import { SafeAreaView, TextInput } from 'react-native';
 import React, { useState, useEffect } from 'react';
-import styles from '../../styles/CreatingPlace/stepten';
-import close from '../../constants/close.png';
-import complete from '../../constants/compete.png';
-import { data } from '../../constants/data';
+import styles from '../../../styles/CreatingPlace/stepten';
+import close from '../../../constants/close.png';
+import complete from '../../../constants/compete.png';
+import { data } from '../../../constants/data';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import BottomTabCreate from '../../components/bottomTabCreate'
+import BottomTabCreate from '../../../components/bottomTabCreate'
 import {
     useFonts,
     Quicksand_300Light,

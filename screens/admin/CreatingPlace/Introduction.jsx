@@ -7,9 +7,9 @@ import {
   Pressable,
 } from "react-native";
 import { SafeAreaView } from "react-native";
-import styles from "../../styles/CreatingPlace/introduction";
-import house from "../../constants/3dhouse.png";
-import close from "../../constants/close.png";
+import styles from "../../../styles/CreatingPlace/introduction";
+import house from "../../../constants/3dhouse.png";
+import close from "../../../constants/close.png";
 import {
   useFonts,
   Quicksand_300Light,
@@ -19,7 +19,7 @@ import {
   Quicksand_700Bold,
 } from "@expo-google-fonts/quicksand";
 import { Filter } from "react-native-svg";
-import BottomTabCreate from "../../components/bottomTabCreate";
+import BottomTabCreate from "../../../components/bottomTabCreate";
 
 const Introduction = ({ navigation }) => {
   let [fontsLoaded] = useFonts({

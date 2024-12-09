@@ -1,18 +1,18 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import LoginScreen from "../screens/LoginScreen";
-import ProfileScreen from "../screens/ProfileScreen";
-import Introduction from "../screens/CreatingPlace/Introduction";
-import StepOneScreen from '../screens/CreatingPlace/StepOneScreen'
-import StepTwoScreen from '../screens/CreatingPlace/StepTwoScreen'
-import StepThreeScreen from '../screens/CreatingPlace/StepThreeScreen'
-import StepFourScreen from '../screens/CreatingPlace/StepFourScreen'
-import StepFiveScreen from '../screens/CreatingPlace/StepFiveScreen'
-import StepSixScreen from '../screens/CreatingPlace/StepSixScreen'
-import StepSevenScreen from '../screens/CreatingPlace/StepSevenScreen'
-import StepEightScreen from '../screens/CreatingPlace/StepEightScreen'
-import StepNineScreen from '../screens/CreatingPlace/StepNineScreen'
-import StepTenScreen from '../screens/CreatingPlace/StepTenScreen'
+import ProfileScreen from "../screens/user/ProfileScreen";
+import Introduction from "../screens/admin/CreatingPlace/Introduction";
+import StepOneScreen from '../screens/admin/CreatingPlace/StepOneScreen'
+import StepTwoScreen from '../screens/admin/CreatingPlace/StepTwoScreen'
+import StepThreeScreen from '../screens/admin/CreatingPlace/StepThreeScreen'
+import StepFourScreen from '../screens/admin/CreatingPlace/StepFourScreen'
+import StepFiveScreen from '../screens/admin/CreatingPlace/StepFiveScreen'
+import StepSixScreen from '../screens/admin/CreatingPlace/StepSixScreen'
+import StepSevenScreen from '../screens/admin/CreatingPlace/StepSevenScreen'
+import StepEightScreen from '../screens/admin/CreatingPlace/StepEightScreen'
+import StepNineScreen from '../screens/admin/CreatingPlace/StepNineScreen'
+import StepTenScreen from '../screens/admin/CreatingPlace/StepTenScreen'
 
 import BottomTabs from "../tabs/BottomTabs";
 import { auth } from "../firebase"; 
@@ -41,7 +41,6 @@ const App = () => {
   }, []);
 
   if (loading) {
-    // Optionally, you can add a loading screen here
     return null;
   }
 
