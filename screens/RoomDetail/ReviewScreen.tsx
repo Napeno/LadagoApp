@@ -6,12 +6,11 @@ import {
   ScrollView,
   Image,
   TouchableOpacity,
-  Dimensions,
   DimensionValue,
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
-// Type definitions for props
 interface RateBarProps {
   width: DimensionValue;
 }
@@ -104,7 +103,7 @@ const ReviewScreen: React.FC = () => {
     { rating: 2, width: "30%" },
     { rating: 1, width: "10%" },
   ];
-
+  const nav = useNavigation();
   return (
     <ScrollView
       contentContainerStyle={styles.root}
@@ -135,7 +134,12 @@ const ReviewScreen: React.FC = () => {
         </View>
       </View>
 
-      <TouchableOpacity style={styles.writeReviewButton}>
+      <TouchableOpacity
+        onPress={() => {
+          nav.navigate("Write Review" as never);
+        }}
+        style={styles.writeReviewButton}
+      >
         <Text style={styles.writeReviewText}>Write Review</Text>
       </TouchableOpacity>
 
@@ -162,7 +166,7 @@ const ReviewScreen: React.FC = () => {
           reviewText="If you are looking for a quiet place, this is the place for you to."
           rating={4.8}
         />
-                <Review
+        <Review
           name="Baldwin IV"
           location="Jerusalem, Israel"
           dateOfStay="2024-02-03"

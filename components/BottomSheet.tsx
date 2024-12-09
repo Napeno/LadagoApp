@@ -31,7 +31,7 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({ isOpen, close }) => {
             <IonSearchbar
               animated
               value={search}
-              onIonInput={handleChange}  // Thay đổi onIonChange thành onIonInput
+              onIonInput={handleChange} // Thay đổi onIonChange thành onIonInput
               debounce={0} // Không có độ trễ để có phản hồi nhanh hơn
               placeholder="Search by item number"
             />
@@ -40,9 +40,7 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({ isOpen, close }) => {
 
         {/* Kiểm tra nội dung bên trong BottomSheetContent */}
         <BottomSheetContent>
-          {[
-            ...Array(amountOfDummyItems),
-          ].map((_, i) => {
+          {[...Array(amountOfDummyItems)].map((_, i) => {
             if (search === "" || search.includes(i.toString())) {
               return <DummyItem key={i} number={i} />;
             }

@@ -1,8 +1,8 @@
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import LoginScreen from '../screens/LoginScreen';
-import ProfileScreen from '../screens/ProfileScreen';
-import Introduction from '../screens/CreatingPlace/Introduction'
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import LoginScreen from "../screens/LoginScreen";
+import ProfileScreen from "../screens/ProfileScreen";
+import Introduction from "../screens/CreatingPlace/Introduction";
 import StepOneScreen from '../screens/CreatingPlace/StepOneScreen'
 import StepTwoScreen from '../screens/CreatingPlace/StepTwoScreen'
 import StepThreeScreen from '../screens/CreatingPlace/StepThreeScreen'
@@ -14,13 +14,15 @@ import StepEightScreen from '../screens/CreatingPlace/StepEightScreen'
 import StepNineScreen from '../screens/CreatingPlace/StepNineScreen'
 import StepTenScreen from '../screens/CreatingPlace/StepTenScreen'
 
-import BottomTabs from '../tabs/BottomTabs';
-import { auth } from '../firebase'; // Import initialized instances
-import { onAuthStateChanged } from 'firebase/auth';
-import { useEffect, useState } from 'react';
-import RoomDetail from '@/screens/RoomDetail';
-import IntroductionScreen from '@/screens/RoomDetail/IntroductionScreen';
-import ReviewScreen from '@/screens/RoomDetail/ReviewScreen';
+import BottomTabs from "../tabs/BottomTabs";
+import { auth } from "../firebase"; 
+import { onAuthStateChanged } from "firebase/auth";
+import { useEffect, useState } from "react";
+import RoomDetail from "@/screens/RoomDetail";
+import IntroductionScreen from "@/screens/RoomDetail/IntroductionScreen";
+import ReviewScreen from "@/screens/RoomDetail/ReviewScreen";
+import WriteReviewScreen from "@/screens/RoomDetail/WriteReviewScreen";
+
 
 const Stack = createNativeStackNavigator();
 
@@ -31,7 +33,7 @@ const App = () => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       // @ts-ignore
-        setUser(user);
+      setUser(user);
       setLoading(false);
     });
 
@@ -58,6 +60,12 @@ const App = () => {
               options={{ headerShown: true }}
               name="Review"
               component={ReviewScreen}
+            />
+
+            <Stack.Screen
+              options={{ headerShown: true }}
+              name="Write Review"
+              component={WriteReviewScreen}
             />
 
           </>
