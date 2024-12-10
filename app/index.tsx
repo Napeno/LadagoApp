@@ -50,7 +50,7 @@ const App = () => {
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         {user ? (
           <>
-            <Stack.Screen name="ADMIN" component={AdminBottomTabs} />
+            {/* <Stack.Screen name="ADMIN" component={AdminBottomTabs} /> */}
             <Stack.Screen name="MAIN" component={BottomTabs} />
             <Stack.Screen name="Room Detail" component={RoomDetail} />
             <Stack.Screen
