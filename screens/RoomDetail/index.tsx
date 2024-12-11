@@ -89,7 +89,12 @@ const RoomDetail = () => {
       </View>
       <View style={[styles.priceBookContainer]}>
         <Text style={[styles.price]}>700k VND/night</Text>
-        <TouchableOpacity style={[styles.bookBtn]}>
+        <TouchableOpacity
+          onPress={() => {
+            nav.navigate("Booking" as never);
+          }}
+          style={[styles.bookBtn]}
+        >
           <Text style={[styles.bookNow]}>Book now</Text>
         </TouchableOpacity>
       </View>
