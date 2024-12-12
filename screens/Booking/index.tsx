@@ -4,8 +4,11 @@ import { ScrollView } from "react-native";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import Fontisto from "@expo/vector-icons/Fontisto";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
-import { RadioButton } from "react-native-paper";
-
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { useRef } from "react";
+import BottomSheetComponent from "./components/BottomSheet";
+import BottomSheet from "@gorhom/bottom-sheet";
+import { useState } from "react";
 import {
   useFonts,
   Quicksand_300Light,
@@ -15,29 +18,14 @@ import {
   Quicksand_700Bold,
 } from "@expo-google-fonts/quicksand";
 import AntDesign from "@expo/vector-icons/AntDesign";
-
-const SeperateBar = () => {
-  return (
-    <View
-      style={{ width: "120%", height: 10, backgroundColor: "#f1f1f1" }}
-    ></View>
-  );
-};
-
-const Divider = () => {
-  return (
-    <View
-      style={{
-        width: "100%",
-        backgroundColor: "#A19E9F",
-        height: 0.3,
-      }}
-    ></View>
-  );
-};
+import { Divider } from "./components/Divider";
+import { SeperateBar } from "./components/SeperateBar";
+import OverLay from "./components/Overlay";
 const Booking = () => {
   const [checked, setChecked] = React.useState("first");
   const [selectedOption, setSelectedOption] = React.useState("option1");
+  const bottomSheetRef = useRef<BottomSheet>(null);
+  const [isSheetVisible, setIsSheetVisible] = useState(false);
 
   let [fontsLoaded] = useFonts({
     Quicksand_300Light,
@@ -49,187 +37,209 @@ const Booking = () => {
   if (!fontsLoaded) {
     return null;
   }
+  const handleSheetChange = (index: number) => {
+    if (index === -1) {
+      setIsSheetVisible(false); // Close the bottom sheet if it is collapsed (swiped down)
+    }
+  };
 
   return (
-    <ScrollView
-      contentContainerStyle={styles.root}
-      showsVerticalScrollIndicator={false}
-    >
-      <View style={styles.imageContainer}>
-        <Image
-          style={styles.image}
-          source={{
-            uri: "https://motogo.vn/wp-content/uploads/2023/05/homestay-da-lat-rung-thong-3.jpg",
-          }}
-        />
-        <View style={styles.textContainer}>
-          <Text style={styles.title}>RAON HOI AN1</Text>
-          <View style={styles.popularBadge}>
-            <Text style={styles.popularText}>Most popular</Text>
-          </View>
-          <View style={styles.ratingContainer}>
-            <Fontisto name="star" size={20} color="#fec008" />
-            <Text style={styles.ratingValue}>4.8</Text>
-            <Text style={styles.ratingText}>Excellent</Text>
-            <Text style={styles.reviewsText}>200 reviews</Text>
-          </View>
-          <View style={styles.addressContainer}>
-            <MaterialCommunityIcons
-              name="map-marker-radius-outline"
-              size={20}
-              color="#365486"
-            />
-            <Text style={styles.addressText}>
-              1 Cua Dai Street, Cửa Đại, Hội An, Việt Nam
-            </Text>
-          </View>
-          <View style={styles.dateContainer}>
-            <Text style={styles.dateText}>6th June - 9th June,2024</Text>
+    <GestureHandlerRootView>
+      <ScrollView
+        contentContainerStyle={styles.root}
+        showsVerticalScrollIndicator={false}
+      >
+        {isSheetVisible && <OverLay />}
+        <View style={styles.imageContainer}>
+          <Image
+            style={styles.image}
+            source={{
+              uri: "https://motogo.vn/wp-content/uploads/2023/05/homestay-da-lat-rung-thong-3.jpg",
+            }}
+          />
+          <View style={styles.textContainer}>
+            <Text style={styles.title}>RAON HOI AN1</Text>
+            <View style={styles.popularBadge}>
+              <Text style={styles.popularText}>Most popular</Text>
+            </View>
+            <View style={styles.ratingContainer}>
+              <Fontisto name="star" size={20} color="#fec008" />
+              <Text style={styles.ratingValue}>4.8</Text>
+              <Text style={styles.ratingText}>Excellent</Text>
+              <Text style={styles.reviewsText}>200 reviews</Text>
+            </View>
+            <View style={styles.addressContainer}>
+              <MaterialCommunityIcons
+                name="map-marker-radius-outline"
+                size={20}
+                color="#365486"
+              />
+              <Text style={styles.addressText}>
+                1 Cua Dai Street, Cửa Đại, Hội An, Việt Nam
+              </Text>
+            </View>
+            <View style={styles.dateContainer}>
+              <Text style={styles.dateText}>6th June - 9th June,2024</Text>
+            </View>
           </View>
         </View>
-      </View>
-      <View style={styles.cancellationContainer}>
-        <FontAwesome5 name="calendar-alt" size={25} color="#365488" />
-        <View>
-          <Text style={styles.cancellationTitle}>
+        <View style={styles.cancellationContainer}>
+          <FontAwesome5 name="calendar-alt" size={25} color="#365488" />
+          <View>
+            <Text style={styles.cancellationTitle}>
+              Free cancellation 24 hours in advance.
+            </Text>
+            <Text style={styles.cancellationText}>
+              Get a full refund if you change your plans
+            </Text>
+          </View>
+        </View>
+        <SeperateBar />
+
+        <View style={styles.tripContainer}>
+          <Text style={styles.sectionTitle}>Your trip</Text>
+          <View style={styles.tripDetails}>
+            <View style={styles.tripDetail}>
+              <Text style={styles.tripDetailTitle}>Date</Text>
+              <Text style={styles.tripDetailText}>6th -9th June 2024</Text>
+            </View>
+            <TouchableOpacity
+              onPress={() => {
+                setIsSheetVisible(true);
+              }}
+            >
+              <AntDesign name="edit" size={24} color="#365486" />
+            </TouchableOpacity>
+          </View>
+          <View style={styles.tripDetails}>
+            <View>
+              <Text style={styles.tripDetailTitle}>Room and passenger</Text>
+              <Text style={styles.tripDetailText}>
+                1 room - 2 passenger - 0 children
+              </Text>
+            </View>
+            <TouchableOpacity>
+              <AntDesign name="edit" size={24} color="#365486" />
+            </TouchableOpacity>
+          </View>
+        </View>
+        <SeperateBar />
+
+        <View style={styles.paymentContainer}>
+          <Text style={styles.sectionTitle}>Payment Option</Text>
+          <Text style={styles.paymentText}>Pay 2,399,000 VND now</Text>
+          <View>
+            <Text style={styles.paymentOptionTitle}>
+              Pay half now, pay the rest later
+            </Text>
+            <Text style={styles.paymentOptionText}>
+              You need to pay 1,200,00 VND now and 1,200,000 VND in 5th June
+              2024. No extra fee
+            </Text>
+          </View>
+        </View>
+        <SeperateBar />
+        <View style={[styles.priceDetailsContainer]}>
+          <Text style={styles.sectionTitle}>Price detail</Text>
+          <View style={styles.priceDetail}>
+            <View style={styles.priceDetailRow}>
+              <Text style={styles.priceDetailText}>3 nights</Text>
+              <Text style={styles.priceDetailAmount}>2,399,000 VND</Text>
+            </View>
+            <View style={styles.priceDetailRow}>
+              <Text style={styles.priceDetailText}>Cleaning fee</Text>
+              <Text style={styles.priceDetailAmount}>300,000 VND</Text>
+            </View>
+            <View style={styles.priceDetailRow}>
+              <Text style={styles.priceDetailText}>Ladago service fee</Text>
+              <Text style={styles.priceDetailAmount}>100,000 VND</Text>
+            </View>
+            <Divider />
+            <View style={styles.priceDetailRow}>
+              <Text style={styles.priceDetailText}>Total</Text>
+              <Text style={styles.priceDetailAmount}>2,799,000 VND</Text>
+            </View>
+          </View>
+        </View>
+        <SeperateBar />
+        <View style={{ width: "100%", display: "flex", gap: 16 }}>
+          <Text style={{ fontSize: 20, fontWeight: "bold" }}>
+            Payment Method
+          </Text>
+          <View style={{ display: "flex", gap: 10 }}>
+            <Text>Email</Text>
+            <Text style={{ color: "'rgba(0, 0, 0, 0.4)'" }}>Email address</Text>
+          </View>
+          <View style={{ display: "flex", gap: 10 }}>
+            <Text>Card number</Text>
+            <Text style={{ color: "'rgba(0, 0, 0, 0.4)'" }}>
+              1234 1234 1234 1234
+            </Text>
+          </View>
+          <View
+            style={{
+              width: "100%",
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+            }}
+          >
+            <View style={{ display: "flex", gap: 10 }}>
+              <Text>Expiration</Text>
+              <Text style={{ color: "'rgba(0, 0, 0, 0.4)'" }}>MM/YY</Text>
+            </View>
+            <View style={{ display: "flex", gap: 10 }}>
+              <Text>CVC</Text>
+              <Text style={{ color: "'rgba(0, 0, 0, 0.4)'" }}>CVC</Text>
+            </View>
+            <View>
+              <Image
+                style={{ width: "20", height: "20" }}
+                source={{
+                  uri: "https://thietkelogo.mondial.vn/wp-content/uploads/2024/02/visa-logo-preview.png",
+                }}
+              />
+              <Image
+                style={{ width: "20", height: "20" }}
+                source={{
+                  uri: "https://www.mastercard.com/content/dam/public/mastercardcom/vn/vi/logos/mastercard-og-image.png",
+                }}
+              />
+            </View>
+          </View>
+
+          <View style={{ display: "flex", gap: 10 }}>
+            <Text>Country</Text>
+            <Text style={{ color: "'rgba(0, 0, 0, 0.4)'" }}>Viet Nam</Text>
+          </View>
+        </View>
+        <SeperateBar />
+        <View style={{ width: "100%", display: "flex", gap: 10 }}>
+          <Text style={{ fontSize: 20, fontWeight: 500 }}>
+            Cancellation policy
+          </Text>
+          <Text style={{ fontSize: 14 }}>
             Free cancellation 24 hours in advance.
           </Text>
-          <Text style={styles.cancellationText}>
+          <Text style={{ fontSize: 12, color: "rgba(0, 0, 0, 0.4)" }}>
             Get a full refund if you change your plans
           </Text>
         </View>
-      </View>
-      <SeperateBar />
-
-      <View style={styles.tripContainer}>
-        <Text style={styles.sectionTitle}>Your trip</Text>
-        <View style={styles.tripDetails}>
-          <View style={styles.tripDetail}>
-            <Text style={styles.tripDetailTitle}>Date</Text>
-            <Text style={styles.tripDetailText}>6th -9th June 2024</Text>
-          </View>
-          <TouchableOpacity>
-            <AntDesign name="edit" size={24} color="#365486" />
-          </TouchableOpacity>
-        </View>
-        <View style={styles.tripDetails}>
-          <View>
-            <Text style={styles.tripDetailTitle}>Room and passenger</Text>
-            <Text style={styles.tripDetailText}>
-              1 room - 2 passenger - 0 children
-            </Text>
-          </View>
-          <TouchableOpacity>
-            <AntDesign name="edit" size={24} color="#365486" />
-          </TouchableOpacity>
-        </View>
-      </View>
-      <SeperateBar />
-
-      <View style={styles.paymentContainer}>
-        <Text style={styles.sectionTitle}>Payment Option</Text>
-        <Text style={styles.paymentText}>Pay 2,399,000 VND now</Text>
+        <SeperateBar />
         <View>
-          <Text style={styles.paymentOptionTitle}>
-            Pay half now, pay the rest later
-          </Text>
-          <Text style={styles.paymentOptionText}>
-            You need to pay 1,200,00 VND now and 1,200,000 VND in 5th June 2024.
-            No extra fee
+          <Text style={{ fontSize: 12, color: "#736E6F" }}>
+            By selecting below button, it means that I agree with Owner’s Policy
+            , General policy and Ladago cancelation policy
           </Text>
         </View>
-      </View>
-      <SeperateBar />
-      <View style={[styles.priceDetailsContainer]}>
-        <Text style={styles.sectionTitle}>Price detail</Text>
-        <View style={styles.priceDetail}>
-          <View style={styles.priceDetailRow}>
-            <Text style={styles.priceDetailText}>3 nights</Text>
-            <Text style={styles.priceDetailAmount}>2,399,000 VND</Text>
-          </View>
-          <View style={styles.priceDetailRow}>
-            <Text style={styles.priceDetailText}>Cleaning fee</Text>
-            <Text style={styles.priceDetailAmount}>300,000 VND</Text>
-          </View>
-          <View style={styles.priceDetailRow}>
-            <Text style={styles.priceDetailText}>Ladago service fee</Text>
-            <Text style={styles.priceDetailAmount}>100,000 VND</Text>
-          </View>
-          <Divider />
-          <View style={styles.priceDetailRow}>
-            <Text style={styles.priceDetailText}>Total</Text>
-            <Text style={styles.priceDetailAmount}>2,799,000 VND</Text>
-          </View>
-        </View>
-      </View>
-      <SeperateBar />
-      <View style={{ width: "100%", display: "flex", gap: 16 }}>
-        <Text style={{ fontSize: 20, fontWeight: "bold" }}>Payment Method</Text>
-        <View style={{ display: "flex", gap: 10 }}>
-          <Text>Email</Text>
-          <Text style={{ color: "'rgba(0, 0, 0, 0.4)'" }}>Email address</Text>
-        </View>
-        <View style={{ display: "flex", gap: 10 }}>
-          <Text>Card number</Text>
-          <Text style={{ color: "'rgba(0, 0, 0, 0.4)'" }}>
-            1234 1234 1234 1234
-          </Text>
-        </View>
-        <View
-          style={{
-            width: "100%",
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between",
-          }}
-        >
-          <View style={{ display: "flex", gap: 10 }}>
-            <Text>Expiration</Text>
-            <Text style={{ color: "'rgba(0, 0, 0, 0.4)'" }}>MM/YY</Text>
-          </View>
-          <View style={{ display: "flex", gap: 10 }}>
-            <Text>CVC</Text>
-            <Text style={{ color: "'rgba(0, 0, 0, 0.4)'" }}>CVC</Text>
-          </View>
-          <View>
-            <Image
-              style={{ width: "20", height: "20" }}
-              source={{
-                uri: "https://thietkelogo.mondial.vn/wp-content/uploads/2024/02/visa-logo-preview.png",
-              }}
-            />
-            <Image
-              style={{ width: "20", height: "20" }}
-              source={{
-                uri: "https://www.mastercard.com/content/dam/public/mastercardcom/vn/vi/logos/mastercard-og-image.png",
-              }}
-            />
-          </View>
-        </View>
-
-        <View style={{ display: "flex", gap: 10 }}>
-          <Text>Country</Text>
-          <Text style={{ color: "'rgba(0, 0, 0, 0.4)'" }}>Viet Nam</Text>
-        </View>
-      </View>
-      <SeperateBar />
-      <View style={{ width: "100%", display:"flex", gap:10 }}>
-        <Text style={{fontSize:20, fontWeight:500}}  >Cancellation policy</Text>
-        <Text style={{fontSize:14}} >Free cancellation 24 hours in advance.</Text>
-        <Text style={{fontSize:12, color: "rgba(0, 0, 0, 0.4)" }} >Get a full refund if you change your plans</Text>
-      </View>
-      <SeperateBar />
-      <View>
-        <Text style={{fontSize:12, color:"#736E6F"}} >
-          By selecting below button, it means that I agree with Owner’s Policy ,
-          General policy and Ladago cancelation policy
-        </Text>
-      </View>
-      <TouchableOpacity style={styles.confirmButton}>
-        <Text style={styles.confirmButtonText}>Confirm and booking</Text>
-      </TouchableOpacity>
-      {/* <View style={{ height: 50 }} /> */}
-    </ScrollView>
+        <TouchableOpacity style={styles.confirmButton}>
+          <Text style={styles.confirmButtonText}>Confirm and booking</Text>
+        </TouchableOpacity>
+      </ScrollView>
+      {isSheetVisible && (
+        <BottomSheetComponent handleSheetChange={handleSheetChange} />
+      )}
+    </GestureHandlerRootView>
   );
 };
 
