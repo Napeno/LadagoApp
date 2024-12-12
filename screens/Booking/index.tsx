@@ -27,7 +27,7 @@ const Booking = () => {
   const [selectedOption, setSelectedOption] = React.useState("option1");
   const bottomSheetRef = useRef<BottomSheet>(null);
   const [isSheetCalVisible, setIsSheetCalVisible] = useState(false);
-  const [isSheetPeopleVisible, setIsSheetPeopleVisible] = useState(true);
+  const [isSheetPeopleVisible, setIsSheetPeopleVisible] = useState(false);
   let [fontsLoaded] = useFonts({
     Quicksand_300Light,
     Quicksand_400Regular,
@@ -169,7 +169,7 @@ const Booking = () => {
         </View>
         <SeperateBar />
         <View style={{ width: "100%", display: "flex", gap: 16 }}>
-          <Text style={{ fontSize: 20, fontWeight: "bold" }}>
+          <Text style={{ fontSize: 20, fontWeight: "400" }}>
             Payment Method
           </Text>
           <View style={{ display: "flex", gap: 10 }}>
