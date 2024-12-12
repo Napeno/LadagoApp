@@ -22,6 +22,7 @@ import { Divider } from "./components/Divider";
 import { SeperateBar } from "./components/SeperateBar";
 import OverLay from "./components/Overlay";
 import BottomSheetPeople from "./components/BottomSheetPeople";
+import { useNavigation } from "@react-navigation/native";
 const Booking = () => {
   const [checked, setChecked] = React.useState("first");
   const [selectedOption, setSelectedOption] = React.useState("option1");
@@ -44,6 +45,7 @@ const Booking = () => {
       setIsSheetPeopleVisible(false);
     }
   };
+  const nav = useNavigation()
 
   return (
     <GestureHandlerRootView>
@@ -238,7 +240,9 @@ const Booking = () => {
             , General policy and Ladago cancelation policy
           </Text>
         </View>
-        <TouchableOpacity style={styles.confirmButton}>
+        <TouchableOpacity style={styles.confirmButton} onPress={() => {
+          nav.navigate("Confirm" as never) 
+        }}>
           <Text style={styles.confirmButtonText}>Confirm and booking</Text>
         </TouchableOpacity>
       </ScrollView>
