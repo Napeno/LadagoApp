@@ -167,11 +167,13 @@ const Booking = () => {
         <Text style={{ fontSize: 20, fontWeight: "bold" }}>Payment Method</Text>
         <View style={{ display: "flex", gap: 10 }}>
           <Text>Email</Text>
-          <Text>Email address</Text>
+          <Text style={{ color: "'rgba(0, 0, 0, 0.4)'" }}>Email address</Text>
         </View>
         <View style={{ display: "flex", gap: 10 }}>
           <Text>Card number</Text>
-          <Text>1234 1234 1234 1234</Text>
+          <Text style={{ color: "'rgba(0, 0, 0, 0.4)'" }}>
+            1234 1234 1234 1234
+          </Text>
         </View>
         <View
           style={{
@@ -183,11 +185,11 @@ const Booking = () => {
         >
           <View style={{ display: "flex", gap: 10 }}>
             <Text>Expiration</Text>
-            <Text>MM/YY</Text>
+            <Text style={{ color: "'rgba(0, 0, 0, 0.4)'" }}>MM/YY</Text>
           </View>
           <View style={{ display: "flex", gap: 10 }}>
             <Text>CVC</Text>
-            <Text>CVC</Text>
+            <Text style={{ color: "'rgba(0, 0, 0, 0.4)'" }}>CVC</Text>
           </View>
           <View>
             <Image
@@ -207,22 +209,18 @@ const Booking = () => {
 
         <View style={{ display: "flex", gap: 10 }}>
           <Text>Country</Text>
-          <Text>Viet Nam</Text>
+          <Text style={{ color: "'rgba(0, 0, 0, 0.4)'" }}>Viet Nam</Text>
         </View>
       </View>
       <SeperateBar />
-      <View>
-        <Text>Cancellation policy</Text>
-        <Text>
-          We require all passengers to remember some general policies to be an
-          excellent passengers
-        </Text>
-        <Text>Follow house rules</Text>
-        <Text>Use as your own house</Text>
+      <View style={{ width: "100%", display:"flex", gap:10 }}>
+        <Text style={{fontSize:20, fontWeight:500}}  >Cancellation policy</Text>
+        <Text style={{fontSize:14}} >Free cancellation 24 hours in advance.</Text>
+        <Text style={{fontSize:12, color: "rgba(0, 0, 0, 0.4)" }} >Get a full refund if you change your plans</Text>
       </View>
       <SeperateBar />
       <View>
-        <Text>
+        <Text style={{fontSize:12, color:"#736E6F"}} >
           By selecting below button, it means that I agree with Owner’s Policy ,
           General policy and Ladago cancelation policy
         </Text>
