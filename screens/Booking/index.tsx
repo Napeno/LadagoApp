@@ -6,7 +6,7 @@ import Fontisto from "@expo/vector-icons/Fontisto";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { useRef } from "react";
-import BottomSheetComponent from "./components/BottomSheet";
+import BottomSheetCal from "./components/BottomSheetCal";
 import BottomSheet from "@gorhom/bottom-sheet";
 import { useState } from "react";
 import {
@@ -21,12 +21,13 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 import { Divider } from "./components/Divider";
 import { SeperateBar } from "./components/SeperateBar";
 import OverLay from "./components/Overlay";
+import BottomSheetPeople from "./components/BottomSheetPeople";
 const Booking = () => {
   const [checked, setChecked] = React.useState("first");
   const [selectedOption, setSelectedOption] = React.useState("option1");
   const bottomSheetRef = useRef<BottomSheet>(null);
-  const [isSheetVisible, setIsSheetVisible] = useState(false);
-
+  const [isSheetCalVisible, setIsSheetCalVisible] = useState(false);
+  const [isSheetPeopleVisible, setIsSheetPeopleVisible] = useState(true);
   let [fontsLoaded] = useFonts({
     Quicksand_300Light,
     Quicksand_400Regular,
@@ -39,7 +40,8 @@ const Booking = () => {
   }
   const handleSheetChange = (index: number) => {
     if (index === -1) {
-      setIsSheetVisible(false); // Close the bottom sheet if it is collapsed (swiped down)
+      setIsSheetCalVisible(false);
+      setIsSheetPeopleVisible(false);
     }
   };
 
@@ -49,7 +51,7 @@ const Booking = () => {
         contentContainerStyle={styles.root}
         showsVerticalScrollIndicator={false}
       >
-        {isSheetVisible && <OverLay />}
+        {(isSheetCalVisible || isSheetPeopleVisible) && <OverLay />}
         <View style={styles.imageContainer}>
           <Image
             style={styles.image}
@@ -105,7 +107,7 @@ const Booking = () => {
             </View>
             <TouchableOpacity
               onPress={() => {
-                setIsSheetVisible(true);
+                setIsSheetCalVisible(true);
               }}
             >
               <AntDesign name="edit" size={24} color="#365486" />
@@ -118,7 +120,11 @@ const Booking = () => {
                 1 room - 2 passenger - 0 children
               </Text>
             </View>
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                setIsSheetPeopleVisible(true);
+              }}
+            >
               <AntDesign name="edit" size={24} color="#365486" />
             </TouchableOpacity>
           </View>
@@ -236,8 +242,11 @@ const Booking = () => {
           <Text style={styles.confirmButtonText}>Confirm and booking</Text>
         </TouchableOpacity>
       </ScrollView>
-      {isSheetVisible && (
-        <BottomSheetComponent handleSheetChange={handleSheetChange} />
+      {isSheetCalVisible && (
+        <BottomSheetCal handleSheetChange={handleSheetChange} />
+      )}
+      {isSheetPeopleVisible && (
+        <BottomSheetPeople handleSheetChange={handleSheetChange} />
       )}
     </GestureHandlerRootView>
   );

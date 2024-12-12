@@ -4,14 +4,13 @@ import { useState } from "react";
 import { BottomSheetView } from "@gorhom/bottom-sheet";
 import BottomSheet from "@gorhom/bottom-sheet";
 import Day from "react-native-calendars";
-import { StyleSheet, Text, View } from "react-native";
-import { Calendar, CalendarList, Agenda } from "react-native-calendars";
-import OverLay from "./Overlay";
+import { StyleSheet } from "react-native";
+import { Calendar } from "react-native-calendars";
 type Props = {
   handleSheetChange: (index: number) => void;
 };
 
-const BottomSheetComponent = ({ handleSheetChange }: Props) => {
+const BottomSheetCal = ({ handleSheetChange }: Props) => {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState<any>(null);
   const bottomSheetRef = useRef<BottomSheet>(null);
@@ -45,7 +44,7 @@ const BottomSheetComponent = ({ handleSheetChange }: Props) => {
   );
 };
 
-export default BottomSheetComponent;
+export default BottomSheetCal;
 
 const styles = StyleSheet.create({
   contentContainer: {
