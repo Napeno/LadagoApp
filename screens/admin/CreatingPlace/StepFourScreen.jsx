@@ -23,7 +23,9 @@ import {
   Quicksand_700Bold,
 } from "@expo-google-fonts/quicksand";
 
-const StepFourScreen = ({ navigation }) => {
+const StepFourScreen = ({ route, navigation }) => {
+  const { formDataRetrieve } = route.params;
+
   let [fontsLoaded] = useFonts({
     Quicksand_300Light,
     Quicksand_400Regular,
@@ -31,35 +33,77 @@ const StepFourScreen = ({ navigation }) => {
     Quicksand_600SemiBold,
     Quicksand_700Bold,
   });
+
   const backNav = "STEPTHREE";
   const nextNav = "STEPFIVE";
 
   const [roomTabs, setRoomTabs] = useState([{ id: 0 }]);
+  const [formData, setFormData] = useState({
+    roomType: [
+      {
+        id: 0,
+        occupacity: 0,
+        type: "",
+        amenities: {
+          bathTub: false,
+          cleaningService: false,
+          pet: false,
+          wifi: false,
+        },
+      },
+    ],
+  });
+
+  useEffect(() => {
+    if (formDataRetrieve) {
+      setFormData((prev) => ({
+        ...prev,
+        ...formDataRetrieve,
+      }));
+    }
+  }, [formDataRetrieve]);
 
   const handleAddRoom = () => {
-    setRoomTabs((prevTabs) => [
-      ...prevTabs,
-      { id: prevTabs[prevTabs.length - 1].id + 1 },
-    ]);
+    const newId = roomTabs[roomTabs.length - 1]?.id + 1 || 0;
+    setRoomTabs((prevTabs) => [...prevTabs, { id: newId }]);
+    setFormData((prev) => ({
+      ...prev,
+      roomType: [
+        ...prev.roomType,
+        {
+          id: newId,
+          occupacity: 0,
+          type: "",
+          amenities: {
+            bathTub: false,
+            cleaningService: false,
+            pet: false,
+            wifi: false,
+          },
+        },
+      ],
+    }));
   };
 
-  const handleDeleteRoom = useCallback((idToRemove) => {
-    setRoomTabs((prevTabs) =>
-      prevTabs.filter((room) => room.id !== idToRemove),
-    );
-  }, []);
+  const handleDeleteRoom = useCallback(
+    (idToRemove) => {
+      setRoomTabs((prevTabs) => prevTabs.filter((room) => room.id !== idToRemove));
+      setFormData((prev) => ({
+        ...prev,
+        roomType: prev.roomType.filter((room) => room.id !== idToRemove),
+      }));
+    },
+    [setFormData]
+  );
 
   if (!fontsLoaded) {
     return null;
   }
+
   return (
     <SafeAreaView style={styles.safeAreaView}>
       <ScrollView contentContainerStyle={styles.scrollView}>
-        <TouchableWithoutFeedback
-          onPress={() => {
-            Keyboard.dismiss();
-          }}
-        >
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View style={styles.viewContainer}>
             <Image style={styles.closeIcon} source={close} resizeMode="cover" />
             <Text style={styles.titleStep}>Step 4</Text>
@@ -70,6 +114,8 @@ const StepFourScreen = ({ navigation }) => {
               <RoomTabCreate
                 key={tab.id}
                 roomTabs={tab.id}
+                setFormData={setFormData} 
+                formData={formData} 
                 onDeleteRoom={handleDeleteRoom}
               />
             ))}
@@ -85,9 +131,11 @@ const StepFourScreen = ({ navigation }) => {
         navigation={navigation}
         backNav={backNav}
         nextNav={nextNav}
+        formData={formData} 
       />
     </SafeAreaView>
   );
 };
 
 export default StepFourScreen;
+

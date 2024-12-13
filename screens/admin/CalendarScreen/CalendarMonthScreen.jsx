@@ -19,8 +19,10 @@ import {
   } from "@expo-google-fonts/quicksand";
   import React, { useState, useEffect, useMemo, useCallback } from 'react';
   import avatar from "../../../constants/avatar2.png";
+  import { useNavigation } from '@react-navigation/native';
 
-  export const CalendarMonthScreen = () => {
+const CalendarMonthScreen = () => {
+    const navigation = useNavigation();
     let [fontsLoaded] = useFonts({
       Quicksand_300Light,
       Quicksand_400Regular,
@@ -50,6 +52,7 @@ import {
     const handleDayPress = (date) => {
       console.log("Day pressed:", date.dateString);
       setSelected(date.dateString);
+      navigation.navigate('CALENDARDETAIL')
     };
 
     if (!fontsLoaded) {
@@ -59,58 +62,59 @@ import {
     return (
       <SafeAreaView style={styles.safeAreaView}>
         <View style={styles.viewContainer}>
+        <Text style={styles.titleCalendar}>Calendar</Text>
           <CalendarList
-                calendarWidth={'90%'}
-                dayComponent={({date, state}) => {
-                    const isUserBooked = dateUser.includes(date.dateString);
-                    
-                    return !isUserBooked? (
-                      <View>
-                        <TouchableOpacity onPress={() => handleDayPress(date)}>
-                          <Text style={styles.dateCalendar}>{date.day}</Text>
-                        </TouchableOpacity>
-                      </View>
-                    )
-                    :
-                    (
-                      <View>
-                        <TouchableOpacity onPress={() => handleDayPress(date)}>
-                          <Image
-                              style={styles.userAvatar}
-                              source={avatar}
-                              resizeMode='cover'
-                          />
-                        </TouchableOpacity>
+              calendarWidth={'100%'}
+              dayComponent={({date, state}) => {
+                  const isUserBooked = dateUser.includes(date.dateString);
+                  
+                  return !isUserBooked? (
+                    <View>
+                      <TouchableOpacity onPress={() => handleDayPress(date)}>
+                        <Text style={styles.dateCalendar}>{date.day}</Text>
+                      </TouchableOpacity>
                     </View>
-                    )
-              
-                }}
-                theme={{
-                    textSectionTitleColor: 'black',
-                    textSectionTitleDisabledColor: 'black',
-                    selectedDayBackgroundColor: 'black',
-                    selectedDayTextColor: 'black',
-                    todayTextColor: 'black',
-                    dayTextColor: 'black',
-                    textDisabledColor: 'black',
-                    dotColor: 'black',
-                    selectedDotColor: '#ffffff',
-                    arrowColor: 'orange',
-                    disabledArrowColor: '#d9e1e8',
-                    monthTextColor: 'black',
-                    indicatorColor: 'black',
-                    textDayFontWeight: '300',
-                    textMonthFontWeight: 'bold',
-                    textDayHeaderFontWeight: '300',
-                    textDayFontSize: 16,
-                    textMonthFontSize: 14,
-                    textDayHeaderFontSize: 14
-                }}
-
+                  )
+                  :
+                  (
+                    <View>
+                      <TouchableOpacity onPress={() => handleDayPress(date)}>
+                        <Image
+                            style={styles.userAvatar}
+                            source={avatar}
+                            resizeMode='cover'
+                        />
+                      </TouchableOpacity>
+                  </View>
+                  )
             
-            />
+              }}
+              theme={{
+                  textSectionTitleColor: 'black',
+                  textSectionTitleDisabledColor: 'black',
+                  selectedDayBackgroundColor: 'black',
+                  selectedDayTextColor: 'black',
+                  todayTextColor: 'black',
+                  dayTextColor: 'black',
+                  textDisabledColor: 'black',
+                  dotColor: 'black',
+                  selectedDotColor: '#ffffff',
+                  arrowColor: 'orange',
+                  disabledArrowColor: '#d9e1e8',
+                  monthTextColor: 'black',
+                  indicatorColor: 'black',
+                  textDayFontWeight: '300',
+                  textMonthFontWeight: 'bold',
+                  textDayHeaderFontWeight: '300',
+                  textDayFontSize: 16,
+                  textMonthFontSize: 14,
+                  textDayHeaderFontSize: 14
+              }}
+          />
         </View>
       </SafeAreaView>
     );
   };
+
+export default CalendarMonthScreen;
   

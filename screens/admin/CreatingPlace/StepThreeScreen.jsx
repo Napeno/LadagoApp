@@ -17,7 +17,8 @@ import {
 import MapView, { Marker, Callout } from 'react-native-maps';
 import * as Location from 'expo-location';
 
-const StepThreeScreen = ({ navigation }) => {
+const StepThreeScreen = ({ route, navigation }) => {
+    const { formDataRetrieve } = route.params;
     let [fontsLoaded] = useFonts({
         Quicksand_300Light,
         Quicksand_400Regular,
@@ -42,6 +43,20 @@ const StepThreeScreen = ({ navigation }) => {
 
     const backNav = "STEPTWO";
     const nextNav = "STEPFOUR";
+
+    const[formData, setFormData] = useState([{
+        address: '',
+        geoCode: ''
+    }])
+
+    useEffect(() => {
+        if (formDataRetrieve) {
+          setFormData((prev) => ({
+            ...prev,
+            ...formDataRetrieve,
+          }));
+        }
+      }, [formDataRetrieve]);
 
     useEffect(() => {
         const requestLocationPermission = async () => {
@@ -104,7 +119,7 @@ const StepThreeScreen = ({ navigation }) => {
     const handleComboBoxChange = async (item) => {
         try {
             setChoosenLocation({ label: item.label, value: item.value });
-            console.log(item.value);
+            console.log(item);
             const response = await getPlaceDetail(item.value);
             const coorLocation = response?.result?.geometry?.location; 
             // console.log(response?.result?.geometry?.location);
@@ -114,6 +129,13 @@ const StepThreeScreen = ({ navigation }) => {
                 latitudeDelta: 0.01,
                 longitudeDelta: 0.01,
             })
+
+            setFormData((prev) => ({
+                ...prev,
+                address: item?.label,
+                geoCode: `${coorLocation.lat},${coorLocation.lng}`
+            }));
+
         } catch (error) {
             console.error('API Error:', error);
         }
@@ -220,7 +242,12 @@ const StepThreeScreen = ({ navigation }) => {
                     </MapView>
                 )}
 
-                <BottomTabCreate navigation={navigation} backNav={backNav} nextNav={nextNav} />
+                <BottomTabCreate
+                    navigation={navigation} 
+                    backNav={backNav} 
+                    nextNav={nextNav} 
+                    formData={formData}
+                />
             </View>
         </SafeAreaView>
     );

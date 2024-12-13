@@ -2,6 +2,7 @@ import { View, Text, TextInput, Pressable, StyleSheet } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
 import React, { useState, useCallback } from "react";
 import { data } from "../constants/data";
+import styles from '../styles/admin/createscreen'
 
 import {
   useFonts,
@@ -12,7 +13,7 @@ import {
   Quicksand_700Bold,
 } from "@expo-google-fonts/quicksand";
 
-const RoomTabCreate = ({ roomTabs, onDeleteRoom }) => {
+const RoomTabCreate = ({ roomTabs, setFormData, formData, onDeleteRoom }) => {
   let [fontsLoaded] = useFonts({
     Quicksand_300Light,
     Quicksand_400Regular,
@@ -21,28 +22,40 @@ const RoomTabCreate = ({ roomTabs, onDeleteRoom }) => {
     Quicksand_700Bold,
   });
 
-  const [value, setValue] = useState(null);
   const [selectedTabs, setSelectedTabs] = useState([]);
+  const roomIndex = formData.roomType.findIndex((room) => room.id === roomTabs);
+
+  const handleUpdateRoom = (key, value) => {
+    setFormData((prev) => {
+      const updatedRooms = [...prev.roomType];
+      updatedRooms[roomIndex] = {
+        ...updatedRooms[roomIndex],
+        [key]: value,
+      };
+      return { ...prev, roomType: updatedRooms };
+    });
+  };
+
+  const handleAmenitiesToggle = (amenity) => {
+    setFormData((prev) => {
+      const updatedRooms = [...prev.roomType];
+      updatedRooms[roomIndex].amenities[amenity] = !updatedRooms[roomIndex].amenities[amenity];
+      return { ...prev, roomType: updatedRooms };
+    });
+
+    setSelectedTabs((prev) =>
+      prev.includes(amenity)
+        ? prev.filter((tab) => tab !== amenity)
+        : [...prev, amenity]
+    );
+  };
 
   const handleDelete = () => onDeleteRoom(roomTabs);
 
-  const handlePress = useCallback((tabIndex) => {
-    setSelectedTabs((prev) =>
-      prev.includes(tabIndex)
-        ? prev.filter((index) => index !== tabIndex)
-        : [...prev, tabIndex],
-    );
-  }, []);
-
-  const getTabStyles = useCallback(
-    (tabIndex) => ({
-      backgroundColor: selectedTabs.includes(tabIndex)
-        ? "#365486"
-        : "transparent",
-      color: selectedTabs.includes(tabIndex) ? "white" : "black",
-    }),
-    [selectedTabs],
-  );
+  const getTabStyles = (tabIndex) => ({
+    backgroundColor: selectedTabs.includes(tabIndex) ? "#365486" : "transparent",
+    color: selectedTabs.includes(tabIndex) ? "white" : "black",
+  });
 
   if (!fontsLoaded) {
     return null;
@@ -73,8 +86,8 @@ const RoomTabCreate = ({ roomTabs, onDeleteRoom }) => {
         valueField="value"
         placeholder="Select item"
         searchPlaceholder="Search..."
-        value={value}
-        onChange={(item) => setValue(item.value)}
+        value={formData.roomType[roomIndex]?.type || ""}
+        onChange={(item) => handleUpdateRoom("type", item.value)}
       />
 
       <Text style={styles.titleName}>Room Occupacity</Text>
@@ -83,116 +96,25 @@ const RoomTabCreate = ({ roomTabs, onDeleteRoom }) => {
         keyboardType="numeric"
         placeholder="0"
         maxLength={2}
+        value={formData.roomType[roomIndex]?.occupacity?.toString() || ""}
+        onChangeText={(text) => handleUpdateRoom("occupacity", parseInt(text) || 0)}
       />
 
       <Text style={styles.titleName}>Amenities</Text>
-      {["Bath Tub", "Cleaning Service", "Pet Allowed", "Wifi"].map(
-        (tab, index) => (
-          <Pressable
-            key={tab}
-            style={[
-              styles.checkedItem,
-              { backgroundColor: getTabStyles(tab).backgroundColor },
-            ]}
-            onPress={() => handlePress(tab)}
-          >
-            <Text
-              style={[styles.textItems, { color: getTabStyles(tab).color }]}
-            >
-              {tab}
-            </Text>
-          </Pressable>
-        ),
-      )}
+      {["bathTub", "cleaningService", "pet", "wifi"].map((amenity) => (
+        <Pressable
+          key={amenity}
+          style={[styles.checkedItem, { backgroundColor: getTabStyles(amenity).backgroundColor }]}
+          onPress={() => handleAmenitiesToggle(amenity)}
+        >
+          <Text style={[styles.textItems, { color: getTabStyles(amenity).color }]}>
+            {amenity.charAt(0).toUpperCase() + amenity.slice(1)}
+          </Text>
+        </Pressable>
+      ))}
     </View>
   );
 };
 
-const styles = StyleSheet.create({
-  textInput: {
-    padding: 10,
-    width: "100%",
-    height: 48,
-    borderWidth: 1,
-    borderRadius: 5,
-    marginBottom: 16,
-  },
-
-  titleName: {
-    fontSize: 20,
-    fontFamily: "Quicksand_600SemiBold",
-    marginBottom: 10,
-    color: "#365486",
-  },
-
-  dropdown: {
-    height: 50,
-    borderWidth: 1,
-    borderRadius: 5,
-    borderBottomColor: "gray",
-    marginBottom: 16,
-  },
-
-  placeholderStyle: {
-    fontSize: 16,
-    marginLeft: 10,
-  },
-
-  selectedTextStyle: {
-    fontSize: 16,
-    marginLeft: 10,
-    fontFamily: "Quicksand_500Medium",
-  },
-
-  iconStyle: {
-    width: 20,
-    height: 20,
-  },
-
-  inputSearchStyle: {
-    height: 40,
-    fontSize: 16,
-    fontFamily: "Quicksand_500Medium",
-  },
-
-  horiItem: {
-    flexDirection: "row",
-    alignContent: "center",
-    justifyContent: "space-between",
-  },
-
-  textItems: {
-    fontFamily: "Quicksand_600SemiBold",
-    fontSize: 15,
-  },
-
-  checkedItem: {
-    padding: 16,
-    borderWidth: 1,
-    borderRadius: 8,
-    marginVertical: 10,
-    width: 160,
-    alignItems: "center",
-  },
-
-  coveredRoom: {
-    borderWidth: 1,
-    borderColor: "#BFBCBD",
-    paddingHorizontal: 15,
-    borderRadius: 15,
-    marginBottom: 40,
-    paddingVertical: 20,
-  },
-  roomTitle: {
-    fontFamily: "Quicksand_600SemiBold",
-    fontSize: 20,
-    marginBottom: 20,
-  },
-  deleteBtn: {
-    fontFamily: "Quicksand_600SemiBold",
-    fontSize: 16,
-    color: "#365486",
-  },
-});
-
 export default RoomTabCreate;
+

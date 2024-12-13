@@ -11,6 +11,7 @@ export default StyleSheet.create({
     marginTop: 20,
     height: "100%",
     paddingHorizontal: 20,
+    paddingBottom: 200
   },
 
   closeIcon: {
@@ -65,6 +66,10 @@ export default StyleSheet.create({
 
   container: {
     marginTop: 24,
+    borderColor: "#365486",
+    borderWidth: 1,
+    borderRadius: 8,
+    padding: 14,
   },
 
   item: {

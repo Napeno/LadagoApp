@@ -14,6 +14,9 @@ import StepEightScreen from '../screens/admin/CreatingPlace/StepEightScreen'
 import StepNineScreen from '../screens/admin/CreatingPlace/StepNineScreen'
 import StepTenScreen from '../screens/admin/CreatingPlace/StepTenScreen'
 
+import CalendarMonthScreen from '../screens/admin/CalendarScreen/CalendarMonthScreen'
+import CalendarDetailScreen from '../screens/admin/CalendarScreen/CalendarDetailScreen'
+
 import BottomTabs from "../tabs/BottomTabs";
 import AdminBottomTabs from "../tabs/AdminBottomTabs";
 
@@ -50,6 +53,7 @@ const App = () => {
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         {user ? (
           <>
+            {/* <Stack.Screen name="STEPONE" component={StepOneScreen} /> */}
             {/* <Stack.Screen name="ADMIN" component={AdminBottomTabs} /> */}
             <Stack.Screen name="MAIN" component={BottomTabs} />
             <Stack.Screen name="Room Detail" component={RoomDetail} />
@@ -86,6 +90,8 @@ const App = () => {
           <Stack.Screen name="STEPEIGHT" component={StepEightScreen} />
           <Stack.Screen name="STEPNINE" component={StepNineScreen} />
           <Stack.Screen name="STEPTEN" component={StepTenScreen} />
+          <Stack.Screen name="CALENDARMONTH" component={CalendarMonthScreen} />
+          <Stack.Screen name="CALENDARDETAIL" component={CalendarDetailScreen} />
 
       </Stack.Navigator>
 
