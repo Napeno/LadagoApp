@@ -53,8 +53,8 @@ const App = () => {
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         {user ? (
           <>
-            <Stack.Screen name="STEPONE" component={StepOneScreen} />
-            <Stack.Screen name="ADMIN" component={AdminBottomTabs} />
+            {/* <Stack.Screen name="STEPONE" component={StepOneScreen} /> */}
+            {/* <Stack.Screen name="ADMIN" component={AdminBottomTabs} /> */}
             <Stack.Screen name="MAIN" component={BottomTabs} />
             <Stack.Screen name="Room Detail" component={RoomDetail} />
             <Stack.Screen
@@ -80,7 +80,7 @@ const App = () => {
         )}
           <Stack.Screen name="CREATE" component={Introduction} />
           <Stack.Screen name="PROFILE" component={ProfileScreen} />
-          {/* <Stack.Screen name="STEPONE" component={StepOneScreen} /> */}
+          <Stack.Screen name="STEPONE" component={StepOneScreen} />
           <Stack.Screen name="STEPTWO" component={StepTwoScreen} />
           <Stack.Screen name="STEPTHREE" component={StepThreeScreen} />
           <Stack.Screen name="STEPFOUR" component={StepFourScreen} />
