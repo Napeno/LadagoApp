@@ -3,9 +3,9 @@ import { useRef } from "react";
 import { useState } from "react";
 import { BottomSheetView } from "@gorhom/bottom-sheet";
 import BottomSheet from "@gorhom/bottom-sheet";
-import Day from "react-native-calendars";
 import { StyleSheet } from "react-native";
 import { Calendar } from "react-native-calendars";
+
 type Props = {
   handleSheetChange: (index: number) => void;
 };

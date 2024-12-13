@@ -45,7 +45,7 @@ const Booking = () => {
       setIsSheetPeopleVisible(false);
     }
   };
-  const nav = useNavigation()
+  const nav = useNavigation();
 
   return (
     <GestureHandlerRootView>
@@ -112,7 +112,7 @@ const Booking = () => {
                 setIsSheetCalVisible(true);
               }}
             >
-              <AntDesign name="edit" size={24} color="#365486" />
+              <AntDesign name="edit" size={20} color="#365486" />
             </TouchableOpacity>
           </View>
           <View style={styles.tripDetails}>
@@ -127,7 +127,7 @@ const Booking = () => {
                 setIsSheetPeopleVisible(true);
               }}
             >
-              <AntDesign name="edit" size={24} color="#365486" />
+              <AntDesign name="edit" size={20} color="#365486" />
             </TouchableOpacity>
           </View>
         </View>
@@ -171,9 +171,7 @@ const Booking = () => {
         </View>
         <SeperateBar />
         <View style={{ width: "100%", display: "flex", gap: 16 }}>
-          <Text style={{ fontSize: 20, fontWeight: "400" }}>
-            Payment Method
-          </Text>
+          <Text style={styles.sectionTitle}>Payment Method</Text>
           <View style={{ display: "flex", gap: 10 }}>
             <Text>Email</Text>
             <Text style={{ color: "'rgba(0, 0, 0, 0.4)'" }}>Email address</Text>
@@ -223,9 +221,7 @@ const Booking = () => {
         </View>
         <SeperateBar />
         <View style={{ width: "100%", display: "flex", gap: 10 }}>
-          <Text style={{ fontSize: 20, fontWeight: 500 }}>
-            Cancellation policy
-          </Text>
+          <Text style={styles.sectionTitle}>Cancellation policy</Text>
           <Text style={{ fontSize: 14 }}>
             Free cancellation 24 hours in advance.
           </Text>
@@ -240,9 +236,12 @@ const Booking = () => {
             , General policy and Ladago cancelation policy
           </Text>
         </View>
-        <TouchableOpacity style={styles.confirmButton} onPress={() => {
-          nav.navigate("Confirm" as never) 
-        }}>
+        <TouchableOpacity
+          style={styles.confirmButton}
+          onPress={() => {
+            nav.navigate("Confirm" as never);
+          }}
+        >
           <Text style={styles.confirmButtonText}>Confirm and booking</Text>
         </TouchableOpacity>
       </ScrollView>
@@ -374,7 +373,7 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 20,
     fontWeight: "500",
-    fontFamily: "Quicksand_500Medium",
+    fontFamily: "Quicksand_600SemiBold",
   },
   tripDetails: {
     width: "100%",
@@ -385,7 +384,7 @@ const styles = StyleSheet.create({
   tripDetail: {
     display: "flex",
     flexDirection: "column",
-    gap: 4,
+    gap: 5,
   },
   tripDetailTitle: {
     fontSize: 16,
@@ -419,7 +418,7 @@ const styles = StyleSheet.create({
   priceDetailsContainer: {
     width: "100%",
     display: "flex",
-    gap: 5,
+    gap: 10,
   },
   priceDetail: {
     display: "flex",
