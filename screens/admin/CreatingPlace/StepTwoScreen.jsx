@@ -31,7 +31,7 @@ const tabs = [
   "Pay directly",
 ];
 
-const StepOneScreen = ({ navigation }) => {
+const StepTwoScreen = ({ route, navigation}) => {
   let [fontsLoaded] = useFonts({
     Quicksand_300Light,
     Quicksand_400Regular,
@@ -39,18 +39,83 @@ const StepOneScreen = ({ navigation }) => {
     Quicksand_600SemiBold,
     Quicksand_700Bold,
   });
-
+  const { formDataRetrieve } = route.params;
   const [selectedTabs, setSelectedTabs] = useState([]);
 
-  useEffect(() => {});
+
+  useEffect(() => {
+    if (formDataRetrieve) {
+      setFormData((prev) => ({
+        ...prev,
+        ...formDataRetrieve,
+      }));
+    }
+  }, [formDataRetrieve]);
 
   const handlePress = (tabIndex) => {
+    let type = "";
+    switch(tabIndex){
+      case "Car pack":{
+        type = 'carPack';
+        break;
+      }
+      case "Check in 24H":{
+        type = 'check24H';
+        break;
+      }
+      case "Private room":{
+        type = 'checkPrivate';
+        break;
+      }
+      case "Front desk":{
+        type = 'frontDesk';
+        break;
+      }
+      case "Key access":{
+        type = 'keyAccess';
+        break;
+      }
+      case "Banking":{
+        type = 'banking';
+        break;
+      }
+      case "Pay directly":{
+        type = 'payDirectly';
+        break;
+      }
+      default:
+        console.warn("Unknown tab:", tabIndex);
+        return;
+    }
+
+    setFormData((prev) => ({
+      ...prev,
+      access:{
+        ...prev.access,
+        [type]: !prev.access[type]
+      }
+    }));
+
     setSelectedTabs(
       selectedTabs.includes(tabIndex)
         ? selectedTabs.filter((index) => index !== tabIndex)
         : [...selectedTabs, tabIndex],
     );
   };
+
+  const [formData, setFormData] = useState({
+    access:{
+      carPack: false,
+      check24H: false,
+      checkPrivate: false,
+      frontDesk: false,
+      keyAccess: false,
+      banking: false,
+      payDirectly: false
+    }
+  });
+
+  console.log('formDataRetrieve', formData);
 
   const getTabStyles = (tabIndex) => ({
     backgroundColor: selectedTabs.includes(tabIndex)
@@ -177,9 +242,10 @@ const StepOneScreen = ({ navigation }) => {
         navigation={navigation}
         backNav={backNav}
         nextNav={nextNav}
+        formData={formData}
       />
     </SafeAreaView>
   );
 };
 
-export default StepOneScreen;
+export default StepTwoScreen;

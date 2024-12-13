@@ -110,6 +110,7 @@ export default StyleSheet.create({
   largeImage: {
     width: "100%",
     height: 200,
+    borderWidth: 1,
     borderRadius: 8,
   },
   smallImageWrapper: {

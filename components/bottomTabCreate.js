@@ -9,7 +9,7 @@ import {
   Quicksand_700Bold,
 } from "@expo-google-fonts/quicksand";
 
-const BottomTabCreate = ({ navigation, backNav, nextNav }) => {
+const BottomTabCreate = ({ navigation, backNav, nextNav, formData }) => {
   let [fontsLoaded] = useFonts({
     Quicksand_300Light,
     Quicksand_400Regular,
@@ -21,7 +21,7 @@ const BottomTabCreate = ({ navigation, backNav, nextNav }) => {
     return null;
   }
   const handleNext = () => {
-    navigation.navigate(nextNav);
+    navigation.navigate(nextNav,{ formDataRetrieve: formData });
   };
 
   const handleBack = () => {

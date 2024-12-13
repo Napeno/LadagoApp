@@ -23,8 +23,21 @@ import {
   Quicksand_700Bold,
 } from "@expo-google-fonts/quicksand";
 import { Filter } from "react-native-svg";
+import { DateTimePickerAndroid} from '@react-native-community/datetimepicker';
+import RNDateTimePicker from '@react-native-community/datetimepicker';
 
-const StepOneScreen = ({ navigation }) => {
+const StepOneScreen = ({ navigation, formDataRetrieve }) => {
+
+  const [formData, setFormData] = useState({
+    checkIn: '',
+    checkOut: '',
+    name: '',
+    description:'',
+  });
+  const backNav = "CREATE";
+  const nextNav = "STEPTWO";
+  const [number, onChangeNumber] = React.useState("");
+
   let [fontsLoaded] = useFonts({
     Quicksand_300Light,
     Quicksand_400Regular,
@@ -33,9 +46,26 @@ const StepOneScreen = ({ navigation }) => {
     Quicksand_700Bold,
   });
 
-  const backNav = "CREATE";
-  const nextNav = "STEPTWO";
-  const [number, onChangeNumber] = React.useState("");
+  const handleInputText = (text, type) =>{
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [type]: text
+    }));
+  }
+
+  const handleSetTime = (time, type) => {
+    const selectedTime = time?.nativeEvent?.timestamp; 
+    // const formattedTime = new Date(selectedTime).toLocaleTimeString();
+    if (selectedTime) {
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        [type]: new Date(selectedTime),
+      }));
+    }
+  };
+  
+
+  console.log('formData', formData);
 
   if (!fontsLoaded) {
     return null;
@@ -61,6 +91,7 @@ const StepOneScreen = ({ navigation }) => {
               placeholder="Type here"
               returnKeyType="done"
               placeholderTextColor="gray"
+              onChangeText={text => handleInputText(text, 'name')}
             />
             <Text style={styles.titleName}>Description</Text>
             <TextInput
@@ -69,42 +100,23 @@ const StepOneScreen = ({ navigation }) => {
               maxLength={1000}
               placeholder="Type here"
               placeholderTextColor="gray"
+              onChangeText={text => handleInputText(text, 'description')}
             />
             <Text style={styles.titleName}>CheckIn - Checkout Time</Text>
             <View style={styles.checkTime}>
-              <Text style={{ fontSize: 18 }}>{"In: "}</Text>
-              <View style={styles.borderCheck}>
-                <TextInput
-                  style={{ width: 30, textAlign: "center", fontSize: 18 }}
-                  keyboardType="numeric"
-                  placeholder="00"
-                  maxLength={2}
-                />
-                <Text>{":"}</Text>
-                <TextInput
-                  style={{ width: 30, textAlign: "center", fontSize: 18 }}
-                  keyboardType="numeric"
-                  placeholder="00"
-                  maxLength={2}
-                />
-              </View>
+            <Text style={{ fontSize: 18 }}>{"In: "}</Text>
+              <RNDateTimePicker
+                value={formData.checkIn || new Date()}
+                mode="time"
+                onChange={(event) => handleSetTime(event, 'checkIn')}
+              />
               <View style={styles.lineSpace}></View>
               <Text style={{ fontSize: 18 }}>{"Out: "}</Text>
-              <View style={styles.borderCheck}>
-                <TextInput
-                  style={{ width: 30, textAlign: "center", fontSize: 18 }}
-                  keyboardType="numeric"
-                  placeholder="00"
-                  maxLength={2}
-                />
-                <Text>{":"}</Text>
-                <TextInput
-                  style={{ width: 30, textAlign: "center", fontSize: 18 }}
-                  keyboardType="numeric"
-                  placeholder="00"
-                  maxLength={2}
-                />
-              </View>
+              <RNDateTimePicker
+                value={formData.checkIn || new Date()}
+                mode="time"
+                onChange={(event) => handleSetTime(event, 'checkOut')}
+              />
             </View>
             <View style={{ flexDirection: "row", alignItems: "center" }}>
               <Text style={styles.titleName}>Rating:</Text>
@@ -125,6 +137,7 @@ const StepOneScreen = ({ navigation }) => {
         navigation={navigation}
         backNav={backNav}
         nextNav={nextNav}
+        formData={formData}
       />
     </SafeAreaView>
   );

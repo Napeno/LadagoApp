@@ -1,10 +1,6 @@
 import {
-    ScrollView,
     View,
-    Image,
     Text,
-    TextInput,
-    Pressable,
   } from "react-native";
   import { SafeAreaView } from "react-native";
   import styles from "../../../styles/admin/calendar";
@@ -16,10 +12,11 @@ import {
     Quicksand_600SemiBold,
     Quicksand_700Bold,
   } from "@expo-google-fonts/quicksand";
+  
   import { Filter } from "react-native-svg";
   import { Tabs } from '@ant-design/react-native';
-  import { CalendarMonthScreen } from './CalendarMonthScreen';
-  import { CalendarDetailScreen } from './CalendarDetailScreen';
+  import CalendarMonthScreen from './CalendarMonthScreen';
+  import CalendarDetailScreen from './CalendarDetailScreen';
   const CalendarScreen = () => {
     let [fontsLoaded] = useFonts({
       Quicksand_300Light,
@@ -48,8 +45,8 @@ import {
         <View style={styles.viewContainer}>
           <Text style={styles.titleCalendar}>Calendar</Text>
           <Tabs tabs={items} initialPage={0}>
-              <CalendarMonthScreen />
-              <CalendarDetailScreen />
+            <CalendarDetailScreen />
+            <CalendarMonthScreen />
         </Tabs>
         </View>
       </SafeAreaView>

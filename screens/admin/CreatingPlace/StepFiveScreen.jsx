@@ -22,7 +22,41 @@ import {
   Quicksand_700Bold,
 } from "@expo-google-fonts/quicksand";
 
-const StepFiveScreen = ({ navigation }) => {
+const StepFiveScreen = ({ route, navigation }) => {
+  const { formDataRetrieve } = route.params;
+
+  const[formData, setFormData] = useState([{
+
+  }])
+
+  useEffect(() => {
+    if (formDataRetrieve) {
+      const updatedRoomType = formDataRetrieve.roomType.map((room) => ({
+        ...room,
+        bathroom: room.bathroom || 1, 
+        bed: room.bed || 1,         
+        bedroom: room.bedroom || 1,  
+      }));
+  
+      setFormData((prev) => ({
+        ...prev,
+        ...formDataRetrieve,
+        roomType: updatedRoomType, 
+      }));
+  
+      const initialCounts = {};
+      updatedRoomType.forEach((room) => {
+        initialCounts[room.id] = data?.itemRoom?.reduce((acc, item) => {
+          acc[item.key] = 1; 
+          return acc;
+        }, {});
+      });
+      setCounts(initialCounts);
+    }
+  }, [formDataRetrieve]);
+  
+
+
   let [fontsLoaded] = useFonts({
     Quicksand_300Light,
     Quicksand_400Regular,
@@ -31,41 +65,56 @@ const StepFiveScreen = ({ navigation }) => {
     Quicksand_700Bold,
   });
 
-  const [counts, setCounts] = useState(
-    data?.itemRoom?.reduce((acc, item) => {
-      acc[item.key] = 1;
-      return acc;
-    }, {}),
-  );
+  const [counts, setCounts] = useState({})
 
-  const [selectedTabs, setSelectedTabs] = useState([]);
+    const handleIncrement = (roomId, key) => {
 
-  useEffect(() => {});
+      setCounts((prev) => ({
+        ...prev,
+        [roomId]: {
+          ...prev[roomId],
+          [key]: prev[roomId][key] + 1,
+        },
+      }));
 
-  const handlePress = (tabIndex) => {
-    setSelectedTabs(
-      selectedTabs.includes(tabIndex)
-        ? selectedTabs.filter((index) => index !== tabIndex)
-        : [...selectedTabs, tabIndex],
-    );
+      setFormData((prev) => {
+        const updatedRooms = prev.roomType.map((room) =>
+          room.id === roomId
+            ? {
+                ...room,
+                [key]: (room[key] || 0) + 1,
+              }
+            : room
+        );
+        return { ...prev, roomType: updatedRooms };
+      });
   };
 
-  const getTabStyles = (tabIndex) => ({
-    backgroundColor: selectedTabs.includes(tabIndex)
-      ? "#365486"
-      : "transparent",
-    color: selectedTabs.includes(tabIndex) ? "white" : "black",
-  });
+  // console.log(counts)
+  console.log('formDataRetrieveStep5', formData);
 
-  const handleIncrement = (key) => {
-    setCounts((prev) => ({ ...prev, [key]: prev[key] + 1 }));
-  };
-
-  const handleDecrement = (key) => {
+  const handleDecrement = (roomId, key) => {
+  
     setCounts((prev) => ({
       ...prev,
-      [key]: prev[key] > 0 ? prev[key] - 1 : 0, // Prevent going below 0
+      [roomId]: {
+        ...prev[roomId],
+        [key]: prev[roomId][key] > 0 ? prev[roomId][key] - 1 : 0,
+      },
     }));
+
+    setFormData((prev) => {
+      const updatedRooms = prev.roomType.map((room) =>
+        room.id === roomId
+          ? {
+              ...room,
+              [key]: room[key] > 0 ? room[key] - 1 : 0,
+            }
+          : room
+      );
+      return { ...prev, roomType: updatedRooms };
+    });
+
   };
 
   if (!fontsLoaded) {
@@ -91,29 +140,35 @@ const StepFiveScreen = ({ navigation }) => {
             <Text style={styles.description}>
               After this, you can add other information.
             </Text>
-
-            <View style={styles.container}>
-              {data?.itemRoom?.map((item) => (
-                <View key={item.key} style={styles.item}>
-                  <Text style={styles.label}>{item.label}</Text>
-                  <View style={styles.counterContainer}>
-                    <Pressable
-                      style={styles.button}
-                      onPress={() => handleDecrement(item.key)}
-                    >
-                      <Text style={styles.buttonText}>-</Text>
-                    </Pressable>
-                    <Text style={styles.count}>{counts[item.key]}</Text>
-                    <Pressable
-                      style={styles.button}
-                      onPress={() => handleIncrement(item.key)}
-                    >
-                      <Text style={styles.buttonText}>+</Text>
-                    </Pressable>
+            
+            {formData?.roomType?.map((room) => (
+              <View key={room.id} style={styles.container}>
+                <Text style={styles.roomTitle}>Room {room.type}</Text>
+                {data?.itemRoom?.map((item) => (
+                  <View key={item.key} style={styles.item}>
+                    <Text style={styles.label}>{item.label}</Text>
+                    <View style={styles.counterContainer}>
+                      <Pressable
+                        style={styles.button}
+                        onPress={() => handleDecrement(room.id, item.key)}
+                      >
+                        <Text style={styles.buttonText}>-</Text>
+                      </Pressable>
+                      <Text style={styles.count}>
+                        {counts[room.id]?.[item.key] || 0}
+                      </Text>
+                      <Pressable
+                        style={styles.button}
+                        onPress={() => handleIncrement(room.id, item.key)}
+                      >
+                        <Text style={styles.buttonText}>+</Text>
+                      </Pressable>
+                    </View>
                   </View>
-                </View>
-              ))}
-            </View>
+                ))}
+              </View>
+            ))}
+            
           </View>
         </TouchableWithoutFeedback>
       </ScrollView>
@@ -121,6 +176,7 @@ const StepFiveScreen = ({ navigation }) => {
         navigation={navigation}
         backNav={backNav}
         nextNav={nextNav}
+        formData={formData}
       />
     </SafeAreaView>
   );

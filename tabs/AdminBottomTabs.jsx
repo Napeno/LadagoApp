@@ -5,6 +5,9 @@ import BookingScreen from "../screens/user/BookingScreen";
 import MessageScreen from "../screens/user/MessageScreen";
 import ProfileScreen from "../screens/user/ProfileScreen";
 import CustomBottomTab from "@/components/BottomTabs/CustomBottomTab";
+import CalendarDetailScreen from "../screens/admin/CalendarScreen/CalendarDetailScreen";
+import CalendarMonthScreen from "../screens/admin/CalendarScreen/CalendarMonthScreen";
+import CreateScreen from "../screens/admin/CreateScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -22,17 +25,17 @@ export default function AdminBottomTabs() {
         />
         <Tab.Screen
           name="Calendar"
-          component={CalendarScreen}
+          component={CalendarMonthScreen}
           options={{ tabBarLabel: "Calendar" }}
         />
         <Tab.Screen
           name="Create"
-          component={BookingScreen}
+          component={CreateScreen}
           options={{ tabBarLabel: "Create" }}
         />
         <Tab.Screen
           name="Message"
-          component={MessageScreen}
+          component={CalendarDetailScreen}
           options={{ tabBarLabel: "Message" }}
         />
         <Tab.Screen
