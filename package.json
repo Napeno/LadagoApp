@@ -25,6 +25,7 @@
     "@expo/prebuild-config": "^8.0.0",
     "@expo/vector-icons": "^14.0.2",
     "@firebase/auth": "^1.8.0",
+    "@gorhom/bottom-sheet": "^5.0.6",
     "@ionic/core": "^8.4.0",
     "@ionic/react": "^8.4.0",
     "@react-native-async-storage/async-storage": "1.23.1",
