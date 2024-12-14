@@ -8,12 +8,12 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native";
 import React, { useEffect, useState } from "react";
-import styles from "../styles/homepage";
-import Categories from "../components/categories";
-import CategoryLocation from "../components/categoryLocation";
-import CategoryPopularLocation from "../components/caregoryPopularLocation";
-import DiscoverLocation from "../components/discoverLocation";
-import PlaceList from "../components/placeList";
+import styles from "../../styles/homepage";
+import Categories from "../../components/categories";
+import CategoryLocation from "../../components/categoryLocation";
+import CategoryPopularLocation from "../../components/caregoryPopularLocation";
+import DiscoverLocation from "../../components/discoverLocation";
+import PlaceList from "../../components/placeList";
 
 import {
   useFonts,
@@ -23,6 +23,7 @@ import {
   Quicksand_600SemiBold,
   Quicksand_700Bold,
 } from "@expo-google-fonts/quicksand";
+import { data } from "@/constants/data";
 
 const Homepage = () => {
   const [activeCategory, setActiveCategory] = useState(null);
@@ -65,7 +66,7 @@ const Homepage = () => {
               </Text>
             </View>
             <Image
-              source={require("../constants/avatar.png")}
+              source={require("../../constants/avatar.png")}
               style={styles.avatar}
               resizeMode="contain"
             />
@@ -73,7 +74,7 @@ const Homepage = () => {
 
           <View style={styles.searchLocation}>
             <Image
-              source={require("../constants/searchIcon.png")}
+              source={require("../../constants/searchIcon.png")}
               style={styles.searchIcon}
               resizeMode="contain"
             />
@@ -98,7 +99,7 @@ const Homepage = () => {
               Filter
             </Text>
             <Image
-              source={require("../constants/ic_filter.png")}
+              source={require("../../constants/ic_filter.png")}
               style={styles.ic_filter}
               resizeMode="contain"
             />
@@ -108,6 +109,7 @@ const Homepage = () => {
             <Categories
               activeCategory={activeCategory}
               handleChangeCategory={handleChangeCategory}
+              datainput={data.categories}
             />
           </View>
 

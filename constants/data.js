@@ -9,6 +9,12 @@ const categories = [
   "Villa",
 ];
 
+const reservation = [
+  "About to check out",
+  "Currently being used",
+  "About to arrive",
+];
+
 const typeRoom = [
   { label: "Item 1", value: "1" },
   { label: "Item 2", value: "2" },
@@ -84,6 +90,7 @@ const message = [
 
 export const data = {
   categories,
+  reservation,
   dataLocation,
   message,
   typeRoom,

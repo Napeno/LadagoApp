@@ -1,9 +1,9 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Homepage from "../screens/Homepage";
-import FavoriteScreen from "../screens/FavoriteScreen";
-import BookingScreen from "../screens/BookingScreen";
-import MessageScreen from "../screens/MessageScreen";
-import ProfileScreen from "../screens/ProfileScreen";
+import Homepage from "../screens/user/Homepage";
+import FavoriteScreen from "../screens/user/FavoriteScreen";
+import BookingScreen from "../screens/user/BookingScreen";
+import MessageScreen from "../screens/user/MessageScreen";
+import ProfileScreen from "../screens/user/ProfileScreen";
 import CustomBottomTab from "@/components/BottomTabs/CustomBottomTab";
 
 const Tab = createBottomTabNavigator();

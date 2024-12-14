@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { Button, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Svg, { Rect, Text as SvgText } from "react-native-svg";
 import axios from "axios";
-import styles from "../styles/camerascreen";
+import styles from "../../styles/camerascreen";
 
 export default function CameraScreen() {
   const [facing, setFacing] = useState("front");

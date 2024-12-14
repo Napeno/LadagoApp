@@ -1,6 +1,6 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Homepage from "./screens/Homepage";
+import Homepage from "./screens/user/Homepage";
 import LoginScreen from "./screens/LoginScreen";
 import { GestureHandlerRootView } from "react-native-gesture-handler"; // Import the GestureHandlerRootView
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
