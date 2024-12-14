@@ -2,8 +2,11 @@ import { StyleSheet, Text, View } from "react-native";
 import React, { useState } from "react";
 import Entypo from "@expo/vector-icons/Entypo";
 import { TouchableOpacity } from "react-native";
-const CounterButton = () => {
-  const [counter, setCounter] = useState<number>(0);
+type Props = {
+  number:number
+}
+const CounterButton = ({number}:Props) => {
+  const [counter, setCounter] = useState<number>(number);
   return (
     <View
       style={{

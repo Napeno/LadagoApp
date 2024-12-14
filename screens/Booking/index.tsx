@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { StyleSheet, Image, View, Text, TouchableOpacity } from "react-native";
 import { ScrollView } from "react-native";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
@@ -23,10 +23,10 @@ import { SeperateBar } from "./components/SeperateBar";
 import OverLay from "./components/Overlay";
 import BottomSheetPeople from "./components/BottomSheetPeople";
 import { useNavigation } from "@react-navigation/native";
+import { useBooking } from "./useBooking";
+
 const Booking = () => {
-  const [checked, setChecked] = React.useState("first");
-  const [selectedOption, setSelectedOption] = React.useState("option1");
-  const bottomSheetRef = useRef<BottomSheet>(null);
+  const { date } = useBooking()
   const [isSheetCalVisible, setIsSheetCalVisible] = useState(false);
   const [isSheetPeopleVisible, setIsSheetPeopleVisible] = useState(false);
   let [fontsLoaded] = useFonts({
@@ -105,7 +105,7 @@ const Booking = () => {
           <View style={styles.tripDetails}>
             <View style={styles.tripDetail}>
               <Text style={styles.tripDetailTitle}>Date</Text>
-              <Text style={styles.tripDetailText}>6th -9th June 2024</Text>
+              <Text style={styles.tripDetailText}>{date}</Text>
             </View>
             <TouchableOpacity
               onPress={() => {
@@ -173,11 +173,11 @@ const Booking = () => {
         <View style={{ width: "100%", display: "flex", gap: 16 }}>
           <Text style={styles.sectionTitle}>Payment Method</Text>
           <View style={{ display: "flex", gap: 10 }}>
-            <Text>Email</Text>
+            <Text style={[{ fontFamily: "Quicksand_500Medium" }]}>Email</Text>
             <Text style={{ color: "'rgba(0, 0, 0, 0.4)'" }}>Email address</Text>
           </View>
           <View style={{ display: "flex", gap: 10 }}>
-            <Text>Card number</Text>
+            <Text style={[{ fontFamily: "Quicksand_500Medium" }]}>Card number</Text>
             <Text style={{ color: "'rgba(0, 0, 0, 0.4)'" }}>
               1234 1234 1234 1234
             </Text>
@@ -191,22 +191,22 @@ const Booking = () => {
             }}
           >
             <View style={{ display: "flex", gap: 10 }}>
-              <Text>Expiration</Text>
+              <Text style={[{ fontFamily: "Quicksand_500Medium" }]}>Expiration</Text>
               <Text style={{ color: "'rgba(0, 0, 0, 0.4)'" }}>MM/YY</Text>
             </View>
             <View style={{ display: "flex", gap: 10 }}>
-              <Text>CVC</Text>
+              <Text style={[{ fontFamily: "Quicksand_500Medium" }]}>CVC</Text>
               <Text style={{ color: "'rgba(0, 0, 0, 0.4)'" }}>CVC</Text>
             </View>
             <View>
               <Image
-                style={{ width: "20", height: "20" }}
+                style={{ width: 20, height: 20 }}
                 source={{
                   uri: "https://thietkelogo.mondial.vn/wp-content/uploads/2024/02/visa-logo-preview.png",
                 }}
               />
               <Image
-                style={{ width: "20", height: "20" }}
+                style={{ width: 20, height: 20 }}
                 source={{
                   uri: "https://www.mastercard.com/content/dam/public/mastercardcom/vn/vi/logos/mastercard-og-image.png",
                 }}
@@ -215,7 +215,7 @@ const Booking = () => {
           </View>
 
           <View style={{ display: "flex", gap: 10 }}>
-            <Text>Country</Text>
+            <Text style={[{ fontFamily: "Quicksand_500Medium" }]}>Country</Text>
             <Text style={{ color: "'rgba(0, 0, 0, 0.4)'" }}>Viet Nam</Text>
           </View>
         </View>

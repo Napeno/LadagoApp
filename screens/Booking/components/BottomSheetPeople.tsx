@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import BottomSheet from "@gorhom/bottom-sheet";
 import { BottomSheetView } from "@gorhom/bottom-sheet";
@@ -13,13 +13,17 @@ import {
   Quicksand_600SemiBold,
   Quicksand_700Bold,
 } from "@expo-google-fonts/quicksand";
+import { useBooking } from "../useBooking";
 type Props = {
   handleSheetChange: (index: number) => void;
 };
 
 const BottomSheetPeople = ({ handleSheetChange }: Props) => {
+  const {adult,children,random} =useBooking()
   const [isEnabled, setIsEnabled] = useState(false);
-
+  useEffect(() => {
+    console.log("random in BottomSheetPeople: ",random)
+  })
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
   const bottomSheetRef = useRef<BottomSheet>(null);
 
@@ -38,18 +42,18 @@ const BottomSheetPeople = ({ handleSheetChange }: Props) => {
         </View>
         <View style={styles.row}>
           <Text style={styles.text}>Room</Text>
-          <CounterButton />
+          <CounterButton number={0} />
         </View>
         <View style={styles.row}>
           <Text style={styles.text}>Adult</Text>
-          <CounterButton />
+          <CounterButton number={adult}/>
         </View>
         <View style={styles.row}>
           <View>
             <Text style={styles.text}>Children</Text>
             <Text style={{ color: "#A19E9F" }}>0 - 17 years old </Text>
           </View>
-          <CounterButton />
+          <CounterButton number={children}/>
         </View>
         <View style={styles.row}>
           <Text style={styles.text}>Bring your pet</Text>
