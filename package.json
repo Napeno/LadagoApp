@@ -25,10 +25,13 @@
     "@expo/prebuild-config": "^8.0.0",
     "@expo/vector-icons": "^14.0.2",
     "@firebase/auth": "^1.8.0",
+    "@flyerhq/react-native-chat-ui": "^1.4.3",
+    "@google/generative-ai": "^0.21.0",
     "@gorhom/bottom-sheet": "^5.0.6",
     "@ionic/core": "^8.4.0",
     "@ionic/react": "^8.4.0",
     "@react-native-async-storage/async-storage": "1.23.1",
+    "@react-native-community/datetimepicker": "8.2.0",
     "@react-native-firebase/app": "^20.5.0",
     "@react-native-firebase/auth": "^21.4.0",
     "@react-native-masked-view/masked-view": "0.3.1",
@@ -94,8 +97,7 @@
     "react-native-webview": "^13.12.4",
     "rn-qr-generator": "^1.4.2",
     "socket.io-client": "^4.8.1",
-    "stream-browserify": "^3.0.0",
-    "@react-native-community/datetimepicker": "8.2.0"
+    "stream-browserify": "^3.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.24.8",

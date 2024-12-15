@@ -31,7 +31,7 @@ const tabs = [
   "Pay directly",
 ];
 
-const StepTwoScreen = ({ route, navigation}) => {
+const StepTwoScreen = ({ route, navigation }) => {
   let [fontsLoaded] = useFonts({
     Quicksand_300Light,
     Quicksand_400Regular,
@@ -41,7 +41,6 @@ const StepTwoScreen = ({ route, navigation}) => {
   });
   const { formDataRetrieve } = route.params;
   const [selectedTabs, setSelectedTabs] = useState([]);
-
 
   useEffect(() => {
     if (formDataRetrieve) {
@@ -54,33 +53,33 @@ const StepTwoScreen = ({ route, navigation}) => {
 
   const handlePress = (tabIndex) => {
     let type = "";
-    switch(tabIndex){
-      case "Car pack":{
-        type = 'carPack';
+    switch (tabIndex) {
+      case "Car pack": {
+        type = "carPack";
         break;
       }
-      case "Check in 24H":{
-        type = 'check24H';
+      case "Check in 24H": {
+        type = "check24H";
         break;
       }
-      case "Private room":{
-        type = 'checkPrivate';
+      case "Private room": {
+        type = "checkPrivate";
         break;
       }
-      case "Front desk":{
-        type = 'frontDesk';
+      case "Front desk": {
+        type = "frontDesk";
         break;
       }
-      case "Key access":{
-        type = 'keyAccess';
+      case "Key access": {
+        type = "keyAccess";
         break;
       }
-      case "Banking":{
-        type = 'banking';
+      case "Banking": {
+        type = "banking";
         break;
       }
-      case "Pay directly":{
-        type = 'payDirectly';
+      case "Pay directly": {
+        type = "payDirectly";
         break;
       }
       default:
@@ -90,10 +89,10 @@ const StepTwoScreen = ({ route, navigation}) => {
 
     setFormData((prev) => ({
       ...prev,
-      access:{
+      access: {
         ...prev.access,
-        [type]: !prev.access[type]
-      }
+        [type]: !prev.access[type],
+      },
     }));
 
     setSelectedTabs(
@@ -104,18 +103,18 @@ const StepTwoScreen = ({ route, navigation}) => {
   };
 
   const [formData, setFormData] = useState({
-    access:{
+    access: {
       carPack: false,
       check24H: false,
       checkPrivate: false,
       frontDesk: false,
       keyAccess: false,
       banking: false,
-      payDirectly: false
-    }
+      payDirectly: false,
+    },
   });
 
-  console.log('formDataRetrieve', formData);
+  console.log("formDataRetrieve", formData);
 
   const getTabStyles = (tabIndex) => ({
     backgroundColor: selectedTabs.includes(tabIndex)

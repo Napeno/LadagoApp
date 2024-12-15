@@ -21,7 +21,7 @@ const BottomTabCreate = ({ navigation, backNav, nextNav, formData }) => {
     return null;
   }
   const handleNext = () => {
-    navigation.navigate(nextNav,{ formDataRetrieve: formData });
+    navigation.navigate(nextNav, { formDataRetrieve: formData });
   };
 
   const handleBack = () => {

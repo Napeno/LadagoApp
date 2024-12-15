@@ -87,13 +87,15 @@ const StepFourScreen = ({ route, navigation }) => {
 
   const handleDeleteRoom = useCallback(
     (idToRemove) => {
-      setRoomTabs((prevTabs) => prevTabs.filter((room) => room.id !== idToRemove));
+      setRoomTabs((prevTabs) =>
+        prevTabs.filter((room) => room.id !== idToRemove),
+      );
       setFormData((prev) => ({
         ...prev,
         roomType: prev.roomType.filter((room) => room.id !== idToRemove),
       }));
     },
-    [setFormData]
+    [setFormData],
   );
 
   if (!fontsLoaded) {
@@ -114,8 +116,8 @@ const StepFourScreen = ({ route, navigation }) => {
               <RoomTabCreate
                 key={tab.id}
                 roomTabs={tab.id}
-                setFormData={setFormData} 
-                formData={formData} 
+                setFormData={setFormData}
+                formData={formData}
                 onDeleteRoom={handleDeleteRoom}
               />
             ))}
@@ -131,11 +133,10 @@ const StepFourScreen = ({ route, navigation }) => {
         navigation={navigation}
         backNav={backNav}
         nextNav={nextNav}
-        formData={formData} 
+        formData={formData}
       />
     </SafeAreaView>
   );
 };
 
 export default StepFourScreen;
-
