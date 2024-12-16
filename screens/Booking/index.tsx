@@ -24,9 +24,6 @@ import OverLay from "./components/Overlay";
 import BottomSheetPeople from "./components/BottomSheetPeople";
 import { useNavigation } from "@react-navigation/native";
 const Booking = () => {
-  const [checked, setChecked] = React.useState("first");
-  const [selectedOption, setSelectedOption] = React.useState("option1");
-  const bottomSheetRef = useRef<BottomSheet>(null);
   const [isSheetCalVisible, setIsSheetCalVisible] = useState(false);
   const [isSheetPeopleVisible, setIsSheetPeopleVisible] = useState(false);
   let [fontsLoaded] = useFonts({

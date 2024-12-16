@@ -1,6 +1,6 @@
 import { StyleSheet, View } from "react-native";
 import { Chat, MessageType } from "@flyerhq/react-native-chat-ui";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
@@ -18,18 +18,14 @@ const ChatBot = () => {
   const [messages, setMessages] = useState<MessageType.Any[]>([]);
   const user = { id: "06c33e8b-e835-4736-80f4-63f44b66666c" };
 
-  // Initialize the GoogleGenerativeAI instance with the API key
   const genAI = new GoogleGenerativeAI(API_KEY);
   const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-  // Function to add messages to the chat
   const addMessage = (message: MessageType.Any) => {
-    setMessages([message, ...messages]);
+    setMessages((prevMessages) => [message, ...prevMessages]);
   };
 
-  // Handle sending of messages
   const handleSendPress = async (message: MessageType.PartialText) => {
-    // Create and add the user's message
     const userMessage: MessageType.Text = {
       author: user,
       createdAt: Date.now(),
@@ -39,7 +35,6 @@ const ChatBot = () => {
     };
     addMessage(userMessage);
 
-    // Call the Gemini model and fetch a response asynchronously
     try {
       const botMessageText = await getBotResponse(message.text);
       const botMessage: MessageType.Text = {
@@ -50,10 +45,9 @@ const ChatBot = () => {
         type: "text",
       };
 
-      // Simulate typing delay for the bot
       setTimeout(() => {
         addMessage(botMessage);
-      }, 1000); // Delay for 1 second to simulate bot typing
+      }, 1000);
     } catch (error) {
       console.error("Error calling Gemini API:", error);
       const errorMessage: MessageType.Text = {
@@ -67,7 +61,6 @@ const ChatBot = () => {
     }
   };
 
-  // Fetch a response from the Gemini model
   const getBotResponse = async (userMessage: string) => {
     try {
       const chat = model.startChat({
@@ -80,7 +73,7 @@ const ChatBot = () => {
       });
 
       const result = await chat.sendMessage(userMessage);
-      console.log("result: ",result)
+      console.log("result: ", result);
       const botResponse = result.response.text();
       return botResponse;
     } catch (error) {
@@ -91,7 +84,9 @@ const ChatBot = () => {
 
   return (
     <SafeAreaProvider>
-      <Chat messages={messages} onSendPress={handleSendPress} user={user} />
+      <View style={{ height: "95%" }}>
+        <Chat messages={messages} onSendPress={handleSendPress} user={user} />
+      </View>
     </SafeAreaProvider>
   );
 };
@@ -99,4 +94,3 @@ const ChatBot = () => {
 export default ChatBot;
 
 const styles = StyleSheet.create({});
-

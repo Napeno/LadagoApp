@@ -57,7 +57,6 @@ const App = () => {
         <>
           {/* <Stack.Screen name="STEPONE" component={StepOneScreen} /> */}
           {/* <Stack.Screen name="ADMIN" component={AdminBottomTabs} /> */}
-          <Stack.Screen name="Chat Bot" component={ChatBot} />
           <Stack.Screen name="MAIN" component={BottomTabs} />
           <Stack.Screen name="Room Detail" component={RoomDetail} />
           <Stack.Screen
@@ -85,6 +84,11 @@ const App = () => {
             options={{ headerShown: true }}
             name="Confirm"
             component={Confirm}
+          />
+          <Stack.Screen
+            options={{ headerShown: true }}
+            name="Chat Bot"
+            component={ChatBot}
           />
         </>
       ) : (
