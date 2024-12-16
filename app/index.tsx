@@ -30,7 +30,8 @@ import WriteReviewScreen from "@/screens/RoomDetail/WriteReviewScreen";
 import Booking from "@/screens/Booking";
 import Confirm from "@/screens/Booking/ConfirmScreen";
 import ChatBot from "@/screens/ChatBot";
-
+import { Provider } from "react-redux";
+import { store } from "../store/reduxStore";
 const Stack = createNativeStackNavigator();
 
 const App = () => {
@@ -52,6 +53,7 @@ const App = () => {
   }
 
   return (
+    <Provider store={store}>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         {user ? (
           <>
@@ -70,45 +72,46 @@ const App = () => {
               component={ReviewScreen}
             />
 
-          <Stack.Screen
-            options={{ headerShown: true }}
-            name="Write Review"
-            component={WriteReviewScreen}
-          />
-          <Stack.Screen
-            options={{ headerShown: true }}
-            name="Booking"
-            component={Booking}
-          />
-          <Stack.Screen
-            options={{ headerShown: true }}
-            name="Confirm"
-            component={Confirm}
-          />
-          <Stack.Screen
-            options={{ headerShown: true }}
-            name="Chat Bot"
-            component={ChatBot}
-          />
-        </>
-      ) : (
-        <Stack.Screen name="LOGIN" component={LoginScreen} />
-      )}
-      <Stack.Screen name="CREATE" component={Introduction} />
-      <Stack.Screen name="PROFILE" component={ProfileScreen} />
-      <Stack.Screen name="STEPONE" component={StepOneScreen} />
-      <Stack.Screen name="STEPTWO" component={StepTwoScreen} />
-      <Stack.Screen name="STEPTHREE" component={StepThreeScreen} />
-      <Stack.Screen name="STEPFOUR" component={StepFourScreen} />
-      <Stack.Screen name="STEPFIVE" component={StepFiveScreen} />
-      <Stack.Screen name="STEPSIX" component={StepSixScreen} />
-      <Stack.Screen name="STEPSEVEN" component={StepSevenScreen} />
-      <Stack.Screen name="STEPEIGHT" component={StepEightScreen} />
-      <Stack.Screen name="STEPNINE" component={StepNineScreen} />
-      <Stack.Screen name="STEPTEN" component={StepTenScreen} />
-      <Stack.Screen name="CALENDARMONTH" component={CalendarMonthScreen} />
-      <Stack.Screen name="CALENDARDETAIL" component={CalendarDetailScreen} />
-    </Stack.Navigator>
+            <Stack.Screen
+              options={{ headerShown: true }}
+              name="Write Review"
+              component={WriteReviewScreen}
+            />
+            <Stack.Screen
+              options={{ headerShown: true }}
+              name="Booking"
+              component={Booking}
+            />
+            <Stack.Screen
+              options={{ headerShown: true }}
+              name="Confirm"
+              component={Confirm}
+            />
+            <Stack.Screen
+              options={{ headerShown: true }}
+              name="Chat Bot"
+              component={ChatBot}
+            />
+          </>
+        ) : (
+          <Stack.Screen name="LOGIN" component={LoginScreen} />
+        )}
+        <Stack.Screen name="CREATE" component={Introduction} />
+        <Stack.Screen name="PROFILE" component={ProfileScreen} />
+        <Stack.Screen name="STEPONE" component={StepOneScreen} />
+        <Stack.Screen name="STEPTWO" component={StepTwoScreen} />
+        <Stack.Screen name="STEPTHREE" component={StepThreeScreen} />
+        <Stack.Screen name="STEPFOUR" component={StepFourScreen} />
+        <Stack.Screen name="STEPFIVE" component={StepFiveScreen} />
+        <Stack.Screen name="STEPSIX" component={StepSixScreen} />
+        <Stack.Screen name="STEPSEVEN" component={StepSevenScreen} />
+        <Stack.Screen name="STEPEIGHT" component={StepEightScreen} />
+        <Stack.Screen name="STEPNINE" component={StepNineScreen} />
+        <Stack.Screen name="STEPTEN" component={StepTenScreen} />
+        <Stack.Screen name="CALENDARMONTH" component={CalendarMonthScreen} />
+        <Stack.Screen name="CALENDARDETAIL" component={CalendarDetailScreen} />
+      </Stack.Navigator>
+    </Provider>
   );
 };
 

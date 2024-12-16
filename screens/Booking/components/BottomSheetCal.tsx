@@ -12,7 +12,7 @@ type Props = {
 };
 
 const BottomSheetCal = ({ handleSheetChange }: Props) => {
-  const {date,handleSelectedDate,random}=useBooking()
+  const { date, handleSelectedDate, random } = useBooking();
   const bottomSheetRef = useRef<BottomSheet>(null);
   const [selectedDate, setSelectedDate] = useState<string | undefined>(date);
 
@@ -20,12 +20,12 @@ const BottomSheetCal = ({ handleSheetChange }: Props) => {
     setSelectedDate(day.dateString);
   };
   useEffect(() => {
-    handleSelectedDate(selectedDate? selectedDate:"")
-  },[selectedDate])
+    handleSelectedDate(selectedDate ? selectedDate : "");
+  }, [selectedDate]);
 
   useEffect(() => {
-    console.log("random in BottomSheetCal: ",random)
-  },[])
+    console.log("random in BottomSheetCal: ", random);
+  }, []);
   return (
     <BottomSheet
       onChange={handleSheetChange}
@@ -40,32 +40,31 @@ const BottomSheetCal = ({ handleSheetChange }: Props) => {
           theme={{
             color: "#808080",
             textDayFontWeight: "500",
-            dayTextColor: "#808080", 
+            dayTextColor: "#808080",
             arrowColor: "#365486",
             todayTextColor: "#365486",
-            fontfamily:""
+            fontfamily: "",
           }}
-          
-        markedDates={{
-          [selectedDate || ""]: {
-            selected: true,
-            selectedColor: "#365486",
-            selectedTextColor: "#fff", 
-            
-            customStyles: {
-              container: {
-                backgroundColor: "#365486", 
-                borderRadius: 30,
-                padding: 10, 
-              },
-              text: {
-                color: "#fff", // Text color for selected date
-                fontWeight: "bold",
+          markedDates={{
+            [selectedDate || ""]: {
+              selected: true,
+              selectedColor: "#365486",
+              selectedTextColor: "#fff",
+
+              customStyles: {
+                container: {
+                  backgroundColor: "#365486",
+                  borderRadius: 30,
+                  padding: 10,
+                },
+                text: {
+                  color: "#fff", // Text color for selected date
+                  fontWeight: "bold",
+                },
               },
             },
-          },
-        }}
-      />
+          }}
+        />
       </BottomSheetView>
     </BottomSheet>
   );

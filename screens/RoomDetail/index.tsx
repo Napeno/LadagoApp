@@ -8,7 +8,7 @@ import { useFonts } from "expo-font";
 import {
   Quicksand_400Regular,
   Quicksand_500Medium,
-  Quicksand_700Bold
+  Quicksand_700Bold,
 } from "@expo-google-fonts/quicksand";
 
 const RoomDetail = () => {
@@ -65,7 +65,15 @@ const RoomDetail = () => {
             4.8 -{" "}
           </Text>
           <TouchableOpacity onPress={() => nav.navigate("Review" as never)}>
-            <Text style={[{ textDecorationLine: "underline",fontFamily:"Quicksand_700Bold" }, styles.info]}>
+            <Text
+              style={[
+                {
+                  textDecorationLine: "underline",
+                  fontFamily: "Quicksand_700Bold",
+                },
+                styles.info,
+              ]}
+            >
               6 reviewers
             </Text>
           </TouchableOpacity>
@@ -118,11 +126,13 @@ const RoomDetail = () => {
         <View style={styles.divider} />
       </View>
       <View style={styles.priceBookContainer}>
-        <View style={{display:"flex", flexDirection:"row"}} >
+        <View style={{ display: "flex", flexDirection: "row" }}>
           <Text style={[styles.price, { fontFamily: "Quicksand_700Bold" }]}>
-          700k VND
+            700k VND
           </Text>
-          <Text style={[styles.price, { fontFamily: "Quicksand_500Medium" }]}>/night</Text>
+          <Text style={[styles.price, { fontFamily: "Quicksand_500Medium" }]}>
+            /night
+          </Text>
         </View>
 
         <TouchableOpacity
@@ -208,7 +218,7 @@ const styles = StyleSheet.create({
   },
   showMore: {
     textDecorationLine: "underline",
-    fontFamily:"Quicksand_500Medium"
+    fontFamily: "Quicksand_500Medium",
   },
   introductionTitle: {
     fontWeight: "600",
@@ -241,7 +251,7 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 16,
     fontWeight: "600",
-    fontFamily:"Quicksand_500Medium"
+    fontFamily: "Quicksand_500Medium",
   },
   price: {
     fontWeight: "600",
