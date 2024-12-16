@@ -52,23 +52,23 @@ const App = () => {
   }
 
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
-      {user ? (
-        <>
-          {/* <Stack.Screen name="STEPONE" component={StepOneScreen} /> */}
-          {/* <Stack.Screen name="ADMIN" component={AdminBottomTabs} /> */}
-          <Stack.Screen name="MAIN" component={BottomTabs} />
-          <Stack.Screen name="Room Detail" component={RoomDetail} />
-          <Stack.Screen
-            options={{ headerShown: true }}
-            name="INTRODUCTION"
-            component={IntroductionScreen}
-          />
-          <Stack.Screen
-            options={{ headerShown: true }}
-            name="Review"
-            component={ReviewScreen}
-          />
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        {user ? (
+          <>
+            {/* <Stack.Screen name="STEPONE" component={StepOneScreen} /> */}
+            <Stack.Screen name="ADMIN" component={AdminBottomTabs} />
+            <Stack.Screen name="MAIN" component={BottomTabs} />
+            <Stack.Screen name="Room Detail" component={RoomDetail} />
+            <Stack.Screen
+              options={{ headerShown: true }}
+              name="INTRODUCTION"
+              component={IntroductionScreen}
+            />
+            <Stack.Screen
+              options={{ headerShown: true }}
+              name="Review"
+              component={ReviewScreen}
+            />
 
           <Stack.Screen
             options={{ headerShown: true }}

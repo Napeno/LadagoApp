@@ -25,7 +25,7 @@ export default function AdminBottomTabs() {
         />
         <Tab.Screen
           name="Calendar"
-          component={CalendarMonthScreen}
+          component={CalendarDetailScreen}
           options={{ tabBarLabel: "Calendar" }}
         />
         <Tab.Screen
@@ -35,7 +35,7 @@ export default function AdminBottomTabs() {
         />
         <Tab.Screen
           name="Message"
-          component={CalendarDetailScreen}
+          component={MessageScreen}
           options={{ tabBarLabel: "Message" }}
         />
         <Tab.Screen
