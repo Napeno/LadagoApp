@@ -6,13 +6,13 @@ export default StyleSheet.create({
     height: "100%",
   },
   scrollView: {},
- 
+
   viewContainer: {
     width: "100%",
     marginTop: 40,
     height: "100%",
     paddingHorizontal: 20,
-    paddingBottom: 100
+    paddingBottom: 100,
   },
 
   locationWrap: {},
@@ -79,18 +79,18 @@ export default StyleSheet.create({
     alignSelf: "center",
   },
 
-  assistMain:{
+  assistMain: {
     // gap: '6%',
   },
 
-  assistWrap:{
+  assistWrap: {
     borderWidth: 1,
-    borderColor: '#BFBCBD',
-    backgroundColor: 'white',
+    borderColor: "#BFBCBD",
+    backgroundColor: "white",
     padding: 15,
-    width: '100%',
-    marginBottom: '6%',
-    gap: '4%',
+    width: "100%",
+    marginBottom: "6%",
+    gap: "4%",
     borderRadius: 10,
     flexDirection: "row",
     justifyContent: "flex-start",
@@ -106,24 +106,23 @@ export default StyleSheet.create({
     height: 80,
   },
 
-  assistHeader:{
+  assistHeader: {
     fontSize: 18,
     fontFamily: "Quicksand_600SemiBold",
     marginBottom: 4,
   },
-  
-  resourceHeader:{
+
+  resourceHeader: {
     fontSize: 18,
-    width: '80%',
+    width: "80%",
     fontFamily: "Quicksand_600SemiBold",
     marginBottom: 4,
   },
-  
-  assistContent:{
+
+  assistContent: {
     fontSize: 14,
-    width: '55%',
+    width: "55%",
     fontFamily: "Quicksand_500Medium",
-    lineHeight: 21
+    lineHeight: 21,
   },
-  
 });
