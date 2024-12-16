@@ -8,6 +8,7 @@ import { useFonts } from "expo-font";
 import {
   Quicksand_400Regular,
   Quicksand_500Medium,
+  Quicksand_700Bold
 } from "@expo-google-fonts/quicksand";
 
 const RoomDetail = () => {
@@ -44,7 +45,7 @@ const RoomDetail = () => {
       />
       <View style={styles.infoLocationNameContainer}>
         <Text
-          style={[styles.locationName, { fontFamily: "Quicksand_500Medium" }]}
+          style={[styles.locationName, { fontFamily: "Quicksand_700Bold" }]}
         >
           Sunny house with lake view
         </Text>
@@ -54,17 +55,17 @@ const RoomDetail = () => {
             size={20}
             color="#365486"
           />
-          <Text style={[styles.info, { fontFamily: "Quicksand_400Regular" }]}>
+          <Text style={[styles.info, { fontFamily: "Quicksand_700Bold" }]}>
             Bao Loc, Vietnam
           </Text>
         </View>
         <View style={styles.infoContainer}>
           <Fontisto name="star" size={20} color="#fec008" />
-          <Text style={[styles.info, { fontFamily: "Quicksand_400Regular" }]}>
+          <Text style={[styles.info, { fontFamily: "Quicksand_700Bold" }]}>
             4.8 -{" "}
           </Text>
-          <TouchableOpacity onPress={() => nav.navigate("Review")}>
-            <Text style={[{ textDecorationLine: "underline" }, styles.info]}>
+          <TouchableOpacity onPress={() => nav.navigate("Review" as never)}>
+            <Text style={[{ textDecorationLine: "underline",fontFamily:"Quicksand_700Bold" }, styles.info]}>
               6 reviewers
             </Text>
           </TouchableOpacity>
@@ -75,7 +76,7 @@ const RoomDetail = () => {
             size={20}
             color="#365486"
           />
-          <Text style={[styles.info, { fontFamily: "Quicksand_400Regular" }]}>
+          <Text style={[styles.info, { fontFamily: "Quicksand_700Bold" }]}>
             232 km
           </Text>
         </View>
@@ -84,7 +85,7 @@ const RoomDetail = () => {
         <Text
           style={[
             styles.introductionTitle,
-            { fontFamily: "Quicksand_500Medium" },
+            { fontFamily: "Quicksand_700Bold" },
           ]}
         >
           Introducing this place
@@ -109,7 +110,7 @@ const RoomDetail = () => {
         <Text
           style={[
             styles.meetTheOwnerTitle,
-            { fontFamily: "Quicksand_500Medium" },
+            { fontFamily: "Quicksand_700Bold" },
           ]}
         >
           Meet the owner
@@ -117,9 +118,13 @@ const RoomDetail = () => {
         <View style={styles.divider} />
       </View>
       <View style={styles.priceBookContainer}>
-        <Text style={[styles.price, { fontFamily: "Quicksand_500Medium" }]}>
-          700k VND/night
-        </Text>
+        <View style={{display:"flex", flexDirection:"row"}} >
+          <Text style={[styles.price, { fontFamily: "Quicksand_700Bold" }]}>
+          700k VND
+          </Text>
+          <Text style={[styles.price, { fontFamily: "Quicksand_500Medium" }]}>/night</Text>
+        </View>
+
         <TouchableOpacity
           onPress={() => nav.navigate("Booking" as never)}
           style={styles.bookBtn}
@@ -203,6 +208,7 @@ const styles = StyleSheet.create({
   },
   showMore: {
     textDecorationLine: "underline",
+    fontFamily:"Quicksand_500Medium"
   },
   introductionTitle: {
     fontWeight: "600",
@@ -235,6 +241,7 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 16,
     fontWeight: "600",
+    fontFamily:"Quicksand_500Medium"
   },
   price: {
     fontWeight: "600",

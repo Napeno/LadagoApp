@@ -1,20 +1,31 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useRef } from "react";
 import { useState } from "react";
 import { BottomSheetView } from "@gorhom/bottom-sheet";
 import BottomSheet from "@gorhom/bottom-sheet";
 import { StyleSheet } from "react-native";
 import { Calendar } from "react-native-calendars";
+import { useBooking } from "../useBooking";
 
 type Props = {
   handleSheetChange: (index: number) => void;
 };
 
 const BottomSheetCal = ({ handleSheetChange }: Props) => {
-  const [loading, setLoading] = useState(true);
-  const [data, setData] = useState<any>(null);
+  const {date,handleSelectedDate,random}=useBooking()
   const bottomSheetRef = useRef<BottomSheet>(null);
+  const [selectedDate, setSelectedDate] = useState<string | undefined>(date);
 
+  const handleDayPress = (day: { dateString: string }) => {
+    setSelectedDate(day.dateString);
+  };
+  useEffect(() => {
+    handleSelectedDate(selectedDate? selectedDate:"")
+  },[selectedDate])
+
+  useEffect(() => {
+    console.log("random in BottomSheetCal: ",random)
+  },[])
   return (
     <BottomSheet
       onChange={handleSheetChange}
@@ -24,21 +35,37 @@ const BottomSheetCal = ({ handleSheetChange }: Props) => {
     >
       <BottomSheetView style={styles.contentContainer}>
         <Calendar
-          style={{
-            width: 350,
-          }}
+          onDayPress={handleDayPress}
+          style={{ width: 400 }}
           theme={{
-            backgroundColor: "#ffffff",
-            calendarBackground: "#ffffff",
-            textSectionTitleColor: "#b6c1cd",
-            selectedDayBackgroundColor: "#00adf5",
-            selectedDayTextColor: "#ffffff",
-            todayTextColor: "#00adf5",
-            dayTextColor: "#2d4150",
-            textDayFontWeight: "bold",
-            arrowColor: "green",
+            color: "#808080",
+            textDayFontWeight: "500",
+            dayTextColor: "#808080", 
+            arrowColor: "#365486",
+            todayTextColor: "#365486",
+            fontfamily:""
           }}
-        />
+          
+        markedDates={{
+          [selectedDate || ""]: {
+            selected: true,
+            selectedColor: "#365486",
+            selectedTextColor: "#fff", 
+            
+            customStyles: {
+              container: {
+                backgroundColor: "#365486", 
+                borderRadius: 30,
+                padding: 10, 
+              },
+              text: {
+                color: "#fff", // Text color for selected date
+                fontWeight: "bold",
+              },
+            },
+          },
+        }}
+      />
       </BottomSheetView>
     </BottomSheet>
   );
