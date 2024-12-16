@@ -7,7 +7,7 @@ export default StyleSheet.create({
     height: "100%",
   },
   scrollView: {},
-  
+
   viewContainer: {
     width: "100%",
     height: "100%",
@@ -20,5 +20,4 @@ export default StyleSheet.create({
     fontSize: 28,
     fontFamily: "Quicksand_700Bold",
   },
-
 });

@@ -24,6 +24,7 @@ import {
   Quicksand_700Bold,
 } from "@expo-google-fonts/quicksand";
 import { data } from "@/constants/data";
+import FloatingMessage from "@/components/FloatingMessage";
 
 const Homepage = () => {
   const [activeCategory, setActiveCategory] = useState(null);
@@ -46,6 +47,7 @@ const Homepage = () => {
 
   return (
     <SafeAreaView style={styles.safeAreaView}>
+      <FloatingMessage />
       <ScrollView contentContainerStyle={styles.scrollView}>
         <View style={styles.viewContainer}>
           <View style={styles.layerWrap}>

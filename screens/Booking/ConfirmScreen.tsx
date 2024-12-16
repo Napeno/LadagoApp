@@ -4,11 +4,18 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 import { TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 const ConfirmScreen = () => {
-  const nav = useNavigation()
+  const nav = useNavigation();
   return (
     <View style={[styles.root]}>
       <AntDesign name="checkcircle" size={100} color="#365486" />
-      <View style={{display:"flex", flexDirection:"column", alignItems:"center",gap:10}} >
+      <View
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: 10,
+        }}
+      >
         <Text style={{ fontSize: 23, fontFamily: "Quicksand_500" }}>
           Booking successfully
         </Text>
@@ -30,7 +37,7 @@ const ConfirmScreen = () => {
       >
         <TouchableOpacity
           onPress={() => {
-            nav.navigate("MAIN" as never)
+            nav.navigate("MAIN" as never);
           }}
           style={{
             borderColor: "#365486",

@@ -11,7 +11,7 @@ export default StyleSheet.create({
     marginTop: 20,
     height: "100%",
     paddingHorizontal: 20,
-    paddingBottom: 200
+    paddingBottom: 200,
   },
 
   closeIcon: {
