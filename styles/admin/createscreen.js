@@ -1,89 +1,87 @@
 import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
-  textInput: {
-    padding: 10,
-    width: "100%",
-    height: 48,
-    borderWidth: 1,
-    borderRadius: 5,
+  safeAreaView: {
+    backgroundColor: 'white',
+    height: '100%',
+
+  },
+
+  viewContainer: {
+    width: '100%',
+    marginTop: 20,
+    height: '100%',
+    paddingHorizontal: 20,
+    paddingBottom: 100,
+
+  },
+  titleManagement: {
     marginBottom: 16,
+    fontSize: 34,
+    marginTop: 16,
+    fontFamily: 'Quicksand_700Bold'
   },
 
-  titleName: {
-    fontSize: 20,
-    fontFamily: "Quicksand_600SemiBold",
-    marginBottom: 10,
-    color: "#365486",
-  },
-
-  dropdown: {
-    height: 50,
-    borderWidth: 1,
-    borderRadius: 5,
-    borderBottomColor: "gray",
-    marginBottom: 16,
-  },
-
-  placeholderStyle: {
-    fontSize: 16,
-    marginLeft: 10,
-  },
-
-  selectedTextStyle: {
-    fontSize: 16,
-    marginLeft: 10,
-    fontFamily: "Quicksand_500Medium",
-  },
-
-  iconStyle: {
-    width: 20,
-    height: 20,
-  },
-
-  inputSearchStyle: {
-    height: 40,
-    fontSize: 16,
-    fontFamily: "Quicksand_500Medium",
-  },
-
-  horiItem: {
-    flexDirection: "row",
-    alignContent: "center",
-    justifyContent: "space-between",
-  },
-
-  textItems: {
-    fontFamily: "Quicksand_600SemiBold",
-    fontSize: 15,
-  },
-
-  checkedItem: {
-    padding: 16,
-    borderWidth: 1,
-    borderRadius: 8,
-    marginVertical: 10,
-    width: 160,
-    alignItems: "center",
-  },
-
-  coveredRoom: {
-    borderWidth: 1,
-    borderColor: "#BFBCBD",
-    paddingHorizontal: 15,
-    borderRadius: 15,
-    marginBottom: 40,
-    paddingVertical: 20,
-  },
-  roomTitle: {
-    fontFamily: "Quicksand_600SemiBold",
-    fontSize: 20,
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
     marginBottom: 20,
   },
-  deleteBtn: {
-    fontFamily: "Quicksand_600SemiBold",
+  button: {
+    backgroundColor: '#F8F8FB',
+    paddingVertical: 15,
+    borderRadius: 10,
+    marginVertical: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: '10%', 
+    width: 180,
+    height: 180,
+    elevation: 2,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 5,
+  },
+  buttonText: {
     fontSize: 16,
-    color: "#365486",
+    textAlign: 'center',
+    fontFamily: 'Quicksand_700Bold',
+  },
+  textDes: {
+    fontSize: 12,
+    fontFamily: 'Quicksand_600SemiBold  ',
+    textAlign: 'center',
+    color: '#A9A9A9'
+  },
+  wrap_button: {
+    flexDirection: 'row',
+    alignContent: 'center',
+    justifyContent: 'space-between',
+    width: '100%',
+  },
+
+  wrap_text:{
+    alignContent: 'center',
+    justifyContent: 'center',
+    width: '100%',
+    gap: '10%',
+  },
+  
+  button_icon:{
+    width: 69,
+    height: 69,
+  },
+
+  sectionBtn:{
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: '100%',
+    height: 40,
+    marginBottom: 14,
+  },
+  wrap_columns:{
+    marginBottom: '10%'
   },
   
 });
