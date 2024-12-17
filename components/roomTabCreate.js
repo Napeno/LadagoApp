@@ -2,7 +2,7 @@ import { View, Text, TextInput, Pressable, StyleSheet } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
 import React, { useState, useCallback } from "react";
 import { data } from "../constants/data";
-import styles from "../styles/admin/createscreen";
+import styles from "../styles/CreatingPlace/createRoom";
 
 import {
   useFonts,
