@@ -1,7 +1,8 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import LoginScreen from "../screens/LoginScreen";
-import ProfileScreen from "../screens/user/ProfileScreen";
+import ProfileScreenUser from "../screens/user/ProfileScreen";
+import ProfileScreenAdmin from "../screens/admin/ProfileScreen";
 import Introduction from "../screens/admin/CreatingPlace/Introduction";
 import StepOneScreen from "../screens/admin/CreatingPlace/StepOneScreen";
 import StepTwoScreen from "../screens/admin/CreatingPlace/StepTwoScreen";
@@ -59,6 +60,7 @@ const App = () => {
             <Stack.Screen name="MAIN" component={BottomTabs} />
             <Stack.Screen name="ADMIN" component={AdminBottomTabs} />
             <Stack.Screen name="Room Detail" component={RoomDetail} />
+
             <Stack.Screen
               options={{ headerShown: true }}
               name="INTRODUCTION"
@@ -95,7 +97,8 @@ const App = () => {
         <Stack.Screen name="LOGIN" component={LoginScreen} />
       )}
       <Stack.Screen name="CREATE" component={Introduction} />
-      <Stack.Screen name="PROFILE" component={ProfileScreen} />
+      <Stack.Screen name="PROFILEU" component={ProfileScreenUser} />
+      <Stack.Screen name="PROFILEA" component={ProfileScreenAdmin} />
       <Stack.Screen name="STEPONE" component={StepOneScreen} />
       <Stack.Screen name="STEPTWO" component={StepTwoScreen} />
       <Stack.Screen name="STEPTHREE" component={StepThreeScreen} />

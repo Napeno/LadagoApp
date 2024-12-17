@@ -24,7 +24,9 @@ import {
   Quicksand_700Bold,
 } from "@expo-google-fonts/quicksand";
 
-const StepSevenScreen = ({ navigation }) => {
+const StepSevenScreen = ({ route, navigation }) => {
+  const { formDataRetrieve } = route?.params;
+
   const [isEditing, setIsEditing] = useState(false);
   const [price, setPrice] = useState(20);
   const [subPrice, setSubPrice] = useState(20 + 20 * 0.02);
@@ -36,6 +38,22 @@ const StepSevenScreen = ({ navigation }) => {
     Quicksand_700Bold,
   });
 
+  const [formData, setFormData] = useState({
+    price: 20,
+  });
+
+  useEffect(() => {
+    if (formDataRetrieve) {
+      setFormData((prev) => ({
+        ...prev,
+        ...formDataRetrieve,
+        price: formDataRetrieve.price || 20,
+      }));
+      setPrice(formDataRetrieve.price || 20);
+    }
+  }, [formDataRetrieve]);
+
+
   const handleEditPress = () => {
     setIsEditing(true);
   };
@@ -44,13 +62,23 @@ const StepSevenScreen = ({ navigation }) => {
     const numericPrice = parseFloat(text);
     if (!isNaN(numericPrice)) {
       setPrice(text);
+      setFormData((prev) => ({
+        ...prev,
+        price: numericPrice,
+      }));
       const subPrice = numericPrice + numericPrice * 0.02;
       setSubPrice(subPrice.toFixed(2));
     } else {
+      setFormData((prev) => ({
+        ...prev,
+        price: 0,
+      }));
       setPrice(0);
       setSubPrice(0);
     }
   };
+
+  console.log("formData", formData);
 
   const handleFinishEditing = () => {
     setIsEditing(false);
@@ -127,6 +155,7 @@ const StepSevenScreen = ({ navigation }) => {
         navigation={navigation}
         backNav={backNav}
         nextNav={nextNav}
+        formData={formData}
       />
     </SafeAreaView>
   );

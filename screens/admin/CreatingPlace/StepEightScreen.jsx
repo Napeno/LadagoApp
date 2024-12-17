@@ -24,12 +24,27 @@ import {
   Quicksand_700Bold,
 } from "@expo-google-fonts/quicksand";
 
-const StepEightScreen = ({ navigation }) => {
+const StepEightScreen = ({ route, navigation }) => {
+
+  const { formDataRetrieve } = route?.params;
+
   const [selected, setSelected] = useState({
     promotion: false,
     weekly: false,
     monthly: false,
   });
+
+  const [formData, setFormData] = useState({
+  });
+
+  useEffect(() => {
+    if (formDataRetrieve) {
+      setFormData((prev) => ({
+        ...prev,
+        ...formDataRetrieve,
+      }));
+    }
+  }, [formDataRetrieve]);
 
   let [fontsLoaded] = useFonts({
     Quicksand_300Light,
@@ -45,6 +60,8 @@ const StepEightScreen = ({ navigation }) => {
       [key]: !prev[key],
     }));
   };
+
+  console.log("formData", formData);
 
   if (!fontsLoaded) {
     return null;
@@ -152,6 +169,7 @@ const StepEightScreen = ({ navigation }) => {
         navigation={navigation}
         backNav={backNav}
         nextNav={nextNav}
+        formData={formData}
       />
     </SafeAreaView>
   );
