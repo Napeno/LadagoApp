@@ -14,6 +14,7 @@ import CategoryLocation from "../../components/categoryLocation";
 import CategoryPopularLocation from "../../components/caregoryPopularLocation";
 import DiscoverLocation from "../../components/discoverLocation";
 import PlaceList from "../../components/placeList";
+import { useNavigation } from "@react-navigation/native";
 
 import {
   useFonts,
@@ -28,7 +29,7 @@ import FloatingMessage from "@/components/FloatingMessage";
 
 const Homepage = () => {
   const [activeCategory, setActiveCategory] = useState(null);
-
+  const nav = useNavigation();
   let [fontsLoaded] = useFonts({
     Quicksand_300Light,
     Quicksand_400Regular,
@@ -74,7 +75,9 @@ const Homepage = () => {
             />
           </View>
 
-          <View style={styles.searchLocation}>
+          <TouchableOpacity style={styles.searchLocation} 
+            onPress={() => {
+                nav.navigate("Search");}}>
             <Image
               source={require("../../constants/searchIcon.png")}
               style={styles.searchIcon}
@@ -105,7 +108,7 @@ const Homepage = () => {
               style={styles.ic_filter}
               resizeMode="contain"
             />
-          </View>
+          </TouchableOpacity>
 
           <View style={styles.categories}>
             <Categories

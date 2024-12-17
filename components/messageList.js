@@ -89,10 +89,12 @@ const MessageListItem = ({ id, name, imgUrl, lastMsg, time, chatPartnerId }) => 
           resizeMode="cover"
         />
 
+
         <View style={styles.cardInfo}>
           <Text style={styles.name} numberOfLines={1}>
             {name}
           </Text>
+
 
           <View style={styles.textLine}>
             <Text style={styles.lastMsg} numberOfLines={1}>
@@ -103,7 +105,9 @@ const MessageListItem = ({ id, name, imgUrl, lastMsg, time, chatPartnerId }) => 
         </View>
       </Pressable>
     </View>
+   
   );
 };
+
 
 export default MessageList;
