@@ -12,7 +12,7 @@ import { firestore } from "../firebase";
 import { collection, addDoc } from "firebase/firestore";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
-const BottomTabCreate = ({ navigation, backNav, nextNav, formData, isSubmit }) => {
+const BottomTabCreate = ({ navigation, backNav, nextNav, formData, isSubmit, isUploaded }) => {
   let [fontsLoaded] = useFonts({
     Quicksand_300Light,
     Quicksand_400Regular,
@@ -54,6 +54,10 @@ const BottomTabCreate = ({ navigation, backNav, nextNav, formData, isSubmit }) =
     navigation.navigate(backNav);
   };
 
+  const handleHome = () => {
+    navigation.navigate('ADMIN');
+  };
+
   const uploadFirebase = async() => {
     try {
       const uploadedImageUrls = await uploadImagesToFirebase(formData.imgHotel);
@@ -78,7 +82,7 @@ const BottomTabCreate = ({ navigation, backNav, nextNav, formData, isSubmit }) =
       const roomTypes = Array.isArray(updatedFormData.roomType)
       ? updatedFormData.roomType
       : [updatedFormData.roomType];
-      
+
       for (const room of roomTypes) {
         console.log("Uploading Room:", room); 
       
@@ -111,27 +115,40 @@ const BottomTabCreate = ({ navigation, backNav, nextNav, formData, isSubmit }) =
         <View style={[styles.Bar, {}]}></View>
       </View>
       <View style={styles.navigateButtons}>
-        <Pressable style={styles.backBar} onPress={handleBack}>
-          <Text style={[styles.textNav, { color: "#365486" }]}>Back</Text>
-        </Pressable>
-          {isSubmit? (
-            <Pressable style={styles.nextBar} 
-            onPress={async() => {
-              await uploadFirebase();
-              handleNext();
-            }
-            }
-              >
-                <Text style={[styles.textNav, { color: "#FFFFFF" }]}> Submit</Text>
-            </Pressable>
-          )  
-          : 
-          (
-            <Pressable style={styles.nextBar} onPress={handleNext}>
-              <Text style={[styles.textNav, { color: "#FFFFFF" }]}> Next</Text>
-            </Pressable>
+        {
+          isUploaded? (
+            <Pressable style={styles.finalBar} onPress={handleHome}>
+              <Text style={[styles.textNav, { color: "#FFFFFF" }]}>Go back home</Text>
+          </Pressable>
           )
-          }
+          :
+          (
+            <>
+              <Pressable style={styles.backBar} onPress={handleBack}>
+                <Text style={[styles.textNav, { color: "#365486" }]}>Back</Text>
+              </Pressable>
+                {isSubmit? (
+                  <Pressable style={styles.nextBar} 
+                  onPress={async() => {
+                    await uploadFirebase();
+                    handleNext();
+                  }
+                  }
+                    >
+                      <Text style={[styles.textNav, { color: "#FFFFFF" }]}> Submit</Text>
+                  </Pressable>
+                )  
+                : 
+                (
+                  <Pressable style={styles.nextBar} onPress={handleNext}>
+                    <Text style={[styles.textNav, { color: "#FFFFFF" }]}> Next</Text>
+                  </Pressable>
+                )
+                }
+            </>
+          )
+        }
+        
 
       </View>
     </View>
@@ -183,6 +200,15 @@ const styles = StyleSheet.create({
 
   nextBar: {
     width: 127,
+    height: 50,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 10,
+    backgroundColor: "#365486",
+  },
+
+  finalBar: {
+    width: '100%',
     height: 50,
     justifyContent: "center",
     alignItems: "center",

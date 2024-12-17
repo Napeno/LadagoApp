@@ -76,6 +76,7 @@ const StepTenScreen = ({ navigation }) => {
         navigation={navigation}
         backNav={backNav}
         nextNav={nextNav}
+        isUploaded={true}
       />
     </SafeAreaView>
   );
