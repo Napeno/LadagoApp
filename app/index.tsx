@@ -28,6 +28,10 @@ import RoomDetail from "@/screens/RoomDetail";
 import IntroductionScreen from "@/screens/RoomDetail/IntroductionScreen";
 import ReviewScreen from "@/screens/RoomDetail/ReviewScreen";
 import WriteReviewScreen from "@/screens/RoomDetail/WriteReviewScreen";
+// import ChatScreen from "@/screens/user/ChatScreen";
+import MessageScreen from "@/screens/user/MessageScreen";
+import AmenitiesScreen from "@/screens/RoomDetail/placeOffer";
+import SearchingScreen from "@/screens/user/searchScreen";
 import Booking from "@/screens/Booking";
 import Confirm from "@/screens/Booking/ConfirmScreen";
 import ChatBot from "@/screens/ChatBot";
@@ -60,6 +64,10 @@ const App = () => {
             <Stack.Screen name="MAIN" component={BottomTabs} />
             <Stack.Screen name="ADMIN" component={AdminBottomTabs} />
             <Stack.Screen name="Room Detail" component={RoomDetail} />
+            {/* <Stack.Screen name="CHAT" component={ChatScreen} /> */}
+            <Stack.Screen name="MESSAGE" component={MessageScreen} />
+            <Stack.Screen name="Amenities" component={AmenitiesScreen} />
+            <Stack.Screen name="Search" component={SearchingScreen} />
 
             <Stack.Screen
               options={{ headerShown: true }}
