@@ -58,10 +58,6 @@ const StepThreeScreen = ({ route, navigation }) => {
   const nextNav = "STEPFOUR";
 
   const [formData, setFormData] = useState([
-    {
-      address: "",
-      geoCode: "",
-    },
   ]);
 
   useEffect(() => {
