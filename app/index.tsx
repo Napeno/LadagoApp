@@ -14,10 +14,9 @@ import StepSevenScreen from "../screens/admin/CreatingPlace/StepSevenScreen";
 import StepEightScreen from "../screens/admin/CreatingPlace/StepEightScreen";
 import StepNineScreen from "../screens/admin/CreatingPlace/StepNineScreen";
 import StepTenScreen from "../screens/admin/CreatingPlace/StepTenScreen";
-
 import CalendarMonthScreen from "../screens/admin/CalendarScreen/CalendarMonthScreen";
 import CalendarDetailScreen from "../screens/admin/CalendarScreen/CalendarDetailScreen";
-
+import ChatDetailScreen from '../screens/user/ChatDetailScreen'
 import BottomTabs from "../tabs/BottomTabs";
 import AdminBottomTabs from "../tabs/AdminBottomTabs";
 
@@ -31,6 +30,7 @@ import WriteReviewScreen from "@/screens/RoomDetail/WriteReviewScreen";
 import Booking from "@/screens/Booking";
 import Confirm from "@/screens/Booking/ConfirmScreen";
 import ChatBot from "@/screens/ChatBot";
+import MessageScreen from '../screens/user/MessageScreen'
 
 const Stack = createNativeStackNavigator();
 
@@ -60,6 +60,8 @@ const App = () => {
             <Stack.Screen name="MAIN" component={BottomTabs} />
             <Stack.Screen name="ADMIN" component={AdminBottomTabs} />
             <Stack.Screen name="Room Detail" component={RoomDetail} />
+            <Stack.Screen name="CHATDETAIL" component={ChatDetailScreen} />
+            <Stack.Screen name="MESSAGE" component={MessageScreen} />
 
             <Stack.Screen
               options={{ headerShown: true }}
