@@ -1,100 +1,88 @@
 import { StyleSheet } from "react-native";
-import { red } from "react-native-redash";
 
 export default StyleSheet.create({
-  safeAreaView: {
-    backgroundColor: "white",
-    height: "100%",
-  },
-  scrollView: {},
-  viewContainer: {
+  textInput: {
+    padding: 10,
     width: "100%",
-    marginTop: 20,
-    height: "100%",
-    paddingHorizontal: 20,
-  },
-
-  closeIcon: {
-    width: 28,
-    height: 28,
+    height: 48,
+    borderWidth: 1,
+    borderRadius: 5,
     marginBottom: 16,
   },
 
-  house: {
-    width: 380,
-    height: 380,
-  },
-
-  titleStep: {
-    fontSize: 16,
-    fontFamily: "Quicksand_500Medium",
-    marginBottom: 4,
-  },
-
-  titleInfo: {
-    fontSize: 28,
-    fontFamily: "Quicksand_700Bold",
-    marginBottom: 18,
-  },
-
-  description: {
-    fontSize: 14,
-    fontFamily: "Quicksand_400Regular",
-    lineHeight: 24,
-  },
-
-  bottomBar: {
-    height: 140,
-    position: "absolute",
-    left: 0,
-    right: 0,
-    bottom: 0,
-  },
-
-  listBar: {
-    marginTop: 10,
-    flexDirection: "row",
-    alignContent: "center",
-    justifyContent: "space-between",
-    marginHorizontal: 20,
-  },
-
-  Bar: {
-    width: 55,
-    height: 5,
-    backgroundColor: "#A8A8A8",
-    borderRadius: 100,
-  },
-
-  navigateButtons: {
-    marginTop: 34,
-    marginHorizontal: 20,
-    flexDirection: "row",
-    alignContent: "center",
-    justifyContent: "space-between",
-  },
-
-  backBar: {
-    width: 127,
-    height: 50,
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 10,
-    borderWidth: 2,
-    borderColor: "#365486",
-  },
-
-  nextBar: {
-    width: 127,
-    height: 50,
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 10,
-    backgroundColor: "#365486",
-  },
-
-  textNav: {
+  titleName: {
     fontSize: 20,
     fontFamily: "Quicksand_600SemiBold",
+    marginBottom: 10,
+    color: "#365486",
+  },
+
+  dropdown: {
+    height: 50,
+    borderWidth: 1,
+    borderRadius: 5,
+    borderBottomColor: "gray",
+    marginBottom: 16,
+  },
+
+  placeholderStyle: {
+    fontSize: 16,
+    marginLeft: 10,
+  },
+
+  selectedTextStyle: {
+    fontSize: 16,
+    marginLeft: 10,
+    fontFamily: "Quicksand_500Medium",
+  },
+
+  iconStyle: {
+    width: 20,
+    height: 20,
+  },
+
+  inputSearchStyle: {
+    height: 40,
+    fontSize: 16,
+    fontFamily: "Quicksand_500Medium",
+  },
+
+  horiItem: {
+    flexDirection: "row",
+    alignContent: "center",
+    justifyContent: "space-between",
+  },
+
+  textItems: {
+    fontFamily: "Quicksand_600SemiBold",
+    fontSize: 15,
+  },
+
+  checkedItem: {
+    padding: 16,
+    borderWidth: 1,
+    borderRadius: 8,
+    marginVertical: 10,
+    width: 160,
+    alignItems: "center",
+  },
+
+  coveredRoom: {
+    borderWidth: 1,
+    borderColor: "#BFBCBD",
+    paddingHorizontal: 15,
+    borderRadius: 15,
+    marginBottom: 40,
+    paddingVertical: 20,
+  },
+  roomTitle: {
+    fontFamily: "Quicksand_600SemiBold",
+    fontSize: 20,
+    marginBottom: 20,
+  },
+  deleteBtn: {
+    fontFamily: "Quicksand_600SemiBold",
+    fontSize: 16,
+    color: "#365486",
   },
 });

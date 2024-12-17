@@ -23,16 +23,15 @@ import {
   Quicksand_700Bold,
 } from "@expo-google-fonts/quicksand";
 import { Filter } from "react-native-svg";
-import { DateTimePickerAndroid} from '@react-native-community/datetimepicker';
-import RNDateTimePicker from '@react-native-community/datetimepicker';
+import { DateTimePickerAndroid } from "@react-native-community/datetimepicker";
+import RNDateTimePicker from "@react-native-community/datetimepicker";
 
 const StepOneScreen = ({ navigation, formDataRetrieve }) => {
-
   const [formData, setFormData] = useState({
-    checkIn: '',
-    checkOut: '',
-    name: '',
-    description:'',
+    checkIn: "",
+    checkOut: "",
+    name: "",
+    description: "",
   });
   const backNav = "CREATE";
   const nextNav = "STEPTWO";
@@ -46,15 +45,15 @@ const StepOneScreen = ({ navigation, formDataRetrieve }) => {
     Quicksand_700Bold,
   });
 
-  const handleInputText = (text, type) =>{
+  const handleInputText = (text, type) => {
     setFormData((prevFormData) => ({
       ...prevFormData,
-      [type]: text
+      [type]: text,
     }));
-  }
+  };
 
   const handleSetTime = (time, type) => {
-    const selectedTime = time?.nativeEvent?.timestamp; 
+    const selectedTime = time?.nativeEvent?.timestamp;
     // const formattedTime = new Date(selectedTime).toLocaleTimeString();
     if (selectedTime) {
       setFormData((prevFormData) => ({
@@ -63,9 +62,8 @@ const StepOneScreen = ({ navigation, formDataRetrieve }) => {
       }));
     }
   };
-  
 
-  console.log('formData', formData);
+  console.log("formData", formData);
 
   if (!fontsLoaded) {
     return null;
@@ -91,7 +89,7 @@ const StepOneScreen = ({ navigation, formDataRetrieve }) => {
               placeholder="Type here"
               returnKeyType="done"
               placeholderTextColor="gray"
-              onChangeText={text => handleInputText(text, 'name')}
+              onChangeText={(text) => handleInputText(text, "name")}
             />
             <Text style={styles.titleName}>Description</Text>
             <TextInput
@@ -100,22 +98,22 @@ const StepOneScreen = ({ navigation, formDataRetrieve }) => {
               maxLength={1000}
               placeholder="Type here"
               placeholderTextColor="gray"
-              onChangeText={text => handleInputText(text, 'description')}
+              onChangeText={(text) => handleInputText(text, "description")}
             />
             <Text style={styles.titleName}>CheckIn - Checkout Time</Text>
             <View style={styles.checkTime}>
-            <Text style={{ fontSize: 18 }}>{"In: "}</Text>
+              <Text style={{ fontSize: 18 }}>{"In: "}</Text>
               <RNDateTimePicker
                 value={formData.checkIn || new Date()}
                 mode="time"
-                onChange={(event) => handleSetTime(event, 'checkIn')}
+                onChange={(event) => handleSetTime(event, "checkIn")}
               />
               <View style={styles.lineSpace}></View>
               <Text style={{ fontSize: 18 }}>{"Out: "}</Text>
               <RNDateTimePicker
                 value={formData.checkIn || new Date()}
                 mode="time"
-                onChange={(event) => handleSetTime(event, 'checkOut')}
+                onChange={(event) => handleSetTime(event, "checkOut")}
               />
             </View>
             <View style={{ flexDirection: "row", alignItems: "center" }}>
@@ -126,6 +124,7 @@ const StepOneScreen = ({ navigation, formDataRetrieve }) => {
                   keyboardType="numeric"
                   placeholder="00"
                   maxLength={2}
+                  onChangeText={(text) => handleInputText(text, "rating")}
                 />
               </View>
             </View>

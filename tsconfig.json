@@ -13,6 +13,8 @@
     ".expo/types/**/*.ts",
     "expo-env.d.ts",
     "pages/screens/LoginScreen.jsx",
-    "screens/QRPaymentScreen.jsx"
-, "screens/admin/CalendarScreen/CalendarMonthScreen.jsx", "screens/admin/CalendarScreen/CalendarDetailScreen.jsx"  ]
+    "screens/QRPaymentScreen.jsx",
+    "screens/admin/CalendarScreen/CalendarMonthScreen.jsx",
+    "screens/admin/CalendarScreen/CalendarDetailScreen.jsx"
+  ]
 }

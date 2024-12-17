@@ -2,7 +2,7 @@ import { View, Text, TextInput, Pressable, StyleSheet } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
 import React, { useState, useCallback } from "react";
 import { data } from "../constants/data";
-import styles from '../styles/admin/createscreen'
+import styles from "../styles/CreatingPlace/createRoom";
 
 import {
   useFonts,
@@ -39,21 +39,24 @@ const RoomTabCreate = ({ roomTabs, setFormData, formData, onDeleteRoom }) => {
   const handleAmenitiesToggle = (amenity) => {
     setFormData((prev) => {
       const updatedRooms = [...prev.roomType];
-      updatedRooms[roomIndex].amenities[amenity] = !updatedRooms[roomIndex].amenities[amenity];
+      updatedRooms[roomIndex].amenities[amenity] =
+        !updatedRooms[roomIndex].amenities[amenity];
       return { ...prev, roomType: updatedRooms };
     });
 
     setSelectedTabs((prev) =>
       prev.includes(amenity)
         ? prev.filter((tab) => tab !== amenity)
-        : [...prev, amenity]
+        : [...prev, amenity],
     );
   };
 
   const handleDelete = () => onDeleteRoom(roomTabs);
 
   const getTabStyles = (tabIndex) => ({
-    backgroundColor: selectedTabs.includes(tabIndex) ? "#365486" : "transparent",
+    backgroundColor: selectedTabs.includes(tabIndex)
+      ? "#365486"
+      : "transparent",
     color: selectedTabs.includes(tabIndex) ? "white" : "black",
   });
 
@@ -97,17 +100,24 @@ const RoomTabCreate = ({ roomTabs, setFormData, formData, onDeleteRoom }) => {
         placeholder="0"
         maxLength={2}
         value={formData.roomType[roomIndex]?.occupacity?.toString() || ""}
-        onChangeText={(text) => handleUpdateRoom("occupacity", parseInt(text) || 0)}
+        onChangeText={(text) =>
+          handleUpdateRoom("occupacity", parseInt(text) || 0)
+        }
       />
 
       <Text style={styles.titleName}>Amenities</Text>
       {["bathTub", "cleaningService", "pet", "wifi"].map((amenity) => (
         <Pressable
           key={amenity}
-          style={[styles.checkedItem, { backgroundColor: getTabStyles(amenity).backgroundColor }]}
+          style={[
+            styles.checkedItem,
+            { backgroundColor: getTabStyles(amenity).backgroundColor },
+          ]}
           onPress={() => handleAmenitiesToggle(amenity)}
         >
-          <Text style={[styles.textItems, { color: getTabStyles(amenity).color }]}>
+          <Text
+            style={[styles.textItems, { color: getTabStyles(amenity).color }]}
+          >
             {amenity.charAt(0).toUpperCase() + amenity.slice(1)}
           </Text>
         </Pressable>
@@ -117,4 +127,3 @@ const RoomTabCreate = ({ roomTabs, setFormData, formData, onDeleteRoom }) => {
 };
 
 export default RoomTabCreate;
-

@@ -1,26 +1,27 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import LoginScreen from "../screens/LoginScreen";
-import ProfileScreen from "../screens/user/ProfileScreen";
+import ProfileScreenUser from "../screens/user/ProfileScreen";
+import ProfileScreenAdmin from "../screens/admin/ProfileScreen";
 import Introduction from "../screens/admin/CreatingPlace/Introduction";
-import StepOneScreen from '../screens/admin/CreatingPlace/StepOneScreen'
-import StepTwoScreen from '../screens/admin/CreatingPlace/StepTwoScreen'
-import StepThreeScreen from '../screens/admin/CreatingPlace/StepThreeScreen'
-import StepFourScreen from '../screens/admin/CreatingPlace/StepFourScreen'
-import StepFiveScreen from '../screens/admin/CreatingPlace/StepFiveScreen'
-import StepSixScreen from '../screens/admin/CreatingPlace/StepSixScreen'
-import StepSevenScreen from '../screens/admin/CreatingPlace/StepSevenScreen'
-import StepEightScreen from '../screens/admin/CreatingPlace/StepEightScreen'
-import StepNineScreen from '../screens/admin/CreatingPlace/StepNineScreen'
-import StepTenScreen from '../screens/admin/CreatingPlace/StepTenScreen'
+import StepOneScreen from "../screens/admin/CreatingPlace/StepOneScreen";
+import StepTwoScreen from "../screens/admin/CreatingPlace/StepTwoScreen";
+import StepThreeScreen from "../screens/admin/CreatingPlace/StepThreeScreen";
+import StepFourScreen from "../screens/admin/CreatingPlace/StepFourScreen";
+import StepFiveScreen from "../screens/admin/CreatingPlace/StepFiveScreen";
+import StepSixScreen from "../screens/admin/CreatingPlace/StepSixScreen";
+import StepSevenScreen from "../screens/admin/CreatingPlace/StepSevenScreen";
+import StepEightScreen from "../screens/admin/CreatingPlace/StepEightScreen";
+import StepNineScreen from "../screens/admin/CreatingPlace/StepNineScreen";
+import StepTenScreen from "../screens/admin/CreatingPlace/StepTenScreen";
 
-import CalendarMonthScreen from '../screens/admin/CalendarScreen/CalendarMonthScreen'
-import CalendarDetailScreen from '../screens/admin/CalendarScreen/CalendarDetailScreen'
+import CalendarMonthScreen from "../screens/admin/CalendarScreen/CalendarMonthScreen";
+import CalendarDetailScreen from "../screens/admin/CalendarScreen/CalendarDetailScreen";
 
 import BottomTabs from "../tabs/BottomTabs";
 import AdminBottomTabs from "../tabs/AdminBottomTabs";
 
-import { auth } from "../firebase"; 
+import { auth } from "../firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
 import RoomDetail from "@/screens/RoomDetail";
@@ -31,6 +32,9 @@ import WriteReviewScreen from "@/screens/RoomDetail/WriteReviewScreen";
 import MessageScreen from "@/screens/user/MessageScreen";
 import AmenitiesScreen from "@/screens/RoomDetail/placeOffer";
 import SearchingScreen from "@/screens/user/searchScreen";
+import Booking from "@/screens/Booking";
+import Confirm from "@/screens/Booking/ConfirmScreen";
+import ChatBot from "@/screens/ChatBot";
 
 const Stack = createNativeStackNavigator();
 
@@ -64,6 +68,7 @@ const App = () => {
             <Stack.Screen name="MESSAGE" component={MessageScreen} />
             <Stack.Screen name="Amenities" component={AmenitiesScreen} />
             <Stack.Screen name="Search" component={SearchingScreen} />
+
             <Stack.Screen
               options={{ headerShown: true }}
               name="INTRODUCTION"
@@ -75,35 +80,46 @@ const App = () => {
               component={ReviewScreen}
             />
 
-            <Stack.Screen
-              options={{ headerShown: true }}
-              name="Write Review"
-              component={WriteReviewScreen}
-            />
-
-          </>
-        ) : (
-          <Stack.Screen name="LOGIN" component={LoginScreen} />
-        )}
-          <Stack.Screen name="CREATE" component={Introduction} />
-          <Stack.Screen name="PROFILE" component={ProfileScreen} />
-          <Stack.Screen name="STEPONE" component={StepOneScreen} />
-          <Stack.Screen name="STEPTWO" component={StepTwoScreen} />
-          <Stack.Screen name="STEPTHREE" component={StepThreeScreen} />
-          <Stack.Screen name="STEPFOUR" component={StepFourScreen} />
-          <Stack.Screen name="STEPFIVE" component={StepFiveScreen} />
-          <Stack.Screen name="STEPSIX" component={StepSixScreen} />
-          <Stack.Screen name="STEPSEVEN" component={StepSevenScreen} />
-          <Stack.Screen name="STEPEIGHT" component={StepEightScreen} />
-          <Stack.Screen name="STEPNINE" component={StepNineScreen} />
-          <Stack.Screen name="STEPTEN" component={StepTenScreen} />
-          <Stack.Screen name="CALENDARMONTH" component={CalendarMonthScreen} />
-          <Stack.Screen name="CALENDARDETAIL" component={CalendarDetailScreen} />
-
-      </Stack.Navigator>
-
-
-
+          <Stack.Screen
+            options={{ headerShown: true }}
+            name="Write Review"
+            component={WriteReviewScreen}
+          />
+          <Stack.Screen
+            options={{ headerShown: true }}
+            name="Booking"
+            component={Booking}
+          />
+          <Stack.Screen
+            options={{ headerShown: true }}
+            name="Confirm"
+            component={Confirm}
+          />
+          <Stack.Screen
+            options={{ headerShown: true }}
+            name="Chat Bot"
+            component={ChatBot}
+          />
+        </>
+      ) : (
+        <Stack.Screen name="LOGIN" component={LoginScreen} />
+      )}
+      <Stack.Screen name="CREATE" component={Introduction} />
+      <Stack.Screen name="PROFILEU" component={ProfileScreenUser} />
+      <Stack.Screen name="PROFILEA" component={ProfileScreenAdmin} />
+      <Stack.Screen name="STEPONE" component={StepOneScreen} />
+      <Stack.Screen name="STEPTWO" component={StepTwoScreen} />
+      <Stack.Screen name="STEPTHREE" component={StepThreeScreen} />
+      <Stack.Screen name="STEPFOUR" component={StepFourScreen} />
+      <Stack.Screen name="STEPFIVE" component={StepFiveScreen} />
+      <Stack.Screen name="STEPSIX" component={StepSixScreen} />
+      <Stack.Screen name="STEPSEVEN" component={StepSevenScreen} />
+      <Stack.Screen name="STEPEIGHT" component={StepEightScreen} />
+      <Stack.Screen name="STEPNINE" component={StepNineScreen} />
+      <Stack.Screen name="STEPTEN" component={StepTenScreen} />
+      <Stack.Screen name="CALENDARMONTH" component={CalendarMonthScreen} />
+      <Stack.Screen name="CALENDARDETAIL" component={CalendarDetailScreen} />
+    </Stack.Navigator>
   );
 };
 

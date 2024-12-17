@@ -3,7 +3,7 @@ import Homepage from "../screens/admin/Homepage";
 import CalendarScreen from "../screens/admin/CalendarScreen/CalendarScreen";
 import BookingScreen from "../screens/user/BookingScreen";
 import MessageScreen from "../screens/user/MessageScreen";
-import ProfileScreen from "../screens/user/ProfileScreen";
+import ProfileScreen from "../screens/admin/ProfileScreen";
 import CustomBottomTab from "@/components/BottomTabs/CustomBottomTab";
 import CalendarDetailScreen from "../screens/admin/CalendarScreen/CalendarDetailScreen";
 import CalendarMonthScreen from "../screens/admin/CalendarScreen/CalendarMonthScreen";
@@ -25,7 +25,7 @@ export default function AdminBottomTabs() {
         />
         <Tab.Screen
           name="Calendar"
-          component={CalendarMonthScreen}
+          component={CalendarDetailScreen}
           options={{ tabBarLabel: "Calendar" }}
         />
         <Tab.Screen
@@ -35,7 +35,7 @@ export default function AdminBottomTabs() {
         />
         <Tab.Screen
           name="Message"
-          component={CalendarDetailScreen}
+          component={MessageScreen}
           options={{ tabBarLabel: "Message" }}
         />
         <Tab.Screen
