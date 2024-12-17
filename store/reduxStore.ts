@@ -32,7 +32,7 @@ const bookingSlice = createSlice({
     decreaseChildren(state) {
       if (state.children > 0) state.children -= 1;
     },
-    setDate(state, action) {
+    setDate(state, action: PayloadAction<Date>) {
       state.date = action.payload;
     },
     increaseRoom(state) {

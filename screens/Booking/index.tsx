@@ -5,9 +5,7 @@ import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import Fontisto from "@expo/vector-icons/Fontisto";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { useRef } from "react";
 import BottomSheetCal from "./components/BottomSheetCal";
-import BottomSheet from "@gorhom/bottom-sheet";
 import { useState } from "react";
 import {
   useFonts,
@@ -26,8 +24,8 @@ import { useNavigation } from "@react-navigation/native";
 import { useBooking } from "./useBooking";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/reduxStore";
+import { UseSelector } from "react-redux";
 const Booking = () => {
-  const { date } = useBooking();
   const bookingState = useSelector((state: RootState) => state.booking);
   const [isSheetCalVisible, setIsSheetCalVisible] = useState(false);
   const [isSheetPeopleVisible, setIsSheetPeopleVisible] = useState(false);
@@ -48,7 +46,6 @@ const Booking = () => {
     }
   };
   const nav = useNavigation();
-
   return (
     <GestureHandlerRootView>
       <ScrollView
@@ -107,7 +104,9 @@ const Booking = () => {
           <View style={styles.tripDetails}>
             <View style={styles.tripDetail}>
               <Text style={styles.tripDetailTitle}>Date</Text>
-              <Text style={styles.tripDetailText}>{date}</Text>
+              <Text style={styles.tripDetailText}>
+                {bookingState.date.toDateString()}
+              </Text>
             </View>
             <TouchableOpacity
               onPress={() => {

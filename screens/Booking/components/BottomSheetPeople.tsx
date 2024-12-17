@@ -13,6 +13,7 @@ import {
   decreaseChildren,
   increaseRoom,
   decreaseRoom,
+  setDate,
 } from "@/store/reduxStore";
 import {
   useFonts,
@@ -31,7 +32,6 @@ import { RootState } from "@/store/reduxStore";
 const BottomSheetPeople = ({ handleSheetChange }: Props) => {
   const bookingState = useSelector((state: RootState) => state.booking);
   const dispatch = useDispatch();
-  const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => {
     dispatch(setBringPet());
   };
@@ -59,6 +59,7 @@ const BottomSheetPeople = ({ handleSheetChange }: Props) => {
   const handleDecreaseChildren = () => {
     dispatch(decreaseChildren());
   };
+
   return (
     <BottomSheet
       onChange={handleSheetChange}
