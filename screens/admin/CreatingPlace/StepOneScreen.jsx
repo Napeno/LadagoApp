@@ -124,6 +124,7 @@ const StepOneScreen = ({ navigation, formDataRetrieve }) => {
                   keyboardType="numeric"
                   placeholder="00"
                   maxLength={2}
+                  onChangeText={(text) => handleInputText(text, "rating")}
                 />
               </View>
             </View>

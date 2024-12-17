@@ -25,6 +25,7 @@ import {
   Quicksand_600SemiBold,
   Quicksand_700Bold,
 } from "@expo-google-fonts/quicksand";
+import { addons } from "react-native";
 
 const StepNineScreen = ({ route, navigation }) => {
 
@@ -136,6 +137,7 @@ const StepNineScreen = ({ route, navigation }) => {
         backNav={backNav}
         nextNav={nextNav}
         formData={formData}
+        isSubmit={true}
       />
     </SafeAreaView>
   );
