@@ -21,6 +21,7 @@ import suportCustomer from "../../constants/customerSupportIcon.png";
 import editIcon from "../../constants/editIcon.png";
 import switchIcon from "../../constants/switchIcon.png";
 import { logout } from "../../components/logout";
+import {getForecastModel} from "../../api/forecast"
 
 import {
   useFonts,
@@ -40,6 +41,16 @@ const ProfileScreen = ({ navigation }) => {
   const handleCreate = () => {
     navigation.navigate("CREATE");
   };
+
+  const handleGenerateForcast = async() => {
+    const steps = 364;
+    try {
+      const response = await getForecastModel(steps);
+      console.log('forecast data: ', response);
+    } catch (error) {
+      console.error("Error:", error.response ? error.response.data : error.message);
+    }
+  }
 
   let [fontsLoaded] = useFonts({
     Quicksand_300Light,
@@ -501,6 +512,7 @@ const ProfileScreen = ({ navigation }) => {
               justifyContent: "center",
               alignSelf: "center",
               alignItems: "center",
+              marginBottom: 20
             }}
           >
             <Image
@@ -520,6 +532,41 @@ const ProfileScreen = ({ navigation }) => {
               }}
             >
               Switch to owner mode
+            </Text>
+          </Pressable>
+
+          <Pressable
+            style={{
+              backgroundColor: "#0F1035",
+              width: 280,
+              height: 59,
+              borderRadius: 28,
+              flexDirection: "row",
+              justifyContent: "center",
+              alignSelf: "center",
+              alignItems: "center",
+            }}
+            onPress={
+             () => handleGenerateForcast()
+            }
+          >
+            <Image
+              style={{
+                width: 30,
+                height: 30,
+                marginEnd: 8,
+              }}
+              source={switchIcon}
+              resizeMode="contain"
+            />
+            <Text
+              style={{
+                fontSize: 18,
+                fontFamily: "Quicksand_600SemiBold",
+                color: "white",
+              }}
+            >
+              Generate forcast date
             </Text>
           </Pressable>
         </View>
