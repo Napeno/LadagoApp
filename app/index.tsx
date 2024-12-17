@@ -14,10 +14,9 @@ import StepSevenScreen from "../screens/admin/CreatingPlace/StepSevenScreen";
 import StepEightScreen from "../screens/admin/CreatingPlace/StepEightScreen";
 import StepNineScreen from "../screens/admin/CreatingPlace/StepNineScreen";
 import StepTenScreen from "../screens/admin/CreatingPlace/StepTenScreen";
-
 import CalendarMonthScreen from "../screens/admin/CalendarScreen/CalendarMonthScreen";
 import CalendarDetailScreen from "../screens/admin/CalendarScreen/CalendarDetailScreen";
-
+import ChatDetailScreen from '../screens/user/ChatDetailScreen'
 import BottomTabs from "../tabs/BottomTabs";
 import AdminBottomTabs from "../tabs/AdminBottomTabs";
 
@@ -64,8 +63,9 @@ const App = () => {
             <Stack.Screen name="MAIN" component={BottomTabs} />
             <Stack.Screen name="ADMIN" component={AdminBottomTabs} />
             <Stack.Screen name="Room Detail" component={RoomDetail} />
-            {/* <Stack.Screen name="CHAT" component={ChatScreen} /> */}
+            <Stack.Screen name="CHATDETAIL" component={ChatDetailScreen} />
             <Stack.Screen name="MESSAGE" component={MessageScreen} />
+            {/* <Stack.Screen name="CHAT" component={ChatScreen} /> */}
             <Stack.Screen name="Amenities" component={AmenitiesScreen} />
             <Stack.Screen name="Search" component={SearchingScreen} />
 
