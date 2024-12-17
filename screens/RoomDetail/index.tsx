@@ -1,4 +1,4 @@
-import { StyleSheet, Text, Touchable, View } from "react-native";
+import { StyleSheet, Text, View, ScrollView } from "react-native";
 import React from "react";
 import { Image } from "react-native";
 import AntDesign from "@expo/vector-icons/AntDesign";
@@ -6,11 +6,12 @@ import { TouchableOpacity } from "react-native";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import Fontisto from "@expo/vector-icons/Fontisto";
 import { useNavigation } from "@react-navigation/native";
-
+import Ionicons from "react-native-vector-icons/Ionicons";
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 const RoomDetail = () => {
   const nav = useNavigation();
   return (
-    <View style={[styles.root]}>
+    <ScrollView style={[styles.root]} showsVerticalScrollIndicator={false} contentContainerStyle={{flexGrow: 1,  gap:20 }} keyboardShouldPersistTaps="handled">
       <View style={[styles.iconListContainer]}>
         <TouchableOpacity
           onPress={() => {
@@ -85,15 +86,86 @@ const RoomDetail = () => {
       <View style={[styles.meeTheOwnerContainer]}>
         <View style={[styles.divider]} />
         <Text style={[styles.meetTheOwnerTitle]}>Meet the owner</Text>
+
+        <View style={[styles.ownerContainer]}>
+          <View style={[styles.ownerCard]}>
+            <View style ={[styles.ownerInfo]}>
+            <View style={[styles.ownerAvatar]}>
+              <Text style={[styles.ownerInitial]}>B</Text>
+            </View>
+            <View style={[styles.ownerInfo]}>
+              <Text style={[styles.ownerName]}>Ben</Text>
+              <Text style={[styles.ownerRole]}>Reputable host</Text>
+            </View>
+            </View>
+            <View style={[styles.ownerStats]}>
+              <Text style={[styles.statItem]}>
+                6 {"\n"}
+                reviews
+              </Text>
+              <Text style={[styles.statItem]}>
+                4.9 {"\n"}
+                stars
+              </Text>
+              <Text style={[styles.statItem]}>
+                3 {"\n"}
+                years experience
+              </Text>
+            </View>
+          </View>
+        </View>
+
+        <View style={[styles.placeOffersContainer]}>
+          <Text style={[styles.offersTitle]}>What this place offers</Text>
+          <View style={[styles.offerList]}>
+            <View style={styles.offerItem}>
+              <Icon name="pool" size={24} color="black" />
+              <Text style={styles.offerText}>Pool</Text>
+            </View>
+            <View style={styles.offerItem}>
+              <MaterialCommunityIcons
+                name="stove"
+                size={24}
+                color="black"
+              />
+              <Text style={styles.offerText}>Kitchen</Text>
+            </View>
+            <View style={styles.offerItem}>
+              <Ionicons name="wifi" size={24} color="black" />
+              <Text style={styles.offerText}>Wi-fi</Text>
+            </View>
+            <View style={styles.offerItem}>
+              <Ionicons name="car-sport" size={24} color="black" />
+              <Text style={styles.offerText}>Parking</Text>
+            </View>
+            <View style={styles.offerItem}>
+              <MaterialCommunityIcons
+                name="cctv"
+                size={24}
+                color="black"
+              />
+              <Text style={styles.offerText}>Security camera</Text>
+            </View>
+          </View>
+          <TouchableOpacity style={styles.showAllButton} 
+            onPress={() => {
+              nav.navigate("Amenities" as never);
+            }}>
+            <Text style={[styles.showAll]}>Show all</Text>
+
+          </TouchableOpacity>
+        </View>
+
         <View style={[styles.divider]} />
       </View>
+      
       <View style={[styles.priceBookContainer]}>
         <Text style={[styles.price]}>700k VND/night</Text>
         <TouchableOpacity style={[styles.bookBtn]}>
           <Text style={[styles.bookNow]}>Book now</Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
@@ -105,13 +177,13 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     display: "flex",
     height: "100%",
-    alignItems: "flex-start",
+    //alignItems: "flex-start",
     borderColor: "red",
-    gap: 10,
+    //gap: 10,
   },
   image: {
     width: "100%",
-    height: "40%",
+    height: 300,
   },
   iconContainer: {
     padding: 5,
@@ -164,6 +236,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 0.5,
     backgroundColor: "black",
+    marginBottom: -8,
   },
   showMore: {
     textDecorationLine: "underline",
@@ -179,21 +252,24 @@ const styles = StyleSheet.create({
   },
   bookBtn: {
     backgroundColor: "#365486",
-    width: 192,
-    height: 42,
+    width: 160,
+    height: 50,
     borderRadius: 5,
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    marginRight: 10,
     justifyContent: "center",
   },
   priceBookContainer: {
     display: "flex",
     flexDirection: "row",
     width: "100%",
-    paddingHorizontal: 10,
+    paddingHorizontal: 5,
     justifyContent: "space-between",
     alignItems: "center",
+    marginBottom: 5,
+    marginLeft: 5,
   },
   bookNow: {
     color: "white",
@@ -204,4 +280,99 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     fontSize: 20,
   },
+
+
+
+  ownerContainer: {
+    paddingHorizontal: 10,
+    marginTop: 10,
+  },
+  ownerCard: {
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 10,
+    padding: 25,
+    flexDirection: "row", // Changed to row
+    alignItems: "center",
+    backgroundColor: "#f8f9fa", // Changed background color
+    justifyContent: "space-around", // Added to space elements
+  },
+  ownerAvatar: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    backgroundColor: "#343a40", // Changed background color
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  ownerInitial: {
+    fontSize: 22,
+    fontWeight: "600",
+    color: "white", // Changed text color
+  },
+  ownerInfo: {
+    //marginTop: 10,
+    alignItems: "center", // Align text to the left
+    marginLeft: 5, // Added margin to separate from avatar
+    flexDirection:"column",
+  },
+  ownerName: {
+    fontSize: 20, // Changed font size
+    fontWeight: "bold",
+  },
+  ownerRole: {
+    color: "#555",
+  },
+  ownerStats: {
+    //marginTop: 10,
+    alignItems: "flex-start", // Align text to the right
+  },
+  statItem: {
+    fontSize: 14,
+    color: "#11111",
+    textAlign: "left", // Added to align text inside each item
+    fontWeight:"400",
+    marginLeft: 30,
+  },
+
+  //style place offer
+  placeOffersContainer: {
+    paddingHorizontal: 10,
+    marginVertical: 10,
+  },
+  offersTitle: {
+    fontSize: 20,
+    fontWeight: "600",
+    marginBottom: 10,
+  },
+  offerList: {
+    flexDirection: "column",
+    gap: 10, 
+  },
+  offerItem: {
+    fontSize: 16,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 15,
+    padding: 5,
+  },
+  offerText: {
+    fontSize: 16,
+  },
+  showAll: {
+    color: "black", 
+    textDecorationLine: "none", // Bỏ gạch chân
+    fontWeight: '600',
+    textAlign: 'center'
+  },
+  showAllButton: {
+    marginTop: 10,
+    borderWidth: 1, // Thêm đường viền
+    borderColor: "#748CAB", // Màu đường viền
+    borderRadius: 5, // Bo góc
+    paddingVertical: 10, // Thêm padding dọc
+    paddingHorizontal: 80, // Thêm padding ngang
+    alignSelf: 'center',
+  },
+  
 });

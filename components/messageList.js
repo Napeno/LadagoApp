@@ -8,10 +8,15 @@ import {
 } from "react-native";
 import React from "react";
 import { data } from "../constants/data";
+
+import { useNavigation } from "@react-navigation/native";
+
 import styles from "../styles/messageList";
+import ChatScreen from "../screens/user/ChatScreen";
 import iconStar from "../constants/star_icon.png";
 
-const MessageList = () => {
+
+const MessageList = ({navigation}) => {
   return (
     <FlatList
       contentContainerStyle={styles.flatListContainer}
@@ -32,7 +37,12 @@ const MessageList = () => {
   );
 };
 
+
 const MessageListItem = ({ id, name, imgUrl, lastMsg, time, isSeen }) => {
+  const navigation = useNavigation();
+  const handleNavigate = () => {
+    navigation.navigate('CHAT');
+  }
   let fontFamily = isSeen ? "Quicksand_500Medium" : "Quicksand_700Bold";
   let color = isSeen ? "#939393" : "black";
   let display = isSeen ? "none" : "";
@@ -40,6 +50,7 @@ const MessageListItem = ({ id, name, imgUrl, lastMsg, time, isSeen }) => {
     <View style={[styles.cardWrap]}>
       <Pressable
         // onPress={() => handleChangeCategory(isActive? null: title)}
+        onPress={() => handleNavigate()}
         style={[styles.cardHolder]}
       >
         <Image
@@ -52,10 +63,12 @@ const MessageListItem = ({ id, name, imgUrl, lastMsg, time, isSeen }) => {
           resizeMode="cover"
         />
 
+
         <View style={styles.cardInfo}>
           <Text style={styles.name} numberOfLines={1}>
             {name}
           </Text>
+
 
           <View style={styles.textLine}>
             <Text
@@ -65,14 +78,18 @@ const MessageListItem = ({ id, name, imgUrl, lastMsg, time, isSeen }) => {
               {lastMsg}
             </Text>
 
+
             <Text style={[styles.time, { fontFamily }, { color }]}>{time}</Text>
           </View>
+
 
           <View style={[styles.seenCircle, { display }]}></View>
         </View>
       </Pressable>
     </View>
+   
   );
 };
+
 
 export default MessageList;

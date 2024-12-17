@@ -41,6 +41,10 @@ const ProfileScreen = ({ navigation }) => {
     navigation.navigate("CREATE");
   };
 
+  const handleSwitch = () => {
+    navigation.navigate("ADMIN");
+  };
+
   let [fontsLoaded] = useFonts({
     Quicksand_300Light,
     Quicksand_400Regular,
@@ -502,6 +506,7 @@ const ProfileScreen = ({ navigation }) => {
               alignSelf: "center",
               alignItems: "center",
             }}
+            onPress={handleSwitch}
           >
             <Image
               style={{

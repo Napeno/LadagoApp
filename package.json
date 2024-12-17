@@ -28,6 +28,7 @@
     "@ionic/core": "^8.4.0",
     "@ionic/react": "^8.4.0",
     "@react-native-async-storage/async-storage": "1.23.1",
+    "@react-native-community/datetimepicker": "8.2.0",
     "@react-native-firebase/app": "^20.5.0",
     "@react-native-firebase/auth": "^21.4.0",
     "@react-native-masked-view/masked-view": "0.3.1",
@@ -75,6 +76,7 @@
     "react-native-gesture-handler": "^2.21.0",
     "react-native-linear-gradient": "^2.8.3",
     "react-native-maps": "1.18.0",
+    "react-native-modal": "^13.0.1",
     "react-native-pager-view": "^6.6.1",
     "react-native-paper": "^5.12.5",
     "react-native-permissions": "^5.2.1",
@@ -93,8 +95,7 @@
     "react-native-webview": "^13.12.4",
     "rn-qr-generator": "^1.4.2",
     "socket.io-client": "^4.8.1",
-    "stream-browserify": "^3.0.0",
-    "@react-native-community/datetimepicker": "8.2.0"
+    "stream-browserify": "^3.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.24.8",
