@@ -50,7 +50,15 @@ const RoomDetail = () => {
             4.8 -{" "}
           </Text>
           <TouchableOpacity onPress={() => nav.navigate("Review" as never)}>
-            <Text style={[{ textDecorationLine: "underline",fontFamily:"Quicksand_700Bold" }, styles.info]}>
+            <Text
+              style={[
+                {
+                  textDecorationLine: "underline",
+                  fontFamily: "Quicksand_700Bold",
+                },
+                styles.info,
+              ]}
+            >
               6 reviewers
             </Text>
           </TouchableOpacity>
@@ -249,7 +257,7 @@ const styles = StyleSheet.create({
   },
   showMore: {
     textDecorationLine: "underline",
-    fontFamily:"Quicksand_500Medium"
+    fontFamily: "Quicksand_500Medium",
   },
   introductionTitle: {
     fontWeight: "600",
@@ -285,7 +293,7 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 16,
     fontWeight: "600",
-    fontFamily:"Quicksand_500Medium"
+    fontFamily: "Quicksand_500Medium",
   },
   price: {
     fontWeight: "600",

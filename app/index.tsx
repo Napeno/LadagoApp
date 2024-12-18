@@ -35,7 +35,8 @@ import SearchingScreen from "@/screens/user/searchScreen";
 import Booking from "@/screens/Booking";
 import Confirm from "@/screens/Booking/ConfirmScreen";
 import ChatBot from "@/screens/ChatBot";
-
+import { Provider } from "react-redux";
+import { store } from "../store/reduxStore";
 const Stack = createNativeStackNavigator();
 
 const App = () => {
@@ -57,6 +58,7 @@ const App = () => {
   }
 
   return (
+    <Provider store={store}>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         {user ? (
           <>
@@ -122,7 +124,8 @@ const App = () => {
       <Stack.Screen name="STEPTEN" component={StepTenScreen} />
       <Stack.Screen name="CALENDARMONTH" component={CalendarMonthScreen} />
       <Stack.Screen name="CALENDARDETAIL" component={CalendarDetailScreen} />
-    </Stack.Navigator>
+      </Stack.Navigator>
+    </Provider>
   );
 };
 
