@@ -1,6 +1,7 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import LoginScreen from "../screens/LoginScreen";
+import SignUpScreen from "../screens/SignUpScreen";
 import ProfileScreenUser from "../screens/user/ProfileScreen";
 import ProfileScreenAdmin from "../screens/admin/ProfileScreen";
 import Introduction from "../screens/admin/CreatingPlace/Introduction";
@@ -103,7 +104,9 @@ const App = () => {
         </>
       ) : (
         <Stack.Screen name="LOGIN" component={LoginScreen} />
+        
       )}
+      <Stack.Screen name="SignUp" component={SignUpScreen} />
       <Stack.Screen name="CREATE" component={Introduction} />
       <Stack.Screen name="PROFILEU" component={ProfileScreenUser} />
       <Stack.Screen name="PROFILEA" component={ProfileScreenAdmin} />
