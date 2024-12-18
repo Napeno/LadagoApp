@@ -67,7 +67,11 @@ const StepNineScreen = ({ route, navigation }) => {
           }}
         >
           <View style={styles.viewContainer}>
-            <Image style={styles.closeIcon} source={close} resizeMode="cover" />
+            <Pressable
+              onPress={() => navigation.navigate('ADDHOTEL')}
+            >
+              <Image style={styles.closeIcon} source={close} resizeMode="cover" />
+            </Pressable>
 
             <Text style={styles.titleStep}>Step 9</Text>
             <Text style={styles.titleInfo}>Reiview the upload place</Text>
@@ -138,6 +142,7 @@ const StepNineScreen = ({ route, navigation }) => {
         nextNav={nextNav}
         formData={formData}
         isSubmit={true}
+        currentPage={10}
       />
     </SafeAreaView>
   );

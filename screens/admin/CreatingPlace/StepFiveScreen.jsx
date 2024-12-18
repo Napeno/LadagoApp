@@ -126,7 +126,11 @@ const StepFiveScreen = ({ route, navigation }) => {
           }}
         >
           <View style={styles.viewContainer}>
-            <Image style={styles.closeIcon} source={close} resizeMode="cover" />
+            <Pressable
+              onPress={() => navigation.navigate('ADDHOTEL')}
+            >
+              <Image style={styles.closeIcon} source={close} resizeMode="cover" />
+            </Pressable>
 
             <Text style={styles.titleStep}>Step 5</Text>
             <Text style={styles.titleInfo}>Place Information</Text>
@@ -169,6 +173,7 @@ const StepFiveScreen = ({ route, navigation }) => {
         backNav={backNav}
         nextNav={nextNav}
         formData={formData}
+        currentPage={6}
       />
     </SafeAreaView>
   );

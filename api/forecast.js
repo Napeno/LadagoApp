@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const getForecastModel = async (steps) => {
-    const url = 'http://192.168.223.51:5000/forecast'; 
+    const url = 'http://192.168.1.23:5000/forecast'; 
     try {
         const options = {
             method: "POST",

@@ -30,10 +30,7 @@ const CalendarDetailScreen = ({route}) => {
   }
 
   useEffect(() => {
-    const fetchForecast = async () => {
-      await handleGenerateForcast();
-    };
-    fetchForecast();
+    handleGenerateForcast();
   }, []);
 
   useEffect(() => {
@@ -47,8 +44,8 @@ const CalendarDetailScreen = ({route}) => {
         colors[entry.date] = "red";
       }
     });
-    setDayColors(colors);
-  }, []);
+    setDayColors(colors); 
+  }, [forecast]);
 
   const loadItems = (day) => {
     setTimeout(() => {

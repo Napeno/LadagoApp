@@ -78,7 +78,11 @@ const StepOneScreen = ({ navigation, formDataRetrieve }) => {
           }}
         >
           <View style={styles.viewContainer}>
-            <Image style={styles.closeIcon} source={close} resizeMode="cover" />
+            <Pressable
+              onPress={() => navigation.navigate('ADDHOTEL')}
+            >
+              <Image style={styles.closeIcon} source={close} resizeMode="cover" />
+            </Pressable>
 
             <Text style={styles.titleStep}>Step 1</Text>
 
@@ -137,6 +141,7 @@ const StepOneScreen = ({ navigation, formDataRetrieve }) => {
         backNav={backNav}
         nextNav={nextNav}
         formData={formData}
+        currentPage={2}
       />
     </SafeAreaView>
   );

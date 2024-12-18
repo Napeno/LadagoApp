@@ -101,7 +101,11 @@ const StepSevenScreen = ({ route, navigation }) => {
           }}
         >
           <View style={styles.viewContainer}>
-            <Image style={styles.closeIcon} source={close} resizeMode="cover" />
+            <Pressable
+              onPress={() => navigation.navigate('ADDHOTEL')}
+            >
+              <Image style={styles.closeIcon} source={close} resizeMode="cover" />
+            </Pressable>
 
             <Text style={styles.titleStep}>Step 7</Text>
             <Text style={styles.titleInfo}>Add price of your place</Text>
@@ -156,6 +160,7 @@ const StepSevenScreen = ({ route, navigation }) => {
         backNav={backNav}
         nextNav={nextNav}
         formData={formData}
+        currentPage={8}
       />
     </SafeAreaView>
   );

@@ -181,7 +181,11 @@ const StepThreeScreen = ({ route, navigation }) => {
   return (
     <SafeAreaView style={styles.safeAreaView}>
       <View style={styles.viewContainer}>
-        <Image style={styles.closeIcon} source={close} resizeMode="cover" />
+          <Pressable
+              onPress={() => navigation.navigate('ADDHOTEL')}
+            >
+              <Image style={styles.closeIcon} source={close} resizeMode="cover" />
+          </Pressable>
         <Text style={styles.titleStep}>Step 3</Text>
 
         <Text style={styles.titleInfo}>Location of your place</Text>
@@ -253,6 +257,7 @@ const StepThreeScreen = ({ route, navigation }) => {
           backNav={backNav}
           nextNav={nextNav}
           formData={formData}
+          currentPage={4}
         />
       </View>
     </SafeAreaView>
