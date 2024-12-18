@@ -17,7 +17,7 @@ import { useNavigation } from "@react-navigation/native";
 import { firestore } from "../firebase";
 import { collection, query, where, getDocs } from "firebase/firestore";
 
-const CategoryLocation = () => {
+const CategoryLocation = ({location}) => {
 
   const [hotels, setHotels] = useState([]);
 
@@ -34,24 +34,55 @@ const CategoryLocation = () => {
     getData();
   }, []);
 
+  const toRadians = (degrees) => {
+    return degrees * (Math.PI / 180);
+  };
+  
+  const haversineDistance = (lat1, lon1, lat2, lon2) => {
+    const R = 6371; // Bán kính Trái Đất (km)
+    const dLat = toRadians(lat2 - lat1); 
+    const dLon = toRadians(lon2 - lon1); 
+    
+    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+              Math.cos(toRadians(lat1)) * Math.cos(toRadians(lat2)) *
+              Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    
+    const distance = R * c; 
+    return distance;
+  };
+
+  const filteredHotels = hotels.filter((item) => {
+    const lat1 = location?.coords?.latitude;
+    const lon1 = location?.coords?.longitude;
+    const [lat2, lon2] = item.geoCode.split(",").map(Number);
+    const km = haversineDistance(lat1, lon1, lat2, lon2);
+
+    return km < 20; //Set hotel gần user location trong khoảng 20 km
+  });
+
   return (
     <FlatList
       horizontal
       contentContainerStyle={styles.flatListContainer}
       showsHorizontalScrollIndicator={false}
-      data={hotels}
+      data={filteredHotels}
       keyExtractor={(item) => item.idHotel?.toString() || Math.random().toString()}
-      renderItem={({ item }) => (
-        <CategoryLocationItem
-          id={item.id}
-          isFavorite={item.favorite}
-          title={item.name}
-          imgUrl={item.imgHotel[0]}
-          address={item.address}
-          price={item.price}
-          stars={item.stars}
-        />
-      )}
+      renderItem={({ item }) => 
+      {
+        return (
+          <CategoryLocationItem
+            id={item.id}
+            isFavorite={item.favorite}
+            title={item.name}
+            imgUrl={item.imgHotel[0]}
+            address={item.address}
+            price={item.price}
+            stars={item.stars}
+          />
+        )
+      }
+    }
     />
   );
 };

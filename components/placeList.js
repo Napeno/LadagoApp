@@ -32,23 +32,20 @@ const PlaceList = () => {
   }, []);
 
   return (
-    <FlatList
-      contentContainerStyle={styles.flatListContainer}
-      showsHorizontalScrollIndicator={false}
-      data={hotels}
-      keyExtractor={(item) => item.idHotel?.toString() || Math.random().toString()}
-      renderItem={({ item }) => (
+    <View style={styles.flatListContainer}>
+      {hotels.map((item) => (
         <PlaceListItem
+          key={item.idHotel?.toString() || Math.random().toString()} // Ensure unique key
           id={item.idHotel}
           isFavorite={item.favorite}
           title={item.name}
           imgUrl={item.imgHotel[0]}
           address={item.address}
           price={item.price}
-          stars={item.rating} 
+          stars={item.rating}
         />
-      )}
-    />
+      ))}
+  </View>
   );
 };
 
