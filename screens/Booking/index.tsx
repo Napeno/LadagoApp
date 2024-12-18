@@ -7,6 +7,7 @@ import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import BottomSheetCal from "./components/BottomSheetCal";
 import { useState } from "react";
+import { ActivityIndicator } from "@ant-design/react-native";
 import {
   useFonts,
   Quicksand_300Light,
@@ -21,11 +22,40 @@ import { SeperateBar } from "./components/SeperateBar";
 import OverLay from "./components/Overlay";
 import BottomSheetPeople from "./components/BottomSheetPeople";
 import { useNavigation } from "@react-navigation/native";
-import { useBooking } from "./useBooking";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/reduxStore";
-import { UseSelector } from "react-redux";
+import {doc,getDoc} from "firebase/firestore";
+import { firestore } from "@/firebase";
+import { Hotel } from "@/types/type";
+
+
 const Booking = () => {
+  const [hotel, setHotel] = useState<Hotel | null>(null); 
+  const [loading,setLoading] =useState<boolean>(false)
+  const hotelId = "I2xifyCEJmV034lLfcpj";
+
+  useEffect(() => {
+    const getHotelById = async () => {
+      setLoading(true)
+      const hotelDocRef = doc(firestore, "hotel", hotelId);
+
+      try {
+        const hotelDocSnapshot = await getDoc(hotelDocRef);
+
+        if (hotelDocSnapshot.exists()) {
+          const hotelData = hotelDocSnapshot.data() as Hotel; 
+          setHotel(hotelData); 
+        } else {
+          console.log("No hotel found with the specified ID.");
+        }
+      } catch (error) {
+        console.error("Error fetching hotel:", error);
+      }
+      setLoading(false)
+    };
+
+    getHotelById();
+  }, [hotelId]);
   const bookingState = useSelector((state: RootState) => state.booking);
   const [isSheetCalVisible, setIsSheetCalVisible] = useState(false);
   const [isSheetPeopleVisible, setIsSheetPeopleVisible] = useState(false);
@@ -46,6 +76,7 @@ const Booking = () => {
     }
   };
   const nav = useNavigation();
+  if (loading) return <ActivityIndicator/>
   return (
     <GestureHandlerRootView>
       <ScrollView
@@ -57,11 +88,11 @@ const Booking = () => {
           <Image
             style={styles.image}
             source={{
-              uri: "https://motogo.vn/wp-content/uploads/2023/05/homestay-da-lat-rung-thong-3.jpg",
+              uri: hotel?.imgHotel[0],
             }}
           />
           <View style={styles.textContainer}>
-            <Text style={styles.title}>RAON HOI AN1</Text>
+            <Text style={styles.title}>{hotel?.name}</Text>
             <View style={styles.popularBadge}>
               <Text style={styles.popularText}>Most popular</Text>
             </View>
@@ -78,7 +109,7 @@ const Booking = () => {
                 color="#365486"
               />
               <Text style={styles.addressText}>
-                1 Cua Dai Street, Cửa Đại, Hội An, Việt Nam
+                {hotel?.address}
               </Text>
             </View>
             <View style={styles.dateContainer}>

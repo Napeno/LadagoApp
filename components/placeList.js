@@ -14,7 +14,7 @@ import unfavorite from "../constants/unfavorite.png";
 import React, { useEffect, useState } from "react";
 import { firestore } from "../firebase";
 import { collection, query, where, getDocs } from "firebase/firestore";
-
+import { useNavigation } from "@react-navigation/native";
 const PlaceList = () => {
   const [hotels, setHotels] = useState([]);
 
@@ -54,11 +54,15 @@ const PlaceListItem = ({
   price,
   stars,
 }) => {
+  const nav=useNavigation()
   return (
     <View style={[styles.cardWrap, { marginBottom: 32 }]}>
       <Pressable
         // onPress={() => handleChangeCategory(isActive? null: title)}
         style={[styles.cardWrap]}
+        onPress={() => {
+          nav.navigate("Room Detail")
+        }}
       >
         <Image
           source={{ uri: imgUrl }}

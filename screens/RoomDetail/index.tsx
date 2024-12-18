@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Image } from "react-native";
+import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Image, ActivityIndicator } from "react-native";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import AntDesign from "@expo/vector-icons/AntDesign";
@@ -6,9 +6,43 @@ import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import Fontisto from "@expo/vector-icons/Fontisto";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { useEffect, useState } from "react";
+import { Hotel } from "@/types/type";
+import { doc ,getDoc} from "firebase/firestore";
+import { firestore } from "@/firebase";
+const data = {
+  imageUrl: "https://motogo.vn/wp-content/uploads/2023/05/homestay-da-lat-rung-thong-3.jpg",
+  name: "Sunny house with lake view",
+  address: "Bao Loc,Vietnam",
+}
 const RoomDetail = () => {
   const nav = useNavigation();
+  const [hotel, setHotel] = useState<Hotel | null>(null); 
+  const [loading,setLoading] =useState<boolean>(false)
+  const hotelId = "I2xifyCEJmV034lLfcpj";
+  useEffect(() => {
+    const getHotelById = async () => {
+      setLoading(true)
+      const hotelDocRef = doc(firestore, "hotel", hotelId);
 
+      try {
+        const hotelDocSnapshot = await getDoc(hotelDocRef);
+
+        if (hotelDocSnapshot.exists()) {
+          const hotelData = hotelDocSnapshot.data() as Hotel; 
+          setHotel(hotelData); 
+        } else {
+          console.log("No hotel found with the specified ID.");
+        }
+      } catch (error) {
+        console.error("Error fetching hotel:", error);
+      }
+      setLoading(false)
+    };
+
+    getHotelById();
+  }, [hotelId]);
+  if (loading) return <ActivityIndicator/>
   return (
     <ScrollView style={[styles.root]} showsVerticalScrollIndicator={false} contentContainerStyle={{flexGrow: 1,  gap:20 }} keyboardShouldPersistTaps="handled">
       <View style={[styles.iconListContainer]}>
@@ -25,14 +59,14 @@ const RoomDetail = () => {
       <Image
         style={styles.image}
         source={{
-          uri: "https://motogo.vn/wp-content/uploads/2023/05/homestay-da-lat-rung-thong-3.jpg",
+          uri: hotel?.imgHotel[0],
         }}
       />
       <View style={styles.infoLocationNameContainer}>
         <Text
           style={[styles.locationName, { fontFamily: "Quicksand_700Bold" }]}
         >
-          Sunny house with lake view
+          {hotel?.name}
         </Text>
         <View style={styles.infoContainer}>
           <MaterialCommunityIcons
@@ -41,7 +75,7 @@ const RoomDetail = () => {
             color="#365486"
           />
           <Text style={[styles.info, { fontFamily: "Quicksand_700Bold" }]}>
-            Bao Loc, Vietnam
+            {hotel?.address}
           </Text>
         </View>
         <View style={styles.infoContainer}>
@@ -83,12 +117,13 @@ const RoomDetail = () => {
         >
           Introducing this place
         </Text>
-        <Text style={{ fontFamily: "Quicksand_400Regular" }}>
-          Our accommodation is where you truly come back to nature. Surrounding
+        <Text style={{ fontFamily: "Quicksand_400Regular" }} numberOfLines={3}>
+          {/* Our accommodation is where you truly come back to nature. Surrounding
           you are coffee, avocado, and durian gardens. The most important is the
           natural lake (Dak Long Thuong Lake) where you can kayak. In the near
           future, we will install wind power to supply electricity to our
-          area...
+          area... */}
+          {hotel?.description}
         </Text>
         <TouchableOpacity
           onPress={() => nav.navigate("INTRODUCTION" as never)}
