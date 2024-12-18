@@ -104,7 +104,7 @@ const BottomTabCreate = ({ navigation, backNav, nextNav, formData, isSubmit, isU
     }
   }
 
-  const barColors = Array.from({ length: 11 }, (_, index) => {
+  const barColors = Array.from({ length: 10 }, (_, index) => {
     if (index < currentPage - 1) {
       return "#365486"; 
     } else if (index === currentPage - 1) {

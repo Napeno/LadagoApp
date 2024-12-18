@@ -127,7 +127,7 @@ const StepFiveScreen = ({ route, navigation }) => {
         >
           <View style={styles.viewContainer}>
             <Pressable
-              onPress={() => navigation.navigate('ADDHOTEL')}
+              onPress={() => navigation.navigate('ADMIN')}
             >
               <Image style={styles.closeIcon} source={close} resizeMode="cover" />
             </Pressable>
@@ -140,7 +140,7 @@ const StepFiveScreen = ({ route, navigation }) => {
 
             {formData?.roomType?.map((room) => (
               <View key={room.id} style={styles.container}>
-                <Text style={styles.roomTitle}>Room {room.type}</Text>
+                <Text style={styles.roomTitle}>{room.type}</Text>
                 {data?.itemRoom?.map((item) => (
                   <View key={item.key} style={styles.item}>
                     <Text style={styles.label}>{item.label}</Text>

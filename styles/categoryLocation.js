@@ -53,7 +53,7 @@ export default StyleSheet.create({
   },
 
   title: {
-    width: 152,
+    width: 180,
     fontSize: 16,
     fontFamily: "Quicksand_600SemiBold",
   },
