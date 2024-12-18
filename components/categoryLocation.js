@@ -52,14 +52,18 @@ const CategoryLocation = ({location}) => {
     return distance;
   };
 
-  const filteredHotels = hotels.filter((item) => {
-    const lat1 = location?.coords?.latitude;
-    const lon1 = location?.coords?.longitude;
-    const [lat2, lon2] = item.geoCode.split(",").map(Number);
-    const km = haversineDistance(lat1, lon1, lat2, lon2);
+  const filteredHotels = hotels
+    .map((item) => {
+      const lat1 = location?.coords?.latitude;
+      const lon1 = location?.coords?.longitude;
+      const [lat2, lon2] = item.geoCode.split(",").map(Number);
+      const km = haversineDistance(lat1, lon1, lat2, lon2);
 
-    return km < 20; //Set hotel gần user location trong khoảng 20 km
-  });
+    return { ...item, distance: km }; // Thêm thuộc tính distance vào mỗi item
+  })
+  .filter((item) => item.distance < 20) // Lọc các khách sạn trong phạm vi 20km
+  .sort((a, b) => a.distance - b.distance); // Sắp xếp khoảng cách từ thấp đến cao
+
 
   return (
     <FlatList
@@ -78,6 +82,7 @@ const CategoryLocation = ({location}) => {
             imgUrl={item.imgHotel[0]}
             address={item.address}
             price={item.price}
+            distance={item.distance}
             stars={item.stars}
           />
         )
@@ -95,6 +100,7 @@ const CategoryLocationItem = ({
   address,
   price,
   stars,
+  distance
 }) => {
   const nav = useNavigation();
   return (
@@ -154,8 +160,10 @@ const CategoryLocationItem = ({
               {address}
             </Text>
           </View>
-
-          <Text style={styles.price}>{price}$ /night</Text>
+          <View style={{flexDirection: "row", justifyContent: 'space-between', alignItems: "center", marginTop: 12, paddingHorizontal: 12}}>
+            <Text style={styles.price}>{price}$ /night</Text>
+            <Text style={styles.distance} numberOfLines={1}>Cách {distance.toFixed(1)} km</Text>
+          </View>
         </View>
       </TouchableOpacity>
     </View>

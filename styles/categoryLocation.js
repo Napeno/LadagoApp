@@ -63,12 +63,15 @@ export default StyleSheet.create({
     color: "#939393",
     fontFamily: "Quicksand_500Medium",
   },
+  distance: {
+    fontSize: 14,
+    color: "#939393",
+    fontFamily: "Quicksand_500Medium",
+  },
 
   price: {
     fontFamily: "Quicksand_700Bold",
     fontSize: 18,
-    marginTop: 10,
-    marginLeft: 12,
     color: "#365486",
   },
 
