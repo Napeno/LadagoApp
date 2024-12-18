@@ -17,27 +17,26 @@ const reservation = [
 
 const amenities = [
   "bathTub", 
-  "cleaning Service", 
+  "cleaningService", 
   "pet",
   "wifi",
   "parking",
-  "security Camera",
-  "air Conditioning",
+  "securityCamera",
+  "airConditioning",
   "restaurant",
   "gym",
-  "hotel Bar",
+  "hotelBar",
   "spa",
   "pool",
   "kitchen",
-  "room Service",
-  "security Guard",
-  "free Wifi",
-  "swimming Pool",
-  "basic Kitchen",
-  "parking Lot",
-  "public Wifi"
+  "roomService",
+  "securityGuard",
+  "freeWifi",
+  "swimmingPool",
+  "basicKitchen",
+  "parkingLot",
+  "publicWifi"
 ];
-
 
 const typeRoom = [
   { label: "Phòng Tiêu Chuẩn (Standard Room)", value: "1" },

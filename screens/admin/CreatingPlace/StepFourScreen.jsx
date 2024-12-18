@@ -8,6 +8,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
+import {data} from '../../../constants/data'
 import { SafeAreaView } from "react-native";
 import React, { useState, useEffect, useCallback } from "react";
 import styles from "../../../styles/CreatingPlace/stepfour";
@@ -38,18 +39,22 @@ const StepFourScreen = ({ route, navigation }) => {
   const nextNav = "STEPFIVE";
 
   const [roomTabs, setRoomTabs] = useState([{ id: 0 }]);
+
+  const createAmenitiesObject = (amenitiesList) => {
+    const amenitiesObject = {};
+    amenitiesList.forEach((item) => {
+      amenitiesObject[item] = false;
+    });
+    return amenitiesObject;
+  };
+
   const [formData, setFormData] = useState({
     roomType: [
       {
         id: 0,
         occupacity: 0,
         type: "",
-        amenities: {
-          bathTub: false,
-          cleaningService: false,
-          pet: false,
-          wifi: false,
-        },
+        amenities: createAmenitiesObject(data.amenities),
       },
     ],
   });
