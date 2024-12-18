@@ -514,7 +514,7 @@ const ProfileScreen = ({ navigation }) => {
               alignItems: "center",
               marginBottom: 20
             }}
-            onPress={() => navigation.navigate('ADMIN')}
+            onPress={() => navigation.navigate('MAIN')}
           >
             <Image
               style={{
@@ -532,7 +532,7 @@ const ProfileScreen = ({ navigation }) => {
                 color: "white",
               }}
             >
-              Switch to owner mode
+              Switch to visit mode
             </Text>
           </Pressable>
 

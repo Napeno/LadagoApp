@@ -8,8 +8,11 @@ import {
   Quicksand_600SemiBold,
   Quicksand_700Bold,
 } from "@expo-google-fonts/quicksand";
+import { firestore } from "../firebase";
+import { collection, addDoc } from "firebase/firestore";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
-const BottomTabCreate = ({ navigation, backNav, nextNav, formData }) => {
+const BottomTabCreate = ({ navigation, backNav, nextNav, formData, isSubmit, isUploaded }) => {
   let [fontsLoaded] = useFonts({
     Quicksand_300Light,
     Quicksand_400Regular,
@@ -20,6 +23,29 @@ const BottomTabCreate = ({ navigation, backNav, nextNav, formData }) => {
   if (!fontsLoaded) {
     return null;
   }
+
+  const uploadImagesToFirebase = async (images) => {
+    const storage = getStorage();
+    const imageURLs = [];
+
+    for (const [index, imageUri] of images.entries()) {
+      try {
+        const response = await fetch(imageUri);
+        const blob = await response.blob(); 
+
+        const storageRef = ref(storage, `images/hotel_${Date.now()}_${index}`); 
+        await uploadBytes(storageRef, blob); 
+
+        const downloadURL = await getDownloadURL(storageRef);
+        imageURLs.push(downloadURL);
+      } catch (error) {
+        console.error("Error uploading image:", error);
+      }
+    }
+
+    return imageURLs;
+  };
+
   const handleNext = () => {
     navigation.navigate(nextNav, { formDataRetrieve: formData });
   };
@@ -27,6 +53,56 @@ const BottomTabCreate = ({ navigation, backNav, nextNav, formData }) => {
   const handleBack = () => {
     navigation.navigate(backNav);
   };
+
+  const handleHome = () => {
+    navigation.navigate('ADMIN');
+  };
+
+  const uploadFirebase = async() => {
+    try {
+      const uploadedImageUrls = await uploadImagesToFirebase(formData.imgHotel);
+
+      const updatedFormData = { ...formData, imgHotel: uploadedImageUrls };
+
+      const hotelRef = await addDoc(collection(firestore, "hotel"), {
+        name: updatedFormData.name,
+        price: updatedFormData.price,
+        address: updatedFormData.address,
+        checkInTime: new Date(updatedFormData.checkIn).toLocaleTimeString(),
+        checkOutTime: new Date(updatedFormData.checkOut).toLocaleTimeString(),
+        geoCode: updatedFormData.geoCode,
+        imgHotel: updatedFormData.imgHotel,
+        description: updatedFormData.description,
+        access: updatedFormData.access,
+        rating: updatedFormData.rating
+      });
+
+      console.log("Hotel added with ID: ", hotelRef.id);
+
+      const roomTypes = Array.isArray(updatedFormData.roomType)
+      ? updatedFormData.roomType
+      : [updatedFormData.roomType];
+
+      for (const room of roomTypes) {
+        console.log("Uploading Room:", room); 
+      
+        await addDoc(collection(firestore, `hotel/${hotelRef.id}/roomType`), {
+          typeName: room.type,
+          occupancy: room.occupacity, 
+          bathroom: room.bathroom,
+          bed: room.bed,
+          bedroom: room.bedroom,
+          amenities: room.amenities,
+        });
+      
+        console.log(`Room uploaded: ${room.type}`);
+      }
+      
+
+    } catch (error) {
+      console.error('Error hotel: ', error);      
+    }
+  }
 
   return (
     <View style={styles.bottomBar}>
@@ -39,12 +115,41 @@ const BottomTabCreate = ({ navigation, backNav, nextNav, formData }) => {
         <View style={[styles.Bar, {}]}></View>
       </View>
       <View style={styles.navigateButtons}>
-        <Pressable style={styles.backBar} onPress={handleBack}>
-          <Text style={[styles.textNav, { color: "#365486" }]}>Back</Text>
-        </Pressable>
-        <Pressable style={styles.nextBar} onPress={handleNext}>
-          <Text style={[styles.textNav, { color: "#FFFFFF" }]}>Next</Text>
-        </Pressable>
+        {
+          isUploaded? (
+            <Pressable style={styles.finalBar} onPress={handleHome}>
+              <Text style={[styles.textNav, { color: "#FFFFFF" }]}>Go back home</Text>
+          </Pressable>
+          )
+          :
+          (
+            <>
+              <Pressable style={styles.backBar} onPress={handleBack}>
+                <Text style={[styles.textNav, { color: "#365486" }]}>Back</Text>
+              </Pressable>
+                {isSubmit? (
+                  <Pressable style={styles.nextBar} 
+                  onPress={async() => {
+                    await uploadFirebase();
+                    handleNext();
+                  }
+                  }
+                    >
+                      <Text style={[styles.textNav, { color: "#FFFFFF" }]}> Submit</Text>
+                  </Pressable>
+                )  
+                : 
+                (
+                  <Pressable style={styles.nextBar} onPress={handleNext}>
+                    <Text style={[styles.textNav, { color: "#FFFFFF" }]}> Next</Text>
+                  </Pressable>
+                )
+                }
+            </>
+          )
+        }
+        
+
       </View>
     </View>
   );
@@ -95,6 +200,15 @@ const styles = StyleSheet.create({
 
   nextBar: {
     width: 127,
+    height: 50,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 10,
+    backgroundColor: "#365486",
+  },
+
+  finalBar: {
+    width: '100%',
     height: 50,
     justifyContent: "center",
     alignItems: "center",

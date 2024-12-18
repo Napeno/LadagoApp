@@ -25,8 +25,24 @@ import {
   Quicksand_600SemiBold,
   Quicksand_700Bold,
 } from "@expo-google-fonts/quicksand";
+import { addons } from "react-native";
 
-const StepNineScreen = ({ navigation }) => {
+const StepNineScreen = ({ route, navigation }) => {
+
+  const { formDataRetrieve } = route?.params;
+
+  const [formData, setFormData] = useState({
+  });
+
+  useEffect(() => {
+    if (formDataRetrieve) {
+      setFormData((prev) => ({
+        ...prev,
+        ...formDataRetrieve,
+      }));
+    }
+  }, [formDataRetrieve]);
+
   let [fontsLoaded] = useFonts({
     Quicksand_300Light,
     Quicksand_400Regular,
@@ -120,6 +136,8 @@ const StepNineScreen = ({ navigation }) => {
         navigation={navigation}
         backNav={backNav}
         nextNav={nextNav}
+        formData={formData}
+        isSubmit={true}
       />
     </SafeAreaView>
   );
