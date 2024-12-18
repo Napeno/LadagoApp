@@ -34,14 +34,14 @@ const Introduction = ({ navigation }) => {
     return null;
   }
 
-  const backNav = "ADDHOTEL";
+  const backNav = "ADMIN";
   const nextNav = "STEPONE";
 
   return (
     <SafeAreaView style={styles.safeAreaView}>
       <View style={styles.viewContainer}>
         <Pressable
-          onPress={() => navigation.navigate('ADDHOTEL')}
+          onPress={() => navigation.navigate('ADMIN')}
         >
           <Image style={styles.closeIcon} source={close} resizeMode="cover" />
         </Pressable>

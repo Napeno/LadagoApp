@@ -80,7 +80,7 @@ const StepEightScreen = ({ route, navigation }) => {
         >
           <View style={styles.viewContainer}>
             <Pressable
-              onPress={() => navigation.navigate('ADDHOTEL')}
+              onPress={() => navigation.navigate('ADMIN')}
             >
               <Image style={styles.closeIcon} source={close} resizeMode="cover" />
             </Pressable>

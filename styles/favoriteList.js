@@ -2,9 +2,8 @@ import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
   flatListContainer: {
-    gap: 42,
     marginTop: 16,
-    paddingBottom: 150,
+    paddingBottom: 50,
   },
 
   cardWrap: {

@@ -22,18 +22,36 @@ const RoomTabCreate = ({ roomTabs, setFormData, formData, onDeleteRoom }) => {
     Quicksand_700Bold,
   });
 
+  const half = Math.ceil(data.amenities.length / 2);
+  const amenitiesFirstRow = data.amenities.slice(0, half);
+  const amenitiesSecondRow = data.amenities.slice(half);
+
   const [selectedTabs, setSelectedTabs] = useState([]);
   const roomIndex = formData.roomType.findIndex((room) => room.id === roomTabs);
 
   const handleUpdateRoom = (key, value) => {
-    setFormData((prev) => {
-      const updatedRooms = [...prev.roomType];
-      updatedRooms[roomIndex] = {
-        ...updatedRooms[roomIndex],
-        [key]: value,
-      };
-      return { ...prev, roomType: updatedRooms };
-    });
+    if(key === 'index'){
+      setFormData((prev) => {
+        const updatedRooms = [...prev.roomType];
+        updatedRooms[roomIndex] = {
+          ...updatedRooms[roomIndex],
+          [key]: value.value,
+          type: value.label,
+  
+        };
+        return { ...prev, roomType: updatedRooms };
+      });
+    }
+    else{
+      setFormData((prev) => {
+        const updatedRooms = [...prev.roomType];
+        updatedRooms[roomIndex] = {
+          ...updatedRooms[roomIndex],
+          [key]: value,
+        };
+        return { ...prev, roomType: updatedRooms };
+      });
+    }
   };
 
   const handleAmenitiesToggle = (amenity) => {
@@ -89,8 +107,8 @@ const RoomTabCreate = ({ roomTabs, setFormData, formData, onDeleteRoom }) => {
         valueField="value"
         placeholder="Select item"
         searchPlaceholder="Search..."
-        value={formData.roomType[roomIndex]?.type || ""}
-        onChange={(item) => handleUpdateRoom("type", item.value)}
+        value={formData.roomType[roomIndex]?.index || ""}
+        onChange={(item) => handleUpdateRoom("index", item)}
       />
 
       <Text style={styles.titleName}>Room Occupacity</Text>
@@ -106,7 +124,8 @@ const RoomTabCreate = ({ roomTabs, setFormData, formData, onDeleteRoom }) => {
       />
 
       <Text style={styles.titleName}>Amenities</Text>
-      {["bathTub", "cleaningService", "pet", "wifi"].map((amenity) => (
+      <View style={styles.row}>
+      {amenitiesFirstRow.map((amenity) => (
         <Pressable
           key={amenity}
           style={[
@@ -122,6 +141,27 @@ const RoomTabCreate = ({ roomTabs, setFormData, formData, onDeleteRoom }) => {
           </Text>
         </Pressable>
       ))}
+    </View>
+
+    {/* Hàng thứ hai */}
+    <View style={styles.row}>
+      {amenitiesSecondRow.map((amenity) => (
+        <Pressable
+          key={amenity}
+          style={[
+            styles.checkedItem,
+            { backgroundColor: getTabStyles(amenity).backgroundColor },
+          ]}
+          onPress={() => handleAmenitiesToggle(amenity)}
+        >
+          <Text
+            style={[styles.textItems, { color: getTabStyles(amenity).color }]}
+          >
+            {amenity.charAt(0).toUpperCase() + amenity.slice(1)}
+          </Text>
+        </Pressable>
+      ))}
+    </View>
     </View>
   );
 };

@@ -85,4 +85,11 @@ export default StyleSheet.create({
     fontSize: 16,
     color: "#365486",
   },
+  row: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+    marginBottom: 10,
+  },
+  
 });
