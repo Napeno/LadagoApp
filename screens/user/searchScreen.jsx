@@ -9,9 +9,11 @@ import {
   Image,
   Dimensions,
   Modal,
+  Switch,
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import DateTimePicker from '@react-native-community/datetimepicker';
+
 
 const { width } = Dimensions.get('window');
 
@@ -26,6 +28,7 @@ const SearchingScreen = ({ navigation }) => {
   const [childrenCount, setChildrenCount] = useState(0);
   const [pet, setPet] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
+  
 
   const destinations = [
     // ... (giữ nguyên)
@@ -102,6 +105,8 @@ const SearchingScreen = ({ navigation }) => {
     setGuests(`${roomCount} room - ${adultCount} passengers - ${childrenCount} children`);
     hideGuestsPicker();
   };
+  const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
+  const [isEnabled, setIsEnabled] = useState(false);
 
   return (
     <ScrollView style={styles.container}>
@@ -177,7 +182,7 @@ const SearchingScreen = ({ navigation }) => {
             </View>
           </View>
         </Modal>
-
+        
         <Text style={styles.label}>Who will you travel with?</Text>
         <View style={styles.inputContainer}>
           <Ionicons
@@ -241,10 +246,12 @@ const SearchingScreen = ({ navigation }) => {
               </View>
 
               <View style={styles.quantityContainer}>
-                <Text style={styles.quantityLabel}>Children</Text>
-                <Text style={styles.quantityLabelDesc}>
-                  0 - 17 years old
-                </Text>
+                <View style={styles.quantityChild}>
+                  <Text style={styles.quantityLabel}>Children</Text>
+                  <Text style={styles.quantityLabelDesc}>
+                    0 - 17 years old
+                  </Text>
+                </View>
                 <View style={styles.quantityButtons}>
                   <TouchableOpacity
                     onPress={() => handleChildrenChange('subtract')}
@@ -264,11 +271,11 @@ const SearchingScreen = ({ navigation }) => {
                 <Text style={styles.quantityLabel}>Bring your pet</Text>
                 <View style={styles.quantityButtons}>
                   <TouchableOpacity onPress={() => setPet(!pet)}>
-                    <Ionicons
-                      name={pet ? 'toggle' : 'toggle-outline'}
-                      size={30}
-                      color={pet ? '#3498db' : 'grey'}
-                    />
+                      <Switch
+                          trackColor={{ false: "#767577", true: "#34C759" }}
+                          onValueChange={toggleSwitch}
+                          value={isEnabled}
+                      />
                   </TouchableOpacity>
                 </View>
               </View>
@@ -466,7 +473,69 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
   },
+  applyButton: {
+    backgroundColor: '#3498db', 
+    paddingVertical: 15,        
+    paddingHorizontal: 30,      
+    borderRadius: 5,           
+    alignItems: 'center', 
+    marginTop: 20,     
+  },
+  modalDivider: {
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc',
+    paddingBottom: 20,
+    marginBottom: 20,
+  },
+  modalTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    textAlign: 'center',
+  },
+  applyButtonText: {
+    color: 'white',             // White text color
+    fontSize: 18,              // Font size
+    fontWeight: 'bold',         // Bold text
+  },
+  quantityContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: 16,
+  },
+  quantityLabel: {
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  quantityLabelDesc: {
+    fontSize: 14,
+    color: 'gray',
+  },
+  quantityChild: {
+    flex:'row',
+  },
+  quantityButtons: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  quantityButton: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#3498db', // Blue color
+    paddingHorizontal: 10,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 5,
+    marginHorizontal: 5,
+    lineHeight: 28, // Adjust line height for better vertical alignment
+  },
+  quantityValue: {
+    fontSize: 16,
+    marginHorizontal: 10,
+  },
   // ... (các style khác cho Guest Picker giữ nguyên)
 });
+
 
 export default SearchingScreen;
