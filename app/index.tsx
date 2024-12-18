@@ -37,8 +37,14 @@ import SearchingScreen from "@/screens/user/searchScreen";
 import Booking from "@/screens/Booking";
 import Confirm from "@/screens/Booking/ConfirmScreen";
 import ChatBot from "@/screens/ChatBot";
+
+// Notification
+import NotificationScreen from "@/screens/user/Noti"
+
+
 import { Provider } from "react-redux";
 import { store } from "../store/reduxStore";
+
 const Stack = createNativeStackNavigator();
 
 const App = () => {
@@ -73,6 +79,7 @@ const App = () => {
             {/* <Stack.Screen name="CHAT" component={ChatScreen} /> */}
             <Stack.Screen name="Amenities" component={AmenitiesScreen} />
             <Stack.Screen name="Search" component={SearchingScreen} />
+            <Stack.Screen name="Notification" component={NotificationScreen} />
 
             <Stack.Screen
               options={{ headerShown: true }}

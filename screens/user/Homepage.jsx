@@ -15,6 +15,7 @@ import CategoryPopularLocation from "../../components/caregoryPopularLocation";
 import DiscoverLocation from "../../components/discoverLocation";
 import PlaceList from "../../components/placeList";
 import { useNavigation } from "@react-navigation/native";
+//import Ionicons from "react-native-vector-icons/Ionicons";
 
 import {
   useFonts,
@@ -26,6 +27,8 @@ import {
 } from "@expo-google-fonts/quicksand";
 import { data } from "@/constants/data";
 import FloatingMessage from "@/components/FloatingMessage";
+import { Icon } from "@ant-design/react-native";
+import { Ionicons } from "@expo/vector-icons";
 
 const Homepage = () => {
   const [activeCategory, setActiveCategory] = useState(null);
@@ -68,11 +71,18 @@ const Homepage = () => {
                 Ho Chi Minh City
               </Text>
             </View>
+            <TouchableOpacity style={styles.iconNoti}
+              onPress={() => {
+                nav.navigate("Notification");
+              }}>
+              <Ionicons name="notifications-outline" size={30} color="black" />
+            </TouchableOpacity>
             <Image
               source={require("../../constants/avatar.png")}
               style={styles.avatar}
               resizeMode="contain"
             />
+            
           </View>
 
           <TouchableOpacity style={styles.searchLocation} 
