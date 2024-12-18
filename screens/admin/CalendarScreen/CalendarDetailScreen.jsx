@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, TouchableOpacity, Text, Alert, StyleSheet } from "react-native";
+import { View, TouchableOpacity, Text, Alert, StyleSheet, Image } from "react-native";
 import { Agenda } from "react-native-calendars";
 import EditIcon from "react-native-vector-icons/MaterialIcons";
 import DeleteIcon from "react-native-vector-icons/MaterialIcons";
@@ -17,7 +17,7 @@ const CalendarDetailScreen = () => {
   const loadItems = (day) => {
     setTimeout(() => {
       const newItems = { ...items };
-      const predefinedDates = ["2024-12-12", "2024-12-13", "2024-12-14"];
+      const predefinedDates = ["2024-12-18", "2024-12-19", "2024-12-20"];
 
       predefinedDates.forEach((strTime) => {
         if (!newItems[strTime]) {
@@ -60,28 +60,31 @@ const CalendarDetailScreen = () => {
           style={styles.item}
           onPress={() => Alert.alert(item.name)}
         >
-          <View>
-            <Text style={styles.timing}>
-              {item.start} - {item.end}
-            </Text>
-            <Text style={styles.name}>{item.name}</Text>
-            <Text style={styles.type}>{item.type}</Text>
-            <View style={{ flexDirection: "row" }}>
-              <EditIcon.Button
-                name="edit"
-                size={20}
-                backgroundColor="white"
-                color="red"
-                onPress={() => Alert.alert("Edit")}
-              />
-              <DeleteIcon.Button
-                name="delete"
-                size={20}
-                backgroundColor="white"
-                color="red"
-                onPress={() => deleteItem(item)}
-              />
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <View style={{ flex: 1, marginLeft: 10 }}>
+              <Text style={styles.timing}>
+                {item.start} - {item.end}
+              </Text>
+              <Text style={styles.name}>{item.name}</Text>
+              <Text style={styles.type}>{item.type}</Text>
+              <View style={{ flexDirection: "row", marginTop: 5 }}>
+                <EditIcon.Button
+                  name="edit"
+                  size={20}
+                  backgroundColor="white"
+                  color="red"
+                  onPress={() => Alert.alert("Edit")}
+                />
+                <DeleteIcon.Button
+                  name="delete"
+                  size={20}
+                  backgroundColor="white"
+                  color="red"
+                  onPress={() => deleteItem(item)}
+                />
+              </View>
             </View>
+            <Image source={avatar} style={styles.avatar} />
           </View>
         </TouchableOpacity>
       )}
@@ -121,5 +124,10 @@ const styles = StyleSheet.create({
   },
   type: {
     color: "#03A9F4",
+  },
+  avatar: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
   },
 });
