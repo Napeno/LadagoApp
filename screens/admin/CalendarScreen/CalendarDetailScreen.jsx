@@ -4,15 +4,51 @@ import { Agenda } from "react-native-calendars";
 import EditIcon from "react-native-vector-icons/MaterialIcons";
 import DeleteIcon from "react-native-vector-icons/MaterialIcons";
 import avatar from "../../../constants/avatar2.png";
+import {getForecastModel} from "../../../api/forecast"
 
 const timeToString = (time) => {
   const date = new Date(time);
   return date.toISOString().split("T")[0];
 };
 
-const CalendarDetailScreen = () => {
+const CalendarDetailScreen = ({route}) => {
   const [items, setItems] = useState({});
   const [selected, setSelected] = useState(timeToString(Date.now()));
+  const [dayColors, setDayColors] = useState({});
+  const [forecast, setForecast] = useState([]);
+ 
+  const handleGenerateForcast = async() => {
+    const steps = 364;
+    try {
+      const response = await getForecastModel(steps);
+      console.log('forecast data: ', response?.forecast);
+      setForecast(response?.forecast);
+      // navigation.navigate("CALENDARDETAIL", { forecast: response?.forecast });
+    } catch (error) {
+      console.error("Error:", error.response ? error.response.data : error.message);
+    }
+  }
+
+  useEffect(() => {
+    const fetchForecast = async () => {
+      await handleGenerateForcast();
+    };
+    fetchForecast();
+  }, []);
+
+  useEffect(() => {
+    const colors = {};
+    forecast.forEach((entry) => {
+      if (entry.value < 30) {
+        colors[entry.date] = "green";
+      } else if (entry.value < 50) {
+        colors[entry.date] = "orange";
+      } else {
+        colors[entry.date] = "red";
+      }
+    });
+    setDayColors(colors);
+  }, []);
 
   const loadItems = (day) => {
     setTimeout(() => {
@@ -99,6 +135,16 @@ const CalendarDetailScreen = () => {
         selected={selected}
         onDayPress={(date) => setSelected(date.dateString)}
         renderItem={renderItem}
+        theme={{
+          selectedDayBackgroundColor: "blue",
+          calendarBackground: "#f1f2f6",
+          agendaDayTextColor: "red",
+          agendaDayNumColor: (day) => dayColors[day] || "black",
+        }}
+        markedDates={Object.keys(dayColors).reduce((acc, date) => {
+          acc[date] = { marked: true, dotColor: dayColors[date] || "red" }; // Áp dụng màu từ dayColors
+          return acc;
+        }, {})}
       />
     </View>
   );
