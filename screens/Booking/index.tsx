@@ -5,9 +5,7 @@ import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import Fontisto from "@expo/vector-icons/Fontisto";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { useRef } from "react";
 import BottomSheetCal from "./components/BottomSheetCal";
-import BottomSheet from "@gorhom/bottom-sheet";
 import { useState } from "react";
 import {
   useFonts,
@@ -24,9 +22,11 @@ import OverLay from "./components/Overlay";
 import BottomSheetPeople from "./components/BottomSheetPeople";
 import { useNavigation } from "@react-navigation/native";
 import { useBooking } from "./useBooking";
-
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/reduxStore";
+import { UseSelector } from "react-redux";
 const Booking = () => {
-  const { date } = useBooking()
+  const bookingState = useSelector((state: RootState) => state.booking);
   const [isSheetCalVisible, setIsSheetCalVisible] = useState(false);
   const [isSheetPeopleVisible, setIsSheetPeopleVisible] = useState(false);
   let [fontsLoaded] = useFonts({
@@ -46,7 +46,6 @@ const Booking = () => {
     }
   };
   const nav = useNavigation();
-
   return (
     <GestureHandlerRootView>
       <ScrollView
@@ -105,7 +104,9 @@ const Booking = () => {
           <View style={styles.tripDetails}>
             <View style={styles.tripDetail}>
               <Text style={styles.tripDetailTitle}>Date</Text>
-              <Text style={styles.tripDetailText}>{date}</Text>
+              <Text style={styles.tripDetailText}>
+                {bookingState.date.toDateString()}
+              </Text>
             </View>
             <TouchableOpacity
               onPress={() => {
@@ -119,7 +120,7 @@ const Booking = () => {
             <View>
               <Text style={styles.tripDetailTitle}>Room and passenger</Text>
               <Text style={styles.tripDetailText}>
-                1 room - 2 passenger - 0 children
+                {`${bookingState.room} room - ${bookingState.adult} passenger - ${bookingState.children} children`}
               </Text>
             </View>
             <TouchableOpacity
@@ -177,7 +178,9 @@ const Booking = () => {
             <Text style={{ color: "'rgba(0, 0, 0, 0.4)'" }}>Email address</Text>
           </View>
           <View style={{ display: "flex", gap: 10 }}>
-            <Text style={[{ fontFamily: "Quicksand_500Medium" }]}>Card number</Text>
+            <Text style={[{ fontFamily: "Quicksand_500Medium" }]}>
+              Card number
+            </Text>
             <Text style={{ color: "'rgba(0, 0, 0, 0.4)'" }}>
               1234 1234 1234 1234
             </Text>
@@ -191,7 +194,9 @@ const Booking = () => {
             }}
           >
             <View style={{ display: "flex", gap: 10 }}>
-              <Text style={[{ fontFamily: "Quicksand_500Medium" }]}>Expiration</Text>
+              <Text style={[{ fontFamily: "Quicksand_500Medium" }]}>
+                Expiration
+              </Text>
               <Text style={{ color: "'rgba(0, 0, 0, 0.4)'" }}>MM/YY</Text>
             </View>
             <View style={{ display: "flex", gap: 10 }}>

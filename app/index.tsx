@@ -15,12 +15,13 @@ import StepSevenScreen from "../screens/admin/CreatingPlace/StepSevenScreen";
 import StepEightScreen from "../screens/admin/CreatingPlace/StepEightScreen";
 import StepNineScreen from "../screens/admin/CreatingPlace/StepNineScreen";
 import StepTenScreen from "../screens/admin/CreatingPlace/StepTenScreen";
-
 import CalendarMonthScreen from "../screens/admin/CalendarScreen/CalendarMonthScreen";
 import CalendarDetailScreen from "../screens/admin/CalendarScreen/CalendarDetailScreen";
-
+import ChatDetailScreen from '../screens/user/ChatDetailScreen'
 import BottomTabs from "../tabs/BottomTabs";
 import AdminBottomTabs from "../tabs/AdminBottomTabs";
+
+import CameraScreen from '../screens/user/CameraScreen'
 
 import { auth } from "../firebase";
 import { onAuthStateChanged } from "firebase/auth";
@@ -36,8 +37,13 @@ import SearchingScreen from "@/screens/user/searchScreen";
 import Booking from "@/screens/Booking";
 import Confirm from "@/screens/Booking/ConfirmScreen";
 import ChatBot from "@/screens/ChatBot";
+
 // Notification
 import NotificationScreen from "@/screens/user/Noti"
+
+
+import { Provider } from "react-redux";
+import { store } from "../store/reduxStore";
 
 const Stack = createNativeStackNavigator();
 
@@ -60,6 +66,7 @@ const App = () => {
   }
 
   return (
+    <Provider store={store}>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         {user ? (
           <>
@@ -67,8 +74,9 @@ const App = () => {
             <Stack.Screen name="MAIN" component={BottomTabs} />
             <Stack.Screen name="ADMIN" component={AdminBottomTabs} />
             <Stack.Screen name="Room Detail" component={RoomDetail} />
-            {/* <Stack.Screen name="CHAT" component={ChatScreen} /> */}
+            <Stack.Screen name="CHATDETAIL" component={ChatDetailScreen} />
             <Stack.Screen name="MESSAGE" component={MessageScreen} />
+            {/* <Stack.Screen name="CHAT" component={ChatScreen} /> */}
             <Stack.Screen name="Amenities" component={AmenitiesScreen} />
             <Stack.Screen name="Search" component={SearchingScreen} />
             <Stack.Screen name="Notification" component={NotificationScreen} />
@@ -104,11 +112,14 @@ const App = () => {
             name="Chat Bot"
             component={ChatBot}
           />
+          <Stack.Screen name="LOGIN" component={LoginScreen} />
+
         </>
       ) : (
         <Stack.Screen name="LOGIN" component={LoginScreen} />
         
       )}
+      <Stack.Screen name="CAMERA" component={CameraScreen} />
       <Stack.Screen name="SignUp" component={SignUpScreen} />
       <Stack.Screen name="CREATE" component={Introduction} />
       <Stack.Screen name="PROFILEU" component={ProfileScreenUser} />
@@ -125,7 +136,8 @@ const App = () => {
       <Stack.Screen name="STEPTEN" component={StepTenScreen} />
       <Stack.Screen name="CALENDARMONTH" component={CalendarMonthScreen} />
       <Stack.Screen name="CALENDARDETAIL" component={CalendarDetailScreen} />
-    </Stack.Navigator>
+      </Stack.Navigator>
+    </Provider>
   );
 };
 

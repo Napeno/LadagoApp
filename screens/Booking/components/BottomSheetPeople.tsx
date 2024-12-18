@@ -6,6 +6,16 @@ import { TouchableOpacity } from "react-native";
 import CounterButton from "./CounterButton";
 import { Switch } from "react-native";
 import {
+  increaseAdult,
+  decreaseAdult,
+  setBringPet,
+  increaseChildren,
+  decreaseChildren,
+  increaseRoom,
+  decreaseRoom,
+  setDate,
+} from "@/store/reduxStore";
+import {
   useFonts,
   Quicksand_300Light,
   Quicksand_400Regular,
@@ -17,15 +27,38 @@ import { useBooking } from "../useBooking";
 type Props = {
   handleSheetChange: (index: number) => void;
 };
-
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/store/reduxStore";
 const BottomSheetPeople = ({ handleSheetChange }: Props) => {
-  const {adult,children,random} =useBooking()
-  const [isEnabled, setIsEnabled] = useState(false);
-  useEffect(() => {
-    console.log("random in BottomSheetPeople: ",random)
-  })
-  const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
+  const bookingState = useSelector((state: RootState) => state.booking);
+  const dispatch = useDispatch();
+  const toggleSwitch = () => {
+    dispatch(setBringPet());
+  };
   const bottomSheetRef = useRef<BottomSheet>(null);
+
+  const handleIncreaseAdult = () => {
+    dispatch(increaseAdult());
+  };
+
+  const handleDecreaseAdult = () => {
+    dispatch(decreaseAdult());
+  };
+
+  const handleIncreaseRoom = () => {
+    dispatch(increaseRoom());
+  };
+
+  const handleDecreaseRoom = () => {
+    dispatch(decreaseRoom());
+  };
+
+  const handleIncreaseChildren = () => {
+    dispatch(increaseChildren());
+  };
+  const handleDecreaseChildren = () => {
+    dispatch(decreaseChildren());
+  };
 
   return (
     <BottomSheet
@@ -42,25 +75,37 @@ const BottomSheetPeople = ({ handleSheetChange }: Props) => {
         </View>
         <View style={styles.row}>
           <Text style={styles.text}>Room</Text>
-          <CounterButton number={0} />
+          <CounterButton
+            number={bookingState.room}
+            handleDecrease={handleDecreaseRoom}
+            handleIncrease={handleIncreaseRoom}
+          />
         </View>
         <View style={styles.row}>
           <Text style={styles.text}>Adult</Text>
-          <CounterButton number={adult}/>
+          <CounterButton
+            number={bookingState.adult}
+            handleDecrease={handleDecreaseAdult}
+            handleIncrease={handleIncreaseAdult}
+          />
         </View>
         <View style={styles.row}>
           <View>
             <Text style={styles.text}>Children</Text>
             <Text style={{ color: "#A19E9F" }}>0 - 17 years old </Text>
           </View>
-          <CounterButton number={children}/>
+          <CounterButton
+            number={bookingState.children}
+            handleDecrease={handleDecreaseChildren}
+            handleIncrease={handleIncreaseChildren}
+          />
         </View>
         <View style={styles.row}>
           <Text style={styles.text}>Bring your pet</Text>
           <Switch
             trackColor={{ false: "#767577", true: "#34C759" }}
             onValueChange={toggleSwitch}
-            value={isEnabled}
+            value={bookingState.bringPet}
           />
         </View>
         <TouchableOpacity style={[styles.btn]}>

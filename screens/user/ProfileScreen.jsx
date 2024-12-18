@@ -46,7 +46,8 @@ const ProfileScreen = ({ navigation }) => {
     const steps = 364;
     try {
       const response = await getForecastModel(steps);
-      console.log('forecast data: ', response);
+      console.log('forecast data: ', response?.forecast);
+      // navigation.navigate("CALENDARDETAIL", { forecast: response?.forecast });
     } catch (error) {
       console.error("Error:", error.response ? error.response.data : error.message);
     }
@@ -141,7 +142,11 @@ const ProfileScreen = ({ navigation }) => {
             >
               Setting
             </Text>
+            <Pressable 
+            onPress={() => navigation.navigate('CAMERA')}
+            >
             <View style={styles.sectionBtn}>
+            
               <Image
                 style={{
                   width: 40,
@@ -151,7 +156,6 @@ const ProfileScreen = ({ navigation }) => {
                 source={user}
                 resizeMode="contain"
               />
-
               <Text
                 style={{
                   fontSize: 16,
@@ -173,6 +177,7 @@ const ProfileScreen = ({ navigation }) => {
                 resizeMode="contain"
               />
             </View>
+            </Pressable>
 
             <View
               style={{
@@ -235,6 +240,7 @@ const ProfileScreen = ({ navigation }) => {
                 source={fileIcon}
                 resizeMode="contain"
               />
+         
 
               <Text
                 style={{
@@ -536,7 +542,7 @@ const ProfileScreen = ({ navigation }) => {
             </Text>
           </Pressable>
 
-          <Pressable
+          {/* <Pressable
             style={{
               backgroundColor: "#0F1035",
               width: 280,
@@ -569,7 +575,7 @@ const ProfileScreen = ({ navigation }) => {
             >
               Generate forcast date
             </Text>
-          </Pressable>
+          </Pressable> */}
         </View>
       </ScrollView>
     </SafeAreaView>
