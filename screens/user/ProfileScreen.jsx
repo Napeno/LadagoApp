@@ -142,10 +142,11 @@ const ProfileScreen = ({ navigation }) => {
             >
               Setting
             </Text>
-            <View style={styles.sectionBtn}>
             <Pressable 
             onPress={() => navigation.navigate('CAMERA')}
             >
+            <View style={styles.sectionBtn}>
+            
               <Image
                 style={{
                   width: 40,
@@ -175,8 +176,8 @@ const ProfileScreen = ({ navigation }) => {
                 source={arrow}
                 resizeMode="contain"
               />
-            </Pressable>
             </View>
+            </Pressable>
 
             <View
               style={{
