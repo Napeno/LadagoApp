@@ -101,6 +101,8 @@ const App = () => {
             name="Chat Bot"
             component={ChatBot}
           />
+          <Stack.Screen name="LOGIN" component={LoginScreen} />
+
         </>
       ) : (
         <Stack.Screen name="LOGIN" component={LoginScreen} />
