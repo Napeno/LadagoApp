@@ -12,23 +12,26 @@ export default StyleSheet.create({
     height: "100%",
     paddingHorizontal: 20,
   },
-  iconNoti:{
-    marginLeft: 165,
+  iconNoti: {
+    marginLeft: 0,
+    paddingRight: 8,
   },
 
-  locationWrap: {},
+  locationWrap: {
+    width: '75%'
+  },
 
   layerWrap: {
     marginBottom: 16,
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "flex-start",
+    justifyContent: "space-between",
   },
 
   avatar: {
     width: 42,
     height: 42,
-    marginLeft: 15,
+    marginLeft: 8, 
   },
 
   searchLocation: {
