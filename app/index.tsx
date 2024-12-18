@@ -21,6 +21,8 @@ import ChatDetailScreen from '../screens/user/ChatDetailScreen'
 import BottomTabs from "../tabs/BottomTabs";
 import AdminBottomTabs from "../tabs/AdminBottomTabs";
 
+import CameraScreen from '../screens/user/CameraScreen'
+
 import { auth } from "../firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
@@ -110,6 +112,7 @@ const App = () => {
         <Stack.Screen name="LOGIN" component={LoginScreen} />
         
       )}
+      <Stack.Screen name="CAMERA" component={CameraScreen} />
       <Stack.Screen name="SignUp" component={SignUpScreen} />
       <Stack.Screen name="CREATE" component={Introduction} />
       <Stack.Screen name="PROFILEU" component={ProfileScreenUser} />

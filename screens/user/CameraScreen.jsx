@@ -11,7 +11,7 @@ export default function CameraScreen() {
   const [boundingBoxes, setBoundingBoxes] = useState([]);
   const [isProcessing, setIsProcessing] = useState(false);
   const cameraRef = useRef(null);
-  const SERVER_URL = "http://192.168.223.152:5000/detect";
+  const SERVER_URL = "http://192.168.223.51:5001/detect";
 
   useEffect(() => {
     if (!permission) requestPermission();
