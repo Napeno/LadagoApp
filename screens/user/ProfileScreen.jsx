@@ -542,7 +542,7 @@ const ProfileScreen = ({ navigation }) => {
             </Text>
           </Pressable>
 
-          <Pressable
+          {/* <Pressable
             style={{
               backgroundColor: "#0F1035",
               width: 280,
@@ -575,7 +575,7 @@ const ProfileScreen = ({ navigation }) => {
             >
               Generate forcast date
             </Text>
-          </Pressable>
+          </Pressable> */}
         </View>
       </ScrollView>
     </SafeAreaView>
