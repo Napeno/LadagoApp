@@ -34,13 +34,17 @@ const Introduction = ({ navigation }) => {
     return null;
   }
 
-  const backNav = "Profile";
+  const backNav = "ADDHOTEL";
   const nextNav = "STEPONE";
 
   return (
     <SafeAreaView style={styles.safeAreaView}>
       <View style={styles.viewContainer}>
-        <Image style={styles.closeIcon} source={close} resizeMode="cover" />
+        <Pressable
+          onPress={() => navigation.navigate('ADDHOTEL')}
+        >
+          <Image style={styles.closeIcon} source={close} resizeMode="cover" />
+        </Pressable>
 
         <Image style={styles.house} source={house} resizeMode="cover" />
 
@@ -78,6 +82,7 @@ const Introduction = ({ navigation }) => {
             navigation={navigation}
             backNav={backNav}
             nextNav={nextNav}
+            currentPage={1}
           />
         </View>
       </View>

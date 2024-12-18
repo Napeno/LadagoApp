@@ -37,7 +37,7 @@ import SearchingScreen from "@/screens/user/searchScreen";
 import Booking from "@/screens/Booking";
 import Confirm from "@/screens/Booking/ConfirmScreen";
 import ChatBot from "@/screens/ChatBot";
-
+import CreateScreen from "@/screens/admin/CreateScreen";
 // Notification
 import NotificationScreen from "@/screens/user/Noti"
 
@@ -80,6 +80,11 @@ const App = () => {
             <Stack.Screen name="Amenities" component={AmenitiesScreen} />
             <Stack.Screen name="Search" component={SearchingScreen} />
             <Stack.Screen name="Notification" component={NotificationScreen} />
+            <Stack.Screen
+              name="ADDHOTEL"
+              component={CreateScreen}
+            />
+
 
             <Stack.Screen
               options={{ headerShown: true }}

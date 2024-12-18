@@ -536,40 +536,6 @@ const ProfileScreen = ({ navigation }) => {
             </Text>
           </Pressable>
 
-          <Pressable
-            style={{
-              backgroundColor: "#0F1035",
-              width: 280,
-              height: 59,
-              borderRadius: 28,
-              flexDirection: "row",
-              justifyContent: "center",
-              alignSelf: "center",
-              alignItems: "center",
-            }}
-            onPress={
-             () => handleGenerateForcast()
-            }
-          >
-            <Image
-              style={{
-                width: 30,
-                height: 30,
-                marginEnd: 8,
-              }}
-              source={switchIcon}
-              resizeMode="contain"
-            />
-            <Text
-              style={{
-                fontSize: 18,
-                fontFamily: "Quicksand_600SemiBold",
-                color: "white",
-              }}
-            >
-              Generate forcast date
-            </Text>
-          </Pressable>
         </View>
       </ScrollView>
     </SafeAreaView>

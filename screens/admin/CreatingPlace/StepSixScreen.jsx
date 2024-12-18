@@ -117,7 +117,11 @@ const StepSixScreen = ({ route, navigation }) => {
       <ScrollView contentContainerStyle={styles.scrollView}>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View style={styles.viewContainer}>
-            <Image style={styles.closeIcon} source={close} resizeMode="cover" />
+            <Pressable
+              onPress={() => navigation.navigate('ADDHOTEL')}
+            >
+              <Image style={styles.closeIcon} source={close} resizeMode="cover" />
+            </Pressable>
 
             <Text style={styles.titleStep}>Step 6</Text>
             <Text style={styles.titleInfo}>Add photos of place</Text>
@@ -176,6 +180,7 @@ const StepSixScreen = ({ route, navigation }) => {
         backNav={backNav}
         nextNav={nextNav}
         formData={formData}
+        currentPage={7}
       />
     </SafeAreaView>
   );

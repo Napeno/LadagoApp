@@ -13,7 +13,7 @@ export default StyleSheet.create({
     paddingHorizontal: 20,
   },
   iconNoti:{
-    marginLeft: 140,
+    marginLeft: 165,
   },
 
   locationWrap: {},
@@ -28,7 +28,7 @@ export default StyleSheet.create({
   avatar: {
     width: 42,
     height: 42,
-    marginHorizontal: 15,
+    marginLeft: 15,
   },
 
   searchLocation: {
