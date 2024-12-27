@@ -57,8 +57,7 @@ const StepThreeScreen = ({ route, navigation }) => {
   const backNav = "STEPTWO";
   const nextNav = "STEPFOUR";
 
-  const [formData, setFormData] = useState([
-  ]);
+  const [formData, setFormData] = useState([]);
 
   useEffect(() => {
     if (formDataRetrieve) {

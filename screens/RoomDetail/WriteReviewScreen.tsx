@@ -8,7 +8,6 @@ const WriteReviewScreen = () => {
   const [image, setImage] = useState<string | null>(null);
 
   const pickImage = async () => {
-    // No permissions request is necessary for launching the image library
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ["images", "videos"],
       allowsEditing: true,

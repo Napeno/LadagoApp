@@ -1,50 +1,64 @@
-import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Image, ActivityIndicator } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  TouchableOpacity,
+  Image,
+  ActivityIndicator,
+} from "react-native";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import Fontisto from "@expo/vector-icons/Fontisto";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useEffect, useState } from "react";
 import { Hotel } from "@/types/type";
-import { doc ,getDoc} from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import { firestore } from "@/firebase";
 const data = {
-  imageUrl: "https://motogo.vn/wp-content/uploads/2023/05/homestay-da-lat-rung-thong-3.jpg",
+  imageUrl:
+    "https://motogo.vn/wp-content/uploads/2023/05/homestay-da-lat-rung-thong-3.jpg",
   name: "Sunny house with lake view",
   address: "Bao Loc,Vietnam",
-}
+};
 const RoomDetail = () => {
   const nav = useNavigation();
-  const [hotel, setHotel] = useState<Hotel | null>(null); 
-  const [loading,setLoading] =useState<boolean>(false)
+  const [hotel, setHotel] = useState<Hotel | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
   const hotelId = "I2xifyCEJmV034lLfcpj";
   useEffect(() => {
     const getHotelById = async () => {
-      setLoading(true)
+      setLoading(true);
       const hotelDocRef = doc(firestore, "hotel", hotelId);
 
       try {
         const hotelDocSnapshot = await getDoc(hotelDocRef);
 
         if (hotelDocSnapshot.exists()) {
-          const hotelData = hotelDocSnapshot.data() as Hotel; 
-          setHotel(hotelData); 
+          const hotelData = hotelDocSnapshot.data() as Hotel;
+          setHotel(hotelData);
         } else {
           console.log("No hotel found with the specified ID.");
         }
       } catch (error) {
         console.error("Error fetching hotel:", error);
       }
-      setLoading(false)
+      setLoading(false);
     };
 
     getHotelById();
   }, [hotelId]);
-  if (loading) return <ActivityIndicator/>
+  if (loading) return <ActivityIndicator />;
   return (
-    <ScrollView style={[styles.root]} showsVerticalScrollIndicator={false} contentContainerStyle={{flexGrow: 1,  gap:20 }} keyboardShouldPersistTaps="handled">
+    <ScrollView
+      style={[styles.root]}
+      showsVerticalScrollIndicator={false}
+      contentContainerStyle={{ flexGrow: 1, gap: 20 }}
+      keyboardShouldPersistTaps="handled"
+    >
       <View style={[styles.iconListContainer]}>
         <TouchableOpacity
           onPress={() => nav.navigate("MAIN")}
@@ -139,14 +153,14 @@ const RoomDetail = () => {
 
         <View style={[styles.ownerContainer]}>
           <View style={[styles.ownerCard]}>
-            <View style ={[styles.ownerInfo]}>
-            <View style={[styles.ownerAvatar]}>
-              <Text style={[styles.ownerInitial]}>B</Text>
-            </View>
             <View style={[styles.ownerInfo]}>
-              <Text style={[styles.ownerName]}>Ben</Text>
-              <Text style={[styles.ownerRole]}>Reputable host</Text>
-            </View>
+              <View style={[styles.ownerAvatar]}>
+                <Text style={[styles.ownerInitial]}>B</Text>
+              </View>
+              <View style={[styles.ownerInfo]}>
+                <Text style={[styles.ownerName]}>Ben</Text>
+                <Text style={[styles.ownerRole]}>Reputable host</Text>
+              </View>
             </View>
             <View style={[styles.ownerStats]}>
               <Text style={[styles.statItem]}>
@@ -173,11 +187,7 @@ const RoomDetail = () => {
               <Text style={styles.offerText}>Pool</Text>
             </View>
             <View style={styles.offerItem}>
-              <MaterialCommunityIcons
-                name="stove"
-                size={24}
-                color="black"
-              />
+              <MaterialCommunityIcons name="stove" size={24} color="black" />
               <Text style={styles.offerText}>Kitchen</Text>
             </View>
             <View style={styles.offerItem}>
@@ -189,30 +199,28 @@ const RoomDetail = () => {
               <Text style={styles.offerText}>Parking</Text>
             </View>
             <View style={styles.offerItem}>
-              <MaterialCommunityIcons
-                name="cctv"
-                size={24}
-                color="black"
-              />
+              <MaterialCommunityIcons name="cctv" size={24} color="black" />
               <Text style={styles.offerText}>Security camera</Text>
             </View>
           </View>
-          <TouchableOpacity style={styles.showAllButton} 
+          <TouchableOpacity
+            style={styles.showAllButton}
             onPress={() => {
               nav.navigate("Amenities" as never);
-            }}>
+            }}
+          >
             <Text style={[styles.showAll]}>Show all</Text>
-
           </TouchableOpacity>
         </View>
 
         <View style={[styles.divider]} />
       </View>
-      
+
       <View style={[styles.priceBookContainer]}>
         <Text style={[styles.price]}>700k VND/night</Text>
-        <TouchableOpacity style={[styles.bookBtn]}
-                  onPress={() => nav.navigate("Booking" as never)}
+        <TouchableOpacity
+          style={[styles.bookBtn]}
+          onPress={() => nav.navigate("Booking" as never)}
         >
           <Text style={[styles.bookNow]}>Book now</Text>
         </TouchableOpacity>
@@ -335,8 +343,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
 
-
-
   ownerContainer: {
     paddingHorizontal: 10,
     marginTop: 10,
@@ -368,7 +374,7 @@ const styles = StyleSheet.create({
     //marginTop: 10,
     alignItems: "center", // Align text to the left
     marginLeft: 5, // Added margin to separate from avatar
-    flexDirection:"column",
+    flexDirection: "column",
   },
   ownerName: {
     fontSize: 20, // Changed font size
@@ -385,7 +391,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "#11111",
     textAlign: "left", // Added to align text inside each item
-    fontWeight:"400",
+    fontWeight: "400",
     marginLeft: 30,
   },
 
@@ -401,7 +407,7 @@ const styles = StyleSheet.create({
   },
   offerList: {
     flexDirection: "column",
-    gap: 10, 
+    gap: 10,
   },
   offerItem: {
     fontSize: 16,
@@ -414,10 +420,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   showAll: {
-    color: "black", 
+    color: "black",
     textDecorationLine: "none", // Bỏ gạch chân
-    fontWeight: '600',
-    textAlign: 'center'
+    fontWeight: "600",
+    textAlign: "center",
   },
   showAllButton: {
     marginTop: 10,
@@ -426,7 +432,6 @@ const styles = StyleSheet.create({
     borderRadius: 5, // Bo góc
     paddingVertical: 10, // Thêm padding dọc
     paddingHorizontal: 80, // Thêm padding ngang
-    alignSelf: 'center',
+    alignSelf: "center",
   },
-  
 });

@@ -17,7 +17,7 @@ import StepNineScreen from "../screens/admin/CreatingPlace/StepNineScreen";
 import StepTenScreen from "../screens/admin/CreatingPlace/StepTenScreen";
 import CalendarMonthScreen from "../screens/admin/CalendarScreen/CalendarMonthScreen";
 import CalendarDetailScreen from "../screens/admin/CalendarScreen/CalendarDetailScreen";
-import ChatDetailScreen from '../screens/user/ChatDetailScreen'
+import ChatDetailScreen from "../screens/user/ChatDetailScreen";
 import BottomTabs from "../tabs/BottomTabs";
 import AdminBottomTabs from "../tabs/AdminBottomTabs";
 
@@ -83,47 +83,46 @@ const App = () => {
               component={ReviewScreen}
             />
 
-          <Stack.Screen
-            options={{ headerShown: true }}
-            name="Write Review"
-            component={WriteReviewScreen}
-          />
-          <Stack.Screen
-            options={{ headerShown: true }}
-            name="Booking"
-            component={Booking}
-          />
-          <Stack.Screen
-            options={{ headerShown: true }}
-            name="Confirm"
-            component={Confirm}
-          />
-          <Stack.Screen
-            options={{ headerShown: true }}
-            name="Chat Bot"
-            component={ChatBot}
-          />
-        </>
-      ) : (
-        <Stack.Screen name="LOGIN" component={LoginScreen} />
-        
-      )}
-      <Stack.Screen name="SignUp" component={SignUpScreen} />
-      <Stack.Screen name="CREATE" component={Introduction} />
-      <Stack.Screen name="PROFILEU" component={ProfileScreenUser} />
-      <Stack.Screen name="PROFILEA" component={ProfileScreenAdmin} />
-      <Stack.Screen name="STEPONE" component={StepOneScreen} />
-      <Stack.Screen name="STEPTWO" component={StepTwoScreen} />
-      <Stack.Screen name="STEPTHREE" component={StepThreeScreen} />
-      <Stack.Screen name="STEPFOUR" component={StepFourScreen} />
-      <Stack.Screen name="STEPFIVE" component={StepFiveScreen} />
-      <Stack.Screen name="STEPSIX" component={StepSixScreen} />
-      <Stack.Screen name="STEPSEVEN" component={StepSevenScreen} />
-      <Stack.Screen name="STEPEIGHT" component={StepEightScreen} />
-      <Stack.Screen name="STEPNINE" component={StepNineScreen} />
-      <Stack.Screen name="STEPTEN" component={StepTenScreen} />
-      <Stack.Screen name="CALENDARMONTH" component={CalendarMonthScreen} />
-      <Stack.Screen name="CALENDARDETAIL" component={CalendarDetailScreen} />
+            <Stack.Screen
+              options={{ headerShown: true }}
+              name="Write Review"
+              component={WriteReviewScreen}
+            />
+            <Stack.Screen
+              options={{ headerShown: true }}
+              name="Booking"
+              component={Booking}
+            />
+            <Stack.Screen
+              options={{ headerShown: true }}
+              name="Confirm"
+              component={Confirm}
+            />
+            <Stack.Screen
+              options={{ headerShown: true }}
+              name="Chat Bot"
+              component={ChatBot}
+            />
+          </>
+        ) : (
+          <Stack.Screen name="LOGIN" component={LoginScreen} />
+        )}
+        <Stack.Screen name="SignUp" component={SignUpScreen} />
+        <Stack.Screen name="CREATE" component={Introduction} />
+        <Stack.Screen name="PROFILEU" component={ProfileScreenUser} />
+        <Stack.Screen name="PROFILEA" component={ProfileScreenAdmin} />
+        <Stack.Screen name="STEPONE" component={StepOneScreen} />
+        <Stack.Screen name="STEPTWO" component={StepTwoScreen} />
+        <Stack.Screen name="STEPTHREE" component={StepThreeScreen} />
+        <Stack.Screen name="STEPFOUR" component={StepFourScreen} />
+        <Stack.Screen name="STEPFIVE" component={StepFiveScreen} />
+        <Stack.Screen name="STEPSIX" component={StepSixScreen} />
+        <Stack.Screen name="STEPSEVEN" component={StepSevenScreen} />
+        <Stack.Screen name="STEPEIGHT" component={StepEightScreen} />
+        <Stack.Screen name="STEPNINE" component={StepNineScreen} />
+        <Stack.Screen name="STEPTEN" component={StepTenScreen} />
+        <Stack.Screen name="CALENDARMONTH" component={CalendarMonthScreen} />
+        <Stack.Screen name="CALENDARDETAIL" component={CalendarDetailScreen} />
       </Stack.Navigator>
     </Provider>
   );

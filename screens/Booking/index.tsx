@@ -24,34 +24,33 @@ import BottomSheetPeople from "./components/BottomSheetPeople";
 import { useNavigation } from "@react-navigation/native";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/reduxStore";
-import {doc,getDoc} from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import { firestore } from "@/firebase";
 import { Hotel } from "@/types/type";
 
-
 const Booking = () => {
-  const [hotel, setHotel] = useState<Hotel | null>(null); 
-  const [loading,setLoading] =useState<boolean>(false)
+  const [hotel, setHotel] = useState<Hotel | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
   const hotelId = "I2xifyCEJmV034lLfcpj";
 
   useEffect(() => {
     const getHotelById = async () => {
-      setLoading(true)
+      setLoading(true);
       const hotelDocRef = doc(firestore, "hotel", hotelId);
 
       try {
         const hotelDocSnapshot = await getDoc(hotelDocRef);
 
         if (hotelDocSnapshot.exists()) {
-          const hotelData = hotelDocSnapshot.data() as Hotel; 
-          setHotel(hotelData); 
+          const hotelData = hotelDocSnapshot.data() as Hotel;
+          setHotel(hotelData);
         } else {
           console.log("No hotel found with the specified ID.");
         }
       } catch (error) {
         console.error("Error fetching hotel:", error);
       }
-      setLoading(false)
+      setLoading(false);
     };
 
     getHotelById();
@@ -76,7 +75,7 @@ const Booking = () => {
     }
   };
   const nav = useNavigation();
-  if (loading) return <ActivityIndicator/>
+  if (loading) return <ActivityIndicator />;
   return (
     <GestureHandlerRootView>
       <ScrollView
@@ -108,9 +107,7 @@ const Booking = () => {
                 size={20}
                 color="#365486"
               />
-              <Text style={styles.addressText}>
-                {hotel?.address}
-              </Text>
+              <Text style={styles.addressText}>{hotel?.address}</Text>
             </View>
             <View style={styles.dateContainer}>
               <Text style={styles.dateText}>6th June - 9th June,2024</Text>

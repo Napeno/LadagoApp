@@ -54,14 +54,14 @@ const PlaceListItem = ({
   price,
   stars,
 }) => {
-  const nav=useNavigation()
+  const nav = useNavigation();
   return (
     <View style={[styles.cardWrap, { marginBottom: 32 }]}>
       <Pressable
         // onPress={() => handleChangeCategory(isActive? null: title)}
         style={[styles.cardWrap]}
         onPress={() => {
-          nav.navigate("Room Detail")
+          nav.navigate("Room Detail");
         }}
       >
         <Image

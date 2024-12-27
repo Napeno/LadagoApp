@@ -75,9 +75,12 @@ const Homepage = () => {
             />
           </View>
 
-          <TouchableOpacity style={styles.searchLocation} 
+          <TouchableOpacity
+            style={styles.searchLocation}
             onPress={() => {
-                nav.navigate("Search");}}>
+              nav.navigate("Search");
+            }}
+          >
             <Image
               source={require("../../constants/searchIcon.png")}
               style={styles.searchIcon}

@@ -30,8 +30,8 @@ const BottomSheetCal = ({ handleSheetChange }: Props) => {
   }, [selectedDate]);
 
   const handleDate = (date: string) => {
-    dispatch(setDate(new Date(date)))
-  }
+    dispatch(setDate(new Date(date)));
+  };
   return (
     <BottomSheet
       onChange={handleSheetChange}
@@ -52,7 +52,7 @@ const BottomSheetCal = ({ handleSheetChange }: Props) => {
             fontfamily: "",
           }}
           markedDates={{
-            [selectedDate|| ""]: {
+            [selectedDate || ""]: {
               selected: true,
               selectedColor: "#365486",
               selectedTextColor: "#fff",

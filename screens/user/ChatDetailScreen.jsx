@@ -9,7 +9,13 @@ import {
   Image,
 } from "react-native";
 import { useRoute, useNavigation } from "@react-navigation/native";
-import { collection, addDoc, query, orderBy, onSnapshot } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  query,
+  orderBy,
+  onSnapshot,
+} from "firebase/firestore";
 import { firestore } from "../../firebase";
 import styles from "../../styles/chatdetail";
 
@@ -21,7 +27,10 @@ const ChatDetailScreen = () => {
   const [text, setText] = useState("");
 
   useEffect(() => {
-    const q = query(collection(firestore, "chats"), orderBy("createdAt", "desc"));
+    const q = query(
+      collection(firestore, "chats"),
+      orderBy("createdAt", "desc"),
+    );
 
     const unsubscribe = onSnapshot(q, (snapshot) => {
       const messagesFirestore = snapshot.docs
@@ -37,8 +46,10 @@ const ChatDetailScreen = () => {
         })
         .filter(
           (msg) =>
-            (msg.senderId === currentUserId && msg.receiverId === chatPartnerId) ||
-            (msg.senderId === chatPartnerId && msg.receiverId === currentUserId)
+            (msg.senderId === currentUserId &&
+              msg.receiverId === chatPartnerId) ||
+            (msg.senderId === chatPartnerId &&
+              msg.receiverId === currentUserId),
         );
 
       setMessages(messagesFirestore);
@@ -68,7 +79,9 @@ const ChatDetailScreen = () => {
       <View
         style={[
           styles.messageWrapper,
-          isCurrentUser ? styles.messageWrapperRight : styles.messageWrapperLeft,
+          isCurrentUser
+            ? styles.messageWrapperRight
+            : styles.messageWrapperLeft,
         ]}
       >
         {!isCurrentUser && (
@@ -108,10 +121,16 @@ const ChatDetailScreen = () => {
           <Text style={styles.status}>Online</Text>
         </View>
         <TouchableOpacity>
-          <Image source={require("../../constants/video_icon.png")} style={styles.icon} />
+          <Image
+            source={require("../../constants/video_icon.png")}
+            style={styles.icon}
+          />
         </TouchableOpacity>
         <TouchableOpacity>
-          <Image source={require("../../constants/call_icon.png")} style={styles.icon} />
+          <Image
+            source={require("../../constants/call_icon.png")}
+            style={styles.icon}
+          />
         </TouchableOpacity>
       </View>
 

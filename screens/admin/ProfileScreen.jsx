@@ -21,7 +21,7 @@ import suportCustomer from "../../constants/customerSupportIcon.png";
 import editIcon from "../../constants/editIcon.png";
 import switchIcon from "../../constants/switchIcon.png";
 import { logout } from "../../components/logout";
-import {getForecastModel} from "../../api/forecast"
+import { getForecastModel } from "../../api/forecast";
 
 import {
   useFonts,
@@ -42,15 +42,18 @@ const ProfileScreen = ({ navigation }) => {
     navigation.navigate("CREATE");
   };
 
-  const handleGenerateForcast = async() => {
+  const handleGenerateForcast = async () => {
     const steps = 364;
     try {
       const response = await getForecastModel(steps);
-      console.log('forecast data: ', response);
+      console.log("forecast data: ", response);
     } catch (error) {
-      console.error("Error:", error.response ? error.response.data : error.message);
+      console.error(
+        "Error:",
+        error.response ? error.response.data : error.message,
+      );
     }
-  }
+  };
 
   let [fontsLoaded] = useFonts({
     Quicksand_300Light,
@@ -512,9 +515,9 @@ const ProfileScreen = ({ navigation }) => {
               justifyContent: "center",
               alignSelf: "center",
               alignItems: "center",
-              marginBottom: 20
+              marginBottom: 20,
             }}
-            onPress={() => navigation.navigate('MAIN')}
+            onPress={() => navigation.navigate("MAIN")}
           >
             <Image
               style={{
@@ -547,9 +550,7 @@ const ProfileScreen = ({ navigation }) => {
               alignSelf: "center",
               alignItems: "center",
             }}
-            onPress={
-             () => handleGenerateForcast()
-            }
+            onPress={() => handleGenerateForcast()}
           >
             <Image
               style={{

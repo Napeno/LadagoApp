@@ -5,7 +5,6 @@ import LoginScreen from "./screens/LoginScreen";
 import { GestureHandlerRootView } from "react-native-gesture-handler"; // Import the GestureHandlerRootView
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 
-
 const Stack = createNativeStackNavigator();
 
 const App = () => {
