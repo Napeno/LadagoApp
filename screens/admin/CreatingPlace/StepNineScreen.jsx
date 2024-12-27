@@ -65,10 +65,12 @@ const StepNineScreen = ({ route, navigation }) => {
           }}
         >
           <View style={styles.viewContainer}>
-            <Pressable
-              onPress={() => navigation.navigate('ADMIN')}
-            >
-              <Image style={styles.closeIcon} source={close} resizeMode="cover" />
+            <Pressable onPress={() => navigation.navigate("ADMIN")}>
+              <Image
+                style={styles.closeIcon}
+                source={close}
+                resizeMode="cover"
+              />
             </Pressable>
 
             <Text style={styles.titleStep}>Step 9</Text>
@@ -88,8 +90,12 @@ const StepNineScreen = ({ route, navigation }) => {
                 />
                 <View style={styles.cardContent}>
                   <View style={styles.cardContentTent}>
-                    <Text style={styles.title} numberOfLines={1}>{formData.name}</Text>
-                    <Text style={styles.address} numberOfLines={1}>{formData.address}</Text>
+                    <Text style={styles.title} numberOfLines={1}>
+                      {formData.name}
+                    </Text>
+                    <Text style={styles.address} numberOfLines={1}>
+                      {formData.address}
+                    </Text>
                     <Text style={styles.price}>${formData.price}/ night</Text>
                   </View>
                   <View style={styles.badge}>

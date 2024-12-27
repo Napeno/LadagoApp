@@ -12,7 +12,15 @@ import { firestore } from "../firebase";
 import { collection, addDoc } from "firebase/firestore";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
-const BottomTabCreate = ({ navigation, backNav, nextNav, formData, isSubmit, isUploaded,currentPage }) => {
+const BottomTabCreate = ({
+  navigation,
+  backNav,
+  nextNav,
+  formData,
+  isSubmit,
+  isUploaded,
+  currentPage,
+}) => {
   let [fontsLoaded] = useFonts({
     Quicksand_300Light,
     Quicksand_400Regular,
@@ -98,17 +106,17 @@ const BottomTabCreate = ({ navigation, backNav, nextNav, formData, isSubmit, isU
         console.log(`Room uploaded: ${room.type}`);
       }
     } catch (error) {
-      console.error('Error hotel: ', error);      
+      console.error("Error hotel: ", error);
     }
-  }
+  };
 
   const barColors = Array.from({ length: 10 }, (_, index) => {
     if (index < currentPage - 1) {
-      return "#365486"; 
+      return "#365486";
     } else if (index === currentPage - 1) {
       return "half"; //
     } else {
-      return "#A8A8A8"; 
+      return "#A8A8A8";
     }
   });
   return (
@@ -118,8 +126,12 @@ const BottomTabCreate = ({ navigation, backNav, nextNav, formData, isSubmit, isU
           <View key={index} style={styles.Bar}>
             {color === "half" ? (
               <View style={styles.halfBarContainer}>
-                <View style={[styles.halfBar, { backgroundColor: "#365486" }]} />
-                <View style={[styles.halfBar, { backgroundColor: "#A8A8A8" }]} />
+                <View
+                  style={[styles.halfBar, { backgroundColor: "#365486" }]}
+                />
+                <View
+                  style={[styles.halfBar, { backgroundColor: "#A8A8A8" }]}
+                />
               </View>
             ) : (
               <View style={[styles.Bar, { backgroundColor: color }]} />

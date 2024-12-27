@@ -50,10 +50,12 @@ const StepTenScreen = ({ navigation }) => {
           }}
         >
           <View style={styles.viewContainer}>
-            <Pressable
-              onPress={() => navigation.navigate('ADMIN')}
-            >
-              <Image style={styles.closeIcon} source={close} resizeMode="cover" />
+            <Pressable onPress={() => navigation.navigate("ADMIN")}>
+              <Image
+                style={styles.closeIcon}
+                source={close}
+                resizeMode="cover"
+              />
             </Pressable>
 
             <Text style={styles.titleInfo}>

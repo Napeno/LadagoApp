@@ -8,7 +8,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
-import {data} from '../../../constants/data'
+import { data } from "../../../constants/data";
 import { SafeAreaView } from "react-native";
 import React, { useState, useEffect, useCallback } from "react";
 import styles from "../../../styles/CreatingPlace/stepfour";
@@ -112,10 +112,12 @@ const StepFourScreen = ({ route, navigation }) => {
       <ScrollView contentContainerStyle={styles.scrollView}>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View style={styles.viewContainer}>
-            <Pressable
-              onPress={() => navigation.navigate('ADMIN')}
-            >
-              <Image style={styles.closeIcon} source={close} resizeMode="cover" />
+            <Pressable onPress={() => navigation.navigate("ADMIN")}>
+              <Image
+                style={styles.closeIcon}
+                source={close}
+                resizeMode="cover"
+              />
             </Pressable>
             <Text style={styles.titleStep}>Step 4</Text>
 
@@ -144,7 +146,7 @@ const StepFourScreen = ({ route, navigation }) => {
         nextNav={nextNav}
         formData={formData}
         currentPage={5}
-        />
+      />
     </SafeAreaView>
   );
 };
