@@ -30,10 +30,9 @@ const RoomDetail = () => {
   const [hotel, setHotel] = useState<Hotel | null>(roomDetail);
   const [loading, setLoading] = useState<boolean>(false);
   const route = useRoute<RouteProp<RoomDetailRouteParams, "RoomDetail">>();
-  const docId = route.params?.docId
-  console.log("docId: ",docId)
-   useEffect(() => {
-    if (!docId) return; 
+  const docId = route.params?.docId;
+  useEffect(() => {
+    if (!docId) return;
 
     const getHotelById = async () => {
       setLoading(true);
@@ -227,7 +226,8 @@ const RoomDetail = () => {
         <Text style={[styles.price]}>700k VND/night</Text>
         <TouchableOpacity
           style={[styles.bookBtn]}
-          onPress={() => nav.navigate("Booking" as never)}
+          //@ts-ignore
+          onPress={() => nav.navigate("Booking", { docId: docId })}
         >
           <Text style={[styles.bookNow]}>Book now</Text>
         </TouchableOpacity>

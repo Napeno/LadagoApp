@@ -538,7 +538,6 @@ const ProfileScreen = ({ navigation }) => {
               Switch to visit mode
             </Text>
           </Pressable>
-
         </View>
       </ScrollView>
     </SafeAreaView>

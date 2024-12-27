@@ -117,10 +117,12 @@ const StepSixScreen = ({ route, navigation }) => {
       <ScrollView contentContainerStyle={styles.scrollView}>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View style={styles.viewContainer}>
-            <Pressable
-              onPress={() => navigation.navigate('ADMIN')}
-            >
-              <Image style={styles.closeIcon} source={close} resizeMode="cover" />
+            <Pressable onPress={() => navigation.navigate("ADMIN")}>
+              <Image
+                style={styles.closeIcon}
+                source={close}
+                resizeMode="cover"
+              />
             </Pressable>
 
             <Text style={styles.titleStep}>Step 6</Text>

@@ -6,6 +6,14 @@ interface BookingState {
   date: Date;
   room: number;
   bringPet: boolean;
+  hotelName: string | null;
+  payment: {
+    email: string | null;
+    cardNumber: string | null;
+    expiration: string | null;
+    country: string | null;
+    cvc: string | null;
+  };
 }
 
 const initialState: BookingState = {
@@ -14,6 +22,14 @@ const initialState: BookingState = {
   date: new Date(),
   room: 0,
   bringPet: true,
+  payment: {
+    email: null,
+    cardNumber: null,
+    expiration: null,
+    country: null,
+    cvc: null,
+  },
+  hotelName:null
 };
 
 const bookingSlice = createSlice({

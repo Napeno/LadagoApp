@@ -18,7 +18,7 @@ export default StyleSheet.create({
   },
 
   locationWrap: {
-    width: '75%'
+    width: "75%",
   },
 
   layerWrap: {
@@ -31,7 +31,7 @@ export default StyleSheet.create({
   avatar: {
     width: 42,
     height: 42,
-    marginLeft: 8, 
+    marginLeft: 8,
   },
 
   searchLocation: {

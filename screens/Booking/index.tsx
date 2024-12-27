@@ -27,16 +27,24 @@ import { RootState } from "../../store/reduxStore";
 import { doc, getDoc } from "firebase/firestore";
 import { firestore } from "@/firebase";
 import { Hotel } from "@/types/type";
+import { useRoute } from "@react-navigation/native";
+import { RouteProp } from "@react-navigation/native";
+import { TextInput } from "react-native";
+type BookingRouteParams = {
+  Booking: {
+    docId: string;
+  };
+};
 
 const Booking = () => {
   const [hotel, setHotel] = useState<Hotel | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
-  const hotelId = "I2xifyCEJmV034lLfcpj";
-
+  const route = useRoute<RouteProp<BookingRouteParams, "Booking">>();
+  const docId = route.params.docId;
   useEffect(() => {
     const getHotelById = async () => {
       setLoading(true);
-      const hotelDocRef = doc(firestore, "hotel", hotelId);
+      const hotelDocRef = doc(firestore, "hotel", docId);
 
       try {
         const hotelDocSnapshot = await getDoc(hotelDocRef);
@@ -54,7 +62,7 @@ const Booking = () => {
     };
 
     getHotelById();
-  }, [hotelId]);
+  }, [docId]);
   const bookingState = useSelector((state: RootState) => state.booking);
   const [isSheetCalVisible, setIsSheetCalVisible] = useState(false);
   const [isSheetPeopleVisible, setIsSheetPeopleVisible] = useState(false);
@@ -203,15 +211,13 @@ const Booking = () => {
           <Text style={styles.sectionTitle}>Payment Method</Text>
           <View style={{ display: "flex", gap: 10 }}>
             <Text style={[{ fontFamily: "Quicksand_500Medium" }]}>Email</Text>
-            <Text style={{ color: "'rgba(0, 0, 0, 0.4)'" }}>Email address</Text>
+            <TextInput style={{ color: "'rgba(0, 0, 0, 0.4)'" }} placeholder="Email address" />
           </View>
-          <View style={{ display: "flex", gap: 10 }}>
+          <View style={{ display: "flex", gap: 10 }}>   
             <Text style={[{ fontFamily: "Quicksand_500Medium" }]}>
               Card number
             </Text>
-            <Text style={{ color: "'rgba(0, 0, 0, 0.4)'" }}>
-              1234 1234 1234 1234
-            </Text>
+            <TextInput style={{ color: "'rgba(0, 0, 0, 0.4)'" }} placeholder="1234 1234 1234"/>
           </View>
           <View
             style={{
@@ -225,11 +231,11 @@ const Booking = () => {
               <Text style={[{ fontFamily: "Quicksand_500Medium" }]}>
                 Expiration
               </Text>
-              <Text style={{ color: "'rgba(0, 0, 0, 0.4)'" }}>MM/YY</Text>
+              <TextInput style={{ color: "'rgba(0, 0, 0, 0.4)'" }} placeholder="MM/YY" />
             </View>
             <View style={{ display: "flex", gap: 10 }}>
               <Text style={[{ fontFamily: "Quicksand_500Medium" }]}>CVC</Text>
-              <Text style={{ color: "'rgba(0, 0, 0, 0.4)'" }}>CVC</Text>
+              <TextInput style={{ color: "'rgba(0, 0, 0, 0.4)'" }} placeholder="CVC" />
             </View>
             <View>
               <Image
@@ -249,7 +255,7 @@ const Booking = () => {
 
           <View style={{ display: "flex", gap: 10 }}>
             <Text style={[{ fontFamily: "Quicksand_500Medium" }]}>Country</Text>
-            <Text style={{ color: "'rgba(0, 0, 0, 0.4)'" }}>Viet Nam</Text>
+            <TextInput style={{ color: "'rgba(0, 0, 0, 0.4)'" }} placeholder="Viet Nam" />
           </View>
         </View>
         <SeperateBar />

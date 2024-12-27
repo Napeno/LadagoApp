@@ -72,10 +72,10 @@ export default StyleSheet.create({
     padding: 14,
   },
 
-  roomTitle:{
+  roomTitle: {
     fontSize: 14,
     fontFamily: "Quicksand_600SemiBold",
-    marginBottom: 18
+    marginBottom: 18,
   },
 
   item: {

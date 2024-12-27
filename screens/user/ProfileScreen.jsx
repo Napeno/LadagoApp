@@ -46,7 +46,7 @@ const ProfileScreen = ({ navigation }) => {
     const steps = 364;
     try {
       const response = await getForecastModel(steps);
-      console.log('forecast data: ', response?.forecast);
+      console.log("forecast data: ", response?.forecast);
       // navigation.navigate("CALENDARDETAIL", { forecast: response?.forecast });
     } catch (error) {
       console.error(
@@ -145,41 +145,38 @@ const ProfileScreen = ({ navigation }) => {
             >
               Setting
             </Text>
-            <Pressable 
-            onPress={() => navigation.navigate('CAMERA')}
-            >
-            <View style={styles.sectionBtn}>
-            
-              <Image
-                style={{
-                  width: 40,
-                  height: 40,
-                  marginEnd: 8,
-                }}
-                source={user}
-                resizeMode="contain"
-              />
-              <Text
-                style={{
-                  fontSize: 16,
-                  fontFamily: "Quicksand_600SemiBold",
-                  marginLeft: 14,
-                  width: 166,
-                }}
-              >
-                Personal information
-              </Text>
+            <Pressable onPress={() => navigation.navigate("CAMERA")}>
+              <View style={styles.sectionBtn}>
+                <Image
+                  style={{
+                    width: 40,
+                    height: 40,
+                    marginEnd: 8,
+                  }}
+                  source={user}
+                  resizeMode="contain"
+                />
+                <Text
+                  style={{
+                    fontSize: 16,
+                    fontFamily: "Quicksand_600SemiBold",
+                    marginLeft: 14,
+                    width: 166,
+                  }}
+                >
+                  Personal information
+                </Text>
 
-              <Image
-                style={{
-                  width: 14,
-                  height: 14,
-                  marginLeft: 130,
-                }}
-                source={arrow}
-                resizeMode="contain"
-              />
-            </View>
+                <Image
+                  style={{
+                    width: 14,
+                    height: 14,
+                    marginLeft: 130,
+                  }}
+                  source={arrow}
+                  resizeMode="contain"
+                />
+              </View>
             </Pressable>
 
             <View
@@ -243,7 +240,6 @@ const ProfileScreen = ({ navigation }) => {
                 source={fileIcon}
                 resizeMode="contain"
               />
-         
 
               <Text
                 style={{

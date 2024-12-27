@@ -8,11 +8,11 @@ import {
   SafeAreaView,
   Image,
   Alert,
-} from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { auth } from '../firebase';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { useNavigation } from '@react-navigation/native';
+} from "react-native";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import { auth } from "../firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { useNavigation } from "@react-navigation/native";
 
 const SignUpScreen = () => {
   const [username, setUsername] = useState("");
@@ -22,19 +22,23 @@ const SignUpScreen = () => {
   const nav = useNavigation();
   const handleSignUp = async () => {
     if (!username || !password || !phoneNumber) {
-      Alert.alert('Error', 'All fields are required!');
+      Alert.alert("Error", "All fields are required!");
       return;
     }
 
     try {
-      const userCredential = await createUserWithEmailAndPassword(auth, username, password);
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        username,
+        password,
+      );
       const user = userCredential.user;
-      console.log('User registered:', user);
-      Alert.alert('Success', 'Registration successful!');
-      nav.navigate('LOGIN');
+      console.log("User registered:", user);
+      Alert.alert("Success", "Registration successful!");
+      nav.navigate("LOGIN");
     } catch (error) {
-      console.error('Registration error:', error);
-      Alert.alert('Error', error.message);
+      console.error("Registration error:", error);
+      Alert.alert("Error", error.message);
     }
   };
 
@@ -151,14 +155,14 @@ const styles = StyleSheet.create({
   eyeIconContainer: {
     position: "absolute",
     right: 15,
-    height: '100%',
-    justifyContent: 'center',
+    height: "100%",
+    justifyContent: "center",
   },
   eyeIcon: {
     height: 30,
     width: 20,
     fontSize: 20,
-    color: 'black',
+    color: "black",
   },
   signUpButton: {
     backgroundColor: "#3b5998",
@@ -178,16 +182,16 @@ const styles = StyleSheet.create({
   logo: {
     width: 200,
     height: 40,
-    alignSelf: 'center',
+    alignSelf: "center",
     marginBottom: 80,
     marginTop: 50,
   },
   icon_login: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     gap: 3,
     columnGap: 72,
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   icon: {
     width: 52,
