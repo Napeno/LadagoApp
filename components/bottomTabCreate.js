@@ -12,14 +12,7 @@ import { firestore } from "../firebase";
 import { collection, addDoc } from "firebase/firestore";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
-const BottomTabCreate = ({
-  navigation,
-  backNav,
-  nextNav,
-  formData,
-  isSubmit,
-  isUploaded,
-}) => {
+const BottomTabCreate = ({ navigation, backNav, nextNav, formData, isSubmit, isUploaded,currentPage }) => {
   let [fontsLoaded] = useFonts({
     Quicksand_300Light,
     Quicksand_400Regular,
@@ -105,19 +98,34 @@ const BottomTabCreate = ({
         console.log(`Room uploaded: ${room.type}`);
       }
     } catch (error) {
-      console.error("Error hotel: ", error);
+      console.error('Error hotel: ', error);      
     }
-  };
+  }
 
+  const barColors = Array.from({ length: 10 }, (_, index) => {
+    if (index < currentPage - 1) {
+      return "#365486"; 
+    } else if (index === currentPage - 1) {
+      return "half"; //
+    } else {
+      return "#A8A8A8"; 
+    }
+  });
   return (
     <View style={styles.bottomBar}>
       <View style={styles.listBar}>
-        <View style={[styles.Bar, {}]}></View>
-        <View style={[styles.Bar, {}]}></View>
-        <View style={[styles.Bar, {}]}></View>
-        <View style={[styles.Bar, {}]}></View>
-        <View style={[styles.Bar, {}]}></View>
-        <View style={[styles.Bar, {}]}></View>
+        {barColors.map((color, index) => (
+          <View key={index} style={styles.Bar}>
+            {color === "half" ? (
+              <View style={styles.halfBarContainer}>
+                <View style={[styles.halfBar, { backgroundColor: "#365486" }]} />
+                <View style={[styles.halfBar, { backgroundColor: "#A8A8A8" }]} />
+              </View>
+            ) : (
+              <View style={[styles.Bar, { backgroundColor: color }]} />
+            )}
+          </View>
+        ))}
       </View>
       <View style={styles.navigateButtons}>
         {isUploaded ? (
@@ -178,7 +186,7 @@ const styles = StyleSheet.create({
   },
 
   Bar: {
-    width: 55,
+    width: 25,
     height: 5,
     backgroundColor: "#A8A8A8",
     borderRadius: 100,

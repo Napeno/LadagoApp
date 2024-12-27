@@ -15,16 +15,48 @@ const reservation = [
   "About to arrive",
 ];
 
-const typeRoom = [
-  { label: "Item 1", value: "1" },
-  { label: "Item 2", value: "2" },
-  { label: "Item 3", value: "3" },
-  { label: "Item 4", value: "4" },
-  { label: "Item 5", value: "5" },
-  { label: "Item 6", value: "6" },
-  { label: "Item 7", value: "7" },
-  { label: "Item 8", value: "8" },
+const amenities = [
+  "bathTub", 
+  "cleaningService", 
+  "pet",
+  "wifi",
+  "parking",
+  "securityCamera",
+  "airConditioning",
+  "restaurant",
+  "gym",
+  "hotelBar",
+  "spa",
+  "pool",
+  "kitchen",
+  "roomService",
+  "securityGuard",
+  "freeWifi",
+  "swimmingPool",
+  "basicKitchen",
+  "parkingLot",
+  "publicWifi"
 ];
+
+const typeRoom = [
+  { label: "Phòng Tiêu Chuẩn (Standard Room)", value: "1" },
+  { label: "Phòng Cao Cấp (Superior Room)", value: "2" },
+  { label: "Phòng Sang Trọng (Deluxe Room)", value: "3" },
+  { label: "Phòng Gia Đình (Family Room)", value: "4" },
+  { label: "Phòng Suite (Suite Room)", value: "5" },
+  { label: "Phòng Hạng Tổng Thống (Presidential Suite)", value: "6" },
+  { label: "Phòng Giường Đôi (Double Room)", value: "7" },
+  { label: "Phòng Giường Đơn (Single Room)", value: "8" },
+  { label: "Phòng Ba Người (Triple Room)", value: "9" },
+  { label: "Phòng Studio (Studio Room)", value: "10" },
+  { label: "Phòng Tập Thể (Dormitory Room)", value: "11" },
+  { label: "Phòng Căn Hộ (Apartment Room)", value: "12" },
+  { label: "Phòng Hướng Biển (Ocean View Room)", value: "13" },
+  { label: "Phòng Hướng Núi (Mountain View Room)", value: "14" },
+  { label: "Phòng Biệt Thự (Villa)", value: "15" },
+  { label: "Phòng Giường Tầng (Bunk Bed Room)", value: "16" },
+];
+
 
 const itemRoom = [
   { label: "Bedroom", key: "bedroom" },
@@ -95,4 +127,5 @@ export const data = {
   message,
   typeRoom,
   itemRoom,
+  amenities
 };

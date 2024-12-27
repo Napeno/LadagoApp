@@ -77,7 +77,11 @@ const StepEightScreen = ({ route, navigation }) => {
           }}
         >
           <View style={styles.viewContainer}>
-            <Image style={styles.closeIcon} source={close} resizeMode="cover" />
+            <Pressable
+              onPress={() => navigation.navigate('ADMIN')}
+            >
+              <Image style={styles.closeIcon} source={close} resizeMode="cover" />
+            </Pressable>
 
             <Text style={styles.titleStep}>Step 8</Text>
             <Text style={styles.titleInfo}>Add discount</Text>
@@ -168,6 +172,7 @@ const StepEightScreen = ({ route, navigation }) => {
         backNav={backNav}
         nextNav={nextNav}
         formData={formData}
+        currentPage={9}
       />
     </SafeAreaView>
   );

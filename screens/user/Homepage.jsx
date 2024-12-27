@@ -15,7 +15,8 @@ import CategoryPopularLocation from "../../components/caregoryPopularLocation";
 import DiscoverLocation from "../../components/discoverLocation";
 import PlaceList from "../../components/placeList";
 import { useNavigation } from "@react-navigation/native";
-
+//import Ionicons from "react-native-vector-icons/Ionicons";
+import * as Location from 'expo-location';
 import {
   useFonts,
   Quicksand_300Light,
@@ -26,9 +27,15 @@ import {
 } from "@expo-google-fonts/quicksand";
 import { data } from "@/constants/data";
 import FloatingMessage from "@/components/FloatingMessage";
+import { Icon } from "@ant-design/react-native";
+import { Ionicons } from "@expo/vector-icons";
+import {getReverseGeoCode} from '../../api/goongmap'
 
 const Homepage = () => {
   const [activeCategory, setActiveCategory] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [location, setLocation] = useState(null);
+  const [currentLocation, setCurrentLocation] = useState(null);
   const nav = useNavigation();
   let [fontsLoaded] = useFonts({
     Quicksand_300Light,
@@ -38,14 +45,59 @@ const Homepage = () => {
     Quicksand_700Bold,
   });
 
+  const toRadians = (degrees) => {
+    return degrees * (Math.PI / 180);
+  };
+  
+  const haversineDistance = (lat1, lon1, lat2, lon2) => {
+    const R = 6371; // Bán kính Trái Đất (km)
+    const dLat = toRadians(lat2 - lat1); 
+    const dLon = toRadians(lon2 - lon1);
+    
+    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+              Math.cos(toRadians(lat1)) * Math.cos(toRadians(lat2)) *
+              Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    
+    const distance = R * c; 
+    return distance;
+  };
+
+  useEffect(() => {
+    const requestLocationPermission = async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== "granted") {
+        setLoading(false);
+        setErrorMsg("Permission to access location was denied");
+        return;
+      }
+      let currentLocation = await Location.getCurrentPositionAsync({});
+      if (currentLocation) {
+        setLocation(currentLocation);
+        let latlng = `${currentLocation?.coords?.latitude},${currentLocation?.coords?.longitude}`
+        let response = await getReverseGeoCode(latlng);
+        setCurrentLocation(response?.results[0]?.formatted_address);
+        console.log(response?.results[0]?.formatted_address);
+        setLoading(false);
+      }
+    };
+
+    if (!location) {
+      requestLocationPermission();
+    }
+  }, []);
+
   const handleChangeCategory = (cat) => {
     setActiveCategory(cat);
   };
 
-  if (!fontsLoaded) {
-    return null;
+  if (!fontsLoaded || loading) {
+    return (
+      <SafeAreaView style={styles.safeAreaView}>
+        <Text>Loading...</Text>
+      </SafeAreaView>
+    );
   }
-
   return (
     <SafeAreaView style={styles.safeAreaView}>
       <FloatingMessage />
@@ -63,16 +115,30 @@ const Homepage = () => {
                 Current Location
               </Text>
               <Text
-                style={{ fontSize: 16, fontFamily: "Quicksand_600SemiBold" }}
+                numberOfLines={1}
+                style={{
+                  fontSize: 16,
+                  fontFamily: "Quicksand_600SemiBold",
+                  marginRight: 8,
+                }}
               >
-                Ho Chi Minh City
+                {currentLocation}
               </Text>
             </View>
-            <Image
-              source={require("../../constants/avatar.png")}
-              style={styles.avatar}
-              resizeMode="contain"
-            />
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <TouchableOpacity style={styles.iconNoti}
+                onPress={() => {
+                  nav.navigate("Notification");
+                }}>
+                <Ionicons name="notifications-outline" size={30} color="black" />
+              </TouchableOpacity>
+              
+              <Image
+                source={require("../../constants/avatar.png")}
+                style={styles.avatar}
+                resizeMode="contain"
+              />
+            </View>
           </View>
 
           <TouchableOpacity
@@ -134,7 +200,7 @@ const Homepage = () => {
                 See all
               </Text>
             </View>
-            <CategoryLocation />
+            <CategoryLocation location={location}/>
           </View>
 
           <View style={styles.cardHoriWrap}>

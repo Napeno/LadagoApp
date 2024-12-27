@@ -8,6 +8,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
+import {data} from '../../../constants/data'
 import { SafeAreaView } from "react-native";
 import React, { useState, useEffect, useCallback } from "react";
 import styles from "../../../styles/CreatingPlace/stepfour";
@@ -38,18 +39,22 @@ const StepFourScreen = ({ route, navigation }) => {
   const nextNav = "STEPFIVE";
 
   const [roomTabs, setRoomTabs] = useState([{ id: 0 }]);
+
+  const createAmenitiesObject = (amenitiesList) => {
+    const amenitiesObject = {};
+    amenitiesList.forEach((item) => {
+      amenitiesObject[item] = false;
+    });
+    return amenitiesObject;
+  };
+
   const [formData, setFormData] = useState({
     roomType: [
       {
         id: 0,
         occupacity: 0,
         type: "",
-        amenities: {
-          bathTub: false,
-          cleaningService: false,
-          pet: false,
-          wifi: false,
-        },
+        amenities: createAmenitiesObject(data.amenities),
       },
     ],
   });
@@ -107,7 +112,11 @@ const StepFourScreen = ({ route, navigation }) => {
       <ScrollView contentContainerStyle={styles.scrollView}>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View style={styles.viewContainer}>
-            <Image style={styles.closeIcon} source={close} resizeMode="cover" />
+            <Pressable
+              onPress={() => navigation.navigate('ADMIN')}
+            >
+              <Image style={styles.closeIcon} source={close} resizeMode="cover" />
+            </Pressable>
             <Text style={styles.titleStep}>Step 4</Text>
 
             <Text style={styles.titleInfo}>Room Information</Text>
@@ -134,7 +143,8 @@ const StepFourScreen = ({ route, navigation }) => {
         backNav={backNav}
         nextNav={nextNav}
         formData={formData}
-      />
+        currentPage={5}
+        />
     </SafeAreaView>
   );
 };

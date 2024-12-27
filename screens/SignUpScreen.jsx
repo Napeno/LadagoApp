@@ -7,18 +7,35 @@ import {
   StyleSheet,
   SafeAreaView,
   Image,
-} from "react-native";
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+  Alert,
+} from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { auth } from '../firebase';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { useNavigation } from '@react-navigation/native';
 
 const SignUpScreen = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const nav = useNavigation();
+  const handleSignUp = async () => {
+    if (!username || !password || !phoneNumber) {
+      Alert.alert('Error', 'All fields are required!');
+      return;
+    }
 
-  const handleSignUp = () => {
-    // Xử lý đăng ký tài khoản ở đây
-    console.log("Đăng ký với:", { username, password, phoneNumber });
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, username, password);
+      const user = userCredential.user;
+      console.log('User registered:', user);
+      Alert.alert('Success', 'Registration successful!');
+      nav.navigate('LOGIN');
+    } catch (error) {
+      console.error('Registration error:', error);
+      Alert.alert('Error', error.message);
+    }
   };
 
   return (
@@ -36,8 +53,8 @@ const SignUpScreen = () => {
 
         <TextInput
           style={styles.input}
-          placeholder="Username"
-          placeholderTextColor="#D3D3D3" // Thay đổi màu chữ placeholder
+          placeholder="Email"
+          placeholderTextColor="#D3D3D3"
           value={username}
           onChangeText={setUsername}
         />
@@ -53,8 +70,8 @@ const SignUpScreen = () => {
           />
           <TouchableOpacity
             style={styles.eyeIconContainer}
-            onPressIn={() => setShowPassword(true)} // Hiện mật khẩu khi nhấn giữ
-            onPressOut={() => setShowPassword(false)} // Ẩn mật khẩu khi thả tay
+            onPressIn={() => setShowPassword(true)}
+            onPressOut={() => setShowPassword(false)}
           >
             <Icon name="eye-outline" style={styles.eyeIcon} />
           </TouchableOpacity>
@@ -69,7 +86,7 @@ const SignUpScreen = () => {
           keyboardType="phone-pad"
         />
 
-        <TouchableOpacity style={styles.signUpButton}>
+        <TouchableOpacity style={styles.signUpButton} onPress={handleSignUp}>
           <Text style={styles.signUpButtonText}>Register</Text>
         </TouchableOpacity>
 
@@ -134,14 +151,14 @@ const styles = StyleSheet.create({
   eyeIconContainer: {
     position: "absolute",
     right: 15,
-    height: "100%",
-    justifyContent: "center",
+    height: '100%',
+    justifyContent: 'center',
   },
   eyeIcon: {
     height: 30,
     width: 20,
     fontSize: 20,
-    color: "black",
+    color: 'black',
   },
   signUpButton: {
     backgroundColor: "#3b5998",
@@ -161,28 +178,25 @@ const styles = StyleSheet.create({
   logo: {
     width: 200,
     height: 40,
-    alignSelf: "center",
+    alignSelf: 'center',
     marginBottom: 80,
     marginTop: 50,
   },
   icon_login: {
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     gap: 3,
     columnGap: 72,
-    flexDirection: "row",
+    flexDirection: 'row',
   },
-
   icon: {
     width: 52,
     height: 52,
   },
-
   icon_apple: {
     width: 64,
     height: 64,
   },
-
   icon_phone: {
     width: 48,
     height: 48,

@@ -65,7 +65,11 @@ const StepNineScreen = ({ route, navigation }) => {
           }}
         >
           <View style={styles.viewContainer}>
-            <Image style={styles.closeIcon} source={close} resizeMode="cover" />
+            <Pressable
+              onPress={() => navigation.navigate('ADMIN')}
+            >
+              <Image style={styles.closeIcon} source={close} resizeMode="cover" />
+            </Pressable>
 
             <Text style={styles.titleStep}>Step 9</Text>
             <Text style={styles.titleInfo}>Reiview the upload place</Text>
@@ -77,18 +81,20 @@ const StepNineScreen = ({ route, navigation }) => {
               <View style={styles.card}>
                 <Image
                   source={{
-                    uri: "https://firebasestorage.googleapis.com/v0/b/ladago-5cee2.appspot.com/o/LocationPlace%2Fimg1.png?alt=media&token=5e968fb3-c07d-4039-ac6a-1a689b7bf715",
+                    uri: formData.imgHotel[0],
                   }}
+                  resizeMode="cover"
                   style={styles.image}
                 />
                 <View style={styles.cardContent}>
-                  <View>
-                    <Text style={styles.title}>Paradise</Text>
-                    <Text style={styles.price}>$16/ night</Text>
+                  <View style={styles.cardContentTent}>
+                    <Text style={styles.title} numberOfLines={1}>{formData.name}</Text>
+                    <Text style={styles.address} numberOfLines={1}>{formData.address}</Text>
+                    <Text style={styles.price}>${formData.price}/ night</Text>
                   </View>
                   <View style={styles.badge}>
                     <Text style={styles.badgeText}>New</Text>
-                    <Icon name="star-border" size={24} color="#000" />
+                    <Icon name="star-border" size={28} color="#000" />
                   </View>
                 </View>
               </View>
@@ -136,6 +142,7 @@ const StepNineScreen = ({ route, navigation }) => {
         nextNav={nextNav}
         formData={formData}
         isSubmit={true}
+        currentPage={10}
       />
     </SafeAreaView>
   );

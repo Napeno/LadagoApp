@@ -85,10 +85,21 @@ export default StyleSheet.create({
     alignItems: "center",
     marginVertical: 10,
   },
+  cardContentTent: {
+    width: '75%'
+  },
   title: {
     fontSize: 18,
     fontWeight: "600",
     color: "#000",
+  },
+  address: {
+    fontSize: 14,
+    color: "#666",
+    marginTop: 4,
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
   },
   price: {
     fontSize: 14,

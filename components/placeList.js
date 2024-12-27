@@ -31,18 +31,22 @@ const PlaceList = () => {
     getData();
   }, []);
 
-  return hotels.map((hotel) => (
-    <PlaceListItem
-      key={hotel.idHotel}
-      id={hotel.idHotel}
-      isFavorite={true}
-      title={hotel.name}
-      imgUrl={hotel.imgHotel[0]}
-      address={hotel.address}
-      price={hotel.price}
-      stars={hotel.rating}
-    />
-  ));
+  return (
+    <View style={styles.flatListContainer}>
+      {hotels.map((item) => (
+        <PlaceListItem
+          key={item.idHotel?.toString() || Math.random().toString()} // Ensure unique key
+          id={item.idHotel}
+          isFavorite={item.favorite}
+          title={item.name}
+          imgUrl={item.imgHotel[0]}
+          address={item.address}
+          price={item.price}
+          stars={item.rating}
+        />
+      ))}
+  </View>
+  );
 };
 
 const PlaceListItem = ({

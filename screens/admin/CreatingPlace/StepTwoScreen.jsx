@@ -39,7 +39,7 @@ const StepTwoScreen = ({ route, navigation }) => {
     Quicksand_600SemiBold,
     Quicksand_700Bold,
   });
-  const { formDataRetrieve } = route.params;
+  const { formDataRetrieve } = route?.params;
   const [selectedTabs, setSelectedTabs] = useState([]);
 
   useEffect(() => {
@@ -139,7 +139,11 @@ const StepTwoScreen = ({ route, navigation }) => {
           }}
         >
           <View style={styles.viewContainer}>
-            <Image style={styles.closeIcon} source={close} resizeMode="cover" />
+            <Pressable
+              onPress={() => navigation.navigate('ADMIN')}
+            >
+              <Image style={styles.closeIcon} source={close} resizeMode="cover" />
+            </Pressable>
 
             <Text style={styles.titleStep}>Step 2</Text>
             <Text style={styles.titleInfo}>
@@ -242,6 +246,7 @@ const StepTwoScreen = ({ route, navigation }) => {
         backNav={backNav}
         nextNav={nextNav}
         formData={formData}
+        currentPage={3}
       />
     </SafeAreaView>
   );

@@ -50,7 +50,11 @@ const StepTenScreen = ({ navigation }) => {
           }}
         >
           <View style={styles.viewContainer}>
-            <Image style={styles.closeIcon} source={close} resizeMode="cover" />
+            <Pressable
+              onPress={() => navigation.navigate('ADMIN')}
+            >
+              <Image style={styles.closeIcon} source={close} resizeMode="cover" />
+            </Pressable>
 
             <Text style={styles.titleInfo}>
               Your place has been uploaded successfully
@@ -77,6 +81,7 @@ const StepTenScreen = ({ navigation }) => {
         backNav={backNav}
         nextNav={nextNav}
         isUploaded={true}
+        currentPage={11}
       />
     </SafeAreaView>
   );
