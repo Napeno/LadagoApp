@@ -12,6 +12,7 @@ import styles from "../styles/favoriteList";
 import iconStar from "../constants/star_icon.png";
 import favorite from "../constants/favorite.png";
 import unfavorite from "../constants/unfavorite.png";
+import { useNavigation } from "@react-navigation/native";
 
 const FavoriteList = () => {
   return (
@@ -44,11 +45,15 @@ const FavoriteListItem = ({
   price,
   stars,
 }) => {
+  const nav = useNavigation();
   return (
     <View style={[styles.cardWrap]}>
       <Pressable
         // onPress={() => handleChangeCategory(isActive? null: title)}
         style={[styles.cardWrap]}
+        onPress={() => {
+          nav.navigate("Room Detail");
+        }}
       >
         <Image
           source={{ uri: imgUrl }}

@@ -98,7 +98,10 @@ const LoginScreen = () => {
             >
               Or
             </Text>
-            <Pressable style={styles.registerScreenButton} onPress={() => navigation.navigate("SignUp")}>
+            <Pressable
+              style={styles.registerScreenButton}
+              onPress={() => navigation.navigate("SignUp")}
+            >
               <Text style={styles.register_btn}>Register</Text>
             </Pressable>
           </View>

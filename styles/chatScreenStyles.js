@@ -1,18 +1,18 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   header: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     padding: 16,
     borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
+    borderBottomColor: "#ccc",
   },
   backButtonContainer: {
     marginRight: 12,
   },
   backButtonText: {
-    color: 'blue',
+    color: "blue",
   },
   avatar: {
     width: 40,
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   container: {
     flex: 1,
@@ -30,18 +30,18 @@ const styles = StyleSheet.create({
     paddingVertical: 24,
   },
   messageContainer: {
-    backgroundColor: '#f0f0f0',
+    backgroundColor: "#f0f0f0",
     borderRadius: 8,
     padding: 12,
     marginVertical: 8,
   },
   receiverContainer: {
-    alignSelf: 'flex-end',
-    backgroundColor: '#e0e0e0',
+    alignSelf: "flex-end",
+    backgroundColor: "#e0e0e0",
   },
   senderName: {
     fontSize: 14,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 4,
   },
   message: {
@@ -49,8 +49,8 @@ const styles = StyleSheet.create({
   },
   timestamp: {
     fontSize: 12,
-    color: '#666',
-    textAlign: 'right',
+    color: "#666",
+    textAlign: "right",
     marginTop: 4,
   },
 });

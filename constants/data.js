@@ -129,3 +129,25 @@ export const data = {
   itemRoom,
   amenities
 };
+
+
+export const roomDetail ={
+  address: "28 Đường Thi Sách, The Sóng, Thắng Tam, Vũng Tàu, Việt Nam",
+  checkInTime: "14:00 - 15:00",
+  checkOutTime: "11:30",
+  description: "Hãy để chuyến đi của quý khách có một khởi đầu tuyệt vời khi ở lại khách sạn này, nơi có Wi-Fi miễn phí trong tất cả các phòng. Nằm ở vị trí trung tâm tại Thắng Tam của Vũng Tàu, chỗ nghỉ này đặt quý khách ở gần các điểm thu hút và tùy chọn ăn uống thú vị. Hãy nhớ dành một chút thời gian để thăm thú Hải đăng Vũng Tàu cũng như Bãi trước gần đó. Được xếp hạng 5 sao, chỗ nghỉ chất lượng cao này cho phép khách nghỉ sử dụng phòng tập và nhà hàng ngay trong khuôn viên.",
+  geoCode: "",
+  imgHotel: ["https://firebasestorage.googleapis.com/v0/b/ladago-5cee2.appspot.com/o/LocationPlace%2F3218212bec21ef67f076d3940f32c5ab.webp?alt=media&token=5287a550-6787-47ed-9d42-3c1fbf96ff6a"],
+  name: "The Sóng Apartm",
+  price: 1,
+  rating: "",
+  access: {
+    banking: true,
+    carPack: true,
+    check24H: true,
+    checkPrivate: false,
+    frontDesk: false,
+    keyAccess: true,
+    payDirectly:false,
+  }
+}

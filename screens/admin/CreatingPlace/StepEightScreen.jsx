@@ -25,7 +25,6 @@ import {
 } from "@expo-google-fonts/quicksand";
 
 const StepEightScreen = ({ route, navigation }) => {
-
   const { formDataRetrieve } = route?.params;
 
   const [selected, setSelected] = useState({
@@ -34,8 +33,7 @@ const StepEightScreen = ({ route, navigation }) => {
     monthly: false,
   });
 
-  const [formData, setFormData] = useState({
-  });
+  const [formData, setFormData] = useState({});
 
   useEffect(() => {
     if (formDataRetrieve) {

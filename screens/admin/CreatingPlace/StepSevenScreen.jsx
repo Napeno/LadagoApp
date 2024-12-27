@@ -53,7 +53,6 @@ const StepSevenScreen = ({ route, navigation }) => {
     }
   }, [formDataRetrieve]);
 
-
   const handleEditPress = () => {
     setIsEditing(true);
   };

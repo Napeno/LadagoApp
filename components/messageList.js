@@ -12,7 +12,10 @@ const MessageList = () => {
   const currentUserId = getAuth().currentUser?.uid;
 
   useEffect(() => {
-    const q = query(collection(firestore, "chats"), orderBy("createdAt", "desc"));
+    const q = query(
+      collection(firestore, "chats"),
+      orderBy("createdAt", "desc"),
+    );
     const unsubscribe = onSnapshot(q, (snapshot) => {
       const conversationMap = new Map();
 
@@ -30,7 +33,7 @@ const MessageList = () => {
             id: doc.id,
             avatarUrl:
               "https://firebasestorage.googleapis.com/v0/b/ladago-5cee2.appspot.com/o/Message%2FEllipse%20144.png?alt=media&token=0f9fbda9-80f8-4131-8dc3-d32658858875",
-            name: senderId === currentUserId ? 'Ha' : 'Hanh Nguyen', 
+            name: senderId === currentUserId ? "Ha" : "Hanh Nguyen",
             lastMsg: text,
             time: createdAt?.toDate().toLocaleTimeString(),
             chatPartnerId: senderId === currentUserId ? receiverId : senderId,
@@ -64,7 +67,14 @@ const MessageList = () => {
   );
 };
 
-const MessageListItem = ({ id, name, imgUrl, lastMsg, time, chatPartnerId }) => {
+const MessageListItem = ({
+  id,
+  name,
+  imgUrl,
+  lastMsg,
+  time,
+  chatPartnerId,
+}) => {
   const navigation = useNavigation();
   const currentUserId = getAuth().currentUser?.uid;
 
@@ -89,12 +99,10 @@ const MessageListItem = ({ id, name, imgUrl, lastMsg, time, chatPartnerId }) => 
           resizeMode="cover"
         />
 
-
         <View style={styles.cardInfo}>
           <Text style={styles.name} numberOfLines={1}>
             {name}
           </Text>
-
 
           <View style={styles.textLine}>
             <Text style={styles.lastMsg} numberOfLines={1}>
@@ -105,9 +113,7 @@ const MessageListItem = ({ id, name, imgUrl, lastMsg, time, chatPartnerId }) => 
         </View>
       </Pressable>
     </View>
-   
   );
 };
-
 
 export default MessageList;

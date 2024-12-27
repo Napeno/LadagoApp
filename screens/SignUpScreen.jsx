@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -15,9 +15,9 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { useNavigation } from '@react-navigation/native';
 
 const SignUpScreen = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const nav = useNavigation();
   const handleSignUp = async () => {
@@ -116,40 +116,40 @@ const SignUpScreen = () => {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: "#FFFFFF",
   },
   container: {
     flex: 1,
     padding: 20,
   },
   header: {
-    justifyContent: 'center',
+    justifyContent: "center",
     marginBottom: 40,
     marginTop: 10,
   },
   headerTitle: {
     fontSize: 24,
-    fontWeight: 'bold',
-    textAlign: 'left',
+    fontWeight: "bold",
+    textAlign: "left",
   },
   input: {
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: "#ccc",
     borderRadius: 5,
     padding: 15,
     marginBottom: 15,
   },
   passwordContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     marginBottom: 0,
   },
   passwordInput: {
     flex: 1,
   },
   eyeIconContainer: {
-    position: 'absolute',
+    position: "absolute",
     right: 15,
     height: '100%',
     justifyContent: 'center',
@@ -161,19 +161,19 @@ const styles = StyleSheet.create({
     color: 'black',
   },
   signUpButton: {
-    backgroundColor: '#3b5998',
+    backgroundColor: "#3b5998",
     borderRadius: 5,
     padding: 15,
   },
   signUpButtonText: {
-    color: '#fff',
-    textAlign: 'center',
-    fontWeight: 'bold',
+    color: "#fff",
+    textAlign: "center",
+    fontWeight: "bold",
   },
   orSignUpWith: {
-    textAlign: 'center',
+    textAlign: "center",
     marginVertical: 50,
-    color: '#777',
+    color: "#777",
   },
   logo: {
     width: 200,

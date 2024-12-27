@@ -28,11 +28,9 @@ import {
 import { addons } from "react-native";
 
 const StepNineScreen = ({ route, navigation }) => {
-
   const { formDataRetrieve } = route?.params;
 
-  const [formData, setFormData] = useState({
-  });
+  const [formData, setFormData] = useState({});
 
   useEffect(() => {
     if (formDataRetrieve) {

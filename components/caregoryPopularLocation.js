@@ -10,8 +10,13 @@ import React from "react";
 import { data } from "../constants/data";
 import styles from "../styles/categoryPopularLocation";
 import iconStar from "../constants/star_icon.png";
+import { useNavigation } from "@react-navigation/native";
 
 const CategoryPopularLocation = () => {
+  const nav = useNavigation()
+  const handleNav = (id) => {
+    nav.navigate("Room Detail",{docId: id})
+  }
   return (
     <FlatList
       horizontal
@@ -27,6 +32,7 @@ const CategoryPopularLocation = () => {
           address={item.address}
           price={item.price}
           stars={item.stars}
+          handleNav={handleNav}
         />
       )}
     />
@@ -39,13 +45,16 @@ const CategoryPopularLocationItem = ({
   imgUrl,
   address,
   price,
-  stars,
+  stars,handleNav
 }) => {
   return (
     <View style={[styles.cardWrap]}>
       <Pressable
         // onPress={() => handleChangeCategory(isActive? null: title)}
         style={[styles.cardHolder]}
+        onPress={() => {
+          handleNav(id)
+        }}
       >
         <Image
           source={{ uri: imgUrl }}

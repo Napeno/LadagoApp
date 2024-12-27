@@ -1,19 +1,74 @@
-import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Image } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  TouchableOpacity,
+  Image,
+  ActivityIndicator,
+} from "react-native";
 import React from "react";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import Fontisto from "@expo/vector-icons/Fontisto";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import { useEffect, useState } from "react";
+import { Hotel } from "@/types/type";
+import { doc, getDoc } from "firebase/firestore";
+import { firestore } from "@/firebase";
+import { roomDetail } from "@/constants/data";
+import { RouteProp } from "@react-navigation/native";
+type RoomDetailRouteParams = {
+  RoomDetail: {
+    docId: string;
+  };
+};
 const RoomDetail = () => {
   const nav = useNavigation();
+  const [hotel, setHotel] = useState<Hotel | null>(roomDetail);
+  const [loading, setLoading] = useState<boolean>(false);
+  const route = useRoute<RouteProp<RoomDetailRouteParams, "RoomDetail">>();
+  const docId = route.params?.docId
+  console.log("docId: ",docId)
+   useEffect(() => {
+    if (!docId) return; 
 
+    const getHotelById = async () => {
+      setLoading(true);
+
+      try {
+        const hotelDocRef = doc(firestore, "hotel", docId);
+        const hotelDocSnapshot = await getDoc(hotelDocRef);
+
+        if (hotelDocSnapshot.exists()) {
+          const hotelData = hotelDocSnapshot.data() as Hotel;
+          setHotel(hotelData);
+        } else {
+          console.warn(`No hotel found with ID: ${docId}`);
+        }
+      } catch (error) {
+        console.error("Error fetching hotel:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    getHotelById();
+  }, [docId]);
+
+  if (loading) return <ActivityIndicator />;
   return (
-    <ScrollView style={[styles.root]} showsVerticalScrollIndicator={false} contentContainerStyle={{flexGrow: 1,  gap:20 }} keyboardShouldPersistTaps="handled">
+    <ScrollView
+      style={[styles.root]}
+      showsVerticalScrollIndicator={false}
+      contentContainerStyle={{ flexGrow: 1, gap: 20 }}
+      keyboardShouldPersistTaps="handled"
+    >
       <View style={[styles.iconListContainer]}>
         <TouchableOpacity
-          onPress={() => nav.navigate("MAIN")}
+          onPress={() => nav.navigate("MAIN" as never)}
           style={styles.iconContainer}
         >
           <AntDesign name="arrowleft" size={20} color="black" />
@@ -25,14 +80,14 @@ const RoomDetail = () => {
       <Image
         style={styles.image}
         source={{
-          uri: "https://motogo.vn/wp-content/uploads/2023/05/homestay-da-lat-rung-thong-3.jpg",
+          uri: hotel?.imgHotel[0],
         }}
       />
       <View style={styles.infoLocationNameContainer}>
         <Text
           style={[styles.locationName, { fontFamily: "Quicksand_700Bold" }]}
         >
-          Sunny house with lake view
+          {hotel?.name}
         </Text>
         <View style={styles.infoContainer}>
           <MaterialCommunityIcons
@@ -41,7 +96,7 @@ const RoomDetail = () => {
             color="#365486"
           />
           <Text style={[styles.info, { fontFamily: "Quicksand_700Bold" }]}>
-            Bao Loc, Vietnam
+            {hotel?.address}
           </Text>
         </View>
         <View style={styles.infoContainer}>
@@ -83,12 +138,13 @@ const RoomDetail = () => {
         >
           Introducing this place
         </Text>
-        <Text style={{ fontFamily: "Quicksand_400Regular" }}>
-          Our accommodation is where you truly come back to nature. Surrounding
+        <Text style={{ fontFamily: "Quicksand_400Regular" }} numberOfLines={3}>
+          {/* Our accommodation is where you truly come back to nature. Surrounding
           you are coffee, avocado, and durian gardens. The most important is the
           natural lake (Dak Long Thuong Lake) where you can kayak. In the near
           future, we will install wind power to supply electricity to our
-          area...
+          area... */}
+          {hotel?.description}
         </Text>
         <TouchableOpacity
           onPress={() => nav.navigate("INTRODUCTION" as never)}
@@ -104,14 +160,14 @@ const RoomDetail = () => {
 
         <View style={[styles.ownerContainer]}>
           <View style={[styles.ownerCard]}>
-            <View style ={[styles.ownerInfo]}>
-            <View style={[styles.ownerAvatar]}>
-              <Text style={[styles.ownerInitial]}>B</Text>
-            </View>
             <View style={[styles.ownerInfo]}>
-              <Text style={[styles.ownerName]}>Ben</Text>
-              <Text style={[styles.ownerRole]}>Reputable host</Text>
-            </View>
+              <View style={[styles.ownerAvatar]}>
+                <Text style={[styles.ownerInitial]}>B</Text>
+              </View>
+              <View style={[styles.ownerInfo]}>
+                <Text style={[styles.ownerName]}>Ben</Text>
+                <Text style={[styles.ownerRole]}>Reputable host</Text>
+              </View>
             </View>
             <View style={[styles.ownerStats]}>
               <Text style={[styles.statItem]}>
@@ -138,11 +194,7 @@ const RoomDetail = () => {
               <Text style={styles.offerText}>Pool</Text>
             </View>
             <View style={styles.offerItem}>
-              <MaterialCommunityIcons
-                name="stove"
-                size={24}
-                color="black"
-              />
+              <MaterialCommunityIcons name="stove" size={24} color="black" />
               <Text style={styles.offerText}>Kitchen</Text>
             </View>
             <View style={styles.offerItem}>
@@ -154,30 +206,28 @@ const RoomDetail = () => {
               <Text style={styles.offerText}>Parking</Text>
             </View>
             <View style={styles.offerItem}>
-              <MaterialCommunityIcons
-                name="cctv"
-                size={24}
-                color="black"
-              />
+              <MaterialCommunityIcons name="cctv" size={24} color="black" />
               <Text style={styles.offerText}>Security camera</Text>
             </View>
           </View>
-          <TouchableOpacity style={styles.showAllButton} 
+          <TouchableOpacity
+            style={styles.showAllButton}
             onPress={() => {
               nav.navigate("Amenities" as never);
-            }}>
+            }}
+          >
             <Text style={[styles.showAll]}>Show all</Text>
-
           </TouchableOpacity>
         </View>
 
         <View style={[styles.divider]} />
       </View>
-      
+
       <View style={[styles.priceBookContainer]}>
         <Text style={[styles.price]}>700k VND/night</Text>
-        <TouchableOpacity style={[styles.bookBtn]}
-                  onPress={() => nav.navigate("Booking" as never)}
+        <TouchableOpacity
+          style={[styles.bookBtn]}
+          onPress={() => nav.navigate("Booking" as never)}
         >
           <Text style={[styles.bookNow]}>Book now</Text>
         </TouchableOpacity>
@@ -300,8 +350,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
 
-
-
   ownerContainer: {
     paddingHorizontal: 10,
     marginTop: 10,
@@ -333,7 +381,7 @@ const styles = StyleSheet.create({
     //marginTop: 10,
     alignItems: "center", // Align text to the left
     marginLeft: 5, // Added margin to separate from avatar
-    flexDirection:"column",
+    flexDirection: "column",
   },
   ownerName: {
     fontSize: 20, // Changed font size
@@ -350,7 +398,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "#11111",
     textAlign: "left", // Added to align text inside each item
-    fontWeight:"400",
+    fontWeight: "400",
     marginLeft: 30,
   },
 
@@ -366,7 +414,7 @@ const styles = StyleSheet.create({
   },
   offerList: {
     flexDirection: "column",
-    gap: 10, 
+    gap: 10,
   },
   offerItem: {
     fontSize: 16,
@@ -379,10 +427,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   showAll: {
-    color: "black", 
+    color: "black",
     textDecorationLine: "none", // Bỏ gạch chân
-    fontWeight: '600',
-    textAlign: 'center'
+    fontWeight: "600",
+    textAlign: "center",
   },
   showAllButton: {
     marginTop: 10,
@@ -391,7 +439,6 @@ const styles = StyleSheet.create({
     borderRadius: 5, // Bo góc
     paddingVertical: 10, // Thêm padding dọc
     paddingHorizontal: 80, // Thêm padding ngang
-    alignSelf: 'center',
+    alignSelf: "center",
   },
-  
 });

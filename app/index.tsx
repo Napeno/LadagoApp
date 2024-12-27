@@ -17,7 +17,7 @@ import StepNineScreen from "../screens/admin/CreatingPlace/StepNineScreen";
 import StepTenScreen from "../screens/admin/CreatingPlace/StepTenScreen";
 import CalendarMonthScreen from "../screens/admin/CalendarScreen/CalendarMonthScreen";
 import CalendarDetailScreen from "../screens/admin/CalendarScreen/CalendarDetailScreen";
-import ChatDetailScreen from '../screens/user/ChatDetailScreen'
+import ChatDetailScreen from "../screens/user/ChatDetailScreen";
 import BottomTabs from "../tabs/BottomTabs";
 import AdminBottomTabs from "../tabs/AdminBottomTabs";
 
