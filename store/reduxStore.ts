@@ -6,14 +6,13 @@ interface BookingState {
   date: Date;
   room: number;
   bringPet: boolean;
-  hotelName: string | null;
-  payment: {
-    email: string | null;
-    cardNumber: string | null;
-    expiration: string | null;
-    country: string | null;
-    cvc: string | null;
-  };
+  docId: string | null;
+  email: string | null;
+  cardNumber: string | null;
+  expiration: string | null;
+  country: string | null;
+  cvc: string | null;
+  paymentOption: "PAYNOW" | "PAYLATER";
 }
 
 const initialState: BookingState = {
@@ -21,15 +20,14 @@ const initialState: BookingState = {
   children: 0,
   date: new Date(),
   room: 0,
-  bringPet: true,
-  payment: {
-    email: null,
-    cardNumber: null,
-    expiration: null,
-    country: null,
-    cvc: null,
-  },
-  hotelName:null
+  bringPet: false,
+  email: null,
+  cardNumber: null,
+  expiration: null,
+  country: null,
+  cvc: null,
+  docId: null,
+  paymentOption: "PAYNOW",
 };
 
 const bookingSlice = createSlice({
@@ -60,6 +58,40 @@ const bookingSlice = createSlice({
     setBringPet(state) {
       state.bringPet = !state.bringPet;
     },
+    updateChange(
+      state,
+      action: PayloadAction<{
+        name: string;
+        value: Date | null | string | number;
+      }>,
+    ) {
+      const { name, value } = action.payload;
+      if (state.hasOwnProperty(name)) {
+        (state as any)[name] = value;
+      }
+      console.log(JSON.stringify(state, null, 2));
+    },
+    reset(state) {
+      Object.keys(state).forEach((key) => {
+        if (key === "bringPet") {
+          if (state.hasOwnProperty(key)) {
+            (state as any)[key] = false;
+          }
+        } else if (typeof state[key as keyof BookingState] === "number") {
+          if (state.hasOwnProperty(key)) {
+            (state as any)[key] = 0;
+          }
+        } else if (key === "date") {
+          state.date = new Date();
+        } else if (key === "paymentOption") {
+          state.paymentOption == "PAYNOW";
+        } else {
+          if (state.hasOwnProperty(key)) {
+            (state as any)[key] = null;
+          }
+        }
+      });
+    },
   },
 });
 
@@ -72,6 +104,8 @@ export const {
   increaseRoom,
   decreaseRoom,
   setBringPet,
+  updateChange,
+  reset,
 } = bookingSlice.actions;
 
 const store = configureStore({
