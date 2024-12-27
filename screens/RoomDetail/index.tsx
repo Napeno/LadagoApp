@@ -8,7 +8,7 @@ import {
   ActivityIndicator,
 } from "react-native";
 import React from "react";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import Fontisto from "@expo/vector-icons/Fontisto";
@@ -18,39 +18,46 @@ import { useEffect, useState } from "react";
 import { Hotel } from "@/types/type";
 import { doc, getDoc } from "firebase/firestore";
 import { firestore } from "@/firebase";
-const data = {
-  imageUrl:
-    "https://motogo.vn/wp-content/uploads/2023/05/homestay-da-lat-rung-thong-3.jpg",
-  name: "Sunny house with lake view",
-  address: "Bao Loc,Vietnam",
+import { roomDetail } from "@/constants/data";
+import { RouteProp } from "@react-navigation/native";
+type RoomDetailRouteParams = {
+  RoomDetail: {
+    docId: string;
+  };
 };
 const RoomDetail = () => {
   const nav = useNavigation();
-  const [hotel, setHotel] = useState<Hotel | null>(null);
+  const [hotel, setHotel] = useState<Hotel | null>(roomDetail);
   const [loading, setLoading] = useState<boolean>(false);
-  const hotelId = "I2xifyCEJmV034lLfcpj";
-  useEffect(() => {
+  const route = useRoute<RouteProp<RoomDetailRouteParams, "RoomDetail">>();
+  const docId = route.params?.docId
+  console.log("docId: ",docId)
+   useEffect(() => {
+    if (!docId) return; 
+
     const getHotelById = async () => {
       setLoading(true);
-      const hotelDocRef = doc(firestore, "hotel", hotelId);
 
       try {
+        const hotelDocRef = doc(firestore, "hotel", docId);
         const hotelDocSnapshot = await getDoc(hotelDocRef);
 
         if (hotelDocSnapshot.exists()) {
           const hotelData = hotelDocSnapshot.data() as Hotel;
           setHotel(hotelData);
         } else {
-          console.log("No hotel found with the specified ID.");
+          console.warn(`No hotel found with ID: ${docId}`);
         }
       } catch (error) {
         console.error("Error fetching hotel:", error);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     };
 
     getHotelById();
-  }, [hotelId]);
+  }, [docId]);
+
   if (loading) return <ActivityIndicator />;
   return (
     <ScrollView
@@ -61,7 +68,7 @@ const RoomDetail = () => {
     >
       <View style={[styles.iconListContainer]}>
         <TouchableOpacity
-          onPress={() => nav.navigate("MAIN")}
+          onPress={() => nav.navigate("MAIN" as never)}
           style={styles.iconContainer}
         >
           <AntDesign name="arrowleft" size={20} color="black" />

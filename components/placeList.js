@@ -17,20 +17,26 @@ import { collection, query, where, getDocs } from "firebase/firestore";
 import { useNavigation } from "@react-navigation/native";
 const PlaceList = () => {
   const [hotels, setHotels] = useState([]);
-
+  const [loading, setLoading] = useState(false)
+  const nav= useNavigation()
+  const handleNav = (id)=>{
+    nav.navigate("Room Detail",{docId: id})
+  }
   useEffect(() => {
     const getData = async () => {
+      setLoading(true)
       const querySnapshot = await getDocs(collection(firestore, "hotel"));
       const hotelData = [];
       querySnapshot.forEach((doc) => {
-        hotelData.push(doc.data());
+        hotelData.push({...doc.data(), docId:doc.id});
       });
       setHotels(hotelData);
+      setLoading(false)
     };
 
     getData();
   }, []);
-
+  if(loading)return <Text>...loading</Text>
   return (
     <View style={styles.flatListContainer}>
       {hotels.map((item) => (
@@ -43,6 +49,8 @@ const PlaceList = () => {
           address={item.address}
           price={item.price}
           stars={item.rating}
+          handleNav={handleNav}
+          docId={item.docId}
         />
       ))}
   </View>
@@ -57,15 +65,17 @@ const PlaceListItem = ({
   address,
   price,
   stars,
+  handleNav,
+  docId
 }) => {
-  const nav = useNavigation();
   return (
     <View style={[styles.cardWrap, { marginBottom: 32 }]}>
       <Pressable
         // onPress={() => handleChangeCategory(isActive? null: title)}
         style={[styles.cardWrap]}
         onPress={() => {
-          nav.navigate("Room Detail");
+          console.log(docId)
+          handleNav(docId)
         }}
       >
         <Image

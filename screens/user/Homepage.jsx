@@ -27,7 +27,6 @@ import {
 } from "@expo-google-fonts/quicksand";
 import { data } from "@/constants/data";
 import FloatingMessage from "@/components/FloatingMessage";
-import { Icon } from "@ant-design/react-native";
 import { Ionicons } from "@expo/vector-icons";
 import {getReverseGeoCode} from '../../api/goongmap'
 
