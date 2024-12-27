@@ -1,19 +1,5 @@
 import { configureStore, createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-interface BookingState {
-  adult: number;
-  children: number;
-  date: Date;
-  room: number;
-  bringPet: boolean;
-  docId: string | null;
-  email: string | null;
-  cardNumber: string | null;
-  expiration: string | null;
-  country: string | null;
-  cvc: string | null;
-  paymentOption: "PAYNOW" | "PAYLATER";
-}
+import { BookingState } from "@/types/type";
 
 const initialState: BookingState = {
   adult: 0,

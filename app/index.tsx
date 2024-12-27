@@ -43,6 +43,7 @@ import NotificationScreen from "@/screens/user/Noti";
 
 import { Provider } from "react-redux";
 import { store } from "../store/reduxStore";
+import DetailScreen from "@/screens/Detail";
 
 const Stack = createNativeStackNavigator();
 
@@ -111,6 +112,11 @@ const App = () => {
               options={{ headerShown: true }}
               name="Chat Bot"
               component={ChatBot}
+            />
+            <Stack.Screen
+              options={{ headerShown: true }}
+              name="Detail"
+              component={DetailScreen}
             />
             <Stack.Screen name="LOGIN" component={LoginScreen} />
           </>

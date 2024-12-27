@@ -77,7 +77,7 @@ const Booking = () => {
     };
 
     getHotelById();
-    handleChange("docId", docId)
+    handleChange("docId", docId);
   }, [docId]);
   const bookingState = useSelector((state: RootState) => state.booking);
   const [isSheetCalVisible, setIsSheetCalVisible] = useState(false);
@@ -110,16 +110,18 @@ const Booking = () => {
     }
 
     setLoading(true);
+    let newDocId = "";
     try {
       handleChange("docId", docId);
       const res = await addDoc(collection(firestore, "booking"), bookingState);
-      alert("Booking successful!");
+      newDocId = res.id;
     } catch (error) {
       console.error("Error during booking:", error);
       alert("Something went wrong. Please try again.");
     } finally {
       handleReset();
-      nav.navigate("Confirm" as never)
+      //@ts-ignore
+      nav.navigate("Confirm" as never, { docId: newDocId });
       setLoading(false);
     }
   };
