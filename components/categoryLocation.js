@@ -79,12 +79,13 @@ const CategoryLocation = ({ location }) => {
         return (
           <CategoryLocationItem
             id={item.id}
+            item={item}
             isFavorite={item.favorite}
             title={item.name}
             imgUrl={item.imgHotel[0]}
             address={item.address}
             price={item.price}
-            distance={item.distance}
+            distance={10} 
             stars={item.stars}
           />
         );
@@ -95,6 +96,7 @@ const CategoryLocation = ({ location }) => {
 
 const CategoryLocationItem = ({
   id,
+  item,
   isFavorite,
   title,
   imgUrl,
@@ -107,9 +109,9 @@ const CategoryLocationItem = ({
   return (
     <View style={[styles.cardWrap]}>
       <TouchableOpacity
-        //onPress={() => handleChangeCategory(isActive? null: title)}
         onPress={() => {
-          nav.navigate("Room Detail");
+          console.log('item', item);
+          nav.navigate("Room Detail", {formData: item, distanceMatrix: distance});
         }}
         style={[styles.cardWrap]}
       >
@@ -174,7 +176,6 @@ const CategoryLocationItem = ({
           >
             <Text style={styles.price}>{price}$ /night</Text>
             <Text style={styles.distance} numberOfLines={1}>
-              Cách {distance.toFixed(1)} km
             </Text>
           </View>
         </View>

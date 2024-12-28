@@ -60,7 +60,7 @@ const CalendarDetailScreen = ({ route }) => {
   const loadItems = (day) => {
     setTimeout(() => {
       const newItems = { ...items };
-      const predefinedDates = ["2024-12-18", "2024-12-19", "2024-12-20"];
+      const predefinedDates = ["2024-12-28", "2024-12-29", "2024-12-30"];
 
       predefinedDates.forEach((strTime) => {
         if (!newItems[strTime]) {

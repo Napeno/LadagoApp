@@ -16,5 +16,5 @@
     "screens/QRPaymentScreen.jsx",
     "screens/admin/CalendarScreen/CalendarMonthScreen.jsx",
     "screens/admin/CalendarScreen/CalendarDetailScreen.jsx"
-  ]
+, "screens/RoomDetail/index.jsx", "screens/RoomDetail/index.jsx"  ]
 }
