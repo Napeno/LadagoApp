@@ -205,68 +205,68 @@ const DetailScreen = () => {
         </View>
       </View>
       <SeperateBar />
-              <View style={{ width: "100%", display: "flex", gap: 16 }}>
-          <Text style={styles.sectionTitle}>Payment Method</Text>
-          <View style={{ display: "flex", gap: 10 }}>
-            <Text style={[{ fontFamily: "Quicksand_500Medium" }]}>Email</Text>
-                        <Text
-              style={{ color: "'rgba(0, 0, 0, 0.4)'" }}
-              >{bookingState?.email}</Text>
-          </View>
+      <View style={{ width: "100%", display: "flex", gap: 16 }}>
+        <Text style={styles.sectionTitle}>Payment Method</Text>
+        <View style={{ display: "flex", gap: 10 }}>
+          <Text style={[{ fontFamily: "Quicksand_500Medium" }]}>Email</Text>
+          <Text style={{ color: "'rgba(0, 0, 0, 0.4)'" }}>
+            {bookingState?.email}
+          </Text>
+        </View>
+        <View style={{ display: "flex", gap: 10 }}>
+          <Text style={[{ fontFamily: "Quicksand_500Medium" }]}>
+            Card number
+          </Text>
+          <Text style={{ color: "'rgba(0, 0, 0, 0.4)'" }}>
+            {bookingState?.cardNumber}
+          </Text>
+        </View>
+        <View
+          style={{
+            width: "100%",
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
+          }}
+        >
           <View style={{ display: "flex", gap: 10 }}>
             <Text style={[{ fontFamily: "Quicksand_500Medium" }]}>
-              Card number
+              Expiration
             </Text>
-                        <Text
-              style={{ color: "'rgba(0, 0, 0, 0.4)'" }}
-              >{bookingState?.cardNumber}</Text>
+            <Text style={{ color: "'rgba(0, 0, 0, 0.4)'" }}>
+              {bookingState?.expiration}
+            </Text>
           </View>
-          <View
-            style={{
-              width: "100%",
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
-            }}
-          >
-            <View style={{ display: "flex", gap: 10 }}>
-              <Text style={[{ fontFamily: "Quicksand_500Medium" }]}>
-                Expiration
-              </Text>
-                          <Text
-              style={{ color: "'rgba(0, 0, 0, 0.4)'" }}
-              >{bookingState?.expiration}</Text>
-            </View>
-            <View style={{ display: "flex", gap: 10 }}>
-              <Text style={[{ fontFamily: "Quicksand_500Medium" }]}>CVC</Text>
-                          <Text
-              style={{ color: "'rgba(0, 0, 0, 0.4)'" }}
-              >{bookingState?.cvc}</Text>
-            </View>
-            <View>
-              <Image
-                style={{ width: 20, height: 20 }}
-                source={{
-                  uri: "https://thietkelogo.mondial.vn/wp-content/uploads/2024/02/visa-logo-preview.png",
-                }}
-              />
-              <Image
-                style={{ width: 20, height: 20 }}
-                source={{
-                  uri: "https://www.mastercard.com/content/dam/public/mastercardcom/vn/vi/logos/mastercard-og-image.png",
-                }}
-              />
-            </View>
-          </View>
-
           <View style={{ display: "flex", gap: 10 }}>
-            <Text style={[{ fontFamily: "Quicksand_500Medium" }]}>Country</Text>
-            <Text
-              style={{ color: "'rgba(0, 0, 0, 0.4)'" }}
-              >{bookingState?.country}</Text>
+            <Text style={[{ fontFamily: "Quicksand_500Medium" }]}>CVC</Text>
+            <Text style={{ color: "'rgba(0, 0, 0, 0.4)'" }}>
+              {bookingState?.cvc}
+            </Text>
+          </View>
+          <View>
+            <Image
+              style={{ width: 20, height: 20 }}
+              source={{
+                uri: "https://thietkelogo.mondial.vn/wp-content/uploads/2024/02/visa-logo-preview.png",
+              }}
+            />
+            <Image
+              style={{ width: 20, height: 20 }}
+              source={{
+                uri: "https://www.mastercard.com/content/dam/public/mastercardcom/vn/vi/logos/mastercard-og-image.png",
+              }}
+            />
           </View>
         </View>
-        <SeperateBar />
+
+        <View style={{ display: "flex", gap: 10 }}>
+          <Text style={[{ fontFamily: "Quicksand_500Medium" }]}>Country</Text>
+          <Text style={{ color: "'rgba(0, 0, 0, 0.4)'" }}>
+            {bookingState?.country}
+          </Text>
+        </View>
+      </View>
+      <SeperateBar />
       <TouchableOpacity
         style={styles.confirmButton}
         onPress={() => {

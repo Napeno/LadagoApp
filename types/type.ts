@@ -1,3 +1,4 @@
+import { DimensionValue } from "react-native";
 export type Hotel = {
   access: {
     banking: boolean;
@@ -32,4 +33,27 @@ export interface BookingState {
   country: string | null;
   cvc: string | null;
   paymentOption: "PAYNOW" | "PAYLATER";
+}
+
+export interface RateBarProps {
+  width: DimensionValue;
+}
+
+export interface RatingRowProps {
+  rating: number;
+  width: DimensionValue;
+}
+
+export interface ReviewProps {
+  name: string;
+  location: string;
+  dateOfStay: string;
+  reviewText: string;
+  rating: number;
+  avatarUrl: string;
+}
+
+export interface Rating {
+  rating: number;
+  width: DimensionValue;
 }

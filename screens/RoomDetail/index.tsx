@@ -103,7 +103,10 @@ const RoomDetail = () => {
           <Text style={[styles.info, { fontFamily: "Quicksand_700Bold" }]}>
             4.8 -{" "}
           </Text>
-          <TouchableOpacity onPress={() => nav.navigate("Review" as never)}>
+          {/* @ts-ignore */}
+          <TouchableOpacity
+            onPress={() => nav.navigate("Review", { hotelDocId: docId })}
+          >
             <Text
               style={[
                 {

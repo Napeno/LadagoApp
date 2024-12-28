@@ -152,3 +152,22 @@ export const roomDetail = {
     payDirectly: false,
   },
 };
+
+export const reviewData = [
+  {
+    name: "Baldwin IV",
+    location: "Jerusalem, Israel",
+    dateOfStay: "2024-02-03",
+    reviewText:
+      "If you are looking for a quiet place, this is the place for you to.",
+    rating: 4.8,
+  },
+];
+
+export const ratingData = [
+  { rating: 5, width: "80%" },
+  { rating: 4, width: "70%" },
+  { rating: 3, width: "50%" },
+  { rating: 2, width: "30%" },
+  { rating: 1, width: "10%" },
+];
