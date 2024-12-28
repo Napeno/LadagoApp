@@ -12,8 +12,28 @@ import styles from "../styles/bookingList";
 import iconStar from "../constants/star_icon.png";
 import favorite from "../constants/favorite.png";
 import unfavorite from "../constants/unfavorite.png";
-
+import { getDocs, collection } from "firebase/firestore";
+import { useEffect } from "react";
 const BookingList = () => {
+    const [data, setDat] = useState();
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    const getBooking = async () => {
+      try {
+        setLoading(true);
+        const res = await getDocs(collection(firestore, "booking"));
+        res.docs.forEach((item) => {
+          res.docs.forEach((item) => {
+            console.log({ id: item.id, ...item.data() });
+          });
+        }); } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    getBooking();
+  }, []);
   return (
     <FlatList
       contentContainerStyle={styles.flatListContainer}

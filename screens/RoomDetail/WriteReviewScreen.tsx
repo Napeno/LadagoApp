@@ -82,11 +82,12 @@ const WriteReviewScreen = () => {
       setImage(result.assets[0].uri);
     }
   };
-  const handleChange = (name: string, value: string)=>{
+  const handleChange = (name: string, value: string) => {
     setReview((prev) => ({
-      ...review, [name]:value
-    }))
-  }
+      ...review,
+      [name]: value,
+    }));
+  };
 
   const submitReview = async () => {
     try {
@@ -94,8 +95,8 @@ const WriteReviewScreen = () => {
       const reviewRef = await addDoc(collection(firestore, "review"), review);
     } catch (error) {
     } finally {
-      setLoading(false)
-      nav.navigate("MAIN" as never)
+      setLoading(false);
+      nav.navigate("MAIN" as never);
     }
   };
 
@@ -153,7 +154,7 @@ const WriteReviewScreen = () => {
           numberOfLines={3}
           style={{ backgroundColor: "#f3f3f3", height: 250, padding: 10 }}
           onChangeText={(value) => {
-            handleChange("reviewText",value)
+            handleChange("reviewText", value);
           }}
         />
       </View>

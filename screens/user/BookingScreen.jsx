@@ -5,6 +5,7 @@ import {
   Text,
   TextInput,
   Pressable,
+  ActivityIndicator,
 } from "react-native";
 import { SafeAreaView } from "react-native";
 import styles from "../../styles/bookingScreen";
@@ -17,8 +18,10 @@ import {
   Quicksand_600SemiBold,
   Quicksand_700Bold,
 } from "@expo-google-fonts/quicksand";
-import { Filter } from "react-native-svg";
-
+import { getDocs, doc } from "firebase/firestore";
+import { useEffect, useState } from "react";
+import { firestore } from "@/firebase";
+import { collection } from "firebase/firestore";
 const BookingScreen = () => {
   let [fontsLoaded] = useFonts({
     Quicksand_300Light,
@@ -31,6 +34,8 @@ const BookingScreen = () => {
   if (!fontsLoaded) {
     return null;
   }
+
+  if (loading) return <ActivityIndicator />;
 
   return (
     <SafeAreaView style={styles.safeAreaView}>
