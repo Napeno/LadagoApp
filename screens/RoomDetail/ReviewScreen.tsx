@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -7,45 +7,16 @@ import {
   Image,
   TouchableOpacity,
   DimensionValue,
+  ActivityIndicator,
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
-
-interface RateBarProps {
-  width: DimensionValue;
-}
-
-interface RatingRowProps {
-  rating: number;
-  width: DimensionValue;
-}
-
-interface ReviewProps {
-  name: string;
-  location: string;
-  dateOfStay: string;
-  reviewText: string;
-  rating: number;
-}
-
-interface Rating {
-  rating: number;
-  width: DimensionValue;
-}
-
-const RateBar: React.FC<RateBarProps> = ({ width }) => {
-  return (
-    <View
-      style={[
-        styles.rateBar,
-        {
-          width: width || "100%", // Default width to 100% if not provided
-        },
-      ]}
-    />
-  );
-};
-
+import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
+import { reviewData } from "@/constants/data";
+import { RatingRowProps, ReviewProps } from "@/types/type";
+import { RateBar } from "./components/RateBar";
+import { ratingData } from "@/constants/data";
+import { collection, getDocs } from "firebase/firestore";
+import { firestore } from "@/firebase";
 const RatingRow: React.FC<RatingRowProps> = ({ rating, width }) => {
   return (
     <View style={styles.ratingRow}>
@@ -64,6 +35,7 @@ const Review: React.FC<ReviewProps> = ({
   dateOfStay,
   reviewText,
   rating,
+  avatarUrl,
 }) => {
   return (
     <View style={styles.reviewContainer}>
@@ -71,7 +43,7 @@ const Review: React.FC<ReviewProps> = ({
         <View style={styles.profileContainer}>
           <Image
             source={{
-              uri: "https://img.freepik.com/premium-photo/3d-avatar-boy-character_914455-603.jpg",
+              uri: avatarUrl,
             }}
             style={styles.profileImage}
           />
@@ -95,15 +67,50 @@ const Review: React.FC<ReviewProps> = ({
   );
 };
 
+type ReviewScreenParams = {
+  ReviewScreen: {
+    hotelDocId: string;
+  };
+};
+
 const ReviewScreen: React.FC = () => {
-  const ratings: Rating[] = [
-    { rating: 5, width: "80%" },
-    { rating: 4, width: "70%" },
-    { rating: 3, width: "50%" },
-    { rating: 2, width: "30%" },
-    { rating: 1, width: "10%" },
-  ];
+  const [data, setData] = useState<any[] | null>(null);
+
   const nav = useNavigation();
+  const [loading, setLoading] = useState<boolean>(false);
+  const route = useRoute<RouteProp<ReviewScreenParams, "ReviewScreen">>();
+  const hotelDocId = route.params.hotelDocId;
+  useEffect(() => {
+    const getReviewData = async () => {
+      if (!hotelDocId) return;
+      try {
+        let arry: any[] = [];
+        const reviewCollectionRef = collection(firestore, "review");
+        const reviewDocSnapShot = await getDocs(reviewCollectionRef);
+
+        reviewDocSnapShot.docs.forEach((doc) => {
+          if (doc.data().hotelDocId === hotelDocId) {
+            arry.push({
+              id: doc.id,
+              ...doc.data(),
+              dateOfStay:
+                doc
+                  .data()
+                  .dateOfStay?.toDate()
+                  .toLocaleString("en-US", { timeZone: "Asia/Bangkok" }) ||
+                null,
+            });
+          }
+        });
+        setData(arry);
+      } catch {
+      } finally {
+        setLoading(false);
+      }
+    };
+    getReviewData();
+  }, [hotelDocId]);
+  if (loading) return <ActivityIndicator />;
   return (
     <ScrollView
       contentContainerStyle={styles.root}
@@ -113,10 +120,11 @@ const ReviewScreen: React.FC = () => {
         <Text style={styles.headerText}>Rating</Text>
         <View style={styles.ratingContainer}>
           <View style={styles.ratingList}>
-            {ratings.map((item) => (
+            {ratingData.map((item) => (
               <RatingRow
                 key={item.rating}
                 rating={item.rating}
+                //@ts-ignore
                 width={item.width}
               />
             ))}
@@ -136,7 +144,8 @@ const ReviewScreen: React.FC = () => {
 
       <TouchableOpacity
         onPress={() => {
-          nav.navigate("Write Review" as never);
+          //@ts-ignore
+          nav.navigate("Write Review", { hotelDocId: hotelDocId });
         }}
         style={styles.writeReviewButton}
       >
@@ -145,34 +154,23 @@ const ReviewScreen: React.FC = () => {
 
       <View style={styles.reviewsSection}>
         <Text style={styles.headerText}>Reviews</Text>
-        <Review
-          name="Baldwin IV"
-          location="Jerusalem, Israel"
-          dateOfStay="2024-02-03"
-          reviewText="If you are looking for a quiet place, this is the place for you to."
-          rating={4.8}
-        />
-        <Review
-          name="Baldwin IV"
-          location="Jerusalem, Israel"
-          dateOfStay="2024-02-03"
-          reviewText="If you are looking for a quiet place, this is the place for you to."
-          rating={4.8}
-        />
-        <Review
-          name="Baldwin IV"
-          location="Jerusalem, Israel"
-          dateOfStay="2024-02-03"
-          reviewText="If you are looking for a quiet place, this is the place for you to."
-          rating={4.8}
-        />
-        <Review
-          name="Baldwin IV"
-          location="Jerusalem, Israel"
-          dateOfStay="2024-02-03"
-          reviewText="If you are looking for a quiet place, this is the place for you to."
-          rating={4.8}
-        />
+        {data ? (
+          data.map((item: any, index: number) => {
+            return (
+              <Review
+                key={index}
+                name={item.name}
+                location={item.location}
+                dateOfStay={item.dateOfStay}
+                reviewText={item.reviewText}
+                rating={item.rating}
+                avatarUrl={item.avatarUrl}
+              />
+            );
+          })
+        ) : (
+          <Text>No comments yet</Text>
+        )}
       </View>
     </ScrollView>
   );
