@@ -86,7 +86,7 @@ export default StyleSheet.create({
     marginVertical: 10,
   },
   cardContentTent: {
-    width: '75%'
+    width: "75%",
   },
   title: {
     fontSize: 18,
@@ -97,9 +97,9 @@ export default StyleSheet.create({
     fontSize: 14,
     color: "#666",
     marginTop: 4,
-    whiteSpace: 'nowrap',
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
+    whiteSpace: "nowrap",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
   },
   price: {
     fontSize: 14,

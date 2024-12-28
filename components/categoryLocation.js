@@ -17,8 +17,7 @@ import { useNavigation } from "@react-navigation/native";
 import { firestore } from "../firebase";
 import { collection, query, where, getDocs } from "firebase/firestore";
 
-const CategoryLocation = ({location}) => {
-
+const CategoryLocation = ({ location }) => {
   const [hotels, setHotels] = useState([]);
 
   useEffect(() => {
@@ -37,18 +36,21 @@ const CategoryLocation = ({location}) => {
   const toRadians = (degrees) => {
     return degrees * (Math.PI / 180);
   };
-  
+
   const haversineDistance = (lat1, lon1, lat2, lon2) => {
     const R = 6371; // Bán kính Trái Đất (km)
-    const dLat = toRadians(lat2 - lat1); 
-    const dLon = toRadians(lon2 - lon1); 
-    
-    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-              Math.cos(toRadians(lat1)) * Math.cos(toRadians(lat2)) *
-              Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const dLat = toRadians(lat2 - lat1);
+    const dLon = toRadians(lon2 - lon1);
+
+    const a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(toRadians(lat1)) *
+        Math.cos(toRadians(lat2)) *
+        Math.sin(dLon / 2) *
+        Math.sin(dLon / 2);
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    
-    const distance = R * c; 
+
+    const distance = R * c;
     return distance;
   };
 
@@ -59,11 +61,10 @@ const CategoryLocation = ({location}) => {
       const [lat2, lon2] = item.geoCode.split(",").map(Number);
       const km = haversineDistance(lat1, lon1, lat2, lon2);
 
-    return { ...item, distance: km }; // Thêm thuộc tính distance vào mỗi item
-  })
-  .filter((item) => item.distance < 20) // Lọc các khách sạn trong phạm vi 20km
-  .sort((a, b) => a.distance - b.distance); // Sắp xếp khoảng cách từ thấp đến cao
-
+      return { ...item, distance: km }; // Thêm thuộc tính distance vào mỗi item
+    })
+    .filter((item) => item.distance < 20) // Lọc các khách sạn trong phạm vi 20km
+    .sort((a, b) => a.distance - b.distance); // Sắp xếp khoảng cách từ thấp đến cao
 
   return (
     <FlatList
@@ -71,9 +72,10 @@ const CategoryLocation = ({location}) => {
       contentContainerStyle={styles.flatListContainer}
       showsHorizontalScrollIndicator={false}
       data={filteredHotels}
-      keyExtractor={(item) => item.idHotel?.toString() || Math.random().toString()}
-      renderItem={({ item }) => 
-      {
+      keyExtractor={(item) =>
+        item.idHotel?.toString() || Math.random().toString()
+      }
+      renderItem={({ item }) => {
         return (
           <CategoryLocationItem
             id={item.id}
@@ -83,12 +85,11 @@ const CategoryLocation = ({location}) => {
             imgUrl={item.imgHotel[0]}
             address={item.address}
             price={item.price}
-            distance={item.distance.toFixed(1)}
+            distance={10} 
             stars={item.stars}
           />
-        )
-      }
-    }
+        );
+      }}
     />
   );
 };
@@ -102,7 +103,7 @@ const CategoryLocationItem = ({
   address,
   price,
   stars,
-  distance
+  distance,
 }) => {
   const nav = useNavigation();
   return (
@@ -141,7 +142,9 @@ const CategoryLocationItem = ({
         <View style={styles.cardInfo}>
           <View style={styles.textLine}>
             <View style={styles.titleStar}>
-              <Text numberOfLines={1} style={styles.title}>{title}</Text>
+              <Text numberOfLines={1} style={styles.title}>
+                {title}
+              </Text>
 
               <View style={{ flexDirection: "row", marginRight: 12 }}>
                 <Image
@@ -162,9 +165,18 @@ const CategoryLocationItem = ({
               {address}
             </Text>
           </View>
-          <View style={{flexDirection: "row", justifyContent: 'space-between', alignItems: "center", marginTop: 12, paddingHorizontal: 12}}>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "center",
+              marginTop: 12,
+              paddingHorizontal: 12,
+            }}
+          >
             <Text style={styles.price}>{price}$ /night</Text>
-            <Text style={styles.distance} numberOfLines={1}>Cách {distance} km</Text>
+            <Text style={styles.distance} numberOfLines={1}>
+            </Text>
           </View>
         </View>
       </TouchableOpacity>

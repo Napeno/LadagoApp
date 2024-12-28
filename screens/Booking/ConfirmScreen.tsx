@@ -1,10 +1,20 @@
 import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { RouteProp, useRoute } from "@react-navigation/native";
+
+type ConfirmScreenParms = {
+  Confirm: {
+    docId: string;
+  };
+};
+
 const ConfirmScreen = () => {
   const nav = useNavigation();
+  const route = useRoute<RouteProp<ConfirmScreenParms, "Confirm">>();
+  const docId = route.params.docId;
   return (
     <View style={[styles.root]}>
       <AntDesign name="checkcircle" size={100} color="#365486" />
@@ -59,6 +69,10 @@ const ConfirmScreen = () => {
             paddingHorizontal: 25,
             paddingVertical: 10,
             borderRadius: 10,
+          }}
+          onPress={() => {
+            //@ts-ignore
+            nav.navigate("Detail", { docId: docId });
           }}
         >
           <Text style={{ color: "white", fontFamily: "Quicksand_400" }}>

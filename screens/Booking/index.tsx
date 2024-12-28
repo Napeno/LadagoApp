@@ -7,6 +7,8 @@ import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import BottomSheetCal from "./components/BottomSheetCal";
 import { useState } from "react";
+import { ActivityIndicator } from "@ant-design/react-native";
+
 import {
   useFonts,
   Quicksand_300Light,
@@ -21,11 +23,62 @@ import { SeperateBar } from "./components/SeperateBar";
 import OverLay from "./components/Overlay";
 import BottomSheetPeople from "./components/BottomSheetPeople";
 import { useNavigation } from "@react-navigation/native";
-import { useBooking } from "./useBooking";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/reduxStore";
-import { UseSelector } from "react-redux";
+import { doc, getDoc } from "firebase/firestore";
+import { firestore } from "@/firebase";
+import { Hotel } from "@/types/type";
+import { useRoute } from "@react-navigation/native";
+import { RouteProp } from "@react-navigation/native";
+import { TextInput } from "react-native";
+import { collection, addDoc } from "firebase/firestore";
+import { useDispatch } from "react-redux";
+import { updateChange } from "../../store/reduxStore";
+import { reset } from "../../store/reduxStore";
+type BookingRouteParams = {
+  Booking: {
+    docId: string;
+  };
+};
+
 const Booking = () => {
+  const [hotel, setHotel] = useState<Hotel | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
+  const route = useRoute<RouteProp<BookingRouteParams, "Booking">>();
+  const dispatch = useDispatch();
+  const handleChange = (name: string, value: string | null | Date | number) => {
+    dispatch(updateChange({ name, value }));
+  };
+  const handleReset = () => {
+    dispatch(reset());
+  };
+  const handleSwitchPayment = (value: "PAYNOW" | "PAYLATER") => {
+    dispatch(updateChange({ name: "paymentOption", value: value }));
+  };
+  const docId = route.params.docId;
+  useEffect(() => {
+    const getHotelById = async () => {
+      setLoading(true);
+      const hotelDocRef = doc(firestore, "hotel", docId);
+
+      try {
+        const hotelDocSnapshot = await getDoc(hotelDocRef);
+
+        if (hotelDocSnapshot.exists()) {
+          const hotelData = hotelDocSnapshot.data() as Hotel;
+          setHotel(hotelData);
+        } else {
+          console.log("No hotel found with the specified ID.");
+        }
+      } catch (error) {
+        console.error("Error fetching hotel:", error);
+      }
+      setLoading(false);
+    };
+
+    getHotelById();
+    handleChange("docId", docId);
+  }, [docId]);
   const bookingState = useSelector((state: RootState) => state.booking);
   const [isSheetCalVisible, setIsSheetCalVisible] = useState(false);
   const [isSheetPeopleVisible, setIsSheetPeopleVisible] = useState(false);
@@ -46,6 +99,34 @@ const Booking = () => {
     }
   };
   const nav = useNavigation();
+  const handleBook = async () => {
+    const missingFields = Object.entries(bookingState)
+      .filter(([key, value]) => value === null || value === "")
+      .map(([key]) => key);
+
+    if (missingFields.length > 0) {
+      alert(`The following fields are missing: ${missingFields.join(", ")}`);
+      return;
+    }
+
+    setLoading(true);
+    let newDocId = "";
+    try {
+      handleChange("docId", docId);
+      const res = await addDoc(collection(firestore, "booking"), bookingState);
+      newDocId = res.id;
+    } catch (error) {
+      console.error("Error during booking:", error);
+      alert("Something went wrong. Please try again.");
+    } finally {
+      handleReset();
+      //@ts-ignore
+      nav.navigate("Confirm" as never, { docId: newDocId });
+      setLoading(false);
+    }
+  };
+
+  if (loading) return <ActivityIndicator />;
   return (
     <GestureHandlerRootView>
       <ScrollView
@@ -57,11 +138,11 @@ const Booking = () => {
           <Image
             style={styles.image}
             source={{
-              uri: "https://motogo.vn/wp-content/uploads/2023/05/homestay-da-lat-rung-thong-3.jpg",
+              uri: hotel?.imgHotel[0],
             }}
           />
           <View style={styles.textContainer}>
-            <Text style={styles.title}>RAON HOI AN1</Text>
+            <Text style={styles.title}>{hotel?.name}</Text>
             <View style={styles.popularBadge}>
               <Text style={styles.popularText}>Most popular</Text>
             </View>
@@ -77,9 +158,7 @@ const Booking = () => {
                 size={20}
                 color="#365486"
               />
-              <Text style={styles.addressText}>
-                1 Cua Dai Street, Cửa Đại, Hội An, Việt Nam
-              </Text>
+              <Text style={styles.addressText}>{hotel?.address}</Text>
             </View>
             <View style={styles.dateContainer}>
               <Text style={styles.dateText}>6th June - 9th June,2024</Text>
@@ -136,15 +215,57 @@ const Booking = () => {
 
         <View style={styles.paymentContainer}>
           <Text style={styles.sectionTitle}>Payment Option</Text>
-          <Text style={styles.paymentText}>Pay 2,399,000 VND now</Text>
-          <View>
-            <Text style={styles.paymentOptionTitle}>
-              Pay half now, pay the rest later
-            </Text>
-            <Text style={styles.paymentOptionText}>
-              You need to pay 1,200,00 VND now and 1,200,000 VND in 5th June
-              2024. No extra fee
-            </Text>
+          <View
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "center",
+              gap: 2,
+            }}
+          >
+            <Text style={styles.paymentText}>Pay 2,399,000 VND now</Text>
+            <TouchableOpacity
+              onPress={() => {
+                handleSwitchPayment("PAYNOW");
+              }}
+            >
+              {bookingState.paymentOption === "PAYNOW" ? (
+                <Fontisto name="radio-btn-active" size={24} color="black" />
+              ) : (
+                <Fontisto name="radio-btn-passive" size={24} color="black" />
+              )}
+            </TouchableOpacity>
+          </View>
+          <View
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "center",
+              gap: 5,
+            }}
+          >
+            <View style={{ flex: 1 }}>
+              <Text style={styles.paymentOptionTitle}>
+                Pay half now, pay the rest later
+              </Text>
+              <Text style={styles.paymentOptionText}>
+                You need to pay 1,200,00 VND now and 1,200,000 VND in 5th June
+                2024. No extra fee
+              </Text>
+            </View>
+            <TouchableOpacity
+              onPress={() => {
+                handleSwitchPayment("PAYLATER");
+              }}
+            >
+              {bookingState.paymentOption === "PAYLATER" ? (
+                <Fontisto name="radio-btn-active" size={24} color="black" />
+              ) : (
+                <Fontisto name="radio-btn-passive" size={24} color="black" />
+              )}
+            </TouchableOpacity>
           </View>
         </View>
         <SeperateBar />
@@ -175,15 +296,25 @@ const Booking = () => {
           <Text style={styles.sectionTitle}>Payment Method</Text>
           <View style={{ display: "flex", gap: 10 }}>
             <Text style={[{ fontFamily: "Quicksand_500Medium" }]}>Email</Text>
-            <Text style={{ color: "'rgba(0, 0, 0, 0.4)'" }}>Email address</Text>
+            <TextInput
+              style={{ color: "'rgba(0, 0, 0, 0.4)'" }}
+              placeholder="Email address"
+              onChangeText={(value) => {
+                handleChange("email", value);
+              }}
+            />
           </View>
           <View style={{ display: "flex", gap: 10 }}>
             <Text style={[{ fontFamily: "Quicksand_500Medium" }]}>
               Card number
             </Text>
-            <Text style={{ color: "'rgba(0, 0, 0, 0.4)'" }}>
-              1234 1234 1234 1234
-            </Text>
+            <TextInput
+              style={{ color: "'rgba(0, 0, 0, 0.4)'" }}
+              placeholder="1234 1234 1234"
+              onChangeText={(value) => {
+                handleChange("cardNumber", value);
+              }}
+            />
           </View>
           <View
             style={{
@@ -197,11 +328,23 @@ const Booking = () => {
               <Text style={[{ fontFamily: "Quicksand_500Medium" }]}>
                 Expiration
               </Text>
-              <Text style={{ color: "'rgba(0, 0, 0, 0.4)'" }}>MM/YY</Text>
+              <TextInput
+                style={{ color: "'rgba(0, 0, 0, 0.4)'" }}
+                placeholder="MM/YY"
+                onChangeText={(value) => {
+                  handleChange("expiration", value);
+                }}
+              />
             </View>
             <View style={{ display: "flex", gap: 10 }}>
               <Text style={[{ fontFamily: "Quicksand_500Medium" }]}>CVC</Text>
-              <Text style={{ color: "'rgba(0, 0, 0, 0.4)'" }}>CVC</Text>
+              <TextInput
+                style={{ color: "'rgba(0, 0, 0, 0.4)'" }}
+                placeholder="CVC"
+                onChangeText={(value) => {
+                  handleChange("cvc", value);
+                }}
+              />
             </View>
             <View>
               <Image
@@ -221,7 +364,13 @@ const Booking = () => {
 
           <View style={{ display: "flex", gap: 10 }}>
             <Text style={[{ fontFamily: "Quicksand_500Medium" }]}>Country</Text>
-            <Text style={{ color: "'rgba(0, 0, 0, 0.4)'" }}>Viet Nam</Text>
+            <TextInput
+              style={{ color: "'rgba(0, 0, 0, 0.4)'" }}
+              placeholder="Viet Nam"
+              onChangeText={(value) => {
+                handleChange("country", value);
+              }}
+            />
           </View>
         </View>
         <SeperateBar />
@@ -241,12 +390,7 @@ const Booking = () => {
             , General policy and Ladago cancelation policy
           </Text>
         </View>
-        <TouchableOpacity
-          style={styles.confirmButton}
-          onPress={() => {
-            nav.navigate("Confirm" as never);
-          }}
-        >
+        <TouchableOpacity style={styles.confirmButton} onPress={handleBook}>
           <Text style={styles.confirmButtonText}>Confirm and booking</Text>
         </TouchableOpacity>
       </ScrollView>

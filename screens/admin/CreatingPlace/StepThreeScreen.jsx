@@ -57,8 +57,7 @@ const StepThreeScreen = ({ route, navigation }) => {
   const backNav = "STEPTWO";
   const nextNav = "STEPFOUR";
 
-  const [formData, setFormData] = useState([
-  ]);
+  const [formData, setFormData] = useState([]);
 
   useEffect(() => {
     if (formDataRetrieve) {
@@ -181,11 +180,9 @@ const StepThreeScreen = ({ route, navigation }) => {
   return (
     <SafeAreaView style={styles.safeAreaView}>
       <View style={styles.viewContainer}>
-          <Pressable
-              onPress={() => navigation.navigate('ADMIN')}
-            >
-              <Image style={styles.closeIcon} source={close} resizeMode="cover" />
-          </Pressable>
+        <Pressable onPress={() => navigation.navigate("ADMIN")}>
+          <Image style={styles.closeIcon} source={close} resizeMode="cover" />
+        </Pressable>
         <Text style={styles.titleStep}>Step 3</Text>
 
         <Text style={styles.titleInfo}>Location of your place</Text>

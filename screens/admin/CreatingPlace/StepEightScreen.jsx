@@ -25,7 +25,6 @@ import {
 } from "@expo-google-fonts/quicksand";
 
 const StepEightScreen = ({ route, navigation }) => {
-
   const { formDataRetrieve } = route?.params;
 
   const [selected, setSelected] = useState({
@@ -34,8 +33,7 @@ const StepEightScreen = ({ route, navigation }) => {
     monthly: false,
   });
 
-  const [formData, setFormData] = useState({
-  });
+  const [formData, setFormData] = useState({});
 
   useEffect(() => {
     if (formDataRetrieve) {
@@ -79,10 +77,12 @@ const StepEightScreen = ({ route, navigation }) => {
           }}
         >
           <View style={styles.viewContainer}>
-            <Pressable
-              onPress={() => navigation.navigate('ADMIN')}
-            >
-              <Image style={styles.closeIcon} source={close} resizeMode="cover" />
+            <Pressable onPress={() => navigation.navigate("ADMIN")}>
+              <Image
+                style={styles.closeIcon}
+                source={close}
+                resizeMode="cover"
+              />
             </Pressable>
 
             <Text style={styles.titleStep}>Step 8</Text>

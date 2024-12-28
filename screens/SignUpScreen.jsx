@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -8,33 +8,37 @@ import {
   SafeAreaView,
   Image,
   Alert,
-} from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { auth } from '../firebase';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { useNavigation } from '@react-navigation/native';
+} from "react-native";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import { auth } from "../firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { useNavigation } from "@react-navigation/native";
 
 const SignUpScreen = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const nav = useNavigation();
   const handleSignUp = async () => {
     if (!username || !password || !phoneNumber) {
-      Alert.alert('Error', 'All fields are required!');
+      Alert.alert("Error", "All fields are required!");
       return;
     }
 
     try {
-      const userCredential = await createUserWithEmailAndPassword(auth, username, password);
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        username,
+        password,
+      );
       const user = userCredential.user;
-      console.log('User registered:', user);
-      Alert.alert('Success', 'Registration successful!');
-      nav.navigate('LOGIN');
+      console.log("User registered:", user);
+      Alert.alert("Success", "Registration successful!");
+      nav.navigate("LOGIN");
     } catch (error) {
-      console.error('Registration error:', error);
-      Alert.alert('Error', error.message);
+      console.error("Registration error:", error);
+      Alert.alert("Error", error.message);
     }
   };
 
@@ -116,78 +120,78 @@ const SignUpScreen = () => {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: "#FFFFFF",
   },
   container: {
     flex: 1,
     padding: 20,
   },
   header: {
-    justifyContent: 'center',
+    justifyContent: "center",
     marginBottom: 40,
     marginTop: 10,
   },
   headerTitle: {
     fontSize: 24,
-    fontWeight: 'bold',
-    textAlign: 'left',
+    fontWeight: "bold",
+    textAlign: "left",
   },
   input: {
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: "#ccc",
     borderRadius: 5,
     padding: 15,
     marginBottom: 15,
   },
   passwordContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     marginBottom: 0,
   },
   passwordInput: {
     flex: 1,
   },
   eyeIconContainer: {
-    position: 'absolute',
+    position: "absolute",
     right: 15,
-    height: '100%',
-    justifyContent: 'center',
+    height: "100%",
+    justifyContent: "center",
   },
   eyeIcon: {
     height: 30,
     width: 20,
     fontSize: 20,
-    color: 'black',
+    color: "black",
   },
   signUpButton: {
-    backgroundColor: '#3b5998',
+    backgroundColor: "#3b5998",
     borderRadius: 5,
     padding: 15,
   },
   signUpButtonText: {
-    color: '#fff',
-    textAlign: 'center',
-    fontWeight: 'bold',
+    color: "#fff",
+    textAlign: "center",
+    fontWeight: "bold",
   },
   orSignUpWith: {
-    textAlign: 'center',
+    textAlign: "center",
     marginVertical: 50,
-    color: '#777',
+    color: "#777",
   },
   logo: {
     width: 200,
     height: 40,
-    alignSelf: 'center',
+    alignSelf: "center",
     marginBottom: 80,
     marginTop: 50,
   },
   icon_login: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     gap: 3,
     columnGap: 72,
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   icon: {
     width: 52,

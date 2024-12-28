@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   StyleSheet,
   View,
@@ -10,17 +10,16 @@ import {
   Dimensions,
   Modal,
   Switch,
-} from 'react-native';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import DateTimePicker from '@react-native-community/datetimepicker';
+} from "react-native";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import DateTimePicker from "@react-native-community/datetimepicker";
 
-
-const { width } = Dimensions.get('window');
+const { width } = Dimensions.get("window");
 
 const SearchingScreen = ({ navigation }) => {
-  const [place, setPlace] = useState('');
-  const [dates, setDates] = useState('Sunday, 9th June 2024');
-  const [guests, setGuests] = useState('1 room - 2 passengers - No children');
+  const [place, setPlace] = useState("");
+  const [dates, setDates] = useState("Sunday, 9th June 2024");
+  const [guests, setGuests] = useState("1 room - 2 passengers - No children");
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [isGuestsPickerVisible, setGuestsPickerVisibility] = useState(false);
   const [roomCount, setRoomCount] = useState(1);
@@ -28,7 +27,6 @@ const SearchingScreen = ({ navigation }) => {
   const [childrenCount, setChildrenCount] = useState(0);
   const [pet, setPet] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
-  
 
   const destinations = [
     // ... (giữ nguyên)
@@ -49,20 +47,20 @@ const SearchingScreen = ({ navigation }) => {
   };
 
   const handleConfirmDate = () => {
-    const formattedDate = selectedDate.toLocaleDateString('en-GB', {
-      weekday: 'short',
-      day: 'numeric',
-      month: 'short',
-      year: 'numeric',
+    const formattedDate = selectedDate.toLocaleDateString("en-GB", {
+      weekday: "short",
+      day: "numeric",
+      month: "short",
+      year: "numeric",
     });
 
     const endFormattedDate = new Date(selectedDate);
     endFormattedDate.setDate(endFormattedDate.getDate() + 3);
-    const formattedEndDate = endFormattedDate.toLocaleDateString('en-GB', {
-      weekday: 'short',
-      day: 'numeric',
-      month: 'short',
-      year: 'numeric',
+    const formattedEndDate = endFormattedDate.toLocaleDateString("en-GB", {
+      weekday: "short",
+      day: "numeric",
+      month: "short",
+      year: "numeric",
     });
     setDates(`${formattedDate} - ${formattedEndDate}`);
     hideDatePicker();
@@ -78,31 +76,33 @@ const SearchingScreen = ({ navigation }) => {
   };
 
   const handleRoomChange = (action) => {
-    if (action === 'add') {
+    if (action === "add") {
       setRoomCount(roomCount + 1);
-    } else if (action === 'subtract' && roomCount > 1) {
+    } else if (action === "subtract" && roomCount > 1) {
       setRoomCount(roomCount - 1);
     }
   };
 
   const handleAdultChange = (action) => {
-    if (action === 'add') {
+    if (action === "add") {
       setAdultCount(adultCount + 1);
-    } else if (action === 'subtract' && adultCount > 1) {
+    } else if (action === "subtract" && adultCount > 1) {
       setAdultCount(adultCount - 1);
     }
   };
 
   const handleChildrenChange = (action) => {
-    if (action === 'add') {
+    if (action === "add") {
       setChildrenCount(childrenCount + 1);
-    } else if (action === 'subtract' && childrenCount > 0) {
+    } else if (action === "subtract" && childrenCount > 0) {
       setChildrenCount(childrenCount - 1);
     }
   };
 
   const handleApplyGuests = () => {
-    setGuests(`${roomCount} room - ${adultCount} passengers - ${childrenCount} children`);
+    setGuests(
+      `${roomCount} room - ${adultCount} passengers - ${childrenCount} children`,
+    );
     hideGuestsPicker();
   };
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
@@ -112,7 +112,12 @@ const SearchingScreen = ({ navigation }) => {
     <ScrollView style={styles.container}>
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Ionicons name="arrow-back" size={24} color="white" style={styles.icon} />
+          <Ionicons
+            name="arrow-back"
+            size={24}
+            color="white"
+            style={styles.icon}
+          />
         </TouchableOpacity>
         <View style={styles.greeting}>
           <Text style={styles.greetingText}>Good Morning!</Text>
@@ -123,7 +128,12 @@ const SearchingScreen = ({ navigation }) => {
       <View style={styles.searchSection}>
         <Text style={styles.label}>Place you want to travel?</Text>
         <View style={styles.inputContainer}>
-          <Ionicons name="search" size={20} color="#7f8c8d" style={styles.icon} />
+          <Ionicons
+            name="search"
+            size={20}
+            color="#7f8c8d"
+            style={styles.icon}
+          />
           <TextInput
             style={styles.input}
             placeholder="Search places"
@@ -182,7 +192,7 @@ const SearchingScreen = ({ navigation }) => {
             </View>
           </View>
         </Modal>
-        
+
         <Text style={styles.label}>Who will you travel with?</Text>
         <View style={styles.inputContainer}>
           <Ionicons
@@ -219,27 +229,27 @@ const SearchingScreen = ({ navigation }) => {
                 <Text style={styles.quantityLabel}>Room</Text>
                 <View style={styles.quantityButtons}>
                   <TouchableOpacity
-                    onPress={() => handleRoomChange('subtract')}
+                    onPress={() => handleRoomChange("subtract")}
                   >
                     <Text style={styles.quantityButton}>−</Text>
                   </TouchableOpacity>
                   <Text style={styles.quantityValue}>{roomCount}</Text>
-                  <TouchableOpacity onPress={() => handleRoomChange('add')}>
+                  <TouchableOpacity onPress={() => handleRoomChange("add")}>
                     <Text style={styles.quantityButton}>+</Text>
                   </TouchableOpacity>
-                </View>	
+                </View>
               </View>
 
               <View style={styles.quantityContainer}>
                 <Text style={styles.quantityLabel}>Adult</Text>
                 <View style={styles.quantityButtons}>
                   <TouchableOpacity
-                    onPress={() => handleAdultChange('subtract')}
+                    onPress={() => handleAdultChange("subtract")}
                   >
                     <Text style={styles.quantityButton}>−</Text>
                   </TouchableOpacity>
                   <Text style={styles.quantityValue}>{adultCount}</Text>
-                  <TouchableOpacity onPress={() => handleAdultChange('add')}>
+                  <TouchableOpacity onPress={() => handleAdultChange("add")}>
                     <Text style={styles.quantityButton}>+</Text>
                   </TouchableOpacity>
                 </View>
@@ -248,20 +258,16 @@ const SearchingScreen = ({ navigation }) => {
               <View style={styles.quantityContainer}>
                 <View style={styles.quantityChild}>
                   <Text style={styles.quantityLabel}>Children</Text>
-                  <Text style={styles.quantityLabelDesc}>
-                    0 - 17 years old
-                  </Text>
+                  <Text style={styles.quantityLabelDesc}>0 - 17 years old</Text>
                 </View>
                 <View style={styles.quantityButtons}>
                   <TouchableOpacity
-                    onPress={() => handleChildrenChange('subtract')}
+                    onPress={() => handleChildrenChange("subtract")}
                   >
                     <Text style={styles.quantityButton}>−</Text>
                   </TouchableOpacity>
                   <Text style={styles.quantityValue}>{childrenCount}</Text>
-                  <TouchableOpacity
-                    onPress={() => handleChildrenChange('add')}
-                  >
+                  <TouchableOpacity onPress={() => handleChildrenChange("add")}>
                     <Text style={styles.quantityButton}>+</Text>
                   </TouchableOpacity>
                 </View>
@@ -271,11 +277,11 @@ const SearchingScreen = ({ navigation }) => {
                 <Text style={styles.quantityLabel}>Bring your pet</Text>
                 <View style={styles.quantityButtons}>
                   <TouchableOpacity onPress={() => setPet(!pet)}>
-                      <Switch
-                          trackColor={{ false: "#767577", true: "#34C759" }}
-                          onValueChange={toggleSwitch}
-                          value={isEnabled}
-                      />
+                    <Switch
+                      trackColor={{ false: "#767577", true: "#34C759" }}
+                      onValueChange={toggleSwitch}
+                      value={isEnabled}
+                    />
                   </TouchableOpacity>
                 </View>
               </View>
@@ -300,9 +306,7 @@ const SearchingScreen = ({ navigation }) => {
         </View>
       </View>
 
-      <View style={styles.discoverSection}>
-        {/*discover giữ nguyên*/}
-      </View>
+      <View style={styles.discoverSection}>{/*discover giữ nguyên*/}</View>
     </ScrollView>
   );
 };
@@ -310,42 +314,42 @@ const SearchingScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ecf0f1',
+    backgroundColor: "#ecf0f1",
   },
   header: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     padding: 20,
-    backgroundColor: '#3498db',
+    backgroundColor: "#3498db",
   },
   greeting: {
     marginLeft: 16,
   },
   greetingText: {
-    color: 'white',
+    color: "white",
     fontSize: 18,
-    fontWeight: '600',
+    fontWeight: "600",
   },
   questionText: {
-    color: 'white',
+    color: "white",
     fontSize: 14,
     marginTop: 5,
   },
   searchSection: {
     padding: 20,
-    backgroundColor: 'white',
+    backgroundColor: "white",
     borderBottomLeftRadius: 30,
     borderBottomRightRadius: 30,
   },
   label: {
     fontSize: 14,
     marginBottom: 8,
-    fontWeight: '600',
+    fontWeight: "600",
   },
   inputContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#ecf0f1',
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#ecf0f1",
     borderRadius: 5,
     marginBottom: 16,
     paddingHorizontal: 10,
@@ -359,86 +363,86 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   buttonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
     marginTop: 10,
   },
   resetButton: {
-    backgroundColor: '#bdc3c7',
+    backgroundColor: "#bdc3c7",
     padding: 12,
     borderRadius: 5,
     flex: 0.48,
-    alignItems: 'center',
+    alignItems: "center",
   },
   searchButton: {
-    backgroundColor: '#3498db',
+    backgroundColor: "#3498db",
     padding: 12,
     borderRadius: 5,
     flex: 0.48,
-    alignItems: 'center',
+    alignItems: "center",
   },
   buttonText: {
-    color: 'white',
-    fontWeight: '600',
+    color: "white",
+    fontWeight: "600",
     fontSize: 16,
   },
   discoverSection: {
     padding: 20,
   },
   discoverHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     marginBottom: 20,
   },
   discoverTitle: {
     fontSize: 20,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   seeAllText: {
-    color: '#3498db',
+    color: "#3498db",
     fontSize: 16,
-    fontWeight: '600',
+    fontWeight: "600",
   },
   destinationCard: {
     width: width * 0.4,
     marginRight: 15,
   },
   destinationImage: {
-    width: '100%',
+    width: "100%",
     height: width * 0.4,
     borderRadius: 10,
     marginBottom: 8,
   },
   destinationName: {
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 4,
   },
   destinationDescription: {
     fontSize: 14,
-    color: '#7f8c8d',
+    color: "#7f8c8d",
     marginBottom: 4,
   },
   destinationLink: {
-    color: '#3498db',
+    color: "#3498db",
     fontSize: 14,
-    fontWeight: '600',
+    fontWeight: "600",
   },
   // Style cho Date Picker Modal
   datePickerModal: {
-    backgroundColor: 'black',
+    backgroundColor: "black",
     borderRadius: 20,
     padding: 20,
-    width: '80%', // Điều chỉnh kích thước modal
-    alignSelf: 'center', // Căn giữa modal
+    width: "80%", // Điều chỉnh kích thước modal
+    alignSelf: "center", // Căn giữa modal
   },
   datePickerContainer: {
-    alignItems: 'center'
+    alignItems: "center",
   },
   datePickerButtonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
+    flexDirection: "row",
+    justifyContent: "flex-end",
     marginTop: 20,
   },
   datePickerCancelButton: {
@@ -447,24 +451,24 @@ const styles = StyleSheet.create({
   datePickerConfirmButton: {},
   datePickerButtonText: {
     fontSize: 16,
-    color: '#3498db',
-    fontWeight: '600',
+    color: "#3498db",
+    fontWeight: "600",
   },
 
   // Style cho Guest Picker Modal (Modal của React Native)
   centeredView: {
     flex: 1,
-    justifyContent: 'flex-end', // Chỉnh modal hiển thị từ dưới lên
-    alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)', // Thêm màu nền trong suốt
+    justifyContent: "flex-end", // Chỉnh modal hiển thị từ dưới lên
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.5)", // Thêm màu nền trong suốt
   },
   modalView: {
-    backgroundColor: 'white',
+    backgroundColor: "white",
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     padding: 25,
-    width: '100%', // Chiếm toàn bộ chiều rộng
-    shadowColor: '#000',
+    width: "100%", // Chiếm toàn bộ chiều rộng
+    shadowColor: "#000",
     shadowOffset: {
       width: 0,
       height: 2,
@@ -474,58 +478,58 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   applyButton: {
-    backgroundColor: '#3498db', 
-    paddingVertical: 15,        
-    paddingHorizontal: 30,      
-    borderRadius: 5,           
-    alignItems: 'center', 
-    marginTop: 20,     
+    backgroundColor: "#3498db",
+    paddingVertical: 15,
+    paddingHorizontal: 30,
+    borderRadius: 5,
+    alignItems: "center",
+    marginTop: 20,
   },
   modalDivider: {
     borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
+    borderBottomColor: "#ccc",
     paddingBottom: 20,
     marginBottom: 20,
   },
   modalTitle: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 10,
-    textAlign: 'center',
+    textAlign: "center",
   },
   applyButtonText: {
-    color: 'white',             // White text color
-    fontSize: 18,              // Font size
-    fontWeight: 'bold',         // Bold text
+    color: "white", // White text color
+    fontSize: 18, // Font size
+    fontWeight: "bold", // Bold text
   },
   quantityContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
     marginBottom: 16,
   },
   quantityLabel: {
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   quantityLabelDesc: {
     fontSize: 14,
-    color: 'gray',
+    color: "gray",
   },
   quantityChild: {
-    flex:'row',
+    flex: "row",
   },
   quantityButtons: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
   quantityButton: {
     fontSize: 24,
-    fontWeight: 'bold',
-    color: '#3498db', // Blue color
+    fontWeight: "bold",
+    color: "#3498db", // Blue color
     paddingHorizontal: 10,
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: "#ccc",
     borderRadius: 5,
     marginHorizontal: 5,
     lineHeight: 28, // Adjust line height for better vertical alignment
@@ -536,6 +540,5 @@ const styles = StyleSheet.create({
   },
   // ... (các style khác cho Guest Picker giữ nguyên)
 });
-
 
 export default SearchingScreen;
